@@ -20,7 +20,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://api.gdeltproject.org https://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://api.gdeltproject.org https://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
         }
       ]
     },
@@ -36,28 +36,32 @@
   ],
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/deploy-index.html"
+    },
+    {
       "source": "/today",
-      "destination": "/index.html"
+      "destination": "/deploy-index.html"
     },
     {
       "source": "/watching",
-      "destination": "/index.html"
+      "destination": "/deploy-index.html"
     },
     {
       "source": "/radar",
-      "destination": "/index.html"
+      "destination": "/deploy-index.html"
     },
     {
       "source": "/ask",
-      "destination": "/index.html"
+      "destination": "/deploy-index.html"
     },
     {
       "source": "/search",
-      "destination": "/index.html"
+      "destination": "/deploy-index.html"
     },
     {
       "source": "/control",
-      "destination": "/index.html"
+      "destination": "/deploy-index.html"
     }
   ],
   "functions": {
