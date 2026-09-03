@@ -1,6 +1,6 @@
 {
   "objective": "Build ABG Pulse into a dependable, thorough and auditable corporate-intelligence PWA that lets a senior ABG user understand, in under 60 seconds, what materially changed across the Group, promoter family, companies, brands and senior leadership; why it matters; what may become important next; and whether to act, watch or ignore—with every factual claim traceable to evidence.",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "measurement": {
     "method": "Weighted milestone completion",
     "formula": "Overall completion = sum(milestone weight × verified completion) / 100.",
@@ -31,8 +31,8 @@
       },
       {
         "name": "GitHub and Vercel connectors",
-        "status": "partially_available",
-        "detail": "Connectors exist, but the Vercel connector currently lacks authorised access to the ninjarks-projects scope for reliable deployment verification and management."
+        "status": "available",
+        "detail": "GitHub is the source of truth and the connected Vercel production project now auto-deploys main. GitHub Actions independently verifies the public homepage, health endpoint, live scan and Job Meter after deployment."
       },
       {
         "name": "n8n workflow design",
@@ -49,8 +49,8 @@
       {
         "name": "Production hosting authorisation",
         "requiredFor": "Verified public deployment, logs, environment variables and rollback",
-        "currentState": "blocked",
-        "ownerAction": "Reauthorise the Vercel connector for ninjarks-projects or provide another approved hosting target."
+        "currentState": "resolved",
+        "ownerAction": "None. GitHub-to-Vercel deployment and external endpoint verification are operational."
       },
       {
         "name": "Persistent database",
@@ -253,16 +253,18 @@
       "title": "Production deployment, observability and recovery",
       "outcome": "ABG Pulse is reliably available, measurable, recoverable and safe to share.",
       "weight": 5,
-      "completion": 10,
-      "status": "blocked",
+      "completion": 55,
+      "status": "in_progress",
       "acceptanceGate": "Public/private production deployment, logs, health endpoints, uptime, alerts, rollback, backup restore and disaster recovery are independently verified.",
       "evidence": [
-        "Deployable Vercel package",
-        "Health and deployment verification scripts",
-        "Local browser QA"
+        "GitHub main branch connected to the Vercel production project",
+        "Vercel deployment status reported success for commit 793c6b60c1c4621aa9ac2cccd70cfab48e6be046",
+        "GitHub Actions production verification run 33739301692 passed homepage, /api/health, /api/scan and /api/progress",
+        "Verified production scan: 65 checks attempted, 35 succeeded, 524 raw articles, 32 relevant articles and 22 events",
+        "Health verification: 42 official companies, 40 official leadership entries and 192 governed entities"
       ],
-      "nextAction": "Reauthorise hosting scope, deploy, verify homepage and APIs externally, then run failure and recovery drills.",
-      "dependency": "Vercel ninjarks-projects authorisation or approved alternative hosting"
+      "nextAction": "Add persistent uptime/error monitoring, controlled rollback proof, backup restore and disaster-recovery drills.",
+      "dependency": "Operational observability and persistent database for recovery proof"
     },
     {
       "id": "M11",
