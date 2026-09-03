@@ -1,0 +1,238 @@
+[
+  {
+    "id": "abg-press",
+    "name": "Aditya Birla Group Press Releases",
+    "url": "https://www.adityabirla.com/en/media/press-releases/",
+    "domain": "adityabirla.com",
+    "include": [
+      "/media/press-releases/"
+    ],
+    "exclude": [
+      "/media/press-releases/$"
+    ],
+    "entityHints": [
+      "abg"
+    ]
+  },
+  {
+    "id": "abg-companies",
+    "name": "ABG Official Companies Register",
+    "url": "https://www.adityabirla.com/en/businesses/companies/",
+    "domain": "adityabirla.com",
+    "include": [
+      "/businesses/companies/"
+    ],
+    "exclude": [
+      "/businesses/companies/$"
+    ],
+    "entityHints": [
+      "abg"
+    ],
+    "registrySource": true
+  },
+  {
+    "id": "abg-leadership",
+    "name": "ABG Official Leadership Register",
+    "url": "https://www.adityabirla.com/en/our-story/leadership/",
+    "domain": "adityabirla.com",
+    "include": [
+      "/our-story/leadership/"
+    ],
+    "exclude": [
+      "/our-story/leadership/$"
+    ],
+    "entityHints": [
+      "abg"
+    ],
+    "registrySource": true
+  },
+  {
+    "id": "hindalco-press",
+    "name": "Hindalco Industries",
+    "url": "https://www.hindalco.com/media/press-releases",
+    "domain": "hindalco.com",
+    "include": [
+      "/media/press-releases/"
+    ],
+    "exclude": [
+      "/media/press-releases$"
+    ],
+    "entityHints": [
+      "hindalco"
+    ]
+  },
+  {
+    "id": "novelis-press",
+    "name": "Novelis Investor Relations",
+    "url": "https://investors.novelis.com/news-events/press-releases",
+    "domain": "investors.novelis.com",
+    "include": [
+      "/news-events/press-releases/detail/"
+    ],
+    "entityHints": [
+      "novelis",
+      "hindalco"
+    ]
+  },
+  {
+    "id": "grasim-press",
+    "name": "Grasim Industries",
+    "url": "https://www.grasim.com/media/press-releases",
+    "domain": "grasim.com",
+    "include": [
+      "/media/press-releases/"
+    ],
+    "exclude": [
+      "/media/press-releases$"
+    ],
+    "entityHints": [
+      "grasim"
+    ]
+  },
+  {
+    "id": "ultratech-press",
+    "name": "UltraTech Cement",
+    "url": "https://www.ultratechcement.com/corporate/media/press-releases",
+    "domain": "ultratechcement.com",
+    "include": [
+      "/corporate/media/press-releases/"
+    ],
+    "exclude": [
+      "/corporate/media/press-releases$"
+    ],
+    "entityHints": [
+      "ultratech"
+    ]
+  },
+  {
+    "id": "abcl-press",
+    "name": "Aditya Birla Capital",
+    "url": "https://www.adityabirlacapital.com/en/press-and-media/press-releases",
+    "domain": "adityabirlacapital.com",
+    "include": [
+      "/press-and-media/press-releases",
+      "/media/press-releases/"
+    ],
+    "exclude": [
+      "/press-and-media/press-releases$"
+    ],
+    "entityHints": [
+      "abcl"
+    ]
+  },
+  {
+    "id": "abfrl-media",
+    "name": "Aditya Birla Fashion and Retail",
+    "url": "https://www.abfrl.com/media/press-releases/",
+    "domain": "abfrl.com",
+    "include": [
+      "/media/press-releases/",
+      "/news/"
+    ],
+    "exclude": [
+      "/media/press-releases/$"
+    ],
+    "entityHints": [
+      "abfrl",
+      "tmrw",
+      "tcns"
+    ]
+  },
+  {
+    "id": "ablbl-media",
+    "name": "Aditya Birla Lifestyle Brands",
+    "url": "https://www.ablbl.in/",
+    "domain": "ablbl.in",
+    "include": [
+      "/media",
+      "/news",
+      "/press"
+    ],
+    "entityHints": [
+      "ablbl"
+    ]
+  },
+  {
+    "id": "vi-investors",
+    "name": "Vodafone Idea Investor Relations",
+    "url": "https://www.myvi.in/investors",
+    "domain": "myvi.in",
+    "include": [
+      "/investors",
+      "/InvestorPdf/"
+    ],
+    "entityHints": [
+      "vi"
+    ]
+  },
+  {
+    "id": "birla-carbon-news",
+    "name": "Birla Carbon Newsroom",
+    "url": "https://www.birlacarbon.com/news-media/",
+    "domain": "birlacarbon.com",
+    "include": [
+      "/news",
+      "/media",
+      "/press"
+    ],
+    "entityHints": [
+      "birla-carbon"
+    ]
+  },
+  {
+    "id": "birla-cellulose-news",
+    "name": "Birla Cellulose Newsroom",
+    "url": "https://www.birlacellulose.com/newsroom/",
+    "domain": "birlacellulose.com",
+    "include": [
+      "/newsroom/",
+      "/media/"
+    ],
+    "entityHints": [
+      "birla-cellulose"
+    ]
+  },
+  {
+    "id": "essel-mining-news",
+    "name": "Essel Mining",
+    "url": "https://www.esselmining.com/",
+    "domain": "esselmining.com",
+    "include": [
+      "/media",
+      "/news",
+      "/press"
+    ],
+    "entityHints": [
+      "essel-mining"
+    ]
+  },
+  {
+    "id": "ab-real-estate-news",
+    "name": "Aditya Birla Real Estate",
+    "url": "https://www.adityabirlarealestate.com/",
+    "domain": "adityabirlarealestate.com",
+    "include": [
+      "/media",
+      "/news",
+      "/press",
+      "/investor"
+    ],
+    "entityHints": [
+      "ab-real-estate"
+    ]
+  },
+  {
+    "id": "tmrw-news",
+    "name": "TMRW",
+    "url": "https://www.tmrw.in/",
+    "domain": "tmrw.in",
+    "include": [
+      "/news",
+      "/media",
+      "/press"
+    ],
+    "entityHints": [
+      "tmrw"
+    ]
+  }
+]

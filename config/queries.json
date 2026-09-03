@@ -1,0 +1,93 @@
+[
+  {
+    "id": "group-family",
+    "label": "Group, promoter family and central leadership",
+    "query": "(\"Aditya Birla Group\" OR \"Kumar Mangalam Birla\" OR \"Rajashree Birla\" OR \"Ananya Birla\" OR \"Aryaman Vikram Birla\" OR ABMCPL)",
+    "publicQuery": "\"Aditya Birla\" OR \"Kumar Mangalam Birla\" OR \"Ananya Birla\" OR \"Aryaman Birla\"",
+    "hindi": true
+  },
+  {
+    "id": "group-leadership",
+    "label": "Business directors and Group function heads",
+    "query": "(\"Ashok Ramchandran\" OR \"Ashish Dikshit\" OR \"Himanshu Kapania\" OR \"Satish Pai\" OR \"Sushil Agarwal\" OR \"Vishakha Mulye\" OR \"Sunil Bajaj\" OR \"Sandeep Gurumurthi\" OR \"Ila Patnaik\" OR \"Deeksha Vats\") \"Aditya Birla\"",
+    "publicQuery": "\"Aditya Birla\" leadership"
+  },
+  {
+    "id": "cement-building",
+    "label": "Cement, paints and building materials",
+    "query": "(\"UltraTech Cement\" OR UltraTech OR \"Birla White\" OR \"Birla Opus\" OR \"Birla Pivot\" OR \"K C Jhanwar\" OR \"Jayant Dua\" OR \"Atul Daga\" OR \"Vivek Agrawal\")",
+    "publicQuery": "UltraTech OR \"Birla Opus\"",
+    "hindi": true
+  },
+  {
+    "id": "metals-aluminium",
+    "label": "Metals, aluminium and aerospace",
+    "query": "(Hindalco OR Novelis OR \"Utkal Alumina\" OR \"Hindalco-Almex\" OR \"Hindalco-Almex Aerospace Limited\" OR HAAL OR \"Dahej Harbour\" OR \"Bay Minette\" OR \"Satish Pai\" OR \"Steven Fisher\")",
+    "publicQuery": "Hindalco OR Novelis",
+    "international": true
+  },
+  {
+    "id": "financial-services",
+    "label": "Financial services and wellness",
+    "query": "(\"Aditya Birla Capital\" OR \"Aditya Birla Finance\" OR \"Aditya Birla Health Insurance\" OR \"Aditya Birla Sun Life AMC\" OR \"Aditya Birla Sun Life Insurance\" OR \"Aditya Birla Sun Life Pension Management\" OR ABSLPML OR \"Aditya Birla Housing Finance\" OR \"Aditya Birla Wellness\" OR \"Vishakha Mulye\")",
+    "publicQuery": "\"Aditya Birla Capital\""
+  },
+  {
+    "id": "telecom",
+    "label": "Vodafone Idea and telecom stakeholders",
+    "query": "(\"Vodafone Idea\" OR \"Vi telecom\" OR \"Vodafone Idea Limited\" OR \"Abhijit Kishore\" OR \"Tejas Mehta\")",
+    "publicQuery": "\"Vodafone Idea\"",
+    "hindi": true
+  },
+  {
+    "id": "fashion-lifestyle",
+    "label": "Fashion, lifestyle and digital brands",
+    "query": "(ABFRL OR ABLBL OR \"Aditya Birla Fashion\" OR TMRW OR TCNS OR Pantaloons OR \"Louis Philippe\" OR \"Van Heusen\" OR \"Allen Solly\" OR \"Peter England\" OR Sabyasachi OR Jaypore OR Tasva)",
+    "publicQuery": "ABFRL OR Pantaloons OR \"Aditya Birla Fashion\""
+  },
+  {
+    "id": "fibres-textiles",
+    "label": "Cellulosic fibres, yarns and international textiles",
+    "query": "(\"Birla Cellulose\" OR \"Aditya Birla Yarns\" OR \"Century Enka\" OR \"Thai Acrylic Fibre\" OR \"Thai Rayon\" OR \"Domsjo Fabriker\" OR \"Domsjö Fabriker\" OR \"Birla Jingwei Fibres\" OR BJFCL OR \"Indo Thai Synthetics\" OR \"PT Elegant Textile\" OR \"Indo Bharat Rayon\" OR \"Indo Liberty Textiles\" OR \"Sunrise Bumi Textiles\")",
+    "publicQuery": "\"Birla Cellulose\" OR \"Aditya Birla Yarns\"",
+    "international": true
+  },
+  {
+    "id": "chemicals-carbon-mining",
+    "label": "Chemicals, carbon, mining and trading",
+    "query": "(\"Aditya Birla Chemicals\" OR \"Aditya Birla Chemicals Thailand\" OR ABCTL OR \"Birla Carbon\" OR \"Essel Mining\" OR \"Indo Raya Kimia\" OR \"Aditya Birla Global Trading\" OR \"Jayant Dhobley\" OR \"Thomas Cherian\")",
+    "publicQuery": "\"Birla Carbon\" OR \"Essel Mining\"",
+    "international": true
+  },
+  {
+    "id": "new-growth",
+    "label": "Renewables, real estate, hospitality, jewellery, ventures and science",
+    "query": "(\"Aditya Birla Renewables\" OR \"Sprng Energy\" OR \"Aditya Birla Real Estate\" OR \"Birla Estates\" OR \"Aditya Birla New Age Hospitality\" OR Indriya OR \"Aditya Birla Ventures\" OR \"Aditya Birla Science and Technology\")",
+    "publicQuery": "\"Aditya Birla Renewables\" OR Indriya OR \"Birla Estates\""
+  },
+  {
+    "id": "sports-rcb",
+    "label": "RCB and sports narrative",
+    "query": "((RCB OR \"Royal Challengers Bengaluru\" OR \"Royal Challengers Bangalore\") AND (\"Aditya Birla\" OR Aryaman OR Ananya))",
+    "publicQuery": "RCB \"Aditya Birla\" OR \"Aryaman Birla\"",
+    "hindi": true
+  },
+  {
+    "id": "regulatory-reputation",
+    "label": "Regulatory, legal, safety and reputation",
+    "query": "(\"Aditya Birla\" OR Grasim OR Hindalco OR UltraTech OR Novelis OR \"Vodafone Idea\" OR ABFRL) (SEBI OR CCI OR RBI OR TRAI OR NCLT OR court OR regulator OR probe OR fraud OR accident OR fire OR strike OR protest OR penalty OR recall)",
+    "publicQuery": "\"Aditya Birla\" regulator OR court OR controversy"
+  },
+  {
+    "id": "leadership-governance-advisors",
+    "label": "Business review, Chairman's Office and Group advisors",
+    "query": "(\"K. K. Maheshwari\" OR \"Askaran Agarwala\" OR \"Shailendra Jain\" OR \"Sushil Kumar Saboo\" OR \"Umesh Adhikary\" OR \"Sitalakshmanan Ganesh\" OR \"Deepak Acharya\" OR \"Kapil Agrawal\" OR \"Vadiraj Kulkarni\" OR \"Vishak Kumar\") (\"Aditya Birla\" OR ABG OR Grasim OR UltraTech OR ABFRL OR ABLBL)",
+    "publicQuery": "\"Aditya Birla\" leadership governance"
+  },
+  {
+    "id": "leadership-corporate-functions",
+    "label": "Corporate function leadership",
+    "query": "(\"Sunita Bangard\" OR \"Subrat Sarkar\" OR \"Pragnya Ram\" OR \"Sandeep Agrawal\" OR \"Duli Kabra\" OR \"Sudhir Dalvi\" OR \"Pankaj Rai\" OR \"Manish Gupta\" OR \"Pooja Kapur\" OR \"E.R. Raj Narayanan\") (\"Aditya Birla\" OR ABG OR UltraTech)",
+    "publicQuery": "\"Aditya Birla\" corporate leadership"
+  }
+]

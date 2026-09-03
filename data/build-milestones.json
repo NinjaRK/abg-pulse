@@ -1,0 +1,280 @@
+{
+  "objective": "Build ABG Pulse into a dependable, thorough and auditable corporate-intelligence PWA that lets a senior ABG user understand, in under 60 seconds, what materially changed across the Group, promoter family, companies, brands and senior leadership; why it matters; what may become important next; and whether to act, watch or ignore—with every factual claim traceable to evidence.",
+  "version": "5.0.0",
+  "measurement": {
+    "method": "Weighted milestone completion",
+    "formula": "Overall completion = sum(milestone weight × verified completion) / 100.",
+    "rules": [
+      "A milestone percentage moves only when its acceptance evidence exists.",
+      "Designed but unconnected infrastructure does not count as operational.",
+      "A passing unit test does not count as real-world dependability proof.",
+      "Externally blocked work remains visible and is never marked complete.",
+      "The 30-day validation milestone cannot be accelerated by assertion."
+    ]
+  },
+  "resources": {
+    "availableNow": [
+      {
+        "name": "Product architecture and orchestration",
+        "status": "available",
+        "detail": "Specification, milestone design, engineering sequencing, QA and red-team review can be executed here."
+      },
+      {
+        "name": "Code build and automated testing",
+        "status": "available",
+        "detail": "The application, APIs, data model, tests, QA renders and deployable packages can be built and tested."
+      },
+      {
+        "name": "Public-web and official-source research",
+        "status": "available",
+        "detail": "Official company pages, public disclosures, public news discovery and open sources can be researched and integrated."
+      },
+      {
+        "name": "GitHub and Vercel connectors",
+        "status": "partially_available",
+        "detail": "Connectors exist, but the Vercel connector currently lacks authorised access to the ninjarks-projects scope for reliable deployment verification and management."
+      },
+      {
+        "name": "n8n workflow design",
+        "status": "available",
+        "detail": "Importable workflows can be built, tested structurally and handed off. Running them continuously requires an authorised n8n instance."
+      },
+      {
+        "name": "Database design",
+        "status": "available",
+        "detail": "Supabase/Postgres schema, migrations and seed data can be produced. A live database requires project credentials or an authorised connector."
+      }
+    ],
+    "externalDependencies": [
+      {
+        "name": "Production hosting authorisation",
+        "requiredFor": "Verified public deployment, logs, environment variables and rollback",
+        "currentState": "blocked",
+        "ownerAction": "Reauthorise the Vercel connector for ninjarks-projects or provide another approved hosting target."
+      },
+      {
+        "name": "Persistent database",
+        "requiredFor": "Shared history, claim-level evidence, corrections, watchlists, audit logs and multi-user continuity",
+        "currentState": "not_connected",
+        "ownerAction": "Authorise a Supabase/Postgres project or approved equivalent."
+      },
+      {
+        "name": "Running n8n instance",
+        "requiredFor": "Scheduled ingestion, retries, alert routing and workflow observability",
+        "currentState": "not_connected",
+        "ownerAction": "Provide or authorise an n8n workspace."
+      },
+      {
+        "name": "Licensed social-listening access",
+        "requiredFor": "Broad X, LinkedIn, Instagram, YouTube-comment and closed-platform public sentiment",
+        "currentState": "not_available",
+        "ownerAction": "Procure or authorise a licensed provider only after a coverage-gap and value test."
+      },
+      {
+        "name": "Licensed premium/print/broadcast sources",
+        "requiredFor": "Closed, print-only, premium and broadcast coverage beyond public indexing",
+        "currentState": "not_available",
+        "ownerAction": "Add only where live miss-testing proves a material gap."
+      },
+      {
+        "name": "Elapsed validation time",
+        "requiredFor": "30-day dependability proof",
+        "currentState": "time_required",
+        "ownerAction": "None; the platform must operate and be measured for 30 actual days."
+      }
+    ]
+  },
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "Objective, constitution and quality gates",
+      "outcome": "One unambiguous objective, scope, operating rules and release definition govern every build decision.",
+      "weight": 5,
+      "completion": 100,
+      "status": "complete",
+      "acceptanceGate": "Product charter, evidence-first rules, world-class UX standard and measurable release gates are documented.",
+      "evidence": [
+        "docs/PRODUCT_CHARTER.md",
+        "docs/DEPENDABILITY.md",
+        "World-class standard translated into product rules"
+      ],
+      "nextAction": "Keep the objective immutable; revise only through explicit governance.",
+      "dependency": "none"
+    },
+    {
+      "id": "M1",
+      "title": "Complete ABG entity and stakeholder graph",
+      "outcome": "All material companies, subsidiaries, brands, promoter family, boards, CEOs, CFOs, senior leaders and stakeholders are recognisable with effective dates and relationships.",
+      "weight": 10,
+      "completion": 70,
+      "status": "in_progress",
+      "acceptanceGate": "42/42 official company entries plus statutory subsidiaries, material brands, boards and current leadership are reconciled with aliases, jurisdictions, effective dates and ownership relationships.",
+      "evidence": [
+        "42/42 official company register snapshot",
+        "40/40 official leadership register snapshot",
+        "192 governed starter entities"
+      ],
+      "nextAction": "Add legal subsidiaries, JV ownership, company boards, subsidiary CEOs/CFOs, international leaders, role history and automated change detection.",
+      "dependency": "Public filings and company disclosures"
+    },
+    {
+      "id": "M2",
+      "title": "Comprehensive source and rights universe",
+      "outcome": "Every priority entity has authoritative, major-media, specialist, regional, international and public-conversation source coverage with legal-use rules.",
+      "weight": 12,
+      "completion": 35,
+      "status": "in_progress",
+      "acceptanceGate": "Each priority entity is mapped to direct source endpoints, language, geography, cadence, rights status, owner lineage and fallback coverage.",
+      "evidence": [
+        "84 governed source domains",
+        "16 direct official-source watches",
+        "14 governed discovery groups"
+      ],
+      "nextAction": "Add direct BSE/NSE/regulator/rating/SEC feeds, priority-company endpoints, multilingual and source-lineage governance.",
+      "dependency": "Public endpoints; licensed feeds where proven necessary"
+    },
+    {
+      "id": "M3",
+      "title": "Direct authoritative ingestion",
+      "outcome": "Official, exchange, regulator, court, rating and company sources are checked directly instead of relying on media pickup.",
+      "weight": 10,
+      "completion": 20,
+      "status": "in_progress",
+      "acceptanceGate": "Tier-0 sources are fetched, parsed, timestamped, health-checked and anomaly-monitored with PDF/attachment extraction where permitted.",
+      "evidence": [
+        "Official HTML source parser",
+        "Live-on-demand Google News and GDELT discovery",
+        "Source failure visibility"
+      ],
+      "nextAction": "Implement exchange/regulator/SEC/rating adapters, PDF parsing, pagination and content-change monitoring.",
+      "dependency": "Stable source access and rights compliance"
+    },
+    {
+      "id": "M4",
+      "title": "Persistent data and n8n orchestration",
+      "outcome": "The platform maintains shared history, scheduled scans, retries, queues and alert delivery across users and devices.",
+      "weight": 10,
+      "completion": 20,
+      "status": "blocked",
+      "acceptanceGate": "Supabase/Postgres and n8n run in production with idempotent ingestion, queue replay, shared state, backups and observable failures.",
+      "evidence": [
+        "Database schema and seed",
+        "Importable n8n news workflow",
+        "Importable social-listening workflow"
+      ],
+      "nextAction": "Connect an authorised database and n8n workspace; run migrations; activate schedules and retry paths.",
+      "dependency": "Supabase/Postgres credentials and n8n workspace"
+    },
+    {
+      "id": "M5",
+      "title": "Claim-level evidence, corrections and audit",
+      "outcome": "Every factual statement can be reconstructed from immutable evidence, while contradictions, updates, corrections and retractions propagate everywhere.",
+      "weight": 10,
+      "completion": 30,
+      "status": "in_progress",
+      "acceptanceGate": "Article snapshots, claims, evidence links, source lineage, contradictions, editorial decisions and correction versions are populated operationally.",
+      "evidence": [
+        "Claim/evidence/audit database schema",
+        "Evidence links on story cards",
+        "Facts and interpretation separated in the UI"
+      ],
+      "nextAction": "Populate claim/evidence tables from live ingestion, add contradiction resolution, correction workflow and propagation tests.",
+      "dependency": "Persistent database and full permitted source content"
+    },
+    {
+      "id": "M6",
+      "title": "Entity resolution, deduplication and event lifecycle",
+      "outcome": "Many reports become one accurate evolving event, with false matches and false merges kept near zero.",
+      "weight": 8,
+      "completion": 45,
+      "status": "in_progress",
+      "acceptanceGate": "Contextual entity matching, source lineage, semantic event clustering and Emerging→Confirmed→Corrected→Closed lifecycle pass blind and adversarial tests.",
+      "evidence": [
+        "Alias-based entity resolution",
+        "Headline/event clustering",
+        "Hard-coded ambiguity controls",
+        "Unit-test coverage"
+      ],
+      "nextAction": "Add semantic and claim-level clustering, cross-language matching, update lineage, entity confidence and hard-negative benchmarks.",
+      "dependency": "Representative real-world corpus"
+    },
+    {
+      "id": "M7",
+      "title": "Decision-grade intelligence models",
+      "outcome": "Materiality, trends, media tone, observed public sentiment, narrative drift and forecasts are transparent, calibrated and useful.",
+      "weight": 12,
+      "completion": 25,
+      "status": "in_progress",
+      "acceptanceGate": "Scores are entity-specific, multilingual where required, sample-size aware, historically calibrated and graded against real outcomes.",
+      "evidence": [
+        "Transparent heuristic scores",
+        "Media Tone distinct from public sentiment",
+        "Narrative Radar and 6/24/72-hour forecasts",
+        "Clickable calculation explanations"
+      ],
+      "nextAction": "Build labelled datasets, human-coded sentiment benchmark, narrative timelines, Google Trends/search-interest enrichment and prediction calibration.",
+      "dependency": "Historical/live corpus; licensed social data for broad public sentiment"
+    },
+    {
+      "id": "M8",
+      "title": "World-class daily-use experience",
+      "outcome": "A senior user understands what matters with minimal mental energy and completes the briefing in under 60 seconds.",
+      "weight": 8,
+      "completion": 80,
+      "status": "in_progress",
+      "acceptanceGate": "Mobile-first experience passes senior-user usability, accessibility, speed, comprehension and repeat-use tests with ≤60-second median completion.",
+      "evidence": [
+        "Muted responsive PWA",
+        "Must Know / Watch / Other hierarchy",
+        "Flexible period control",
+        "Clickable transparency",
+        "Desktop and mobile browser QA"
+      ],
+      "nextAction": "Reduce card density, run real target-user tests, add role-specific briefs, cross-device Watching and measured habit-loop analytics.",
+      "dependency": "Target-user testing and persistent user state"
+    },
+    {
+      "id": "M9",
+      "title": "Security, access, alerts and governance",
+      "outcome": "Only authorised users see sensitive intelligence, critical alerts are governed and every intervention is accountable.",
+      "weight": 6,
+      "completion": 10,
+      "status": "blocked",
+      "acceptanceGate": "SSO/RBAC, rate limits, secret rotation, editorial roles, critical-alert approval, privacy/retention and rights governance are active and tested.",
+      "evidence": [
+        "Security and rights requirements documented",
+        "Fail-closed product behaviour"
+      ],
+      "nextAction": "Select identity provider, implement RBAC and editorial workflow, add rate limiting, alert routing and security testing.",
+      "dependency": "Approved identity provider, hosting access and organisational governance owner"
+    },
+    {
+      "id": "M10",
+      "title": "Production deployment, observability and recovery",
+      "outcome": "ABG Pulse is reliably available, measurable, recoverable and safe to share.",
+      "weight": 5,
+      "completion": 10,
+      "status": "blocked",
+      "acceptanceGate": "Public/private production deployment, logs, health endpoints, uptime, alerts, rollback, backup restore and disaster recovery are independently verified.",
+      "evidence": [
+        "Deployable Vercel package",
+        "Health and deployment verification scripts",
+        "Local browser QA"
+      ],
+      "nextAction": "Reauthorise hosting scope, deploy, verify homepage and APIs externally, then run failure and recovery drills.",
+      "dependency": "Vercel ninjarks-projects authorisation or approved alternative hosting"
+    },
+    {
+      "id": "M11",
+      "title": "30-day independent dependability benchmark",
+      "outcome": "The platform earns—not claims—9–10/10 dependability, thoroughness and executive trust.",
+      "weight": 4,
+      "completion": 0,
+      "status": "not_started",
+      "acceptanceGate": "30 consecutive days show 100% critical-event recall in the reference set, ≥98% high-event weighted recall, 0 unsupported material claims, 0 silent Tier-0 outages and trusted daily use.",
+      "evidence": [],
+      "nextAction": "Begin the shadow run after production ingestion, persistence and observability are live.",
+      "dependency": "Operational production system plus 30 elapsed days and an independent reference set"
+    }
+  ]
+}
