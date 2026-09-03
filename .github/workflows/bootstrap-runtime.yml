@@ -1,0 +1,44 @@
+name: Bootstrap ABG Pulse runtime source
+
+on:
+  push:
+    paths:
+      - '.bootstrap/runtime-v5.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  expand-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct runtime archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/runtime-v5.b64.* | base64 --decode > /tmp/abg-pulse-runtime-v5.tar.gz
+          tar -xzf /tmp/abg-pulse-runtime-v5.tar.gz
+          test -f api/scan.js
+          test -f api/health.js
+          test -f data/entities.json
+          test -f config/queries.json
+
+      - name: Commit expanded runtime source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add api config data assets .env.example .gitignore
+          git rm -f .bootstrap/runtime-v5.ready .bootstrap/runtime-v5.b64.*
+          if git diff --cached --quiet; then
+            echo 'No runtime changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Add complete ABG Pulse runtime source'
+          git push origin HEAD:main
