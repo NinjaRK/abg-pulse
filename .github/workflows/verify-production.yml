@@ -5,9 +5,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-production.yml'
-      - '.bootstrap/**'
-      - 'bootstrap.mjs'
       - 'index.html'
+      - 'deploy-index.html'
       - 'app.js'
       - 'styles.css'
       - 'core.mjs'
@@ -22,40 +21,57 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: verify-production-main
+  cancel-in-progress: true
+
 jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
       PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
+      EXPECTED_SHA: ${{ github.sha }}
     steps:
-      - name: Wait for the Git-connected Vercel deployment
+      - name: Wait for this exact Git-connected deployment
         shell: bash
         run: |
           set -euo pipefail
-          for attempt in $(seq 1 24); do
-            code=$(curl -L -sS --max-time 25 -o /tmp/home.html -w '%{http_code}' "$PRODUCTION_URL" || true)
-            if [ "$code" = "200" ] && grep -qi 'ABG Pulse' /tmp/home.html; then
-              echo "Homepage is live on attempt $attempt."
+          for attempt in $(seq 1 32); do
+            home_code=$(curl -L -sS --max-time 25 -o /tmp/home.html -w '%{http_code}' "$PRODUCTION_URL" || true)
+            health_code=$(curl -L -sS --max-time 25 -o /tmp/health.json -w '%{http_code}' "$PRODUCTION_URL/api/health" || true)
+            deployed_sha=$(node --input-type=module -e "
+              import { readFileSync } from 'node:fs';
+              try {
+                const payload = JSON.parse(readFileSync('/tmp/health.json', 'utf8'));
+                process.stdout.write(payload?.deployment?.commitSha || '');
+              } catch { process.stdout.write(''); }
+            " || true)
+            if [ "$home_code" = "200" ] \
+              && grep -qi 'ABG Pulse' /tmp/home.html \
+              && [ "$health_code" = "200" ] \
+              && [ "$deployed_sha" = "$EXPECTED_SHA" ]; then
+              echo "Exact production commit $EXPECTED_SHA is live on attempt $attempt."
               exit 0
             fi
-            echo "Attempt $attempt: homepage returned HTTP $code; retrying in 15 seconds."
+            echo "Attempt $attempt: homepage=$home_code health=$health_code deployed_sha=${deployed_sha:-missing} expected=$EXPECTED_SHA; retrying in 15 seconds."
             sleep 15
           done
-          echo "Production homepage did not become healthy in time."
-          cat /tmp/home.html 2>/dev/null || true
+          echo "The exact production commit did not become healthy in time."
+          cat /tmp/health.json 2>/dev/null || true
           exit 1
 
       - name: Verify health and governed entity universe
         shell: bash
         run: |
           set -euo pipefail
-          curl -L -fS --max-time 45 "$PRODUCTION_URL/api/health" -o /tmp/health.json
           node --input-type=module <<'NODE'
           import { readFileSync } from 'node:fs';
           const payload = JSON.parse(readFileSync('/tmp/health.json', 'utf8'));
           const actual = payload?.entityUniverse?.actual || {};
+          const expectedSha = process.env.EXPECTED_SHA;
           if (!['ok', 'degraded'].includes(payload.status)) throw new Error(`Unexpected health status: ${payload.status}`);
+          if (payload?.deployment?.commitSha !== expectedSha) throw new Error(`Deployment mismatch: expected ${expectedSha}; received ${payload?.deployment?.commitSha}`);
           if (payload?.entityUniverse?.reconciled !== true) throw new Error('Official entity universe is not reconciled.');
           if (actual.officialCompanies !== 42) throw new Error(`Expected 42 official companies; received ${actual.officialCompanies}`);
           if (actual.officialLeadership !== 40) throw new Error(`Expected 40 official leadership entries; received ${actual.officialLeadership}`);
@@ -63,6 +79,7 @@ jobs:
           console.log(JSON.stringify({
             status: payload.status,
             mode: payload.mode,
+            deploymentCommit: payload.deployment.commitSha,
             officialCompanies: actual.officialCompanies,
             officialLeadership: actual.officialLeadership,
             totalEntities: actual.totalEntities,
@@ -125,11 +142,11 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: abg-pulse-production-verification
+          name: abg-pulse-production-verification-${{ github.sha }}
           path: |
             /tmp/home.html
             /tmp/health.json
             /tmp/scan.json
             /tmp/progress.json
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 30
