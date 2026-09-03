@@ -38,6 +38,15 @@ export default async function handler(req, res) {
   return send(res, databaseReachable === false ? 503 : 200, {
     status: databaseReachable === false ? 'degraded' : 'ok',
     mode: configured.database ? 'persistent' : 'live-on-demand',
+    deployment: {
+      environment: process.env.VERCEL_ENV || process.env.VERCEL_TARGET_ENV || 'local',
+      commitSha: process.env.VERCEL_GIT_COMMIT_SHA || null,
+      commitRef: process.env.VERCEL_GIT_COMMIT_REF || null,
+      deploymentId: process.env.VERCEL_DEPLOYMENT_ID || null,
+      projectId: process.env.VERCEL_PROJECT_ID || null,
+      deploymentUrl: process.env.VERCEL_URL || null,
+      productionUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL || null
+    },
     configured,
     databaseReachable,
     entityUniverse: { ...entityUniverse, actual: counts, reconciled: universeReconciled },
