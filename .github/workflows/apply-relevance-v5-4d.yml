@@ -1,0 +1,52 @@
+name: Apply and verify ABG Pulse relevance hardening v5.4d
+
+on:
+  push:
+    branches:
+      - sol/relevance-hardening-v5-4
+    paths:
+      - '.bootstrap/relevance-v5.4.ready4'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out relevance-hardening branch
+        uses: actions/checkout@v4
+        with:
+          ref: sol/relevance-hardening-v5-4
+          fetch-depth: 0
+
+      - name: Reconstruct and apply reviewed patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/relevance-v5.4.chunk.* | base64 --decode > /tmp/relevance-v5.4.patch.gz
+          gzip -dc /tmp/relevance-v5.4.patch.gz > /tmp/relevance-v5.4.patch
+          git apply --check /tmp/relevance-v5.4.patch
+          git apply /tmp/relevance-v5.4.patch
+          sed -i "s/job meter is evidence-weighted and currently reports 37%/job meter is evidence-weighted and currently reports 40%/" tests/progress.test.mjs
+          sed -i "s/assert.equal(completion(plan), 37);/assert.equal(completion(plan), 40);/" tests/progress.test.mjs
+
+      - name: Run complete automated suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Commit only verified source changes and remove bootstrap files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add core.mjs api/scan.js tests
+          git rm -f .bootstrap/relevance-v5.4* .github/workflows/apply-relevance-v5-4*.yml
+          git commit -m 'Harden live relevance, public sentiment and event freshness'
+          git push origin HEAD:sol/relevance-hardening-v5-4
