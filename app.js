@@ -1,1360 +1,335 @@
-import {
-  dedupeEvents,
-  sortEvents,
-  normalizeText,
-  titleTokens,
-  matchEntities,
-  formatLiveArticle,
-  clusterArticles,
-  deriveLiveEvent,
-  domainFromUrl,
-  resolvePeriodWindow,
-  previousPeriodWindow,
-  filterEventsByWindow,
-  eventOccursInWindow
-} from './core.mjs';
+const IST = 'Asia/Kolkata';
+const HOUR = 3_600_000;
+const DAY = 86_400_000;
+const state = { events:[], meta:null, progress:null, health:null, window:null, scanning:false };
 
-const STORAGE = {
-  watched: 'abg-pulse:watched:v1',
-  preferences: 'abg-pulse:preferences:v1',
-  feedback: 'abg-pulse:feedback:v1',
-  liveEvents: 'abg-pulse:live-events:v1',
-  liveMeta: 'abg-pulse:live-meta:v2',
-  knownEvents: 'abg-pulse:known-events:v1',
-  lastOpened: 'abg-pulse:last-opened:v1',
-  period: 'abg-pulse:period:v1'
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+const explanations = {
+  brief:{ title:'The sharp conclusion', body:'A plain-English editorial summary of the selected period: how many developments materially changed today’s picture, what remains on Watch, and whether the overall coverage tone is positive, mixed or negative. It is generated only after the live source scan completes.' },
+  must:{ title:'Must Know', body:'A development that materially changes today’s senior-management picture and is supported strongly enough to brief now. Current gate: authoritative confirmation with materiality of at least 62, or materiality of at least 72 with confidence of at least 76. Article volume alone cannot make a story Must Know.' },
+  watch:{ title:'Watch', body:'A development that may become important, needs more confirmation, or is accelerating fast enough to prepare for now. Watch is not a claim that the underlying report is true.' },
+  events:{ title:'Actual events', body:'Articles about the same underlying development are collapsed into one event using headline similarity, shared entities, numerical anchors, timing and source lineage. One event may therefore represent many articles.' },
+  articles:{ title:'Relevant articles', body:'Retrieved articles within the exact selected period that matched a governed ABG entity after ambiguity checks. Raw search results and unrelated Birla or Vi matches are excluded.' },
+  coverage:{ title:'Source coverage', body:'The numerator is checks that actually completed during this scan. The denominator is checks attempted. A successful HTTP response with zero items is shown separately from a failed source. Registered sources are never presented as if they were checked.' },
+  mediaTone:{ title:'Media Tone', body:'A directional score from −100 to +100 based on positive and negative language in retrieved media coverage, with simple negation handling. It measures article tone—not consumer opinion, reputation value or the views of the whole public. Broader public sentiment requires authorised social-listening data.' },
+  radar:{ title:'Narrative Radar', body:'An early-warning view combining news momentum, entity-specific Media Tone, official-versus-media framing and a probabilistic importance estimate. These signals help decide what to inspect; they are not facts.' },
+  momentum:{ title:'Momentum', body:'A 0–100 signal based on recency, article volume and independent source-family breadth. Sister publications are collapsed into one family so syndication does not masquerade as independent acceleration.' },
+  prediction:{ title:'Likely importance', body:'A transparent heuristic estimate for whether an event may become more important within 24 hours, based on materiality, momentum and uncertainty. It is explicitly labelled uncalibrated until enough real outcomes have been graded.' },
+  drift:{ title:'Narrative alignment', body:'Where both authoritative and media headlines exist, the product compares their framing. Low textual alignment is a prompt for human review—not automatic proof of misinformation or narrative loss.' },
+  misses:{ title:'What we may have missed', body:'Visible evidence of possible blind spots: failed or timed-out source checks, incomplete official-register extraction, or source categories not yet connected. Dependability means exposing uncertainty, not decorating it away.' },
+  jobMeter:{ title:'Job Meter', body:'The overall percentage is the weighted completion of all milestones. Progress is credited only when evidence exists. Drafted code, an unconnected workflow or a visually complete screen does not count as an operational capability.' }
 };
 
-const DEFAULT_PREFERENCES = {
-  liveScan: true,
-  showForecasts: true,
-  reduceNoise: true
-};
-
-const REPORTING_TIMEZONE = 'Asia/Kolkata';
-const REPORTING_OFFSET_MINUTES = 330;
-const PERIOD_LABELS = {
-  'since-last-visit': 'Since my last visit',
-  '1h': 'Last 1 hour',
-  '6h': 'Last 6 hours',
-  '24h': 'Last 24 hours',
-  today: 'Today',
-  '7d': 'Last 7 days',
-  '30d': 'Last 30 days',
-  custom: 'Custom period'
-};
-
-const state = {
-  entities: [],
-  sources: [],
-  entityUniverse: {},
-  buildPlan: {},
-  demoEvents: [],
-  demoMode: false,
-  events: [],
-  liveEvents: [],
-  rawArticleCount: 0,
-  currentView: 'today',
-  searchFilter: 'all',
-  searchQuery: '',
-  watched: new Set(),
-  feedback: [],
-  preferences: { ...DEFAULT_PREFERENCES },
-  liveStatus: 'idle',
-  lastScanAt: null,
-  liveMeta: {},
-  newEventIds: new Set(),
-  installPrompt: null,
-  toastTimer: null,
-  periodPreset: '24h',
-  periodWindow: null,
-  comparePeriod: false,
-  previousOpenedAt: null
-};
-
-const $ = (selector, root = document) => root.querySelector(selector);
-const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-
-function escapeHtml(value = '') {
-  return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
+function escapeHtml(value='') {
+  return String(value).replace(/[&<>"']/g,(character)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[character]));
 }
 
-function safeUrl(value = '') {
-  try {
-    const url = new URL(value, location.origin);
-    return ['http:', 'https:'].includes(url.protocol) ? url.href : '#';
-  } catch {
-    return '#';
+function formatDate(date, includeTime=true) {
+  const value = date instanceof Date ? date : new Date(date);
+  if (Number.isNaN(value.getTime())) return '—';
+  return new Intl.DateTimeFormat('en-IN', includeTime
+    ? { day:'2-digit', month:'short', hour:'numeric', minute:'2-digit', timeZone:IST }
+    : { day:'2-digit', month:'short', year:'numeric', timeZone:IST }
+  ).format(value);
+}
+
+function startOfToday(now=new Date()) {
+  const parts = new Intl.DateTimeFormat('en-CA',{ year:'numeric',month:'2-digit',day:'2-digit',timeZone:IST }).format(now);
+  return new Date(`${parts}T00:00:00+05:30`);
+}
+
+function lastVisit() {
+  const stored = localStorage.getItem('abgPulseLastVisit');
+  const parsed = stored ? new Date(stored) : new Date(Date.now() - DAY);
+  return Number.isNaN(parsed.getTime()) ? new Date(Date.now() - DAY) : parsed;
+}
+
+function selectedWindow() {
+  const end = new Date();
+  const value = $('#periodSelect').value;
+  let start;
+  if (value === 'last_visit') start = lastVisit();
+  else if (value === '1h') start = new Date(end.getTime() - HOUR);
+  else if (value === '6h') start = new Date(end.getTime() - 6 * HOUR);
+  else if (value === '24h') start = new Date(end.getTime() - DAY);
+  else if (value === 'today') start = startOfToday(end);
+  else if (value === '7d') start = new Date(end.getTime() - 7 * DAY);
+  else if (value === '30d') start = new Date(end.getTime() - 30 * DAY);
+  else {
+    start = new Date($('#customStart').value);
+    const customEnd = new Date($('#customEnd').value);
+    if (!Number.isNaN(customEnd.getTime())) return { start:Number.isNaN(start.getTime()) ? new Date(end.getTime()-DAY) : start, end:customEnd };
   }
+  return { start, end };
 }
 
-function loadJsonStorage(key, fallback) {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  } catch {
-    return fallback;
-  }
+function updateWindowLabel() {
+  state.window = selectedWindow();
+  $('#coverageWindow').textContent = `${formatDate(state.window.start)} – ${formatDate(state.window.end)} IST`;
 }
 
-function saveJsonStorage(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage may be unavailable */ }
+async function fetchJson(url) {
+  const response = await fetch(url,{ cache:'no-store' });
+  const text = await response.text();
+  let payload;
+  try { payload = JSON.parse(text); }
+  catch { throw new Error(`Expected JSON but received ${response.status} ${response.statusText}.`); }
+  if (!response.ok) throw new Error(payload.message || payload.error || `Request failed: ${response.status}`);
+  return payload;
 }
 
-async function fetchJson(url, options = {}) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), options.timeout || 6500);
-  try {
-    const response = await fetch(url, { ...options, signal: controller.signal, headers: { Accept: 'application/json', ...(options.headers || {}) } });
-    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-    return await response.json();
-  } finally {
-    clearTimeout(timeout);
-  }
+function setBanner(message='', type='') {
+  const node = $('#statusBanner');
+  node.hidden = !message;
+  node.className = `status-banner ${type}`.trim();
+  node.innerHTML = message;
 }
 
-function entityById(id) {
-  return state.entities.find((entity) => entity.id === id);
+function toneLabel(score) {
+  if (!Number.isFinite(score)) return 'No measured tone';
+  if (score >= 25) return 'Positive';
+  if (score <= -25) return 'Negative';
+  return 'Neutral / mixed';
 }
 
-function entitiesForEvent(event) {
-  return (event.entityIds || []).map(entityById).filter(Boolean);
-}
-
-function relativeTime(value) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return 'time unavailable';
-  const seconds = Math.round((date.getTime() - Date.now()) / 1000);
-  const formatter = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
-  const ranges = [
-    ['year', 31536000], ['month', 2592000], ['week', 604800], ['day', 86400], ['hour', 3600], ['minute', 60]
-  ];
-  for (const [unit, size] of ranges) {
-    if (Math.abs(seconds) >= size || unit === 'minute') return formatter.format(Math.round(seconds / size), unit);
-  }
-  return 'now';
-}
-
-function formatDate(value, withTime = false) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return 'Date unavailable';
-  return new Intl.DateTimeFormat('en-IN', withTime
-    ? { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: REPORTING_TIMEZONE }
-    : { day: 'numeric', month: 'short', year: 'numeric', timeZone: REPORTING_TIMEZONE }).format(date);
-}
-
-
-function parseIstDateTimeLocal(value) {
-  if (!value || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(value)) return null;
-  const date = new Date(`${value.slice(0, 16)}:00+05:30`);
-  return Number.isNaN(date.getTime()) ? null : date;
-}
-
-function toIstDateTimeLocal(value) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return '';
-  const shifted = new Date(date.getTime() + REPORTING_OFFSET_MINUTES * 60 * 1000);
-  return shifted.toISOString().slice(0, 16);
-}
-
-function exactPeriodLabel(window = state.periodWindow) {
-  if (!window) return 'Period unavailable';
-  return `${formatDate(window.start, true)} – ${formatDate(window.end, true)} IST`;
-}
-
-function resolveSelectedPeriod(preset = state.periodPreset) {
-  const customStart = preset === 'custom' ? parseIstDateTimeLocal($('#custom-period-start')?.value) : null;
-  const customEnd = preset === 'custom' ? parseIstDateTimeLocal($('#custom-period-end')?.value) : null;
-  return resolvePeriodWindow(preset, {
-    now: new Date(),
-    lastOpened: state.previousOpenedAt,
-    customStart,
-    customEnd,
-    timezoneOffsetMinutes: REPORTING_OFFSET_MINUTES
+function aggregateTone(events) {
+  if (!events.length) return null;
+  let weighted = 0, weight = 0;
+  events.forEach((event)=>{
+    const score = Number(event.intelligence?.mediaTone ?? event.intelligence?.sentiment);
+    if (!Number.isFinite(score)) return;
+    const eventWeight = Math.max(1, Number(event.articleCount || event.sourceCount || 1));
+    weighted += score * eventWeight; weight += eventWeight;
   });
+  return weight ? Math.round(weighted / weight) : null;
 }
 
-function periodEvents() {
-  return sortEvents(filterEventsByWindow(visibleEvents(), state.periodWindow || resolveSelectedPeriod()));
-}
+function updateSummary() {
+  const events = state.events;
+  const must = events.filter((event)=>event.bucket === 'must');
+  const watch = events.filter((event)=>event.bucket === 'watch');
+  const tone = aggregateTone(events);
+  $('#mustCount').textContent = must.length;
+  $('#watchCount').textContent = watch.length;
+  $('#eventCount').textContent = events.length;
+  $('#sourceCount').textContent = state.meta ? `${state.meta.successfulChecks}/${state.meta.totalChecks}` : '—';
+  $('#articleCount').textContent = state.meta?.articleCount ?? '—';
+  $('#toneScore').textContent = tone === null ? '—' : `${tone > 0 ? '+' : ''}${tone}`;
+  $('#toneLabel').textContent = toneLabel(tone);
+  $('#tonePointer').style.left = `${tone === null ? 50 : Math.max(0,Math.min(100,(tone + 100)/2))}%`;
 
-function previousPeriodEvents() {
-  const previous = previousPeriodWindow(state.periodWindow);
-  return previous ? sortEvents(filterEventsByWindow(visibleEvents(), previous)) : [];
-}
-
-function evidenceSourcesForEvents(events = []) {
-  const map = new Map();
-  for (const event of events) {
-    for (const source of event.sources || []) {
-      const url = source.url ? safeUrl(source.url) : '#';
-      const domain = url === '#' ? '' : domainFromUrl(url);
-      const key = domain || normalizeText(source.name || 'unknown-source');
-      if (!key || map.has(key)) continue;
-      const registry = domain ? state.sources.find((item) => item.domain === domain || domain.endsWith(`.${item.domain}`)) : null;
-      map.set(key, {
-        name: source.name || registry?.name || domain || 'Unnamed source',
-        domain,
-        tier: source.tier ?? registry?.tier ?? 3,
-        class: registry?.class || sourceClassFromTier(source.tier),
-        provider: source.provider || ''
-      });
-    }
-  }
-  return [...map.values()].sort((a, b) => (a.tier - b.tier) || a.name.localeCompare(b.name));
-}
-
-function sourceClassFromTier(tier) {
-  if (Number(tier) === 0) return 'official';
-  if (Number(tier) === 1) return 'major-media';
-  if (Number(tier) === 2) return 'specialist-media';
-  return 'discovery-index';
-}
-
-function coverageGroupForSource(source = {}) {
-  const cls = source.class || sourceClassFromTier(source.tier);
-  if (['official', 'official-filing'].includes(cls)) return 'Official company / IR';
-  if (['exchange', 'regulator'].includes(cls)) return 'Exchanges & regulators';
-  if (cls === 'major-media') return 'Major journalism';
-  if (['specialist-media', 'regional'].includes(cls)) return 'Specialist & regional media';
-  if (cls === 'discovery-index') return 'Open discovery';
-  return 'Other evidence';
-}
-
-function coverageSnapshot(events = periodEvents()) {
-  const configured = state.sources.filter((source) => source.active !== false);
-  const evidence = evidenceSourcesForEvents(events);
-  const groups = ['Official company / IR', 'Exchanges & regulators', 'Major journalism', 'Specialist & regional media', 'Open discovery', 'Other evidence']
-    .map((name) => ({
-      name,
-      configured: configured.filter((source) => coverageGroupForSource(source) === name).length,
-      evidence: evidence.filter((source) => coverageGroupForSource(source) === name).length
-    }))
-    .filter((group) => group.configured || group.evidence);
-  const attemptedChecks = Number(state.liveMeta?.queryCount || 0);
-  const successfulChecks = Number(state.liveMeta?.successfulQueries || 0);
-  const errors = Array.isArray(state.liveMeta?.errors) ? state.liveMeta.errors : [];
-  return { configured, evidence, groups, attemptedChecks, successfulChecks, errors };
-}
-
-function averageSentiment(events = []) {
-  if (!events.length) return 0;
-  return Math.round(events.reduce((sum, event) => sum + Number(event.intelligence?.sentiment || 0), 0) / events.length);
-}
-
-function signedDifference(value) {
-  const number = Number(value) || 0;
-  return `${number > 0 ? '+' : ''}${number}`;
-}
-
-function sourceItemCount(events = []) {
-  return events.reduce((sum, event) => sum + getSourceCount(event), 0);
-}
-
-function periodPresetLabel(preset = state.periodPreset) {
-  return PERIOD_LABELS[preset] || PERIOD_LABELS['24h'];
-}
-
-function scoreColor(score, type = 'standard') {
-  if (type === 'sentiment') return score < 0 ? 'var(--red)' : score > 20 ? 'var(--sage)' : 'var(--slate)';
-  if (score >= 75) return 'var(--wine)';
-  if (score >= 55) return 'var(--amber)';
-  return 'var(--slate)';
-}
-
-
-const METHODOLOGY = {
-  must: { title: 'Must Know', lead: 'Materially changes today’s senior-management picture and is supported strongly enough to brief now.', formula: 'Must Know when materiality ≥76 and certainty ≥58; or an immediate high-impact event reaches materiality 64; or materiality ≥68 with momentum ≥72 and certainty ≥50.', note: 'Article volume alone cannot make a story Must Know.' },
-  watch: { title: 'Watch', lead: 'May change tomorrow’s picture, is accelerating, or needs stronger confirmation.', formula: 'Watch when 24-hour importance ≥52%, materiality ≥58, momentum ≥62, or a relevant signal has certainty below 48.', note: 'Watch means prepare and verify—not automatically respond.' },
-  other: { title: 'Other Developments', lead: 'Relevant to the ABG record, but does not change what a senior leader needs to know now.', formula: 'A relevant event that does not cross Must Know or Watch thresholds.', note: 'Most developments can correctly sit here. That is signal discipline.' },
-  materiality: { title: 'Materiality', lead: 'Potential consequence for ABG—not the loudness of coverage.', formula: 'Weighted event type + entity seniority + source quality + source breadth, capped at 100.', note: 'This is decision support, not a SEBI materiality determination.' },
-  certainty: { title: 'Certainty', lead: 'Strength of evidence supporting the factual core.', formula: 'Base by source tier + limited corroboration + confirmation terms − speculative language.', note: 'Several domains can still repeat one wire story, so count is not proof.' },
-  momentum: { title: 'Momentum / Trending', lead: 'How quickly media attention is building in the selected period.', formula: 'Recent item volume + independent-source diversity + acceleration; capped at 100.', note: 'Momentum is attention, not importance or approval.' },
-  sentiment: { title: 'Media Tone Score', lead: 'Positive or negative language used toward the relevant ABG entity in published coverage.', formula: 'Favourable and adverse language is normalised from −100 to +100. Radar uses materiality-weighted entity averages.', note: 'It is media language—not public opinion, reputation value or business impact.' },
-  'public-sentiment': { title: 'Observed Public Sentiment', lead: 'Direction of accessible public-conversation language around an ABG event.', formula: 'Open-public posts are scored from −100 to +100 and weighted modestly by accessible engagement. Sample size, channel count and confidence are always shown.', note: 'This is not “full public sentiment”. X, LinkedIn, Instagram, YouTube comments and other closed-platform data require authorised or licensed access.' },
-  narrative: { title: 'Narrative Drift', lead: 'Where emerging shorthand moves away from verified institutional facts.', formula: 'Headline/frame divergence + personality displacement + ownership simplification + source spread.', note: 'A drift signal asks for human review; it does not prescribe a response.' },
-  forecast: { title: 'Likely to Become Important', lead: 'Heuristic probability that a story becomes more important in 6, 24 or 72 hours.', formula: 'Logistic model using materiality, momentum, certainty, source breadth, seniority and narrative risk.', note: 'Forecasts are decision support, never fact. They must be graded against later outcomes.' },
-  coverage: { title: 'Coverage', lead: 'Separates what is registered, what was successfully checked and what actually supports an event.', formula: 'Registered ≠ checked ≠ evidence. Each is shown separately.', note: 'A healthy scan does not prove universal internet coverage.' },
-  universe: { title: 'ABG Entity Universe', lead: 'The governed list of companies, people, brands, initiatives and material stakeholders that Pulse is designed to recognise.', formula: 'The company and leadership registers are reconciled to ABG’s official public pages; aliases, relationships and verification dates are stored with each entity.', note: 'Organisations and roles change. The verification date is therefore as important as the count.' },
-  gaps: { title: 'What We May Have Missed', lead: 'Shows source failures, thin corroboration and visible coverage gaps.', formula: 'Post-scan checks inspect provider errors, entity-universe reconciliation, public-conversation availability and evidence quality.', note: 'No warning means no configured anomaly—not guaranteed completeness.' },
-  audit: { title: 'Auditability', lead: 'Makes the path from event to score, label and source traceable.', formula: 'Entity → event → claim/evidence → intelligence score → classification.', note: 'Explainability cannot improve the quality of a weak source.' },
-  scores: { title: 'How the Scores Work', lead: 'Each score answers a different question so consequence, truth, public response and attention are never confused.', formula: 'Materiality = consequence · Certainty = evidence · Momentum = attention · Media tone = published language · Observed public sentiment = accessible public conversation · Forecast = future importance · Drift = framing risk.', note: 'The platform exposes its rules rather than hiding heuristics behind “AI”.' },
-  progress: { title: 'Job Meter', lead: 'The weighted percentage of the full product objective that has been completed with evidence.', formula: 'Overall completion = sum of each milestone weight × its verified completion percentage. Milestone weights total 100%.', note: 'Designed, coded or locally tested work is not counted as operational when the required live connection, external verification or elapsed benchmark is still missing.' }
-};
-
-function toneClass(value) {
-  const number = Number(value) || 0;
-  return number >= 25 ? 'positive' : number <= -25 ? 'negative' : 'neutral';
-}
-
-function toneLabel(value) {
-  const number = Number(value) || 0;
-  return number >= 25 ? 'Positive' : number <= -25 ? 'Negative' : 'Neutral / mixed';
-}
-
-function openMethodology(key = 'scores') {
-  const method = METHODOLOGY[key] || METHODOLOGY.scores;
-  const dialog = $('#methodology-dialog');
-  $('#methodology-eyebrow').textContent = 'Transparent intelligence';
-  $('#methodology-title').textContent = method.title;
-  $('#methodology-body').innerHTML = `<p class="methodology-lead">${escapeHtml(method.lead)}</p><div class="methodology-grid"><div class="methodology-card"><span>What it answers</span><strong>${escapeHtml(method.lead)}</strong></div><div class="methodology-card"><span>How to use it</span><strong>Read it with evidence status, sample size and source links—not alone.</strong></div></div><div class="methodology-formula">${escapeHtml(method.formula)}</div><div class="methodology-note"><strong>Limitation:</strong> ${escapeHtml(method.note)}</div>`;
-  if (typeof dialog.showModal === 'function') dialog.showModal();
-}
-
-function bindMethodology() {
-  document.addEventListener('click', (event) => {
-    const target = event.target.closest('[data-method]');
-    if (!target) return;
-    event.preventDefault();
-    event.stopPropagation();
-    openMethodology(target.dataset.method);
-  });
-  document.addEventListener('keydown', (event) => {
-    const target = event.target.closest?.('[data-method][role="button"]');
-    if (target && (event.key === 'Enter' || event.key === ' ')) {
-      event.preventDefault();
-      openMethodology(target.dataset.method);
-    }
-  });
-}
-
-function eventSearchText(event) {
-  const names = entitiesForEvent(event).map((entity) => `${entity.name} ${(entity.aliases || []).join(' ')}`).join(' ');
-  return normalizeText(`${event.headline} ${event.summary} ${event.whyItMatters} ${event.category} ${names} ${(event.flags || []).join(' ')}`);
-}
-
-function eventIsRoutineNoise(event) {
-  const text = eventSearchText(event);
-  return /share price|stock rises|stock falls|market today|trading call|technical chart/.test(text)
-    && !/results|filing|acquisition|regulator|court|ceo|cfo|chairman/.test(text);
-}
-
-function visibleEvents() {
-  const events = state.preferences.reduceNoise ? state.events.filter((event) => !eventIsRoutineNoise(event)) : state.events;
-  return sortEvents(events);
-}
-
-function bucketLabel(bucket) {
-  return bucket === 'must' ? 'Must know' : bucket === 'watch' ? 'Watch' : 'Other';
-}
-
-function statusLabel(status) {
-  return status === 'confirmed' ? 'Confirmed' : status === 'strong' ? 'Strong reporting' : 'Developing';
-}
-
-function watchStateLabel(value) {
-  const labels = {
-    'new-update': 'New update',
-    tracking: 'Tracking',
-    'no-change': 'No material change',
-    developing: 'Developing',
-    'case-study': 'Case study',
-    stable: 'Stable'
-  };
-  return labels[value] || 'Tracking';
-}
-
-function getSourceCount(event) {
-  return Math.max(event.sourceCount || 0, event.sources?.length || 0);
-}
-
-function storyCard(event, { compact = false } = {}) {
-  const entities = entitiesForEvent(event);
-  const primaryEntities = entities.filter((entity) => entity.type !== 'stakeholder').slice(0, 3).map((entity) => entity.name).join(' · ');
-  const intelligence = event.intelligence || {};
-  const prediction = intelligence.prediction || {};
-  const publicSentiment = intelligence.publicSentiment || {};
-  const watched = state.watched.has(event.id);
-  const sourceCount = getSourceCount(event);
-  const publicPill = Number.isFinite(Number(publicSentiment.score)) && Number(publicSentiment.sampleSize) > 0
-    ? `<span class="tone-pill ${toneClass(publicSentiment.score)}">Public ${signed(publicSentiment.score)} · n=${Number(publicSentiment.sampleSize)}</span>`
-    : '';
-  const scores = compact ? '' : `
-    <aside class="story-score-rail" aria-label="Intelligence scores">
-      <div class="score-stack">
-        ${scoreItem('Materiality', intelligence.materiality ?? 0, 'materiality')}
-        ${scoreItem('Momentum', intelligence.momentum ?? 0, 'momentum')}
-        ${scoreItem('Certainty', intelligence.certainty ?? 0, 'certainty')}
-        ${sentimentScoreItem(intelligence.mediaTone ?? intelligence.sentiment ?? 0)}
-      </div>
-      ${state.preferences.showForecasts ? `<div class="forecast-mini">24-hour importance<strong>${escapeHtml(prediction.p24 ?? 0)}%</strong></div>` : ''}
-    </aside>`;
-
-  return `
-    <article class="story-card bucket-${escapeHtml(event.bucket || 'other')} ${event.live ? 'is-live' : ''}" data-event-id="${escapeHtml(event.id)}">
-      <div class="story-main">
-        <div class="story-meta">
-          <span class="status-pill ${escapeHtml(event.status || 'developing')}">${escapeHtml(statusLabel(event.status))}</span>
-          <span class="category-pill">${escapeHtml(event.category || 'Corporate')}</span>
-          <span class="tone-pill ${toneClass(intelligence.mediaTone ?? intelligence.sentiment)}">Tone ${signed(intelligence.mediaTone ?? intelligence.sentiment)} · ${toneLabel(intelligence.mediaTone ?? intelligence.sentiment)}</span>
-          ${publicPill}
-          ${event.live ? '<span>Live discovery signal</span>' : ''}
-          ${state.newEventIds.has(event.id) ? '<span class="new-pill">New since last visit</span>' : ''}
-          <span>${escapeHtml(primaryEntities || 'Aditya Birla Group')}</span>
-        </div>
-        <h3>${escapeHtml(event.headline)}</h3>
-        <p class="story-summary">${escapeHtml(event.summary)}</p>
-        <div class="why-block"><span>Why it matters</span><p>${escapeHtml(event.whyItMatters)}</p></div>
-        <div class="story-footer">
-          <span class="story-proof">Updated ${escapeHtml(relativeTime(event.updatedAt || event.publishedAt))} · ${sourceCount} source${sourceCount === 1 ? '' : 's'}${event.flags?.includes('headline-derived') ? ' · headline-derived' : ''}</span>
-          <div class="story-actions">
-            <button class="action-button ${watched ? 'is-watched' : ''}" data-action="watch" data-event-id="${escapeHtml(event.id)}">${watched ? 'Watching' : 'Watch this'}</button>
-            <button class="action-button" data-action="ask" data-event-id="${escapeHtml(event.id)}">Ask Pulse</button>
-            <button class="action-button" data-action="detail" data-event-id="${escapeHtml(event.id)}">Evidence</button>
-          </div>
-        </div>
-      </div>
-      ${scores}
-    </article>`;
-}
-
-function scoreItem(label, value, method = 'scores') {
-  const score = Math.max(0, Math.min(100, Number(value) || 0));
-  return `<div class="score-item"><button class="score-item-label" data-method="${escapeHtml(method)}">${escapeHtml(label)}</button><strong>${score}</strong><div class="score-bar"><i style="width:${score}%;background:${scoreColor(score)}"></i></div></div>`;
-}
-
-function sentimentScoreItem(value) {
-  const score = Math.max(-100, Math.min(100, Number(value) || 0));
-  const cls = toneClass(score);
-  const position = 50 + score / 2;
-  return `<div class="score-item sentiment-score"><button class="score-item-label" data-method="sentiment">Media tone</button><strong class="${cls}">${signed(score)}</strong><div class="sentiment-scale"><i style="left:${position}%"></i></div></div>`;
-}
-
-function renderDateAndGreeting() {
-  const now = new Date();
-  const dateText = new Intl.DateTimeFormat('en-IN', { weekday: 'long', day: 'numeric', month: 'long', timeZone: REPORTING_TIMEZONE }).format(now);
-  $('#current-date').textContent = dateText;
-  const hourPart = new Intl.DateTimeFormat('en-IN', { hour: 'numeric', hourCycle: 'h23', timeZone: REPORTING_TIMEZONE }).formatToParts(now).find((part) => part.type === 'hour');
-  const hour = Number(hourPart?.value || 12);
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-  $('#today-heading').textContent = `${greeting}, Rishi.`;
-}
-
-function todayEvents() {
-  return periodEvents();
-}
-
-
-function renderScopeToolbar() {
-  if (!state.periodWindow) state.periodWindow = resolveSelectedPeriod();
-  const events = periodEvents();
-  const coverage = coverageSnapshot(events);
-  const selected = $('#period-select');
-  if (selected && selected.value !== state.periodPreset) selected.value = state.periodPreset;
-  $('#custom-period').hidden = state.periodPreset !== 'custom';
-  $('#period-window-label').textContent = exactPeriodLabel();
-  $('#compare-period-toggle').checked = state.comparePeriod;
-  $('#coverage-button-count').textContent = `${coverage.evidence.length} evidence · ${coverage.configured.length} registered`;
-  const scanText = coverage.attemptedChecks
-    ? `${coverage.successfulChecks}/${coverage.attemptedChecks} automated checks succeeded${coverage.errors.length ? ` · ${coverage.errors.length} degraded` : ''}`
-    : 'Live scan health has not yet been metered in this session';
-  const universe = entityUniverseCounts();
-  $('#scope-proof').textContent = `${universe.companies.length}/${universe.expectedCompanies} official companies · ${universe.leadership.length}/${universe.expectedLeadership} official leaders · ${events.length} deduplicated development${events.length === 1 ? '' : 's'} · ${sourceItemCount(events)} source item${sourceItemCount(events) === 1 ? '' : 's'} · ${scanText}.`;
-  $('#trend-period-button').textContent = periodPresetLabel();
-  renderCoverageDialog(events, coverage);
-}
-
-function renderPeriodComparison(events) {
-  const panel = $('#period-comparison');
-  if (!state.comparePeriod) {
-    panel.hidden = true;
-    panel.innerHTML = '';
+  if (!state.meta) {
+    $('#briefHeadline').textContent = 'No completed scan yet';
+    $('#briefSummary').textContent = 'Refresh intelligence to check the selected period.';
     return;
   }
-  const previous = previousPeriodEvents();
-  const currentMust = events.filter((event) => event.bucket === 'must').length;
-  const previousMust = previous.filter((event) => event.bucket === 'must').length;
-  const eventDiff = events.length - previous.length;
-  const mustDiff = currentMust - previousMust;
-  const sourceDiff = sourceItemCount(events) - sourceItemCount(previous);
-  const sentimentDiff = averageSentiment(events) - averageSentiment(previous);
-  const metric = (value, label) => `<div class="comparison-metric"><strong class="${value > 0 ? 'comparison-positive' : value < 0 ? 'comparison-negative' : ''}">${escapeHtml(signedDifference(value))}</strong><span>${escapeHtml(label)}</span></div>`;
-  panel.hidden = false;
-  panel.innerHTML = `<div class="comparison-title"><div><p class="eyebrow">Compared with the immediately preceding period</p><h2>${escapeHtml(periodPresetLabel())}</h2></div><span class="metric-chip">${escapeHtml(formatDate(previousPeriodWindow(state.periodWindow)?.start, true))} – ${escapeHtml(formatDate(previousPeriodWindow(state.periodWindow)?.end, true))}</span></div><div class="comparison-grid">${metric(eventDiff, 'Developments')}${metric(mustDiff, 'Must Know')}${metric(sourceDiff, 'Source items')}${metric(sentimentDiff, 'Avg media tone')}</div>`;
+  if (!events.length) {
+    $('#briefHeadline').textContent = 'Nothing material found in this window';
+    $('#briefSummary').textContent = `${state.meta.successfulChecks} of ${state.meta.totalChecks} checks completed. Review Coverage before treating this as a clean bill of health.`;
+    return;
+  }
+  $('#briefHeadline').textContent = must.length ? `${must.length} ${must.length === 1 ? 'development changes' : 'developments change'} today’s picture` : `${watch.length} ${watch.length === 1 ? 'development needs' : 'developments need'} watching`;
+  const top = [...must,...watch].slice(0,2).map((event)=>event.headline).join(' · ');
+  $('#briefSummary').textContent = `${top || 'Relevant developments were found.'} Overall Media Tone is ${toneLabel(tone).toLowerCase()}.`;
 }
 
-function renderCoverageDialog(events = periodEvents(), coverage = coverageSnapshot(events)) {
-  $('#coverage-period-copy').textContent = `${periodPresetLabel()} · ${exactPeriodLabel()}`;
-  const scanValue = coverage.attemptedChecks ? `${coverage.successfulChecks}/${coverage.attemptedChecks}` : '—';
-  $('#coverage-metrics').innerHTML = [
-    [coverage.evidence.length, 'Evidence source domains'],
-    [coverage.configured.length, 'Governed source registry'],
-    [scanValue, 'Latest checks succeeded'],
-    [coverage.errors.length, 'Checks degraded']
-  ].map(([value, label]) => `<div class="coverage-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join('');
+function scoreChip(label,value,kind='') {
+  return `<span class="score-chip ${kind}">${escapeHtml(label)} ${escapeHtml(value)}</span>`;
+}
 
-  $('#coverage-class-list').innerHTML = coverage.groups.map((group) => `<div class="coverage-class-row"><div><strong>${escapeHtml(group.name)}</strong><small>${group.evidence ? `${group.evidence} evidence source${group.evidence === 1 ? '' : 's'} in this window` : 'No attached evidence in this window'}</small></div><span>${group.configured} registered</span><span class="coverage-class-status ${group.evidence ? 'present' : 'none'}">${group.evidence ? 'Covered' : 'No event evidence'}</span></div>`).join('');
+function eventCard(event) {
+  const tone = Number(event.intelligence?.mediaTone ?? event.intelligence?.sentiment ?? 0);
+  const toneKind = tone >= 25 ? 'positive' : tone <= -25 ? 'negative' : '';
+  const p24 = event.intelligence?.prediction?.p24 ?? event.intelligence?.prediction24 ?? '—';
+  return `<article class="story-card ${escapeHtml(event.bucket || 'other')}">
+    <div class="card-top"><span class="entity-line">${escapeHtml(event.entity || event.primaryEntity?.name || 'ABG')} · ${escapeHtml(event.category || 'Corporate')}</span><span class="status-pill">${escapeHtml(event.status || 'Developing')}</span></div>
+    <h3>${escapeHtml(event.headline || event.title)}</h3>
+    <p class="summary">${escapeHtml(event.summary || '')}</p>
+    <div class="why"><b>Why it matters:</b> ${escapeHtml(event.whyItMatters || event.interpretation || '')}</div>
+    <div class="score-row">
+      ${scoreChip('Materiality',event.intelligence?.materiality ?? '—')}
+      ${scoreChip('Momentum',event.intelligence?.momentum ?? '—')}
+      ${scoreChip('Tone',`${tone > 0 ? '+' : ''}${tone}`,toneKind)}
+      ${scoreChip('24h',`${p24}%`)}
+    </div>
+    <div class="meta-row"><span>${event.sourceCount || 0} independent source families</span><span>${event.articleCount || event.sources?.length || 0} articles</span><span>Updated ${formatDate(event.updatedAt)}</span></div>
+    <div class="card-actions"><button data-story="${escapeHtml(event.id)}">Evidence & method</button></div>
+  </article>`;
+}
 
-  $('#coverage-domain-list').innerHTML = coverage.evidence.length
-    ? coverage.evidence.map((source) => `<span class="coverage-domain-chip" title="${escapeHtml(source.domain || source.name)}">${escapeHtml(source.name)}${source.domain ? ` · ${escapeHtml(source.domain)}` : ''}</span>`).join('')
-    : '<div class="empty-state"><h2>No event evidence in this window</h2><p>This does not mean the registry was not checked; it means no source is attached to a qualifying event in the selected period.</p></div>';
-
-  const scannedAt = state.liveMeta?.scannedAt || state.lastScanAt;
-  const scanCopy = coverage.attemptedChecks
-    ? `${coverage.successfulChecks} of ${coverage.attemptedChecks} configured automated checks succeeded${scannedAt ? ` at ${formatDate(scannedAt, true)}` : ''}.`
-    : 'No live-scan health record is available in this session. The evidence record remains usable, but successful-check coverage cannot be claimed.';
-  const capCopy = state.liveMeta?.windowCapped
-    ? 'The automated live scan was capped to the latest 30 days. The selected period still filters all evidence already stored in Pulse.'
-    : '';
-  $('#coverage-scan-health').innerHTML = `<div class="coverage-scan-card"><strong>${escapeHtml(scanCopy)}</strong><p>${escapeHtml((state.liveMeta?.providers || []).join(' · ') || 'Providers not yet metered.')}</p>${capCopy ? `<p><strong>${escapeHtml(capCopy)}</strong></p>` : ''}${coverage.errors.length ? `<ul class="coverage-error-list">${coverage.errors.slice(0, 8).map((error) => `<li>${escapeHtml(error.provider || 'Source check')} · ${escapeHtml(error.query || 'unknown')} · ${escapeHtml(error.error || 'degraded')}</li>`).join('')}</ul>` : ''}</div>`;
+function renderSection(target,title,description,events) {
+  const node = $(target);
+  node.innerHTML = `<section class="section-block"><div class="section-heading"><div><h2>${title} <button class="info" data-info="${title === 'Must Know' ? 'must' : title === 'Watch' ? 'watch' : 'events'}">i</button></h2><p>${description}</p></div><p>${events.length}</p></div>${events.length ? `<div class="story-grid">${events.map(eventCard).join('')}</div>` : `<div class="empty-state">Nothing in this category for the selected period.</div>`}</section>`;
 }
 
 function renderToday() {
-  const events = todayEvents();
-  const must = events.filter((event) => event.bucket === 'must');
-  const watch = events.filter((event) => event.bucket === 'watch');
-  const other = events.filter((event) => !['must', 'watch'].includes(event.bucket));
-  const coverage = coverageSnapshot(events);
-
-  $('#must-list').innerHTML = must.map((event) => storyCard(event)).join('') || emptyCard('No Must Know developments in this period', 'That is a valid outcome—not a monitoring failure.');
-  $('#watch-list').innerHTML = watch.map((event) => storyCard(event)).join('') || emptyCard('Nothing is escalating in this period', 'Pulse will keep monitoring developing signals.');
-  $('#other-list').innerHTML = other.map((event) => storyCard(event, { compact: true })).join('') || emptyCard('No other developments in this period', 'The selected evidence record is clear.');
-
-  $('#must-count').textContent = must.length;
-  $('#watch-count').textContent = watch.length;
-  $('#other-count').textContent = other.length;
-  $('#matter-count').textContent = must.length;
-  $('#matter-label').textContent = must.length === 1 ? 'thing matters in this period' : 'things matter in this period';
-  $('#nav-today-count').textContent = must.length;
-
-  const articleCount = sourceItemCount(events);
-  $('#source-scan-count').textContent = coverage.evidence.length;
-  $('#source-scan-label').textContent = 'evidence sources';
-  $('#article-scan-count').textContent = articleCount;
-  $('#event-scan-count').textContent = events.length;
-  $('#scan-summary').textContent = `${articleCount} source items from ${coverage.evidence.length} evidence source domain${coverage.evidence.length === 1 ? '' : 's'} collapsed into ${events.length} actual development${events.length === 1 ? '' : 's'}.`;
-  $('#caught-up-copy').textContent = `${articleCount} source items reviewed · ${events.length} developments · ${must.length} deserved Must Know attention · ${exactPeriodLabel()}.`;
-  $('#today-subtitle').textContent = must.length
-    ? `${periodPresetLabel()}: what changed around the Group—and what deserves attention now.`
-    : `${periodPresetLabel()}: no development currently changes the Group picture. Watch items remain under review.`;
-
-  const words = [...must, ...watch].reduce((sum, event) => sum + String(event.summary).split(/\s+/).length + 14, 0);
-  const seconds = events.length ? Math.max(20, Math.min(120, Math.round(words / 3.5))) : 12;
-  $('#reading-time').textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
-
-  $('#other-details').open = other.length <= 2;
-  renderPeriodComparison(events);
-  bindStoryActions($('#view-today'));
-}
-
-function emptyCard(title, copy) {
-  return `<div class="empty-state"><h2>${escapeHtml(title)}</h2><p>${escapeHtml(copy)}</p></div>`;
-}
-
-function renderWatching() {
-  const allWatched = visibleEvents().filter((event) => state.watched.has(event.id));
-  const events = [...allWatched].sort((a, b) => {
-    const aCurrent = eventOccursInWindow(a, state.periodWindow) ? 1 : 0;
-    const bCurrent = eventOccursInWindow(b, state.periodWindow) ? 1 : 0;
-    if (aCurrent !== bCurrent) return bCurrent - aCurrent;
-    return new Date(b.updatedAt || b.publishedAt) - new Date(a.updatedAt || a.publishedAt);
-  });
-  const changedInPeriod = events.filter((event) => eventOccursInWindow(event, state.periodWindow));
-  $('#nav-watch-count').textContent = allWatched.length;
-  const groups = {
-    updates: changedInPeriod.filter((event) => event.watchState === 'new-update').length,
-    developing: changedInPeriod.filter((event) => ['tracking', 'developing', 'case-study'].includes(event.watchState)).length,
-    stable: events.length - changedInPeriod.length + changedInPeriod.filter((event) => ['stable', 'no-change'].includes(event.watchState)).length,
-    total: events.length
-  };
-  $('#watch-status-strip').innerHTML = [
-    ['New updates in period', groups.updates], ['Developing in period', groups.developing], ['No material change', groups.stable], ['Total watched', groups.total]
-  ].map(([label, value]) => `<div class="watch-stat"><span>${escapeHtml(label)}</span><strong>${value}</strong></div>`).join('');
-
-  $('#watching-empty').hidden = events.length > 0;
-  $('#watching-list').innerHTML = events.map((event) => {
-    const changed = eventOccursInWindow(event, state.periodWindow);
-    const copy = changed
-      ? (event.watchState === 'new-update' ? event.summary : event.whyItMatters)
-      : `No material update during ${periodPresetLabel().toLowerCase()} (${exactPeriodLabel()}).`;
-    const status = changed ? watchStateLabel(event.watchState) : 'No change in period';
-    const indicator = changed ? (event.watchState || 'tracking') : 'no-change';
-    return `<article class="watch-row" data-event-id="${escapeHtml(event.id)}">
-      <span class="watch-indicator ${escapeHtml(indicator)}"></span>
-      <div><h3>${escapeHtml(event.headline)}</h3><p>${escapeHtml(copy)}</p></div>
-      <button class="watch-status" data-action="detail" data-event-id="${escapeHtml(event.id)}">${escapeHtml(status)}</button>
-    </article>`;
-  }).join('');
-  bindStoryActions($('#view-watching'));
-}
-
-function aggregateEntitySentiment(events) {
-  const map = new Map();
-  for (const event of events) {
-    const tone = Number(event.intelligence?.sentiment || 0);
-    const weight = Math.max(1, Number(event.intelligence?.materiality || 25) / 25);
-    for (const id of event.entityIds || []) {
-      const entity = entityById(id);
-      if (!entity || entity.tier > 2) continue;
-      const current = map.get(id) || { entity, total: 0, weight: 0, count: 0 };
-      current.total += tone * weight;
-      current.weight += weight;
-      current.count += 1;
-      map.set(id, current);
-    }
-  }
-  return [...map.values()]
-    .filter((item) => item.count >= 1)
-    .map((item) => ({ entity: item.entity, value: Math.round(item.total / item.weight), count: item.count }))
-    .sort((a, b) => (b.count * 10 + Math.abs(b.value)) - (a.count * 10 + Math.abs(a.value)))
-    .slice(0, 7);
-}
-
-function aggregateObservedPublicSentiment(events = []) {
-  const observations = events
-    .map((event) => event.intelligence?.publicSentiment)
-    .filter((item) => item && Number.isFinite(Number(item.score)) && Number(item.sampleSize) > 0);
-  if (!observations.length) return { score: null, sampleSize: 0, channelCount: 0, confidence: 'unavailable' };
-  const totalWeight = observations.reduce((sum, item) => sum + Math.max(1, Number(item.sampleSize)), 0);
-  const score = Math.round(observations.reduce((sum, item) => sum + Number(item.score) * Math.max(1, Number(item.sampleSize)), 0) / totalWeight);
-  const sampleSize = observations.reduce((sum, item) => sum + Number(item.sampleSize || 0), 0);
-  const channelCount = Math.max(...observations.map((item) => Number(item.channelCount || 0)));
-  const confidence = sampleSize >= 50 && channelCount >= 2 ? 'high' : sampleSize >= 12 ? 'medium' : 'low';
-  return { score, sampleSize, channelCount, confidence };
-}
-
-function renderPublicSentiment(events = []) {
-  const node = $('#public-sentiment-summary');
-  if (!node) return;
-  const observed = aggregateObservedPublicSentiment(events);
-  const meta = state.liveMeta?.sentimentCoverage || {};
-  if (!Number.isFinite(Number(observed.score))) {
-    node.innerHTML = `<div class="public-sentiment-head"><div><span>Observed public sentiment</span><strong>Not available in this period</strong></div><button class="method-link" data-method="public-sentiment">What this includes</button></div><p class="public-sentiment-proof">No accessible public-conversation sample was attached to a qualifying event. ${escapeHtml(meta.closedSocial || 'Closed social platforms require authorised or licensed access.')}</p>`;
-    return;
-  }
-  const score = Number(observed.score);
-  const position = 50 + score / 2;
-  node.innerHTML = `<div class="public-sentiment-head"><div><span>Observed public sentiment</span><strong class="${toneClass(score)}">${signed(score)} · ${toneLabel(score)}</strong></div><button class="method-link" data-method="public-sentiment">What this includes</button></div><div class="public-sentiment-meter"><span>−100</span><div class="sentiment-track"><i class="${score < 0 ? 'negative' : ''}" style="left:${Math.min(99, Math.max(1, position))}%;width:2px"></i></div><span>+100</span></div><p class="public-sentiment-proof"><span class="public-sentiment-status">${escapeHtml(observed.confidence)} confidence</span> ${observed.sampleSize} accessible public sample${observed.sampleSize === 1 ? '' : 's'} across ${observed.channelCount} channel${observed.channelCount === 1 ? '' : 's'}. ${escapeHtml(meta.closedSocial || 'Closed-platform coverage is not implied.')}</p>`;
+  renderSection('#mustSection','Must Know','Changes today’s senior-management picture.',state.events.filter((event)=>event.bucket === 'must'));
+  renderSection('#watchSection','Watch','May become important; prepare or verify.',state.events.filter((event)=>event.bucket === 'watch'));
+  renderSection('#otherSection','Other Developments','Relevant to the record, but not urgent.',state.events.filter((event)=>event.bucket === 'other'));
+  const caught = $('#caughtUp');
+  caught.hidden = !state.meta;
+  if (state.meta) $('#caughtUpText').textContent = `${state.meta.articleCount || 0} relevant articles collapsed into ${state.events.length} actual events. ${state.meta.failedChecks || 0} source checks failed and remain visible in Coverage.`;
+  bindDynamicControls();
 }
 
 function renderRadar() {
-  const events = periodEvents();
-  const trending = [...events].sort((a, b) => (b.intelligence?.momentum || 0) - (a.intelligence?.momentum || 0)).slice(0, 6);
-  $('#trend-list').innerHTML = trending.map((event, index) => {
-    const momentum = event.intelligence?.momentum || 0;
-    const change = event.intelligence?.trendChange || 0;
-    return `<button class="trend-row" data-action="detail" data-event-id="${escapeHtml(event.id)}" style="border-left:0;border-right:0;border-top:0;background:transparent;width:100%;text-align:left;cursor:pointer">
-      <span class="trend-rank">${index + 1}</span>
-      <span class="trend-name"><strong>${escapeHtml(event.headline)}</strong><small>${escapeHtml(entitiesForEvent(event)[0]?.name || event.category)}</small></span>
-      <span class="trend-score"><strong>${momentum}</strong><small class="${change < 0 ? 'down' : ''}">${change >= 0 ? '↑' : '↓'} ${Math.abs(change)}%</small></span>
-    </button>`;
-  }).join('');
+  const sorted = [...state.events].sort((a,b)=>Number(b.intelligence?.momentum||0)-Number(a.intelligence?.momentum||0));
+  $('#trendingList').innerHTML = sorted.length ? sorted.slice(0,8).map((event,index)=>`<div class="trend-row"><div><b>${index+1}. ${escapeHtml(event.headline)}</b><div class="bar"><i style="width:${Math.max(0,Math.min(100,event.intelligence?.momentum||0))}%"></i></div><small>${escapeHtml(event.entity || event.primaryEntity?.name || 'ABG')}</small></div><span class="trend-score">${event.intelligence?.momentum || 0}</span></div>`).join('') : '<div class="empty-state">No live trend signal in this period.</div>';
 
-  const sentiments = aggregateEntitySentiment(events);
-  $('#sentiment-list').innerHTML = sentiments.map(({ entity, value }) => {
-    const left = value >= 0 ? 50 : Math.max(0, 50 + value / 2);
-    const width = Math.max(2, Math.abs(value) / 2);
-    return `<div class="sentiment-row"><span>${escapeHtml(entity.name)}</span><div class="sentiment-track"><i class="${value < 0 ? 'negative' : ''}" style="left:${left}%;width:${width}%"></i></div><strong class="sentiment-value">${value > 0 ? '+' : ''}${value}</strong></div>`;
-  }).join('') || '<p class="method-note">Insufficient entity-level evidence.</p>';
-  renderPublicSentiment(events);
+  const predicted = [...state.events].filter((event)=>Number(event.intelligence?.prediction?.p24 ?? event.intelligence?.prediction24 ?? 0) >= 55).sort((a,b)=>Number(b.intelligence?.prediction?.p24||0)-Number(a.intelligence?.prediction?.p24||0));
+  $('#predictionList').innerHTML = predicted.length ? predicted.slice(0,7).map((event)=>`<div class="prediction-item"><strong>${event.intelligence?.prediction?.p24 ?? event.intelligence?.prediction24}%</strong> · ${escapeHtml(event.headline)}<br><small>${escapeHtml(event.status)} · heuristic until calibrated</small></div>`).join('') : '<div class="empty-state">No story crosses the current threshold.</div>';
 
-  const narrativeEvent = [...events].filter((event) => event.narrative).sort((a, b) => (b.narrative?.score || 0) - (a.narrative?.score || 0))[0];
-  if (narrativeEvent) {
-    const narrative = narrativeEvent.narrative;
-    const badge = $('#narrative-risk-badge');
-    badge.textContent = `${narrative.risk} risk`;
-    badge.className = `risk-badge ${String(narrative.risk).toLowerCase()}`;
-    $('#narrative-card').innerHTML = `
-      <div class="narrative-layout">
-        <div>
-          <div class="narrative-frames">
-            <div class="frame-card"><span>Verified frame</span><p>${escapeHtml(narrative.officialFrame)}</p></div>
-            <div class="frame-arrow" aria-hidden="true">→</div>
-            <div class="frame-card emerging"><span>Emerging shorthand</span><p>${escapeHtml(narrative.emergingFrame)}</p></div>
-          </div>
-          <p class="narrative-takeaway"><strong>Recommended posture:</strong> ${escapeHtml(narrative.recommendation)}</p>
-          <div class="narrative-actions"><span class="posture-pill">${escapeHtml(narrativeEvent.intelligence?.prediction?.posture || 'WATCH')}</span><button class="action-button" data-action="detail" data-event-id="${escapeHtml(narrativeEvent.id)}">Open evidence</button></div>
-        </div>
-        <div class="drift-meter"><div class="drift-circle" style="--score:${Number(narrative.score) || 0}"><div><strong>${Number(narrative.score) || 0}</strong><span>drift score</span></div></div></div>
-      </div>`;
-  } else {
-    $('#narrative-risk-badge').textContent = 'No active drift';
-    $('#narrative-risk-badge').className = 'risk-badge low';
-    $('#narrative-card').innerHTML = '<div class="empty-state"><h2>No narrative divergence detected</h2><p>The verified and emerging frames currently remain aligned.</p></div>';
-  }
+  const byEntity = new Map();
+  state.events.forEach((event)=>{
+    const name = event.entity || event.primaryEntity?.name || 'ABG';
+    const score = Number(event.intelligence?.mediaTone ?? event.intelligence?.sentiment);
+    if (!Number.isFinite(score)) return;
+    const row = byEntity.get(name) || { total:0,weight:0 };
+    const weight = Math.max(1,event.articleCount || 1); row.total += score*weight; row.weight += weight; byEntity.set(name,row);
+  });
+  const entityRows = [...byEntity.entries()].map(([name,row])=>[name,Math.round(row.total/row.weight)]).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,10);
+  $('#entityTone').innerHTML = entityRows.length ? entityRows.map(([name,score])=>`<div class="tone-row"><b>${escapeHtml(name)}</b><span>${score > 0 ? '+' : ''}${score}</span><div class="tone-mini"><i style="left:${Math.max(0,Math.min(100,(score+100)/2))}%"></i></div></div>`).join('') : '<div class="empty-state">No entity-level tone signal.</div>';
 
-  const forecastEvents = [...events]
-    .filter((event) => event.intelligence?.prediction)
-    .sort((a, b) => (b.intelligence.prediction.p24 || 0) - (a.intelligence.prediction.p24 || 0))
-    .slice(0, 3);
-  $('#forecast-grid').innerHTML = forecastEvents.map((event) => {
-    const p = event.intelligence.prediction;
-    return `<button class="forecast-card" data-action="detail" data-event-id="${escapeHtml(event.id)}" style="text-align:left;cursor:pointer;color:inherit">
-      <h3>${escapeHtml(event.headline)}</h3>
-      <div class="forecast-probabilities"><div><strong>${p.p6}%</strong><span>6 hrs</span></div><div><strong>${p.p24}%</strong><span>24 hrs</span></div><div><strong>${p.p72}%</strong><span>72 hrs</span></div></div>
-      <p class="forecast-driver"><strong>${escapeHtml(p.posture || 'WATCH')}</strong> · ${escapeHtml((p.drivers || []).slice(0, 2).join(' · '))}</p>
-    </button>`;
-  }).join('');
-
-  bindStoryActions($('#view-radar'));
+  const drift = state.events.filter((event)=>event.intelligence?.narrativeDrift?.score !== null && event.intelligence?.narrativeDrift?.score !== undefined).sort((a,b)=>b.intelligence.narrativeDrift.score-a.intelligence.narrativeDrift.score);
+  $('#driftList').innerHTML = drift.length ? drift.slice(0,7).map((event)=>`<div class="drift-item"><b>${escapeHtml(event.headline)}</b><br><span>${escapeHtml(event.intelligence.narrativeDrift.label)} · ${event.intelligence.narrativeDrift.score}/100</span></div>`).join('') : '<div class="empty-state">Insufficient official-versus-media pairs to calculate narrative alignment.</div>';
 }
 
 function renderSearch() {
-  const query = normalizeText(state.searchQuery);
-  const queryTokens = new Set(titleTokens(query));
-  let events = periodEvents().filter((event) => {
-    if (!query) return true;
-    const text = eventSearchText(event);
-    if (text.includes(query)) return true;
-    const eventTokens = new Set(titleTokens(text));
-    const overlap = [...queryTokens].filter((token) => eventTokens.has(token)).length;
-    return overlap >= Math.max(1, Math.ceil(queryTokens.size * 0.5));
-  });
+  const query = $('#searchInput').value.trim().toLowerCase();
+  const events = state.events.filter((event)=>!query || JSON.stringify(event).toLowerCase().includes(query));
+  $('#searchResults').innerHTML = events.length ? `<div class="story-grid">${events.map(eventCard).join('')}</div>` : '<div class="empty-state">No matching evidence-led development in this period.</div>';
+  bindDynamicControls();
+}
 
-  const filter = state.searchFilter;
-  if (filter !== 'all') {
-    events = events.filter((event) => {
-      if (['must', 'watch'].includes(filter)) return event.bucket === filter;
-      if (filter === 'confirmed') return event.status === 'confirmed';
-      return event.category === filter;
-    });
+function renderCoverage() {
+  const meta = state.meta;
+  if (!meta) {
+    $('#coverageSummary').innerHTML = '';
+    $('#coverageTable').innerHTML = '<div class="empty-state">Complete a scan to see actual source health.</div>';
+    $('#possibleMisses').innerHTML = '<div class="miss-item">No source-health evidence yet.</div>';
+    return;
   }
-  $('#search-results-meta').textContent = `${events.length} development${events.length === 1 ? '' : 's'} found in ${periodPresetLabel().toLowerCase()}${query ? ` for “${state.searchQuery}”` : ''} · ${exactPeriodLabel()}.`;
-  $('#search-results').innerHTML = events.map((event) => storyCard(event, { compact: true })).join('') || emptyCard('No matching evidence', 'Try a company, person, brand or topic already present in the verified record.');
-  bindStoryActions($('#view-search'));
+  $('#coverageSummary').innerHTML = [
+    ['Attempted',meta.totalChecks],['Succeeded',meta.successfulChecks],['Failed',meta.failedChecks],['Relevant items',meta.articleCount]
+  ].map(([label,value])=>`<article><strong>${value ?? '—'}</strong><span>${label}</span></article>`).join('');
+  const rows = meta.sourceChecks || [];
+  $('#coverageTable').innerHTML = `<div class="coverage-row head"><span>Source check</span><span>Provider</span><span>Items</span><span>Status</span></div>${rows.map((check)=>`<div class="coverage-row"><b>${escapeHtml(check.name)}</b><span>${escapeHtml(check.provider)}</span><span>${check.itemCount ?? 0}</span><span class="${check.ok ? 'health-ok' : 'health-fail'}">${check.ok ? 'Healthy' : 'Failed'}</span></div>`).join('')}`;
+  const misses = [];
+  if (meta.failedChecks) misses.push(`${meta.failedChecks} attempted checks failed or timed out.`);
+  if (meta.entityAudit && !meta.entityAudit.companyRegisterComplete) misses.push('The official company register did not meet the expected coverage gate during this scan.');
+  if (meta.entityAudit && !meta.entityAudit.leadershipRegisterComplete) misses.push('The official leadership register did not meet the expected coverage gate during this scan.');
+  if (!state.health?.database?.configured) misses.push('Persistent central history is not connected; this scan is live but stateless across users.');
+  misses.push('Closed social platforms, print-only and broadcast sources are not comprehensive until authorised or licensed feeds are connected.');
+  $('#possibleMisses').innerHTML = misses.map((item)=>`<div class="miss-item">${escapeHtml(item)}</div>`).join('');
 }
 
-function answerQuestion(question) {
-  const q = normalizeText(question);
-  const events = periodEvents();
-  let matches = [];
-  let intro = 'These are the most relevant evidence-backed developments in the current record.';
-
-  if (/chairman|must know|what matters|today/.test(q)) {
-    matches = todayEvents().filter((event) => event.bucket === 'must').slice(0, 4);
-    intro = matches.length ? 'The current Must Know brief contains the developments most likely to change today’s Group picture.' : 'No current development meets the Must Know threshold.';
-  } else if (/narrative|drift|misattrib|reputation/.test(q)) {
-    matches = events.filter((event) => event.narrative || event.category === 'Reputation').sort((a, b) => (b.narrative?.score || 0) - (a.narrative?.score || 0)).slice(0, 4);
-    intro = 'These events carry the clearest narrative or reputation signals in the current record.';
-  } else if (/unconfirmed|developing|uncertain|remain/.test(q)) {
-    matches = events.filter((event) => event.status !== 'confirmed').sort((a, b) => (b.intelligence?.materiality || 0) - (a.intelligence?.materiality || 0)).slice(0, 5);
-    intro = 'These developments still contain reported or unresolved elements. Their status should not be presented as final fact.';
-  } else if (/positive|amplif|good news|sentiment/.test(q)) {
-    matches = events.filter((event) => (event.intelligence?.sentiment || 0) > 20).sort((a, b) => (b.intelligence?.sentiment || 0) - (a.intelligence?.sentiment || 0)).slice(0, 5);
-    intro = 'These developments currently show positive media tone. Positive tone alone does not automatically mean narrative alignment.';
-  } else {
-    const matchedEntities = matchEntities(question, state.entities);
-    const entityIds = new Set(matchedEntities.map((entity) => entity.id));
-    const tokens = new Set(titleTokens(q));
-    matches = events.map((event) => {
-      const textTokens = new Set(titleTokens(eventSearchText(event)));
-      const tokenScore = [...tokens].filter((token) => textTokens.has(token)).length;
-      const entityScore = (event.entityIds || []).filter((id) => entityIds.has(id)).length * 4;
-      return { event, score: tokenScore + entityScore };
-    }).filter((item) => item.score > 0).sort((a, b) => b.score - a.score || (b.event.intelligence?.materiality || 0) - (a.event.intelligence?.materiality || 0)).slice(0, 5).map((item) => item.event);
-    if (matchedEntities.length) intro = `The current record contains the following verified or clearly labelled developments involving ${matchedEntities.map((entity) => entity.name).join(', ')}.`;
-  }
-
-  return { intro, matches };
+function renderBuild() {
+  const progress = state.progress;
+  if (!progress) return;
+  $('#objectiveText').textContent = progress.objective;
+  $('#sideProgress').textContent = `${progress.overallPercent}%`;
+  $('#sideProgressBar').style.width = `${progress.overallPercent}%`;
+  $('#jobPercent').textContent = `${progress.overallPercent}%`;
+  $('#jobRing').style.background = `conic-gradient(var(--wine) ${progress.overallPercent}%,var(--paper-2) 0)`;
+  $('#milestoneList').innerHTML = progress.milestones.map((milestone)=>`<article class="milestone"><div class="milestone-top"><span class="milestone-id">${escapeHtml(milestone.id)}</span><span class="milestone-name">${escapeHtml(milestone.name)}</span><span class="milestone-percent">${milestone.complete}%</span></div><div class="milestone-bar"><i style="width:${milestone.complete}%"></i></div><div class="milestone-details"><span class="milestone-status">${escapeHtml(milestone.status)}</span><span><b>Evidence:</b> ${escapeHtml(milestone.evidence)}</span><span><b>Next:</b> ${escapeHtml(milestone.next || 'Gate passed.')}</span>${milestone.dependency ? `<span><b>Dependency:</b> ${escapeHtml(milestone.dependency)}</span>` : ''}</div></article>`).join('');
+  $('#dependencyList').innerHTML = progress.unresolvedExternalDependencies.map((item)=>`<div class="dependency-item">${escapeHtml(item)}</div>`).join('');
 }
 
-function renderAnswer(question) {
-  const answer = answerQuestion(question);
-  const card = $('#answer-card');
-  card.hidden = false;
-  const sourceLinks = [];
-  for (const event of answer.matches) for (const source of event.sources || []) if (!sourceLinks.some((item) => item.url === source.url)) sourceLinks.push(source);
-  card.innerHTML = `
-    <p class="eyebrow">Answer from the evidence record</p>
-    <h2>${escapeHtml(question)}</h2>
-    <p>${escapeHtml(answer.intro)}</p>
-    ${answer.matches.length ? `<ul class="answer-list">${answer.matches.map((event) => `<li><strong>${escapeHtml(event.headline)}</strong><span>${escapeHtml(event.whyItMatters)}</span><button class="text-button" data-action="detail" data-event-id="${escapeHtml(event.id)}">Open evidence →</button></li>`).join('')}</ul>` : '<div class="empty-state"><h2>No supported answer</h2><p>The current evidence record does not support a reliable answer to that question.</p></div>'}
-    <div class="answer-sources">Based on ${answer.matches.length} event${answer.matches.length === 1 ? '' : 's'} and ${sourceLinks.length} linked source${sourceLinks.length === 1 ? '' : 's'}. No facts were added from generic model knowledge.</div>`;
-  bindStoryActions(card);
+function openInfo(key) {
+  const info = explanations[key];
+  if (!info) return;
+  $('#infoTitle').textContent = info.title;
+  $('#infoBody').innerHTML = `<p>${escapeHtml(info.body)}</p>`;
+  $('#infoDialog').showModal();
 }
 
-function entityUniverseCounts() {
-  const officialCompanyUrl = state.entityUniverse?.sourceOfTruth?.companies || 'https://www.adityabirla.com/en/businesses/companies/';
-  const officialLeadershipUrl = state.entityUniverse?.sourceOfTruth?.leadership || 'https://www.adityabirla.com/en/our-story/leadership/';
-  const companies = state.entities.filter((entity) => entity.type === 'company' && entity.officialCompanyEntry === true);
-  const leadership = state.entities.filter((entity) => entity.type === 'person' && entity.sourceUrl === officialLeadershipUrl);
-  const stakeholders = state.entities.filter((entity) => entity.type === 'stakeholder');
-  const brands = state.entities.filter((entity) => entity.type === 'brand');
-  return { companies, leadership, stakeholders, brands, expectedCompanies: Number(state.entityUniverse?.officialCompanyEntries || companies.length), expectedLeadership: Number(state.entityUniverse?.officialLeadershipEntries || leadership.length), total: state.entities.length, officialCompanyUrl, officialLeadershipUrl };
+function openStory(id) {
+  const event = state.events.find((item)=>item.id === id);
+  if (!event) return;
+  $('#storyKicker').textContent = `${event.entity || event.primaryEntity?.name || 'ABG'} · ${event.status} · ${event.action || ''}`;
+  $('#storyTitle').textContent = event.headline || event.title;
+  const sources = (event.sources || []).map((source)=>`<a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.name || source.domain || 'Source')}</a>`).join('');
+  $('#storyBody').innerHTML = `<div class="dialog-section"><h3>Reported facts</h3><div class="claim">${escapeHtml(event.summary || '')}</div></div><div class="dialog-section"><h3>Interpretation</h3><p>${escapeHtml(event.whyItMatters || event.interpretation || '')}</p></div><div class="dialog-section"><h3>Evidence sources</h3><div class="source-list">${sources || 'No accessible source link.'}</div></div><div class="dialog-section"><h3>Why this classification</h3><p>Materiality ${event.intelligence?.materiality ?? '—'} · confidence ${event.intelligence?.confidence ?? event.intelligence?.certainty ?? '—'} · momentum ${event.intelligence?.momentum ?? '—'} · ${event.sourceCount || 0} independent source families.</p></div>`;
+  $('#storyDialog').showModal();
 }
 
-function renderEntityUniverse() {
-  const counts = entityUniverseCounts();
-  const companyPass = counts.companies.length === counts.expectedCompanies;
-  const leadershipPass = counts.leadership.length === counts.expectedLeadership;
-  $('#universe-coverage-ratio').textContent = `${counts.companies.length}/${counts.expectedCompanies} companies · ${counts.leadership.length}/${counts.expectedLeadership} leaders`;
-  $('#universe-summary').innerHTML = [[counts.companies.length, 'Official company entries'],[counts.leadership.length, 'Official leadership entries'],[counts.brands.length, 'Brands mapped'],[counts.stakeholders.length, 'Material stakeholders mapped']].map(([value, label]) => `<div class="universe-stat"><strong>${value}</strong><span>${escapeHtml(label)}</span></div>`).join('');
-  $('#company-universe-count').textContent = `${counts.companies.length}/${counts.expectedCompanies} reconciled`;
-  $('#leadership-universe-count').textContent = `${counts.leadership.length}/${counts.expectedLeadership} reconciled`;
-  $('#company-universe').innerHTML = counts.companies.sort((a, b) => Number(a.officialCompanyIndex || 999) - Number(b.officialCompanyIndex || 999)).map((entity) => `<span class="universe-chip">${escapeHtml(entity.name)}</span>`).join('');
-  $('#leadership-universe').innerHTML = counts.leadership.map((entity) => `<span class="universe-chip person"><strong>${escapeHtml(entity.name)}</strong><small>${escapeHtml(entity.role || 'Role monitored')}</small></span>`).join('');
-  const verified = state.entityUniverse?.verifiedAt || counts.companies[0]?.lastVerifiedAt || counts.leadership[0]?.lastVerifiedAt || 'not recorded';
-  const liveAudits = Array.isArray(state.liveMeta?.registryAudits) ? state.liveMeta.registryAudits : [];
-  const liveReconciled = liveAudits.length === 2 && liveAudits.every((audit) => audit.reconciled);
-  const liveProof = liveAudits.length ? ` Latest live registry check: ${liveReconciled ? '<strong>reconciled</strong>' : '<strong>change detected</strong>'} across ${liveAudits.map((audit) => `${audit.matchedCount}/${audit.expectedCount}`).join(' and ')} entries.` : ' A live registry drift check will run with the next successful source scan.';
-  $('#universe-verification-note').innerHTML = `${companyPass && leadershipPass ? '<strong>Local reconciliation passed.</strong>' : '<strong>Local reconciliation incomplete.</strong>'} Verified ${escapeHtml(verified)} against the <a href="${escapeHtml(safeUrl(counts.officialCompanyUrl))}" target="_blank" rel="noopener noreferrer">official company register ↗</a> and <a href="${escapeHtml(safeUrl(counts.officialLeadershipUrl))}" target="_blank" rel="noopener noreferrer">official leadership register ↗</a>.${liveProof} Roles and entities remain date-sensitive.`;
+function bindDynamicControls() {
+  $$('[data-info]').forEach((button)=>{ button.onclick = (event)=>{ event.stopPropagation(); openInfo(button.dataset.info); }; });
+  $$('[data-story]').forEach((button)=>{ button.onclick = ()=>openStory(button.dataset.story); });
 }
 
-function buildProgressSnapshot() {
-  const plan = state.buildPlan && typeof state.buildPlan === 'object' ? state.buildPlan : {};
-  const milestones = Array.isArray(plan.milestones) ? plan.milestones : [];
-  const weightTotal = milestones.reduce((sum, milestone) => sum + Number(milestone.weight || 0), 0);
-  const weighted = milestones.reduce((sum, milestone) => sum + Number(milestone.weight || 0) * Number(milestone.completion || 0) / 100, 0);
-  const overall = weightTotal ? Math.round(weighted / weightTotal * 100) : 0;
-  const counts = milestones.reduce((acc, milestone) => {
-    const key = String(milestone.status || 'not_started').replaceAll('_', '-');
-    acc[key] = (acc[key] || 0) + 1;
-    return acc;
-  }, {});
-  const dependencies = Array.isArray(plan.resources?.externalDependencies) ? plan.resources.externalDependencies : [];
-  const activeDependencies = dependencies.filter((item) => !['available', 'connected', 'complete'].includes(String(item.currentState || '').toLowerCase()));
-  return { plan, milestones, weightTotal, overall, counts, activeDependencies };
+function activateView(view) {
+  $$('.view').forEach((node)=>node.classList.toggle('active',node.id === `view-${view}`));
+  $$('.nav-item,.mobile-nav button').forEach((button)=>button.classList.toggle('active',button.dataset.view === view));
+  if (view === 'radar') renderRadar();
+  if (view === 'search') renderSearch();
+  if (view === 'coverage') renderCoverage();
+  if (view === 'build') renderBuild();
+  window.scrollTo({ top:0,behavior:'smooth' });
 }
 
-function buildStatusLabel(status = '') {
-  return String(status).replaceAll('_', ' ').replaceAll('-', ' ').replace(/\b\w/g, (char) => char.toUpperCase());
-}
-
-function renderBuildProgress() {
-  const snapshot = buildProgressSnapshot();
-  const { plan, milestones, overall, counts, activeDependencies } = snapshot;
-  const sidebarValue = $('#sidebar-build-progress');
-  if (!sidebarValue) return;
-  sidebarValue.textContent = `${overall}%`;
-  $('#sidebar-build-progress-bar').style.width = `${overall}%`;
-  $('#sidebar-build-progress-copy').textContent = `${counts.complete || 0} complete · ${counts['in-progress'] || 0} in progress · ${counts.blocked || 0} blocked`;
-
-  $('#objective-progress-value').textContent = `${overall}%`;
-  $('#objective-progress-bar').style.width = `${overall}%`;
-  $('#objective-progress-track').setAttribute('aria-valuenow', String(overall));
-  $('#objective-progress-objective').textContent = plan.objective || 'Progress is counted only when milestone evidence exists.';
-  $('#objective-progress-meta').innerHTML = [
-    ['complete', counts.complete || 0, 'complete'],
-    ['in-progress', counts['in-progress'] || 0, 'in progress'],
-    ['blocked', counts.blocked || 0, 'blocked'],
-    ['not-started', counts['not-started'] || 0, 'not started'],
-    ['dependency', activeDependencies.length, 'external dependencies']
-  ].map(([cls, value, label]) => `<span class="progress-chip ${escapeHtml(cls)}"><i></i><strong>${escapeHtml(value)}</strong> ${escapeHtml(label)}</span>`).join('');
-  $('#milestone-summary-count').textContent = `${milestones.length} milestones · weighted`;
-  $('#resource-summary-count').textContent = `${activeDependencies.length} unresolved`;
-
-  $('#milestone-list').innerHTML = milestones.map((milestone) => {
-    const statusClass = String(milestone.status || 'not_started').replaceAll('_', '-');
-    const evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
-    return `<details class="milestone-card" ${milestone.status === 'in_progress' || milestone.status === 'blocked' ? 'open' : ''}>
-      <summary>
-        <span class="milestone-id">${escapeHtml(milestone.id)}</span>
-        <span class="milestone-title"><strong>${escapeHtml(milestone.title)}</strong><small>${escapeHtml(buildStatusLabel(milestone.status))} · weight ${escapeHtml(milestone.weight)}%</small></span>
-        <span class="milestone-score"><strong>${escapeHtml(milestone.completion)}%</strong><small>verified</small></span>
-      </summary>
-      <div class="milestone-progress-track"><i style="width:${Math.max(0, Math.min(100, Number(milestone.completion || 0)))}%"></i></div>
-      <div class="milestone-card-body">
-        <span class="milestone-status ${escapeHtml(statusClass)}">${escapeHtml(buildStatusLabel(milestone.status))}</span>
-        <p><strong>Outcome:</strong> ${escapeHtml(milestone.outcome)}</p>
-        <p><strong>Pass gate:</strong> ${escapeHtml(milestone.acceptanceGate)}</p>
-        <p><strong>Next:</strong> ${escapeHtml(milestone.nextAction)}</p>
-        <p><strong>Dependency:</strong> ${escapeHtml(milestone.dependency || 'None')}</p>
-        ${evidence.length ? `<div class="milestone-evidence">${evidence.map((item) => `<span>${escapeHtml(item)}</span>`).join('')}</div>` : ''}
-      </div>
-    </details>`;
-  }).join('') || '<div class="empty-state"><h2>No milestone plan loaded</h2><p>The job meter cannot calculate completion without the governed milestone file.</p></div>';
-
-  const available = Array.isArray(plan.resources?.availableNow) ? plan.resources.availableNow : [];
-  const required = Array.isArray(plan.resources?.externalDependencies) ? plan.resources.externalDependencies : [];
-  $('#resources-available').innerHTML = available.map((item) => `<div class="resource-item"><strong>${escapeHtml(item.name)}</strong><p>${escapeHtml(item.detail)}</p><span class="resource-state">${escapeHtml(buildStatusLabel(item.status))}</span></div>`).join('');
-  $('#resources-required').innerHTML = required.map((item) => `<div class="resource-item"><strong>${escapeHtml(item.name)}</strong><p>${escapeHtml(item.requiredFor)}</p><p><strong>Needed:</strong> ${escapeHtml(item.ownerAction)}</p><span class="resource-state">${escapeHtml(buildStatusLabel(item.currentState))}</span></div>`).join('');
-}
-
-function renderControlRoom() {
-  renderBuildProgress();
-  const events = periodEvents();
-  const confirmed = events.filter((event) => event.status === 'confirmed').length;
-  const headlineDerived = events.filter((event) => event.flags?.includes('headline-derived')).length;
-  const coverage = coverageSnapshot(events);
-  const gaps = buildCoverageGaps(events);
-  const universe = entityUniverseCounts();
-  const healthCards = [
-    ['Official companies', `${universe.companies.length}/${universe.expectedCompanies}`, 'official register reconciled'],
-    ['Official leadership', `${universe.leadership.length}/${universe.expectedLeadership}`, 'current public register reconciled'],
-    ['Latest scan checks', coverage.attemptedChecks ? `${coverage.successfulChecks}/${coverage.attemptedChecks}` : '—', coverage.attemptedChecks ? `${coverage.errors.length} degraded` : 'not metered'],
-    ['Open coverage gaps', gaps.length, gaps.length ? 'visible, not hidden' : 'none detected']
-  ];
-  $('#health-grid').innerHTML = healthCards.map(([label, value, copy]) => `<div class="health-card"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong><small>${escapeHtml(copy)}</small></div>`).join('');
-
-  const providerErrors = Array.isArray(state.liveMeta?.errors) ? state.liveMeta.errors : [];
-  const providerErrorCount = (provider) => providerErrors.filter((item) => String(item.provider).toLowerCase().includes(provider.toLowerCase())).length;
-  const groups = [
-    ['Authoritative registry', state.sources.filter((s) => s.tier === 0), 'Official, exchange and regulator', 'Official source'],
-    ['Major journalism', state.sources.filter((s) => s.tier === 1), 'High-quality independent reporting', 'Google News'],
-    ['Specialist media', state.sources.filter((s) => s.tier === 2), 'Sector and regional depth', 'GDELT'],
-    ['Open discovery', state.sources.filter((s) => s.tier >= 3), 'GDELT and Google News safety nets', 'Discovery']
-  ];
-  $('#source-health-list').innerHTML = groups.map(([name, sources, copy, provider], index) => {
-    const failures = provider === 'Discovery' ? providerErrors.length : providerErrorCount(provider);
-    const degraded = state.liveStatus === 'error' || failures > 0;
-    const status = degraded ? 'warning' : 'healthy';
-    const statusText = degraded ? `${failures || '—'} failed check${failures === 1 ? '' : 's'}` : (state.liveStatus === 'success' ? 'healthy' : 'configured');
-    return `<div class="source-health-row"><span class="status-light ${status}"></span><div><strong>${escapeHtml(name)}</strong><small>${escapeHtml(copy)} · ${sources.length} registered</small></div><span>${escapeHtml(statusText)}</span></div>`;
-  }).join('');
-  $('#healthy-source-ratio').textContent = `${coverage.evidence.length} evidenced · ${coverage.configured.length} registered`;
-
-  $('#gap-list').innerHTML = gaps.map((gap) => `<div class="gap-item"><strong>${escapeHtml(gap.title)}</strong><p>${escapeHtml(gap.copy)}</p></div>`).join('') || '<div class="gap-item"><strong>No active gap signal</strong><p>That does not prove universal completeness; it means no configured anomaly is currently visible.</p></div>';
-
-  const decisions = [...events].sort((a, b) => new Date(b.updatedAt || b.publishedAt) - new Date(a.updatedAt || a.publishedAt)).slice(0, 8);
-  $('#audit-body').innerHTML = decisions.map((event) => `<tr><td>${escapeHtml(formatDate(event.updatedAt || event.publishedAt, true))}</td><td>${escapeHtml(bucketLabel(event.bucket))}: ${escapeHtml(event.headline)}</td><td>${getSourceCount(event)} source${getSourceCount(event) === 1 ? '' : 's'} · certainty ${event.intelligence?.certainty ?? '—'}</td><td class="audit-outcome ${event.bucket === 'watch' ? 'watch' : ''}">${escapeHtml(event.status === 'confirmed' ? 'Published' : 'Labelled')}</td></tr>`).join('');
-
-  renderEntityUniverse();
-
-  if (headlineDerived) {
-    $('#gap-list').insertAdjacentHTML('beforeend', `<div class="gap-item"><strong>${headlineDerived} headline-derived live signal${headlineDerived === 1 ? '' : 's'}</strong><p>These items remain visibly labelled and should not be treated as full-article verification.</p></div>`);
-  }
-}
-
-function buildCoverageGaps(events) {
-  const gaps = [];
-  if (state.liveStatus === 'error') gaps.push({ title: 'Open-web discovery temporarily unavailable', copy: 'The last successful local live record remains visible, but one or more discovery providers could not be refreshed in this session.' });
-  const providerErrors = Array.isArray(state.liveMeta?.errors) ? state.liveMeta.errors : [];
-  if (providerErrors.length) gaps.push({ title: `${providerErrors.length} configured source check${providerErrors.length === 1 ? '' : 's'} degraded`, copy: providerErrors.slice(0, 3).map((item) => `${item.provider}: ${item.query}`).join(' · ') });
-  const universe = entityUniverseCounts();
-  if (universe.companies.length !== universe.expectedCompanies) gaps.push({ title: 'Official company universe is not fully reconciled', copy: `${universe.companies.length} of ${universe.expectedCompanies} official company entries are present.` });
-  if (universe.leadership.length !== universe.expectedLeadership) gaps.push({ title: 'Official leadership universe is not fully reconciled', copy: `${universe.leadership.length} of ${universe.expectedLeadership} official leadership entries are present.` });
-  const registryAudits = Array.isArray(state.liveMeta?.registryAudits) ? state.liveMeta.registryAudits : [];
-  for (const audit of registryAudits.filter((item) => !item.reconciled)) gaps.push({ title: `${audit.sourceName || audit.registryId} has changed`, copy: `${audit.matchedCount} of ${audit.expectedCount} governed entries were found in the latest live registry check. Missing entries are flagged for reconciliation.` });
-  const currentEventEntities = new Set(events.flatMap((event) => event.entityIds || []));
-  const priorityMissing = state.entities.filter((entity) => entity.coverageRequired && entity.tier <= 1 && !currentEventEntities.has(entity.id));
-  if (priorityMissing.length) gaps.push({ title: `${priorityMissing.length} priority entities have no current event`, copy: `Examples: ${priorityMissing.slice(0, 4).map((entity) => entity.name).join(', ')}. Absence may be normal; it is not treated as a missed story by itself.` });
-  const lowCertaintyHighImpact = events.filter((event) => (event.intelligence?.materiality || 0) >= 70 && (event.intelligence?.certainty || 0) < 65);
-  if (lowCertaintyHighImpact.length) gaps.push({ title: `${lowCertaintyHighImpact.length} high-impact development${lowCertaintyHighImpact.length === 1 ? '' : 's'} need stronger corroboration`, copy: lowCertaintyHighImpact.slice(0, 2).map((event) => event.headline).join(' · ') });
-  if (Number(state.liveMeta?.publicConversationChecks || 0) && Number(state.liveMeta?.publicConversationChecksSucceeded || 0) === 0) gaps.push({ title: 'Open-public conversation sources were unavailable', copy: 'Public-sentiment scoring is withheld rather than inferred from media tone.' });
-  gaps.push({ title: 'Closed-social listening is not connected', copy: 'X, LinkedIn, Instagram, YouTube comments and other closed-platform conversation require authorised or licensed access. Observed Public Sentiment therefore states its coverage explicitly.' });
-  return gaps;
-}
-
-function renderAll() {
-  renderDateAndGreeting();
-  renderScopeToolbar();
-  renderToday();
-  renderWatching();
-  renderRadar();
-  renderSearch();
-  renderControlRoom();
-  updateLastScanLabel();
-}
-
-function updateLastScanLabel() {
-  const label = $('#last-scan-label');
-  if (state.liveStatus === 'loading') label.textContent = 'Scanning live public sources…';
-  else if (state.liveStatus === 'success' && state.lastScanAt) label.textContent = `Live scan ${relativeTime(state.lastScanAt)}`;
-  else if (state.liveStatus === 'error') label.textContent = 'Verified brief active · live discovery degraded';
-  else label.textContent = 'Forward monitoring active';
-}
-
-function switchView(view) {
-  if (!document.querySelector(`[data-view-panel="${CSS.escape(view)}"]`)) return;
-  state.currentView = view;
-  if (!globalThis.__ABG_PULSE_QA__ && history?.replaceState) history.replaceState(null, '', `#${view}`);
-  $$('[data-view-panel]').forEach((panel) => panel.classList.toggle('is-active', panel.dataset.viewPanel === view));
-  $$('[data-view]').forEach((button) => {
-    const active = button.dataset.view === view;
-    button.classList.toggle('is-active', active);
-    if (button.closest('.side-nav')) active ? button.setAttribute('aria-current', 'page') : button.removeAttribute('aria-current');
-  });
-  if (view === 'search') setTimeout(() => $('#search-input')?.focus(), 100);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function bindNavigation() {
-  $$('[data-view]').forEach((button) => button.addEventListener('click', () => switchView(button.dataset.view)));
-  $$('[data-go-view]').forEach((button) => button.addEventListener('click', () => switchView(button.dataset.goView)));
-}
-
-function bindStoryActions(root = document) {
-  $$('[data-action]', root).forEach((button) => {
-    if (button.dataset.bound === 'true') return;
-    button.dataset.bound = 'true';
-    button.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const item = state.events.find((candidate) => candidate.id === button.dataset.eventId);
-      if (!item) return;
-      if (button.dataset.action === 'watch') toggleWatch(item.id);
-      if (button.dataset.action === 'detail') openStory(item);
-      if (button.dataset.action === 'ask') {
-        switchView('ask');
-        $('#ask-input').value = `Why does “${item.headline}” matter to ABG?`;
-        renderAnswer($('#ask-input').value);
-      }
-    });
-  });
-}
-
-function toggleWatch(id) {
-  if (state.watched.has(id)) {
-    state.watched.delete(id);
-    showToast('Removed from Watching.');
-  } else {
-    state.watched.add(id);
-    showToast('Added to Watching. Pulse will carry it forward.');
-  }
-  saveJsonStorage(STORAGE.watched, [...state.watched]);
-  renderToday();
-  renderWatching();
-}
-
-function openStory(event) {
-  const dialog = $('#story-dialog');
-  const intelligence = event.intelligence || {};
-  const prediction = intelligence.prediction || {};
-  const entities = entitiesForEvent(event);
-  const narrative = event.narrative;
-  const sources = event.sources || [];
-  $('#dialog-content').innerHTML = `
-    <div class="story-meta"><span class="status-pill ${escapeHtml(event.status)}">${escapeHtml(statusLabel(event.status))}</span><span class="category-pill">${escapeHtml(event.category)}</span><span>${escapeHtml(bucketLabel(event.bucket))}</span></div>
-    <h2 class="dialog-headline" id="dialog-headline">${escapeHtml(event.headline)}</h2>
-    <p class="dialog-summary">${escapeHtml(event.summary)}</p>
-    <section class="dialog-section"><h3>Why it matters · interpretation</h3><p>${escapeHtml(event.whyItMatters)}</p></section>
-    <section class="dialog-section"><h3>Entities</h3><p>${escapeHtml(entities.map((entity) => entity.name).join(' · ') || 'Aditya Birla Group')}</p></section>
-    ${narrative ? `<section class="dialog-section"><h3>Narrative radar</h3><div class="narrative-frames"><div class="frame-card"><span>Verified frame</span><p>${escapeHtml(narrative.officialFrame)}</p></div><div class="frame-arrow">→</div><div class="frame-card emerging"><span>Emerging shorthand</span><p>${escapeHtml(narrative.emergingFrame)}</p></div></div><p class="narrative-takeaway"><strong>Recommendation:</strong> ${escapeHtml(narrative.recommendation)}</p></section>` : ''}
-    <section class="dialog-section"><h3>Intelligence scores</h3><div class="intelligence-grid">
-      ${intelligenceTile('Materiality', intelligence.materiality)}${intelligenceTile('Certainty', intelligence.certainty)}${intelligenceTile('Momentum', intelligence.momentum)}${intelligenceTile('Media tone', signed(intelligence.mediaTone ?? intelligence.sentiment))}${intelligenceTile('Observed public sentiment', Number.isFinite(Number(intelligence.publicSentiment?.score)) ? `${signed(intelligence.publicSentiment.score)} · n=${intelligence.publicSentiment.sampleSize || 0}` : 'Unavailable')}${intelligenceTile('Narrative alignment', intelligence.narrativeAlignment)}${intelligenceTile('24h importance', prediction.p24 !== undefined ? `${prediction.p24}%` : '—')}
-    </div>${prediction.drivers?.length ? `<p class="method-note">Forecast drivers: ${escapeHtml(prediction.drivers.join(' · '))}. Posture: ${escapeHtml(prediction.posture || 'WATCH')}.</p>` : ''}</section>
-    <section class="dialog-section"><h3>Evidence and sources</h3>${sources.length ? `<ul class="source-list">${sources.map((source) => `<li><a href="${escapeHtml(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(source.name || domainFromUrl(source.url))}</span><small>Tier ${source.tier ?? '—'} ↗</small></a></li>`).join('')}</ul>` : '<p>No external source link is available. The item must not be treated as operationally verified.</p>'}<p class="method-note">Published ${escapeHtml(formatDate(event.publishedAt, true))}. Updated ${escapeHtml(formatDate(event.updatedAt || event.publishedAt, true))}. Facts above are derived from the linked evidence; “Why it matters” and forecasts are labelled interpretation.</p></section>
-    <section class="dialog-section"><h3>Improve the system</h3><div class="feedback-row">${['Useful','Not important','Wrong entity','Duplicate','Missing context','Wrong summary'].map((label) => `<button data-feedback="${escapeHtml(label)}" data-event-id="${escapeHtml(event.id)}">${escapeHtml(label)}</button>`).join('')}</div></section>`;
-  $$('[data-feedback]', dialog).forEach((button) => button.addEventListener('click', () => recordFeedback(button.dataset.eventId, button.dataset.feedback)));
-  if (typeof dialog.showModal === 'function') dialog.showModal();
-}
-
-function intelligenceTile(label, value) {
-  return `<div class="intelligence-tile"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value ?? '—')}</strong></div>`;
-}
-
-function signed(value) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) return '—';
-  return `${number > 0 ? '+' : ''}${number}`;
-}
-
-function recordFeedback(eventId, feedback) {
-  state.feedback.push({ eventId, feedback, at: new Date().toISOString() });
-  saveJsonStorage(STORAGE.feedback, state.feedback.slice(-250));
-  showToast(`Feedback saved: ${feedback}.`);
-}
-
-function showToast(message) {
-  const toast = $('#toast');
-  toast.textContent = message;
-  toast.classList.add('is-visible');
-  clearTimeout(state.toastTimer);
-  state.toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 3100);
-}
-
-function bindAsk() {
-  $('#ask-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const question = $('#ask-input').value.trim();
-    if (!question) return;
-    renderAnswer(question);
-  });
-  $$('#ask-suggestions button').forEach((button) => button.addEventListener('click', () => {
-    $('#ask-input').value = button.textContent.trim();
-    renderAnswer($('#ask-input').value);
-  }));
-}
-
-function bindSearch() {
-  let timer;
-  $('#search-input').addEventListener('input', (event) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => { state.searchQuery = event.target.value.trim(); renderSearch(); }, 120);
-  });
-  $$('#search-filters .filter-chip').forEach((button) => button.addEventListener('click', () => {
-    state.searchFilter = button.dataset.filter;
-    $$('#search-filters .filter-chip').forEach((item) => item.classList.toggle('is-active', item === button));
-    renderSearch();
-  }));
-}
-
-
-function persistPeriodSettings() {
-  saveJsonStorage(STORAGE.period, {
-    preset: state.periodPreset,
-    compare: state.comparePeriod,
-    customStart: $('#custom-period-start')?.value || '',
-    customEnd: $('#custom-period-end')?.value || ''
-  });
-}
-
-function applySelectedPeriod({ refreshLive = true } = {}) {
-  state.periodWindow = resolveSelectedPeriod(state.periodPreset);
-  persistPeriodSettings();
-  renderAll();
-  if (refreshLive && state.preferences.liveScan) scanLiveSources({ periodChange: true });
-}
-
-function bindPeriodControls() {
-  const select = $('#period-select');
-  const custom = $('#custom-period');
-  select.addEventListener('change', () => {
-    state.periodPreset = select.value;
-    custom.hidden = state.periodPreset !== 'custom';
-    if (state.periodPreset === 'custom') {
-      if (!$('#custom-period-start').value) $('#custom-period-start').value = toIstDateTimeLocal(new Date(Date.now() - 24 * 60 * 60 * 1000));
-      if (!$('#custom-period-end').value) $('#custom-period-end').value = toIstDateTimeLocal(new Date());
-      persistPeriodSettings();
-      $('#custom-period-start').focus();
-      return;
-    }
-    applySelectedPeriod();
-  });
-  $('#apply-custom-period').addEventListener('click', () => {
-    const start = parseIstDateTimeLocal($('#custom-period-start').value);
-    const end = parseIstDateTimeLocal($('#custom-period-end').value);
-    if (!start || !end || start >= end) {
-      showToast('Choose a valid start and end time.');
-      return;
-    }
-    state.periodPreset = 'custom';
-    applySelectedPeriod();
-  });
-  $('#compare-period-toggle').addEventListener('change', (event) => {
-    state.comparePeriod = Boolean(event.target.checked);
-    persistPeriodSettings();
-    renderAll();
-  });
-  $('#coverage-button').addEventListener('click', () => {
-    renderCoverageDialog();
-    $('#coverage-dialog').showModal();
-  });
-  $('#trend-period-button').addEventListener('click', () => {
-    select.focus();
-    showToast('Choose a period above. Radar recalculates instantly.');
-  });
-}
-
-function bindPreferences() {
-  const dialog = $('#preferences-dialog');
-  $('#profile-button').addEventListener('click', () => {
-    $('#live-scan-toggle').checked = state.preferences.liveScan;
-    $('#forecast-toggle').checked = state.preferences.showForecasts;
-    $('#noise-toggle').checked = state.preferences.reduceNoise;
-    dialog.showModal();
-  });
-  $$('[data-preference-view]', dialog).forEach((button) => button.addEventListener('click', () => {
-    dialog.close();
-    switchView(button.dataset.preferenceView);
-  }));
-  $('#save-preferences').addEventListener('click', (event) => {
-    event.preventDefault();
-    state.preferences = {
-      liveScan: $('#live-scan-toggle').checked,
-      showForecasts: $('#forecast-toggle').checked,
-      reduceNoise: $('#noise-toggle').checked
-    };
-    saveJsonStorage(STORAGE.preferences, state.preferences);
-    dialog.close();
-    renderAll();
-    showToast('Preferences saved.');
-  });
-}
-
-function bindInstall() {
-  const button = $('#install-button');
-  window.addEventListener('beforeinstallprompt', (event) => {
-    event.preventDefault();
-    state.installPrompt = event;
-    button.hidden = false;
-  });
-  button.addEventListener('click', async () => {
-    if (!state.installPrompt) return;
-    state.installPrompt.prompt();
-    await state.installPrompt.userChoice;
-    state.installPrompt = null;
-    button.hidden = true;
-  });
-  window.addEventListener('appinstalled', () => showToast('ABG Pulse installed.'));
-}
-
-async function scanLiveSources({ manual = false, periodChange = false } = {}) {
-  if (!state.preferences.liveScan && !manual) return;
-  if (state.periodPreset !== 'custom') state.periodWindow = resolveSelectedPeriod(state.periodPreset);
-  state.liveStatus = 'loading';
-  updateLastScanLabel();
-  $('#refresh-button').classList.add('is-loading');
+async function scan() {
+  if (state.scanning) return;
+  state.scanning = true; updateWindowLabel();
+  $('#scanButton').disabled = true; $('#scanButton').textContent = 'Scanning…'; $('#sideStatus').textContent = 'Scanning public sources';
+  setBanner('Checking the selected ABG universe. One failing source will not hide the results from healthy sources.','');
   try {
-    let payload;
-    const params = new URLSearchParams({ start: new Date(state.periodWindow.start).toISOString(), end: new Date(state.periodWindow.end).toISOString() });
-    try {
-      payload = await fetchJson(`/api/scan?${params}`, { timeout: 26000 });
-    } catch {
-      payload = await directGdeltScan();
-    }
-    const liveEvents = Array.isArray(payload?.events) ? payload.events : [];
-    state.rawArticleCount = Number(payload?.meta?.articleCount || 0);
-    if (payload?.entityUniverse) state.entityUniverse = payload.entityUniverse;
-    state.liveEvents = dedupeEvents([...liveEvents, ...state.liveEvents])
-      .sort((a, b) => new Date(b.updatedAt || b.publishedAt) - new Date(a.updatedAt || a.publishedAt))
-      .filter((event) => Date.now() - new Date(event.updatedAt || event.publishedAt).getTime() <= 45 * 24 * 60 * 60 * 1000)
-      .slice(0, 250);
-    state.lastScanAt = payload?.meta?.scannedAt || new Date().toISOString();
-    state.liveMeta = { ...(payload?.meta || {}), windowStart: state.periodWindow.start, windowEnd: state.periodWindow.end };
-    state.liveStatus = 'success';
-    const known = new Set(loadJsonStorage(STORAGE.knownEvents, state.demoMode ? state.demoEvents.map((event) => event.id) : []));
-    state.newEventIds = new Set(liveEvents.filter((event) => !known.has(event.id) && (event.intelligence?.materiality || 0) >= 55).map((event) => event.id));
-    saveJsonStorage(STORAGE.liveEvents, state.liveEvents);
-    saveJsonStorage(STORAGE.liveMeta, state.liveMeta);
-    state.events = dedupeEvents([...state.liveEvents, ...(state.demoMode ? state.demoEvents : [])]);
-    saveJsonStorage(STORAGE.knownEvents, [...new Set([...known, ...state.events.map((event) => event.id)])].slice(-500));
-    renderAll();
-    if (manual) {
-      const newCount = state.newEventIds.size;
-      showToast(newCount ? `${newCount} new material development${newCount === 1 ? '' : 's'} found.` : (liveEvents.length ? 'Sources refreshed. No newly material development.' : 'Live sources checked. No new relevant event signal.'));
-    } else if (periodChange && state.liveStatus === 'success') {
-      showToast(`${periodPresetLabel()} applied. Intelligence and coverage recalculated.`);
-    }
+    const params = new URLSearchParams({ start:state.window.start.toISOString(),end:state.window.end.toISOString() });
+    const payload = await fetchJson(`/api/scan?${params}`);
+    state.events = Array.isArray(payload.events) ? payload.events : [];
+    state.meta = payload.meta || null;
+    $('#lastScan').textContent = state.meta?.scannedAt ? `${formatDate(state.meta.scannedAt)} IST` : 'Completed';
+    $('#sideStatus').textContent = state.meta?.failedChecks ? `${state.meta.failedChecks} source checks failed` : 'Live scan healthy';
+    const type = state.meta?.failedChecks ? '' : 'success';
+    setBanner(`${state.meta?.successfulChecks || 0} of ${state.meta?.totalChecks || 0} source checks completed. ${state.meta?.failedChecks || 0} failures remain visible in Coverage.`,type);
+    updateSummary(); renderToday(); renderRadar(); renderSearch(); renderCoverage();
+    localStorage.setItem('abgPulseLastVisit',new Date().toISOString());
   } catch (error) {
-    state.liveStatus = 'error';
-    updateLastScanLabel();
-    renderControlRoom();
-    renderScopeToolbar();
-    if (manual || periodChange) showToast('Live discovery is temporarily unavailable. The verified period record remains available.');
-    console.warn('Live scan unavailable:', error);
+    state.events = []; state.meta = null;
+    setBanner(`<b>Live scan unavailable.</b> ${escapeHtml(error.message)} No cached story has been presented as current.`,'error');
+    $('#sideStatus').textContent = 'Scan failed';
+    updateSummary(); renderToday(); renderRadar(); renderSearch(); renderCoverage();
   } finally {
-    $('#refresh-button').classList.remove('is-loading');
+    state.scanning = false; $('#scanButton').disabled = false; $('#scanButton').textContent = 'Refresh intelligence';
   }
 }
 
-function gdeltDateParameter(value) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return '';
-  return date.toISOString().replace(/[-:T.Z]/g, '').slice(0, 14);
+async function loadSystemState() {
+  const [health,progress] = await Promise.allSettled([fetchJson('/api/health'),fetchJson('/api/progress')]);
+  if (health.status === 'fulfilled') { state.health = health.value; $('#versionLabel').textContent = `v${health.value.version || '5.3'}`; }
+  if (progress.status === 'fulfilled') { state.progress = progress.value; renderBuild(); }
 }
 
-async function directGdeltScan() {
-  const query = '("Aditya Birla" OR Grasim OR Hindalco OR UltraTech OR Novelis OR "Vodafone Idea" OR ABFRL)';
-  const params = new URLSearchParams({
-    query,
-    mode: 'artlist',
-    maxrecords: '125',
-    format: 'json',
-    sort: 'datedesc',
-    startdatetime: gdeltDateParameter(state.periodWindow.start),
-    enddatetime: gdeltDateParameter(state.periodWindow.end)
-  });
-  const payload = await fetchJson(`https://api.gdeltproject.org/api/v2/doc/doc?${params}`, { timeout: 12000 });
-  const rawArticles = Array.isArray(payload?.articles) ? payload.articles : [];
-  const formatted = rawArticles.map(formatLiveArticle);
-  const relevant = formatted.filter((article) => {
-    const published = new Date(article.publishedAt).getTime();
-    return published >= new Date(state.periodWindow.start).getTime()
-      && published <= new Date(state.periodWindow.end).getTime()
-      && matchEntities(article.title, state.entities).length > 0;
-  });
-  const clusters = clusterArticles(relevant, state.entities);
-  const events = clusters.map((cluster) => deriveLiveEvent(cluster, { entities: state.entities, sources: state.sources })).filter(Boolean).filter((event) => (event.intelligence?.materiality || 0) >= 35);
-  return {
-    events,
-    meta: {
-      scannedAt: new Date().toISOString(),
-      articleCount: relevant.length,
-      rawArticleCount: rawArticles.length,
-      provider: 'GDELT direct',
-      providers: ['GDELT direct'],
-      queryCount: 1,
-      successfulQueries: 1,
-      errors: [],
-      windowStart: state.periodWindow.start,
-      windowEnd: state.periodWindow.end
-    }
+function initCustomDates() {
+  const local = (date)=>new Date(date.getTime()-date.getTimezoneOffset()*60_000).toISOString().slice(0,16);
+  const end = new Date(); const start = new Date(end.getTime()-DAY);
+  $('#customStart').value = local(start); $('#customEnd').value = local(end);
+}
+
+function init() {
+  const hour = Number(new Intl.DateTimeFormat('en-IN',{ hour:'2-digit',hour12:false,timeZone:IST }).format(new Date()));
+  $('#greeting').textContent = `${hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'}, Rishi`;
+  initCustomDates();
+  const saved = localStorage.getItem('abgPulsePeriod');
+  if (saved && [...$('#periodSelect').options].some((option)=>option.value === saved)) $('#periodSelect').value = saved;
+  updateWindowLabel();
+  $('#periodSelect').onchange = ()=>{
+    const custom = $('#periodSelect').value === 'custom'; $('#customPeriod').hidden = !custom;
+    localStorage.setItem('abgPulsePeriod',$('#periodSelect').value); updateWindowLabel(); if (!custom) scan();
   };
+  $('#applyCustom').onclick = scan; $('#scanButton').onclick = scan;
+  $('#searchInput').oninput = renderSearch;
+  $$('.nav-item,.mobile-nav button,.job-mini').forEach((button)=>button.onclick = ()=>activateView(button.dataset.view));
+  $('#closeInfo').onclick = ()=>$('#infoDialog').close(); $('#closeStory').onclick = ()=>$('#storyDialog').close();
+  $('#shareButton').onclick = async()=>{
+    const share = { title:'ABG Pulse',text:'ABG Pulse — one-minute, evidence-led ABG intelligence.',url:location.href };
+    if (navigator.share) await navigator.share(share); else { await navigator.clipboard.writeText(location.href); $('#shareButton').textContent = 'Link copied'; setTimeout(()=>$('#shareButton').textContent='Share',1600); }
+  };
+  bindDynamicControls();
+  loadSystemState().finally(scan);
+  setInterval(()=>{ if (!document.hidden && !state.scanning) scan(); },5*60_000);
 }
 
-async function loadInitialData() {
-  const embedded = globalThis.__ABG_PULSE_QA_DATA__;
-  const params = new URLSearchParams(location.search);
-  state.demoMode = Boolean(embedded || globalThis.__ABG_PULSE_QA__ || params.has('qa') || params.has('demo'));
-  let entities, sources, universe, buildPlan, demoEvents = [];
-  if (embedded) {
-    entities = embedded.entities;
-    sources = embedded.sources;
-    universe = embedded.entityUniverse || {};
-    buildPlan = embedded.buildPlan || {};
-    demoEvents = embedded.events || [];
-  } else {
-    [entities, sources, universe, buildPlan] = await Promise.all([
-      fetchJson('./data/entities.json'),
-      fetchJson('./data/source-registry.json'),
-      fetchJson('./data/entity-universe-summary.json'),
-      fetchJson('./data/build-milestones.json')
-    ]);
-    if (state.demoMode) demoEvents = await fetchJson('./data/demo-events.json');
-  }
-  state.entities = Array.isArray(entities) ? entities : [];
-  state.sources = Array.isArray(sources) ? sources : [];
-  state.entityUniverse = universe && typeof universe === 'object' ? universe : {};
-  state.buildPlan = buildPlan && typeof buildPlan === 'object' ? buildPlan : {};
-  state.demoEvents = Array.isArray(demoEvents) ? demoEvents : [];
-  state.preferences = { ...DEFAULT_PREFERENCES, ...loadJsonStorage(STORAGE.preferences, {}) };
-  state.previousOpenedAt = loadJsonStorage(STORAGE.lastOpened, null);
-  const periodSettings = loadJsonStorage(STORAGE.period, {});
-  state.periodPreset = PERIOD_LABELS[periodSettings?.preset] ? periodSettings.preset : '24h';
-  state.comparePeriod = Boolean(periodSettings?.compare);
-  $('#period-select').value = state.periodPreset;
-  $('#custom-period-start').value = periodSettings?.customStart || toIstDateTimeLocal(new Date(Date.now() - 24 * 60 * 60 * 1000));
-  $('#custom-period-end').value = periodSettings?.customEnd || toIstDateTimeLocal(new Date());
-  state.periodWindow = resolveSelectedPeriod(state.periodPreset);
-  $('#custom-period').hidden = state.periodPreset !== 'custom';
-  if (state.demoMode && !params.has('live')) state.preferences.liveScan = false;
-  state.feedback = loadJsonStorage(STORAGE.feedback, []);
-
-  const storedWatched = loadJsonStorage(STORAGE.watched, null);
-  const defaults = state.demoMode ? state.demoEvents.filter((event) => !['stable'].includes(event.watchState)).map((event) => event.id) : [];
-  state.watched = new Set(Array.isArray(storedWatched) ? storedWatched : defaults);
-
-  const cachedLive = loadJsonStorage(STORAGE.liveEvents, []);
-  const cachedMeta = loadJsonStorage(STORAGE.liveMeta, {});
-  state.liveEvents = Array.isArray(cachedLive) ? cachedLive : [];
-  state.liveMeta = cachedMeta || {};
-  state.lastScanAt = cachedMeta.scannedAt || cachedMeta.lastScanAt || null;
-  state.rawArticleCount = cachedMeta.articleCount || 0;
-  state.events = dedupeEvents([...state.liveEvents, ...(state.demoMode ? state.demoEvents : [])]);
-
-  try {
-    if (state.demoMode) throw new Error('Demo/QA mode');
-    const serverPayload = await fetchJson('/api/events', { timeout: 3500 });
-    const serverEvents = Array.isArray(serverPayload?.events) ? serverPayload.events : [];
-    if (serverPayload?.entityUniverse) state.entityUniverse = serverPayload.entityUniverse;
-    if (serverEvents.length) state.events = dedupeEvents([...serverEvents, ...state.liveEvents]);
-  } catch { /* live-on-demand mode remains valid without a persistent database */ }
-}
-
-function registerServiceWorker() {
-  if (!globalThis.__ABG_PULSE_QA__ && 'serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/service-worker.js').catch(() => {}));
-}
-
-async function init() {
-  bindNavigation();
-  bindMethodology();
-  bindAsk();
-  bindSearch();
-  bindPeriodControls();
-  bindPreferences();
-  bindInstall();
-  $('#refresh-button').addEventListener('click', () => scanLiveSources({ manual: true }));
-  renderDateAndGreeting();
-
-  try {
-    await loadInitialData();
-    renderAll();
-    if (loadJsonStorage(STORAGE.knownEvents, null) === null) saveJsonStorage(STORAGE.knownEvents, state.demoMode ? state.demoEvents.map((event) => event.id) : []);
-    saveJsonStorage(STORAGE.lastOpened, new Date().toISOString());
-    const requestedView = location.hash.replace('#', '');
-    if (requestedView && document.querySelector(`[data-view-panel="${CSS.escape(requestedView)}"]`)) switchView(requestedView);
-    if (state.preferences.liveScan) scanLiveSources();
-  } catch (error) {
-    console.error(error);
-    $('#scan-summary').textContent = 'The product could not load its local intelligence record.';
-    $('#must-list').innerHTML = emptyCard('Initialisation failed', 'Reload the page. If the problem persists, inspect the Control Room and runtime logs.');
-  }
-}
-
-registerServiceWorker();
-init();
+document.addEventListener('DOMContentLoaded',init);
