@@ -1,0 +1,118 @@
+name: Verify ABG Pulse production
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-production.yml'
+      - 'index.html'
+      - 'app.js'
+      - 'styles.css'
+      - 'core.mjs'
+      - 'official.mjs'
+      - 'api/**'
+      - 'config/**'
+      - 'data/**'
+      - 'package.json'
+      - 'vercel.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
+    steps:
+      - name: Wait for the Git-connected Vercel deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 24); do
+            code=$(curl -L -sS --max-time 25 -o /tmp/home.html -w '%{http_code}' "$PRODUCTION_URL" || true)
+            if [ "$code" = "200" ] && grep -qi 'ABG Pulse' /tmp/home.html; then
+              echo "Homepage is live on attempt $attempt."
+              exit 0
+            fi
+            echo "Attempt $attempt: homepage returned HTTP $code; retrying in 15 seconds."
+            sleep 15
+          done
+          echo "Production homepage did not become healthy in time."
+          cat /tmp/home.html 2>/dev/null || true
+          exit 1
+
+      - name: Verify health and governed entity universe
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L -fS --max-time 45 "$PRODUCTION_URL/api/health" -o /tmp/health.json
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('/tmp/health.json', 'utf8'));
+          const actual = payload?.entityUniverse?.actual || {};
+          if (!['ok', 'degraded'].includes(payload.status)) throw new Error(`Unexpected health status: ${payload.status}`);
+          if (payload?.entityUniverse?.reconciled !== true) throw new Error('Official entity universe is not reconciled.');
+          if (actual.officialCompanies !== 42) throw new Error(`Expected 42 official companies; received ${actual.officialCompanies}`);
+          if (actual.officialLeadership !== 40) throw new Error(`Expected 40 official leadership entries; received ${actual.officialLeadership}`);
+          if (actual.totalEntities < 190) throw new Error(`Entity graph unexpectedly small: ${actual.totalEntities}`);
+          console.log(JSON.stringify({
+            status: payload.status,
+            mode: payload.mode,
+            officialCompanies: actual.officialCompanies,
+            officialLeadership: actual.officialLeadership,
+            totalEntities: actual.totalEntities,
+            databaseConfigured: payload?.configured?.database
+          }, null, 2));
+          NODE
+
+      - name: Verify live scan returns valid intelligence JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L -fS --max-time 90 "$PRODUCTION_URL/api/scan" -o /tmp/scan.json
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('/tmp/scan.json', 'utf8'));
+          if (!Array.isArray(payload.events)) throw new Error('Scan response has no events array.');
+          if (!payload.meta || typeof payload.meta !== 'object') throw new Error('Scan response has no metadata.');
+          if (!Number.isFinite(payload.meta.totalChecks) || payload.meta.totalChecks < 1) throw new Error('No source checks were attempted.');
+          if (!Number.isFinite(payload.meta.successfulChecks)) throw new Error('Successful source count missing.');
+          if (!Array.isArray(payload.meta.sourceChecks)) throw new Error('Source-health detail missing.');
+          console.log(JSON.stringify({
+            totalChecks: payload.meta.totalChecks,
+            successfulChecks: payload.meta.successfulChecks,
+            failedChecks: payload.meta.totalChecks - payload.meta.successfulChecks,
+            articleCount: payload.meta.articleCount,
+            eventCount: payload.events.length,
+            mode: payload.meta.mode || 'live-on-demand'
+          }, null, 2));
+          NODE
+
+      - name: Verify objective Job Meter endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L -fS --max-time 45 "$PRODUCTION_URL/api/progress" -o /tmp/progress.json
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('/tmp/progress.json', 'utf8'));
+          if (!Number.isFinite(payload.overallPercent)) throw new Error('Job Meter overall percentage missing.');
+          if (!Array.isArray(payload.milestones) || payload.milestones.length < 10) throw new Error('Milestone evidence is incomplete.');
+          console.log(JSON.stringify({ overallPercent: payload.overallPercent, milestones: payload.milestones.length }, null, 2));
+          NODE
+
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: abg-pulse-production-verification
+          path: |
+            /tmp/home.html
+            /tmp/health.json
+            /tmp/scan.json
+            /tmp/progress.json
+          if-no-files-found: warn
+          retention-days: 14
