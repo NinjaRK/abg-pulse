@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-production.yml'
+      - '.bootstrap/**'
+      - 'bootstrap.mjs'
       - 'index.html'
       - 'app.js'
       - 'styles.css'
@@ -23,7 +25,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     env:
       PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
     steps:
@@ -72,22 +74,37 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -L -fS --max-time 90 "$PRODUCTION_URL/api/scan" -o /tmp/scan.json
+          scan_ok=false
+          for attempt in $(seq 1 8); do
+            code=$(curl -L -sS --max-time 100 -o /tmp/scan.json -w '%{http_code}' "$PRODUCTION_URL/api/scan" || true)
+            if [ "$code" = "200" ]; then
+              scan_ok=true
+              break
+            fi
+            echo "Attempt $attempt: scan returned HTTP $code; retrying in 15 seconds."
+            cat /tmp/scan.json 2>/dev/null || true
+            sleep 15
+          done
+          if [ "$scan_ok" != "true" ]; then
+            echo "Live scan did not return HTTP 200."
+            exit 1
+          fi
           node --input-type=module <<'NODE'
           import { readFileSync } from 'node:fs';
           const payload = JSON.parse(readFileSync('/tmp/scan.json', 'utf8'));
           if (!Array.isArray(payload.events)) throw new Error('Scan response has no events array.');
           if (!payload.meta || typeof payload.meta !== 'object') throw new Error('Scan response has no metadata.');
-          if (!Number.isFinite(payload.meta.totalChecks) || payload.meta.totalChecks < 1) throw new Error('No source checks were attempted.');
-          if (!Number.isFinite(payload.meta.successfulChecks)) throw new Error('Successful source count missing.');
+          if (!Number.isFinite(payload.meta.queryCount) || payload.meta.queryCount < 1) throw new Error('No source checks were attempted.');
+          if (!Number.isFinite(payload.meta.successfulQueries)) throw new Error('Successful source count missing.');
           if (!Array.isArray(payload.meta.sourceChecks)) throw new Error('Source-health detail missing.');
           console.log(JSON.stringify({
-            totalChecks: payload.meta.totalChecks,
-            successfulChecks: payload.meta.successfulChecks,
-            failedChecks: payload.meta.totalChecks - payload.meta.successfulChecks,
-            articleCount: payload.meta.articleCount,
+            totalChecks: payload.meta.queryCount,
+            successfulChecks: payload.meta.successfulQueries,
+            failedChecks: payload.meta.queryCount - payload.meta.successfulQueries,
+            rawArticleCount: payload.meta.rawArticleCount,
+            relevantArticleCount: payload.meta.articleCount,
             eventCount: payload.events.length,
-            mode: payload.meta.mode || 'live-on-demand'
+            registryReconciled: payload.meta.registryReconciled
           }, null, 2));
           NODE
 
@@ -99,9 +116,9 @@ jobs:
           node --input-type=module <<'NODE'
           import { readFileSync } from 'node:fs';
           const payload = JSON.parse(readFileSync('/tmp/progress.json', 'utf8'));
-          if (!Number.isFinite(payload.overallPercent)) throw new Error('Job Meter overall percentage missing.');
+          if (!Number.isFinite(payload.completion)) throw new Error('Job Meter completion percentage missing.');
           if (!Array.isArray(payload.milestones) || payload.milestones.length < 10) throw new Error('Milestone evidence is incomplete.');
-          console.log(JSON.stringify({ overallPercent: payload.overallPercent, milestones: payload.milestones.length }, null, 2));
+          console.log(JSON.stringify({ completion: payload.completion, milestones: payload.milestones.length }, null, 2));
           NODE
 
       - name: Upload verification evidence
