@@ -28,6 +28,44 @@ const MATERIALITY_TERMS = [
 const CERTAINTY_DOWN = ['reportedly','sources said','people familiar','may','might','could','exploring','considering','talks','likely','rumour','rumor','unconfirmed','appears'];
 const CERTAINTY_UP = ['announced','disclosed','filing','official','confirmed','approved','commissioned','appointed','completed','signed','exchange filing','press release'];
 
+
+// These patterns are deliberately conservative. ABG Pulse should surface an
+// underlying corporate development, not every article that happens to mention
+// an ABG-listed security or every public question about an ABG brand.
+const ROUTINE_MARKET_PATTERNS = [
+  /\b(stocks?|shares?)\s+to\s+(buy|sell|watch)\b/,
+  /\b(buy|sell|hold)\s+(call|rating|recommendation)\b/,
+  /\btarget\s+price\b/,
+  /\bprice\s+target\b/,
+  /\bshare\s+price\s+(target|forecast|prediction|today|outlook)\b/,
+  /\b(multibagger|intraday|technical\s+analysis|trading\s+strategy)\b/,
+  /\b(top|best)\s+\d*\s*(stocks?|shares?)\b/,
+  /\bmarket\s+(movers?|roundup|wrap|live)\b/,
+  /\b(brokerage|analyst)\s+(call|pick|recommendation)\b/,
+  /\bshould\s+(you|i|investors?)\s+(buy|sell|hold)\b/
+];
+
+const PURE_PRICE_MOVEMENT_PATTERNS = [
+  /\bshares?\s+(rise|rises|rose|fall|falls|fell|jump|jumps|surge|surges|slip|slips|gain|gains|drop|drops)\b/,
+  /\bstock\s+(rise|rises|rose|fall|falls|fell|jump|jumps|surge|surges|slip|slips|gain|gains|drop|drops)\b/
+];
+
+const CORPORATE_EVENT_PATTERNS = [
+  /\b(announces?|announced|discloses?|disclosed|filing|results?|revenue|profit|loss|ebitda)\b/,
+  /\b(acquisition|acquires?|merger|stake|divest|sale|funding|financing|investment|capex)\b/,
+  /\b(appoints?|appointed|resigns?|resigned|chairman|chief executive|ceo|cfo|managing director|board)\b/,
+  /\b(sebi|rbi|trai|cci|nclt|nclat|court|regulator|penalty|fine|probe|investigation|order)\b/,
+  /\b(plant|capacity|commissioned|launches?|launched|partnership|contract|spectrum|subscriber)\b/,
+  /\b(accident|fatal|fire|strike|protest|recall|breach|fraud|allegation)\b/,
+  /\b(upgrade|downgrade|credit rating|sustainability|renewable|emission)\b/
+];
+
+const PUBLIC_QUESTION_PATTERNS = [
+  /^(why|what|when|where|who|how|is|are|do|does|did|can|could|should|would|has|have)\b/,
+  /\b(anyone|thoughts|opinion|review|experience|help|advice)\b/,
+  /\?$/
+];
+
 const TOKEN_CANONICAL = new Map([
   ['commissions','commission'],['commissioned','commission'],['opens','commission'],['opened','commission'],['open','commission'],
   ['facility','plant'],['facilities','plant'],['rollout','expansion'],['expands','expansion'],['expanded','expansion'],
@@ -163,13 +201,77 @@ export function matchEntities(text = '', entities = []) {
   return [...primary, ...stakeholderMatches];
 }
 
+
+export function assessArticleSignal(article = {}, entities = [], sources = []) {
+  const title = normalizeText(article.title || '');
+  const description = normalizeText(article.description || '');
+  const combined = `${title} ${description}`.trim();
+  const titleEntities = matchEntities(article.title || '', entities).filter((entity) => entity.type !== 'stakeholder');
+  const textEntities = matchEntities(`${article.title || ''} ${article.description || ''}`, entities).filter((entity) => entity.type !== 'stakeholder');
+  const hintedEntities = (article.entityHints || [])
+    .map((id) => entities.find((entity) => entity.id === id))
+    .filter((entity) => entity && entity.type !== 'stakeholder');
+  const combinedEntities = [...new Map([...textEntities, ...hintedEntities].map((entity) => [entity.id, entity])).values()];
+  const tier = sourceTier(article.domain || domainFromUrl(article.url), sources);
+  const official = Boolean(article.official) || tier === 0;
+  const hasCorporateEvent = CORPORATE_EVENT_PATTERNS.some((pattern) => pattern.test(combined));
+  const routineMarket = ROUTINE_MARKET_PATTERNS.some((pattern) => pattern.test(title));
+  const purePriceMove = PURE_PRICE_MOVEMENT_PATTERNS.some((pattern) => pattern.test(title)) && !hasCorporateEvent;
+  const publicQuestion = article.channel === 'public-conversation' && PUBLIC_QUESTION_PATTERNS.some((pattern) => pattern.test(title));
+
+  if (!combinedEntities.length) {
+    return { includeAsNews: false, includeAsSentiment: false, reason: 'no_abg_entity', entities: [] };
+  }
+  if (article.channel === 'public-conversation') {
+    return {
+      includeAsNews: false,
+      // Public conversation can inform observed sentiment only when the ABG
+      // entity is explicit in the title and the item is not a generic question.
+      includeAsSentiment: titleEntities.length > 0 && !publicQuestion,
+      reason: publicQuestion ? 'public_question' : (titleEntities.length ? 'public_sentiment_only' : 'weak_public_context'),
+      entities: combinedEntities
+    };
+  }
+  if (routineMarket && !official) {
+    return { includeAsNews: false, includeAsSentiment: false, reason: 'routine_market_advice', entities: combinedEntities };
+  }
+  if (purePriceMove && !official) {
+    return { includeAsNews: false, includeAsSentiment: false, reason: 'price_movement_without_event', entities: combinedEntities };
+  }
+  if (!titleEntities.length && !official) {
+    return { includeAsNews: false, includeAsSentiment: false, reason: 'entity_only_in_snippet', entities: combinedEntities };
+  }
+  return { includeAsNews: true, includeAsSentiment: false, reason: official ? 'official' : 'direct_entity_news', entities: combinedEntities };
+}
+
+export function attachRelatedPublicConversation(mediaClusters = [], publicArticles = [], entities = []) {
+  if (!publicArticles.length) return mediaClusters.map((cluster) => [...cluster]);
+  return mediaClusters.map((cluster) => {
+    const mediaEntityIds = new Set(matchEntities(
+      cluster.map((article) => `${article.title || ''} ${article.description || ''}`).join(' '),
+      entities
+    ).filter((entity) => entity.type !== 'stakeholder').map((entity) => entity.id));
+    const attached = publicArticles.filter((article) => {
+      const publicIds = matchEntities(`${article.title || ''} ${article.description || ''}`, entities)
+        .filter((entity) => entity.type !== 'stakeholder')
+        .map((entity) => entity.id);
+      if (!publicIds.some((id) => mediaEntityIds.has(id))) return false;
+      // Entity overlap is necessary but not enough: require event-language
+      // overlap so generic brand chatter cannot distort a specific event.
+      return cluster.some((media) => articlesRelated(article, media, entities));
+    });
+    return [...cluster, ...attached];
+  });
+}
+
 export function uniqueDomains(articles = []) {
   return [...new Set(articles.map((article) => article.domain || domainFromUrl(article.url)).filter(Boolean))];
 }
 
 function articlesRelated(a, b, entities = []) {
   const similarity = jaccardSimilarity(a.title, b.title);
-  if (similarity >= 0.64) return true;
+  const involvesPublicConversation = a.channel === 'public-conversation' || b.channel === 'public-conversation';
+  if (similarity >= (involvesPublicConversation ? 0.72 : 0.64)) return true;
   const aEntities = new Set(matchEntities(a.title, entities).map((entity) => entity.id));
   const bEntities = new Set(matchEntities(b.title, entities).map((entity) => entity.id));
   const sharedEntity = [...aEntities].some((id) => bEntities.has(id));
@@ -179,6 +281,10 @@ function articlesRelated(a, b, entities = []) {
   const sharedTokens = [...aTokens].filter((token) => bTokens.has(token));
   const sharedMeaningful = sharedTokens.length;
   const sharedNumericAnchor = sharedTokens.some((token) => /^\d/.test(token));
+  if (involvesPublicConversation) {
+    if (sharedMeaningful >= 5 && similarity >= 0.48) return true;
+    return sharedMeaningful >= 4 && similarity >= 0.42 && sharedNumericAnchor;
+  }
   if (sharedMeaningful >= 4 && similarity >= 0.42) return true;
   return sharedMeaningful >= 3 && similarity >= 0.34 && sharedNumericAnchor;
 }
@@ -290,7 +396,10 @@ export function predictImportance({ materiality = 0, momentum = 0, certainty = 0
 
 export function classifyBucket({ materiality = 0, certainty = 0, momentum = 0, p24 = 0, immediate = false } = {}) {
   if ((materiality >= 76 && certainty >= 58) || (immediate && materiality >= 64) || (materiality >= 68 && momentum >= 72 && certainty >= 50)) return 'must';
-  if (p24 >= 52 || materiality >= 58 || momentum >= 62 || certainty < 48) return 'watch';
+  // Uncertainty by itself is not news. It can lower confidence, but it must not
+  // manufacture urgency. Watch requires consequence, momentum, or a forecast
+  // supported by those signals.
+  if (p24 >= 58 || materiality >= 58 || (momentum >= 65 && certainty >= 50)) return 'watch';
   return 'other';
 }
 
@@ -402,30 +511,38 @@ export function deriveLiveEvent(cluster = [], { entities = [], sources = [], now
     if (ta !== tb) return ta - tb;
     return (parseGdeltDate(b.publishedAt).getTime() || 0) - (parseGdeltDate(a.publishedAt).getTime() || 0);
   });
-  const lead = ranked[0];
-  const allText = ranked.map((article) => `${article.title || ''} ${article.description || ''}`).join(' ');
-  const entityMatches = matchEntities(allText, entities);
+  const mediaArticles = ranked.filter((article) => article.channel !== 'public-conversation');
+  if (!mediaArticles.length) return null;
+  const publicArticles = ranked.filter((article) => article.channel === 'public-conversation');
+  const lead = mediaArticles[0];
+  const allText = mediaArticles.map((article) => `${article.title || ''} ${article.description || ''}`).join(' ');
+  const textEntityMatches = matchEntities(allText, entities);
+  const hintedEntityMatches = mediaArticles
+    .flatMap((article) => article.entityHints || [])
+    .map((id) => entities.find((entity) => entity.id === id))
+    .filter(Boolean);
+  const entityMatches = [...new Map([...textEntityMatches, ...hintedEntityMatches].map((entity) => [entity.id, entity])).values()];
   const primaryEntities = entityMatches.filter((entity) => entity.type !== 'stakeholder');
   if (!primaryEntities.length) return null;
-  const domains = uniqueDomains(ranked);
-  const tiers = ranked.map((article) => sourceTier(article.domain || domainFromUrl(article.url), sources));
+  // Public-conversation samples may describe sentiment, but they never count as
+  // corroborating news domains, momentum, certainty or materiality evidence.
+  const domains = uniqueDomains(mediaArticles);
+  const tiers = mediaArticles.map((article) => sourceTier(article.domain || domainFromUrl(article.url), sources));
   const bestTier = tiers.length ? Math.min(...tiers) : 3;
-  const officialArticles = ranked.filter((article) => article.official || sourceTier(article.domain || domainFromUrl(article.url), sources) === 0);
-  const publicArticles = ranked.filter((article) => article.channel === 'public-conversation');
-  const mediaArticles = ranked.filter((article) => article.channel !== 'public-conversation');
+  const officialArticles = mediaArticles.filter((article) => article.official || sourceTier(article.domain || domainFromUrl(article.url), sources) === 0);
   const official = officialArticles.length > 0;
   const materiality = materialityScore({ text: allText, entities: primaryEntities, sourceCount: domains.length, sourceTierValue: bestTier });
   const certainty = certaintyScore({ text: allText, sourceCount: domains.length, sourceTierValue: bestTier, official });
-  const momentum = momentumScore({ articles: ranked, now });
-  const change = trendChange({ articles: ranked, now });
-  const toneBase = mediaArticles.length ? mediaArticles : ranked;
+  const momentum = momentumScore({ articles: mediaArticles, now });
+  const change = trendChange({ articles: mediaArticles, now });
+  const toneBase = mediaArticles;
   const toneValues = toneBase.map((article) => mediaTone(`${article.title || ''} ${article.description || ''}`, article.tone));
   const tone = Math.round(toneValues.reduce((sum, value) => sum + value, 0) / Math.max(1, toneValues.length));
   const publicSentiment = observedPublicSentiment(publicArticles);
   const seniority = primaryEntities.reduce((max, entity) => Math.max(max, entity.type === 'person' ? 5 - (entity.tier ?? 4) : 0), 0);
 
   const officialFrame = officialArticles[0]?.title || '';
-  const emergingArticle = ranked.find((article) => !officialArticles.includes(article) && article.channel !== 'public-conversation');
+  const emergingArticle = mediaArticles.find((article) => !officialArticles.includes(article));
   const emergingFrame = emergingArticle?.title || lead.title;
   const drift = officialFrame && emergingFrame && normalizeText(officialFrame) !== normalizeText(emergingFrame)
     ? narrativeDriftScore({ headline: emergingFrame, officialFrame, entityMatches: primaryEntities, sourceCount: domains.length })
@@ -436,7 +553,7 @@ export function deriveLiveEvent(cluster = [], { entities = [], sources = [], now
     materiality, certainty, momentum, p24: forecast.p24,
     immediate: /court|regulator|resign|accident|fatal|fraud|probe|fire|strike/.test(normalizeText(allText))
   });
-  const validTimes = ranked.map((article) => parseGdeltDate(article.publishedAt).getTime()).filter(Number.isFinite);
+  const validTimes = mediaArticles.map((article) => parseGdeltDate(article.publishedAt).getTime()).filter(Number.isFinite);
   const firstReported = validTimes.length ? Math.min(...validTimes) : new Date(now).getTime();
   const lastReported = validTimes.length ? Math.max(...validTimes) : new Date(now).getTime();
   const primaryName = primaryEntities[0]?.name || 'Aditya Birla Group';
@@ -451,8 +568,8 @@ export function deriveLiveEvent(cluster = [], { entities = [], sources = [], now
     category: inferCategory(allText),
     entityIds: entityMatches.map((entity) => entity.id),
     publishedAt: new Date(firstReported).toISOString(),
-    updatedAt: new Date(Math.max(lastReported, new Date(now).getTime())).toISOString(),
-    sources: ranked.slice(0, 16).map((article) => ({
+    updatedAt: new Date(lastReported).toISOString(),
+    sources: [...mediaArticles, ...publicArticles].slice(0, 16).map((article) => ({
       name: article.sourceName || article.domain,
       url: article.url,
       publishedAt: article.publishedAt,

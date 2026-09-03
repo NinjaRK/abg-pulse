@@ -8,16 +8,19 @@ import {
   dedupeEvents,
   sortEvents,
   isFreshArticle,
-  normalizeText
+  normalizeText,
+  assessArticleSignal,
+  attachRelatedPublicConversation
 } from '../core.mjs';
 import { fetchOfficialSource, auditOfficialRegistry } from '../official.mjs';
 
-const loadJson = (relative) => JSON.parse(readFileSync(fileURLToPath(new URL(relative, import.meta.url)), 'utf8'));
-const entities = loadJson('../data/entities.json');
-const sources = loadJson('../data/source-registry.json');
-const queryGroups = loadJson('../config/queries.json');
-const officialSources = loadJson('../config/official-sources.json');
-const entityUniverse = loadJson('../data/entity-universe-summary.json');
+// Literal asset paths ensure Vercel includes every governed JSON file in the
+// serverless function bundle.
+const entities = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entities.json', import.meta.url)), 'utf8'));
+const sources = JSON.parse(readFileSync(fileURLToPath(new URL('../data/source-registry.json', import.meta.url)), 'utf8'));
+const queryGroups = JSON.parse(readFileSync(fileURLToPath(new URL('../config/queries.json', import.meta.url)), 'utf8'));
+const officialSources = JSON.parse(readFileSync(fileURLToPath(new URL('../config/official-sources.json', import.meta.url)), 'utf8'));
+const entityUniverse = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entity-universe-summary.json', import.meta.url)), 'utf8'));
 
 const GOOGLE_EDITIONS = {
   indiaEnglish: { id: 'IN-en', hl: 'en-IN', gl: 'IN', ceid: 'IN:en' },
@@ -209,11 +212,6 @@ function buildJobs(window) {
   return jobs;
 }
 
-function relevanceMatches(article) {
-  const text = `${article.title || ''} ${article.description || ''}`;
-  return matchEntities(text, entities);
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'GET') return send(res, 405, { error: 'method_not_allowed' });
 
@@ -251,8 +249,18 @@ export default async function handler(req, res) {
       maxHours: Math.max(24, (new Date(window.end) - new Date(window.start)) / 36e5 + 1),
       futureToleranceHours: 12
     }));
-    const relevant = fresh.filter((article) => relevanceMatches(article).some((entity) => entity.type !== 'stakeholder'));
-    const clusters = clusterArticles(relevant, entities);
+    const assessed = fresh.map((article) => ({ article, signal: assessArticleSignal(article, entities, sources) }));
+    const relevantNews = assessed.filter(({ signal }) => signal.includeAsNews).map(({ article }) => article);
+    const publicSentimentCandidates = assessed.filter(({ signal }) => signal.includeAsSentiment).map(({ article }) => article);
+    const rejectionReasons = assessed
+      .filter(({ signal }) => !signal.includeAsNews && !signal.includeAsSentiment)
+      .reduce((counts, { signal }) => {
+        counts[signal.reason] = (counts[signal.reason] || 0) + 1;
+        return counts;
+      }, {});
+
+    const mediaClusters = clusterArticles(relevantNews, entities);
+    const clusters = attachRelatedPublicConversation(mediaClusters, publicSentimentCandidates, entities);
     const events = sortEvents(dedupeEvents(
       clusters
         .map((cluster) => deriveLiveEvent(cluster, { entities, sources, now: startedAt }))
@@ -260,7 +268,7 @@ export default async function handler(req, res) {
         .filter((event) => (event.intelligence?.materiality || 0) >= 35)
     )).slice(0, 60);
 
-    const publicConversationItems = relevant.filter((article) => article.channel === 'public-conversation').length;
+    const publicConversationItems = publicSentimentCandidates.length;
     const publicConversationChecks = sourceChecks.filter((check) => check.provider === 'Open public conversation');
     const providerSummary = [...new Set(jobs.map((job) => job.provider))];
     const registryAudits = sourceChecks.map((check) => check.registryAudit).filter(Boolean);
@@ -271,7 +279,7 @@ export default async function handler(req, res) {
       meta: {
         scannedAt: new Date().toISOString(),
         providers: providerSummary,
-        serviceVersion: '4.0.0',
+        serviceVersion: '5.2.0',
         queryCount: jobs.length,
         officialSourceCount: officialSources.length,
         registryAudits,
@@ -280,14 +288,16 @@ export default async function handler(req, res) {
         sourceChecks,
         rawArticleCount: raw.length,
         freshArticleCount: fresh.length,
-        articleCount: relevant.length,
+        articleCount: relevantNews.length,
+        rejectedArticleCount: assessed.length - relevantNews.length - publicSentimentCandidates.length,
+        rejectionReasons,
         eventCount: events.length,
         publicConversationItems,
         publicConversationChecks: publicConversationChecks.length,
         publicConversationChecksSucceeded: publicConversationChecks.filter((check) => check.ok).length,
         sentimentCoverage: {
           media: 'Google News, GDELT and official published-source language',
-          openPublic: 'Accessible Reddit public-search RSS where available',
+          openPublic: 'Accessible Reddit public-search RSS where available; samples inform sentiment only and cannot create news events.',
           closedSocial: 'X, LinkedIn, Instagram and platform-level comments require authorised or licensed data access and are not represented unless connected.'
         },
         errors,
@@ -305,7 +315,7 @@ export default async function handler(req, res) {
       entityUniverse,
       meta: {
         scannedAt: new Date().toISOString(),
-        serviceVersion: '4.0.0',
+        serviceVersion: '5.2.0',
         queryCount: jobs.length,
         successfulQueries: 0,
         sourceChecks: [],

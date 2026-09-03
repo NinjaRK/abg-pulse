@@ -1,0 +1,174 @@
+{
+  "name": "ABG Pulse \u2014 governed intelligence ingestion v4",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 20
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Every 20 minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -620,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.ABG_PULSE_BASE_URL + '/api/scan' }}",
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "scan",
+      "name": "Scan official + news sources",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -360,
+        0
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-events",
+              "leftValue": "={{ Array.isArray($json.events) ? $json.events.length : 0 }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-events",
+      "name": "Any material events?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -100,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.ABG_PULSE_BASE_URL + '/api/ingest' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Ingest-Secret",
+              "value": "={{ $env.ABG_PULSE_INGEST_SECRET }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ events: $json.events, meta: $json.meta }) }}",
+        "options": {
+          "timeout": 20000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "ingest",
+      "name": "Persist verified event records",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        170,
+        -70
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    }
+  ],
+  "connections": {
+    "Every 20 minutes": {
+      "main": [
+        [
+          {
+            "node": "Scan official + news sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scan official + news sources": {
+      "main": [
+        [
+          {
+            "node": "Any material events?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Any material events?": {
+      "main": [
+        [
+          {
+            "node": "Persist verified event records",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "timezone": "Asia/Kolkata"
+  },
+  "active": false,
+  "versionId": "abg-pulse-governed-v4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "notes": "Requires ABG_PULSE_BASE_URL and ABG_PULSE_INGEST_SECRET. Runs the same v4 governed scan used by the PWA, including official-company/leadership query coverage, registry audits, open-public sentiment where available, source-health reporting and fail-closed event validation."
+  },
+  "tags": []
+}
