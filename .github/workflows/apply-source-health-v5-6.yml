@@ -1,0 +1,75 @@
+name: Apply and promote ABG Pulse source health v5.6
+
+on:
+  push:
+    branches:
+      - sol/source-health-v5-6
+    paths:
+      - '.build/source-health-v5.6.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Apply deterministic source-health integration patch
+        run: node scripts/apply-source-health-v5.6.mjs
+
+      - name: Install without bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run full product verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import { evaluateSourceHealth } from './lib/source-health.mjs';
+          const baselines = JSON.parse(readFileSync('data/source-health-baselines.json', 'utf8'));
+          const result = evaluateSourceHealth({
+            sourceChecks: [{ name: 'tier0-test', tier: 'tier0', ok: true, status: 'healthy', schemaValidated: true, emptyIsValid: true, itemCount: 0, durationMs: 10 }],
+            baselines
+          });
+          if (!result.gates.tier0Configured || !result.gates.noExplicitTier0Failure || !result.gates.noSilentTier0Failure) {
+            throw new Error(JSON.stringify(result, null, 2));
+          }
+          if (result.gates.baselineCoverageComplete) throw new Error('Empty learning baselines must remain visibly incomplete.');
+          console.log(JSON.stringify(result.summary, null, 2));
+          NODE
+
+      - name: Refuse promotion if main moved outside candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after the candidate branch was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Commit verified integration and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add lib/source-health.mjs lib/tier0-ingestion.mjs tests/source-health.test.mjs api/scan.js package.json
+          git rm -f .build/source-health-v5.6.ready scripts/apply-source-health-v5.6.mjs .github/workflows/apply-source-health-v5-6.yml
+          git commit -m 'Add Tier-0-aware source health and silent-failure detection'
+          git push origin HEAD:sol/source-health-v5-6
+          git push origin HEAD:main
