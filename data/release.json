@@ -1,0 +1,26 @@
+{
+  "version": "6.1.0",
+  "releaseName": "Exact-commit production trust gate",
+  "objective": "No release is accepted merely because Vercel reports Ready; the exact Git commit and every public trust endpoint must pass production evidence checks.",
+  "requiredEndpoints": [
+    "/",
+    "/api/health",
+    "/api/scan",
+    "/api/coverage",
+    "/api/dependability",
+    "/api/source-health",
+    "/api/progress"
+  ],
+  "requiredAssertions": [
+    "Production commit SHA equals the Git commit under review",
+    "Official entity universe remains reconciled",
+    "Entity-complete query plan passes",
+    "All configured NSE, BSE and SEC Tier-0 jobs are attempted",
+    "Bounded executor accounting and per-source timing are complete",
+    "Every published event has a claim-level evidence chain",
+    "No unverified or disputed story enters Must Know",
+    "Public-conversation-only and generic stock-tip events remain excluded",
+    "Dependability is never claimed before 30 consecutive passing days"
+  ],
+  "evidenceRetentionDays": 90
+}
