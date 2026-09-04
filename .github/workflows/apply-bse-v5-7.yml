@@ -1,0 +1,75 @@
+name: Apply and promote ABG Pulse BSE Tier-0 v5.7
+
+on:
+  push:
+    branches:
+      - sol/bse-tier0-v5-7
+    paths:
+      - '.build/bse-v5.7.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Apply deterministic BSE integration patch
+        run: node scripts/apply-bse-v5.7.mjs
+
+      - name: Install without bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run full product verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import { validateBseConfig, buildBseJobs } from './lib/bse-ingestion.mjs';
+          import { bseRegistryRecords } from './lib/bse-registry.mjs';
+          const entities = JSON.parse(readFileSync('data/entities.json', 'utf8'));
+          const config = JSON.parse(readFileSync('config/bse-sources.json', 'utf8'));
+          const validation = validateBseConfig(config, entities);
+          if (!validation.valid) throw new Error(JSON.stringify(validation.errors));
+          if (validation.instruments !== 10) throw new Error(`Expected 10 verified BSE instruments; received ${validation.instruments}`);
+          const jobs = buildBseJobs({ config, entities, window: { start: '2026-09-01T00:00:00Z', end: '2026-09-02T00:00:00Z' }, fetchImpl: async () => { throw new Error('not invoked'); } });
+          const records = bseRegistryRecords(config);
+          if (jobs.jobs.length !== 10 || records.length !== 10) throw new Error('BSE adapter and source registry counts disagree.');
+          console.log(JSON.stringify(validation, null, 2));
+          NODE
+
+      - name: Refuse promotion if main moved outside candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after the candidate branch was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Commit verified integration and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add config/bse-sources.json lib/bse-ingestion.mjs lib/bse-registry.mjs tests/bse-ingestion.test.mjs api/scan.js api/coverage.js api/health.js package.json
+          git rm -f .build/bse-v5.7.ready scripts/apply-bse-v5.7.mjs .github/workflows/apply-bse-v5-7.yml
+          git commit -m 'Add direct BSE corporate-announcement ingestion'
+          git push origin HEAD:sol/bse-tier0-v5-7
+          git push origin HEAD:main
