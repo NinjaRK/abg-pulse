@@ -1,0 +1,8 @@
+{
+  "_meta": {
+    "status": "learning",
+    "minimumSamplesBeforeEnforcement": 5,
+    "method": "Rolling 30 successful observations; median defines typical volume and the lower-decile observation informs the minimum threshold.",
+    "warning": "An empty baseline must never be interpreted as healthy source coverage. Baseline coverage remains a visible failed gate until learned and reviewed."
+  }
+}
