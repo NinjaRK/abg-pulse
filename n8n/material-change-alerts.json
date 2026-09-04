@@ -1,0 +1,421 @@
+{
+  "name": "ABG Pulse — Material change alerts",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse01",
+      "name": "Every 30 minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-900, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.PULSE_BASE_URL + '/api/scan'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 120000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse02",
+      "name": "Scan public sources",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [-680, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.PULSE_BASE_URL + '/api/history?limit=250'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse03",
+      "name": "Read previous history",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [-460, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.PULSE_BASE_URL + '/api/notifications?limit=5000'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.PULSE_INGEST_SECRET}}"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse04",
+      "name": "Read notification ledger",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [-240, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const scan = $('Scan public sources').first().json;\nconst history = $('Read previous history').first().json;\nconst ledger = $('Read notification ledger').first().json;\nif (!Array.isArray(scan.events)) throw new Error('Production scan returned no events array.');\nif (!Array.isArray(history.events)) throw new Error('Persistent history returned no events array.');\nreturn [{ json: {\n  currentEvents: scan.events,\n  previousEvents: history.events,\n  previouslyNotifiedKeys: Array.isArray(ledger.notificationKeys) ? ledger.notificationKeys : [],\n  options: { notificationThreshold: 50, mustKnowNewThreshold: 60, watchNewThreshold: 75 }\n} }];"
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse05",
+      "name": "Build material comparison",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-20, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.PULSE_BASE_URL + '/api/material-changes'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.PULSE_INGEST_SECRET}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{JSON.stringify($json)}}",
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse06",
+      "name": "Evaluate material changes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [200, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.PULSE_BASE_URL + '/api/persist'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.PULSE_INGEST_SECRET}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{JSON.stringify($('Scan public sources').first().json)}}",
+        "options": {
+          "timeout": 90000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse07",
+      "name": "Persist current scan",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [420, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const comparison = $('Evaluate material changes').first().json;\nconst eligible = Array.isArray(comparison.eligible) ? comparison.eligible : [];\nreturn [{ json: { changes: eligible, destination: 'configured-webhook', eligibleCount: eligible.length } }];"
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse08",
+      "name": "Prepare notification reservations",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [640, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eligible-changes-exist",
+              "leftValue": "={{$json.eligibleCount}}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse09",
+      "name": "Any material change?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [860, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.PULSE_BASE_URL + '/api/notifications'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.PULSE_INGEST_SECRET}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{JSON.stringify({changes: $json.changes, destination: $json.destination})}}",
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse10",
+      "name": "Reserve unseen notifications",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, -100]
+    },
+    {
+      "parameters": {
+        "jsCode": "const reservations = Array.isArray($json.notifications) ? $json.notifications : [];\nreturn reservations.map((reservation) => ({ json: reservation }));"
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse11",
+      "name": "Split reserved notifications",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, -100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.PULSE_ALERT_WEBHOOK_URL}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{JSON.stringify({\n  source: 'ABG Pulse',\n  eventId: $json.eventId,\n  notificationKey: $json.notificationKey,\n  headline: $json.change?.event?.title || $json.change?.event?.headline || 'Material ABG development',\n  summary: $json.alertSummary,\n  entity: $json.change?.event?.primaryEntity?.name || $json.change?.event?.entities?.[0]?.name || null,\n  whyItMatters: $json.change?.event?.whyItMatters || $json.change?.event?.intelligence?.whyItMatters || null,\n  verification: $json.change?.current?.verification || null,\n  classification: $json.change?.current?.classification || null,\n  reasons: $json.change?.reasons || [],\n  sources: ($json.change?.event?.evidenceChain?.evidence || []).slice(0, 5).map((item) => ({ title: item.title, publisher: item.publisher, url: item.url, tier: item.tier }))\n})}}",
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse12",
+      "name": "Deliver alert webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1520, -100],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const reservation = $('Split reserved notifications').item.json;\nconst delivery = $json;\nconst statusCode = Number(delivery.statusCode || delivery.status || 0);\nconst sent = statusCode >= 200 && statusCode < 300 && !delivery.error;\nreturn [{ json: {\n  notificationKey: reservation.notificationKey,\n  status: sent ? 'sent' : 'failed',\n  response: sent ? { statusCode, body: delivery.body ?? delivery } : null,\n  error: sent ? null : String(delivery.error?.message || delivery.message || delivery.body || 'Alert webhook failed').slice(0, 2000)\n} }];"
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse13",
+      "name": "Classify delivery result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1740, -100]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.PULSE_BASE_URL + '/api/notifications'}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{'Bearer ' + $env.PULSE_INGEST_SECRET}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{JSON.stringify($json)}}",
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse14",
+      "name": "Record delivery outcome",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1960, -100]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { ok: true, message: 'No genuinely new material development. No notification sent.', checkedAt: new Date().toISOString() } }];"
+      },
+      "id": "7d8f7b94-9ee7-48ce-8f08-001abgpulse15",
+      "name": "No notification required",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1080, 120]
+    }
+  ],
+  "connections": {
+    "Every 30 minutes": { "main": [[{ "node": "Scan public sources", "type": "main", "index": 0 }]] },
+    "Scan public sources": { "main": [[{ "node": "Read previous history", "type": "main", "index": 0 }]] },
+    "Read previous history": { "main": [[{ "node": "Read notification ledger", "type": "main", "index": 0 }]] },
+    "Read notification ledger": { "main": [[{ "node": "Build material comparison", "type": "main", "index": 0 }]] },
+    "Build material comparison": { "main": [[{ "node": "Evaluate material changes", "type": "main", "index": 0 }]] },
+    "Evaluate material changes": { "main": [[{ "node": "Persist current scan", "type": "main", "index": 0 }]] },
+    "Persist current scan": { "main": [[{ "node": "Prepare notification reservations", "type": "main", "index": 0 }]] },
+    "Prepare notification reservations": { "main": [[{ "node": "Any material change?", "type": "main", "index": 0 }]] },
+    "Any material change?": { "main": [[{ "node": "Reserve unseen notifications", "type": "main", "index": 0 }], [{ "node": "No notification required", "type": "main", "index": 0 }]] },
+    "Reserve unseen notifications": { "main": [[{ "node": "Split reserved notifications", "type": "main", "index": 0 }]] },
+    "Split reserved notifications": { "main": [[{ "node": "Deliver alert webhook", "type": "main", "index": 0 }]] },
+    "Deliver alert webhook": { "main": [[{ "node": "Classify delivery result", "type": "main", "index": 0 }]] },
+    "Classify delivery result": { "main": [[{ "node": "Record delivery outcome", "type": "main", "index": 0 }]] }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "timezone": "Asia/Kolkata"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "active": false,
+  "versionId": "7d8f7b94-9ee7-48ce-8f08-001abgpulse99",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "objective": "Notify only when a genuinely new or materially updated verified ABG development exists; otherwise remain silent.",
+    "requiredEnvironmentVariables": [
+      "PULSE_BASE_URL",
+      "PULSE_INGEST_SECRET",
+      "PULSE_ALERT_WEBHOOK_URL"
+    ],
+    "emailDependency": false
+  }
+}
