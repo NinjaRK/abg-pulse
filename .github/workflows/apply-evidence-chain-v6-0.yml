@@ -1,0 +1,107 @@
+name: Apply and promote ABG Pulse evidence chain v6.0
+
+on:
+  push:
+    branches:
+      - sol/evidence-chain-v6-0
+    paths:
+      - '.build/evidence-chain-v6.0.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Apply deterministic evidence-chain integration patch
+        run: node scripts/apply-evidence-chain-v6.0.mjs
+
+      - name: Install without bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run full product verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Verify fail-closed evidence policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { applyEvidencePolicy } from './lib/evidence-policy.mjs';
+          import { summarizeEvidenceChains } from './lib/evidence-chain.mjs';
+          const confirmed = applyEvidencePolicy({
+            id: 'confirmed',
+            title: 'Official acquisition filing',
+            classification: 'Must Know',
+            intelligence: { classification: 'Must Know', materiality: 90 }
+          }, { articles: [{
+            title: 'Company acquires 51% stake for ₹1,000 crore',
+            url: 'https://www.nseindia.com/filing/1',
+            sourceTier: 'tier0',
+            official: true,
+            publishedAt: '2026-09-03T10:00:00Z'
+          }] });
+          const unverified = applyEvidencePolicy({
+            id: 'single',
+            title: 'Reported acquisition',
+            classification: 'Must Know',
+            intelligence: { classification: 'Must Know', materiality: 90 }
+          }, { articles: [{
+            title: 'Company may acquire 51% stake for ₹1,000 crore',
+            url: 'https://single.example/story',
+            sourceName: 'Single source',
+            publishedAt: '2026-09-03T10:00:00Z'
+          }] });
+          if (confirmed.intelligence.classification !== 'Must Know') throw new Error('Tier-0 confirmation was incorrectly downgraded.');
+          if (unverified.intelligence.classification !== 'Watch') throw new Error('Single-source Must Know was not downgraded.');
+          if (!confirmed.evidenceChain?.chainHash || confirmed.evidenceChain?.tier0EvidenceCount !== 1) throw new Error('Evidence chain is incomplete.');
+          const summary = summarizeEvidenceChains([confirmed, unverified]);
+          if (summary.confirmedEvents !== 1 || summary.singleSourceEvents !== 1) throw new Error(JSON.stringify(summary));
+          console.log(JSON.stringify(summary, null, 2));
+          NODE
+
+      - name: Verify the live scan applies evidence before publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'applyEvidencePolicy(event, cluster' api/scan.js
+          grep -q 'evidence: evidenceSummary' api/scan.js
+          grep -q "serviceVersion: '6.0.0'" api/scan.js
+
+      - name: Refuse promotion if main moved outside candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after the candidate branch was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Commit verified integration and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add lib/evidence-chain.mjs lib/evidence-policy.mjs tests/evidence-chain.test.mjs tests/evidence-policy.test.mjs api/scan.js package.json CHANGELOG.md
+          git rm -f .build/evidence-chain-v6.0.ready scripts/apply-evidence-chain-v6.0.mjs .github/workflows/apply-evidence-chain-v6-0.yml
+          git commit -m 'Add claim-level evidence chains and fail-closed publication policy'
+          git push origin HEAD:sol/evidence-chain-v6-0
+          git push origin HEAD:main
