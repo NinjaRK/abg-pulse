@@ -1,0 +1,46 @@
+name: Promote verified persistence orchestration v5.4
+
+on:
+  push:
+    branches:
+      - sol/persistence-orchestration-v5-4
+    paths:
+      - 'api/cron-scan.js'
+      - 'tests/cron-scan.test.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconcile with current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git fetch origin main
+          git merge --no-edit origin/main
+      - name: Run full release gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+          node -e "const v=require('./vercel.json'); if(!v.crons?.some(c=>c.path==='/api/cron-scan')) process.exit(1); console.log('Cron configuration verified')"
+      - name: Remove one-time generators and promote exact tested tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm -f .github/workflows/apply-persistence-orchestration-v5-4.yml .github/workflows/promote-persistence-orchestration-v5-4.yml || true
+          if ! git diff --cached --quiet; then git commit -m 'Finalize persistence orchestration v5.4 release'; fi
+          git push origin HEAD:main
