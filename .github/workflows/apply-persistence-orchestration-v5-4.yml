@@ -1,0 +1,293 @@
+name: Apply persistence orchestration v5.4
+
+on:
+  push:
+    branches:
+      - sol/persistence-orchestration-v5-4
+    paths:
+      - '.github/workflows/apply-persistence-orchestration-v5-4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build safe scheduled-scan orchestration
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json, textwrap
+
+          endpoint = r'''
+          const HOUR = 60 * 60 * 1000;
+
+          function send(res, status, body) {
+            res.statusCode = status;
+            res.setHeader('Content-Type', 'application/json; charset=utf-8');
+            res.setHeader('Cache-Control', 'no-store');
+            res.end(JSON.stringify(body));
+          }
+
+          function firstHeader(req, name) {
+            const value = req?.headers?.[name] ?? req?.headers?.[name.toLowerCase()];
+            return Array.isArray(value) ? value[0] : value;
+          }
+
+          function baseUrl(req) {
+            const host = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL || firstHeader(req, 'host');
+            if (!host) throw new Error('deployment_host_unavailable');
+            return host.startsWith('http') ? host.replace(/\/$/, '') : `https://${host.replace(/\/$/, '')}`;
+          }
+
+          function missingConfiguration() {
+            return [
+              !process.env.CRON_SECRET && 'CRON_SECRET',
+              !process.env.INGEST_SECRET && 'INGEST_SECRET',
+              !process.env.SUPABASE_URL && 'SUPABASE_URL',
+              !process.env.SUPABASE_SERVICE_ROLE_KEY && 'SUPABASE_SERVICE_ROLE_KEY'
+            ].filter(Boolean);
+          }
+
+          function authorised(req) {
+            const supplied = firstHeader(req, 'authorization');
+            return Boolean(process.env.CRON_SECRET && supplied === `Bearer ${process.env.CRON_SECRET}`);
+          }
+
+          export default async function handler(req, res) {
+            if (req.method !== 'GET') return send(res, 405, { status: 'rejected', error: 'method_not_allowed' });
+
+            const missing = missingConfiguration();
+            if (missing.length) {
+              return send(res, 200, {
+                status: 'not_configured',
+                ran: false,
+                missing,
+                message: 'Scheduled ingestion remains dormant until its server-side secrets and persistent database are connected.'
+              });
+            }
+
+            if (!authorised(req)) return send(res, 401, { status: 'rejected', error: 'unauthorised_cron_request' });
+
+            const end = new Date();
+            const start = new Date(end.getTime() - 2 * HOUR);
+            const origin = baseUrl(req);
+            const scanUrl = `${origin}/api/scan?start=${encodeURIComponent(start.toISOString())}&end=${encodeURIComponent(end.toISOString())}`;
+
+            try {
+              const scanResponse = await fetch(scanUrl, {
+                headers: { Accept: 'application/json', 'User-Agent': 'ABGPulse-Cron/5.4' }
+              });
+              const scanText = await scanResponse.text();
+              if (!scanResponse.ok) throw new Error(`scan_failed_${scanResponse.status}: ${scanText.slice(0, 400)}`);
+
+              let scan;
+              try { scan = JSON.parse(scanText); } catch { throw new Error('scan_returned_invalid_json'); }
+              if (!Array.isArray(scan.events) || !scan.meta) throw new Error('scan_contract_invalid');
+
+              const idempotencyKey = `scheduled-${String(scan.meta.scannedAt || end.toISOString()).slice(0, 16)}`;
+              const ingestResponse = await fetch(`${origin}/api/ingest`, {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${process.env.INGEST_SECRET}`,
+                  'X-Ingest-Secret': process.env.INGEST_SECRET,
+                  'X-ABG-Pulse-Ingest-Secret': process.env.INGEST_SECRET,
+                  'X-Idempotency-Key': idempotencyKey,
+                  'User-Agent': 'ABGPulse-Cron/5.4'
+                },
+                body: JSON.stringify({
+                  events: scan.events,
+                  meta: scan.meta,
+                  sourceChecks: scan.meta.sourceChecks || [],
+                  scannedAt: scan.meta.scannedAt || end.toISOString(),
+                  idempotencyKey
+                })
+              });
+              const ingestText = await ingestResponse.text();
+              if (!ingestResponse.ok) throw new Error(`ingest_failed_${ingestResponse.status}: ${ingestText.slice(0, 400)}`);
+
+              let ingest = {};
+              try { ingest = JSON.parse(ingestText); } catch { ingest = { raw: ingestText.slice(0, 400) }; }
+              return send(res, 200, {
+                status: 'ok',
+                ran: true,
+                scannedAt: scan.meta.scannedAt,
+                windowStart: scan.meta.windowStart,
+                windowEnd: scan.meta.windowEnd,
+                checksAttempted: scan.meta.queryCount,
+                checksSucceeded: scan.meta.successfulQueries,
+                eventsFound: scan.events.length,
+                idempotencyKey,
+                ingest
+              });
+            } catch (error) {
+              return send(res, 502, {
+                status: 'failed',
+                ran: true,
+                error: String(error?.message || error),
+                time: new Date().toISOString()
+              });
+            }
+          }
+          '''
+          Path('api/cron-scan.js').write_text(textwrap.dedent(endpoint).lstrip())
+
+          tests = r'''
+          import test from 'node:test';
+          import assert from 'node:assert/strict';
+          import handler from '../api/cron-scan.js';
+
+          function responseCapture() {
+            return {
+              statusCode: 0,
+              headers: {},
+              body: '',
+              setHeader(name, value) { this.headers[name] = value; },
+              end(value) { this.body = String(value || ''); }
+            };
+          }
+
+          function saveEnv() {
+            return { ...process.env };
+          }
+
+          function restoreEnv(saved) {
+            for (const key of Object.keys(process.env)) if (!(key in saved)) delete process.env[key];
+            Object.assign(process.env, saved);
+          }
+
+          test('scheduled ingestion remains safely dormant before configuration', async () => {
+            const saved = saveEnv();
+            try {
+              delete process.env.CRON_SECRET;
+              delete process.env.INGEST_SECRET;
+              delete process.env.SUPABASE_URL;
+              delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+              const res = responseCapture();
+              await handler({ method: 'GET', headers: { host: 'example.test' } }, res);
+              const body = JSON.parse(res.body);
+              assert.equal(res.statusCode, 200);
+              assert.equal(body.status, 'not_configured');
+              assert.equal(body.ran, false);
+              assert.ok(body.missing.includes('CRON_SECRET'));
+            } finally { restoreEnv(saved); }
+          });
+
+          test('configured scheduled ingestion rejects the wrong bearer secret', async () => {
+            const saved = saveEnv();
+            try {
+              process.env.CRON_SECRET = 'correct';
+              process.env.INGEST_SECRET = 'ingest';
+              process.env.SUPABASE_URL = 'https://db.test';
+              process.env.SUPABASE_SERVICE_ROLE_KEY = 'role';
+              const res = responseCapture();
+              await handler({ method: 'GET', headers: { authorization: 'Bearer wrong', host: 'example.test' } }, res);
+              assert.equal(res.statusCode, 401);
+              assert.equal(JSON.parse(res.body).error, 'unauthorised_cron_request');
+            } finally { restoreEnv(saved); }
+          });
+
+          test('configured scheduled ingestion scans then submits an idempotent payload', async () => {
+            const saved = saveEnv();
+            const originalFetch = global.fetch;
+            try {
+              process.env.CRON_SECRET = 'correct';
+              process.env.INGEST_SECRET = 'ingest';
+              process.env.SUPABASE_URL = 'https://db.test';
+              process.env.SUPABASE_SERVICE_ROLE_KEY = 'role';
+              process.env.VERCEL_PROJECT_PRODUCTION_URL = 'pulse.test';
+              const calls = [];
+              global.fetch = async (url, options = {}) => {
+                calls.push({ url: String(url), options });
+                if (String(url).includes('/api/scan')) return new Response(JSON.stringify({ events: [{ id: 'event-1' }], meta: { scannedAt: '2026-09-04T05:30:00.000Z', windowStart: 'a', windowEnd: 'b', queryCount: 10, successfulQueries: 9, sourceChecks: [] } }), { status: 200 });
+                return new Response(JSON.stringify({ stored: 1 }), { status: 200 });
+              };
+              const res = responseCapture();
+              await handler({ method: 'GET', headers: { authorization: 'Bearer correct', host: 'ignored.test' } }, res);
+              const body = JSON.parse(res.body);
+              assert.equal(res.statusCode, 200);
+              assert.equal(body.status, 'ok');
+              assert.equal(calls.length, 2);
+              assert.match(calls[0].url, /^https:\/\/pulse\.test\/api\/scan/);
+              assert.equal(calls[1].options.headers['X-Ingest-Secret'], 'ingest');
+              assert.match(calls[1].options.headers['X-Idempotency-Key'], /^scheduled-/);
+              assert.equal(JSON.parse(calls[1].options.body).events.length, 1);
+            } finally {
+              global.fetch = originalFetch;
+              restoreEnv(saved);
+            }
+          });
+          '''
+          Path('tests/cron-scan.test.mjs').write_text(textwrap.dedent(tests).lstrip())
+
+          vercel_path = Path('vercel.json')
+          vercel = json.loads(vercel_path.read_text())
+          vercel.setdefault('functions', {})['api/cron-scan.js'] = { 'maxDuration': 60 }
+          crons = [item for item in vercel.get('crons', []) if item.get('path') != '/api/cron-scan']
+          crons.append({ 'path': '/api/cron-scan', 'schedule': '7 * * * *' })
+          vercel['crons'] = crons
+          vercel_path.write_text(json.dumps(vercel, indent=2) + '\n')
+
+          env_path = Path('.env.example')
+          env = env_path.read_text() if env_path.exists() else ''
+          if 'CRON_SECRET=' not in env:
+            env += '\n# Vercel Cron authenticates scheduled ingestion with this bearer secret.\nCRON_SECRET=replace-with-a-separate-long-random-secret\n'
+          env_path.write_text(env.lstrip())
+
+          pkg_path = Path('package.json')
+          pkg = json.loads(pkg_path.read_text())
+          check = pkg['scripts'].get('check', '')
+          if 'api/cron-scan.js' not in check:
+            check += ' && node --check api/cron-scan.js'
+          pkg['scripts']['check'] = check
+          pkg['version'] = '5.4.0'
+          pkg_path.write_text(json.dumps(pkg, indent=2) + '\n')
+
+          docs = '''# Scheduled ingestion\n\nABG Pulse can run a secure hourly overlap scan using Vercel Cron. The endpoint is dormant and performs no external work until `CRON_SECRET`, `INGEST_SECRET`, `SUPABASE_URL`, and `SUPABASE_SERVICE_ROLE_KEY` are configured server-side.\n\nOnce configured, each run scans a two-hour overlap window and sends an idempotency key to the existing ingest endpoint. Source failures remain visible in the stored scan metadata. No secret is committed to this public repository.\n'''
+          Path('docs/SCHEDULED_INGESTION.md').write_text(docs)
+
+          release = {
+            'version': '5.4.0',
+            'releaseId': 'persistence-orchestration-2026-09-04',
+            'title': 'Secure scheduled scan-to-ingest orchestration',
+            'state': 'dormant-until-database-and-secrets-connected'
+          }
+          Path('data/release.json').write_text(json.dumps(release, indent=2) + '\n')
+
+          changelog_path = Path('CHANGELOG.md')
+          changelog = changelog_path.read_text()
+          entry = '''\n## 5.4.0 — persistence orchestration\n\n- Added a secure Vercel Cron scan-to-ingest endpoint.\n- Added idempotent two-hour overlap scanning for missed-window resilience.\n- Kept automation dormant until server-side database and secrets are connected.\n- Added deterministic authentication, configuration and orchestration tests.\n'''
+          if '## 5.4.0' not in changelog:
+            changelog_path.write_text(changelog.rstrip() + '\n' + entry)
+          PY
+
+      - name: Run complete release gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Commit verified implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add api/cron-scan.js tests/cron-scan.test.mjs vercel.json .env.example package.json docs/SCHEDULED_INGESTION.md data/release.json CHANGELOG.md
+          git commit -m 'Add secure scheduled scan-to-ingest orchestration'
+          git push origin HEAD:sol/persistence-orchestration-v5-4
