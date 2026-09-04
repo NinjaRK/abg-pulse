@@ -1,0 +1,57 @@
+name: Apply ABG Pulse objective v6
+
+on:
+  push:
+    branches: [sol/objective-milestones-v6]
+    paths:
+      - '.bootstrap/objective-v6.ready'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out objective branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct and verify objective patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/objective-v6.patch.gz.b64.* > /tmp/objective-v6.patch.gz.b64
+          echo 'cf3403761d3cace7553a9966b010665a56867485a8d51778dddf1fe4b87cce41  /tmp/objective-v6.patch.gz.b64' | sha256sum -c -
+          base64 --decode /tmp/objective-v6.patch.gz.b64 > /tmp/objective-v6.patch.gz
+          gzip -dc /tmp/objective-v6.patch.gz > /tmp/objective-v6.patch
+          echo '7de2231a659780c41835ae1f97c3d8f2f7ebbfc77c9ffc3bda1aba1c25579375  /tmp/objective-v6.patch' | sha256sum -c -
+          git apply --check /tmp/objective-v6.patch
+          git apply /tmp/objective-v6.patch
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run all objective gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Commit verified objective build
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .bootstrap/objective-v6.ready .bootstrap/objective-v6.patch.gz.b64.*
+          rm -f .github/workflows/apply-objective-v6.yml
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'Build objective-led milestones, dual Job Meter and governed snapshots'
+          git push origin HEAD:sol/objective-milestones-v6
