@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "sourceId": "bse-corporate-announcements",
+  "tier": "tier0",
+  "authority": "exchange",
+  "rightsStatus": "metadata-and-link",
+  "cadence": "on-demand",
+  "endpoint": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+  "referer": "https://www.bseindia.com/corporates/ann.html",
+  "maxPages": 5,
+  "instruments": [
+    { "scripCode": "500300", "symbol": "GRASIM", "companyContains": "Grasim Industries", "enabled": true },
+    { "scripCode": "500440", "symbol": "HINDALCO", "companyContains": "Hindalco Industries", "enabled": true },
+    { "scripCode": "532538", "symbol": "ULTRACEMCO", "companyContains": "UltraTech Cement", "enabled": true },
+    { "scripCode": "540691", "symbol": "ABCAPITAL", "companyContains": "Aditya Birla Capital", "enabled": true },
+    { "scripCode": "535755", "symbol": "ABFRL", "companyContains": "Aditya Birla Fashion and Retail", "enabled": true },
+    { "scripCode": "532822", "symbol": "IDEA", "companyContains": "Vodafone Idea", "enabled": true },
+    { "scripCode": "543374", "symbol": "ABSLAMC", "companyContains": "Aditya Birla Sun Life AMC", "enabled": true },
+    { "scripCode": "532974", "symbol": "BIRLAMONEY", "companyContains": "Aditya Birla Money", "enabled": true },
+    { "scripCode": "539883", "symbol": "PILANIINVS", "companyContains": "Pilani Investment", "enabled": true },
+    { "scripCode": "506854", "symbol": "TANFACIND", "companyContains": "Tanfac Industries", "enabled": true }
+  ]
+}
