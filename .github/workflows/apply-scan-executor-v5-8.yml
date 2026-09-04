@@ -1,0 +1,86 @@
+name: Apply and promote ABG Pulse scan executor v5.8
+
+on:
+  push:
+    branches:
+      - sol/scan-executor-v5-8
+    paths:
+      - '.build/scan-executor-v5.8.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Apply deterministic scan-executor integration patch
+        run: node scripts/apply-scan-executor-v5.8.mjs
+
+      - name: Install without bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run full product verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+          node --input-type=module <<'NODE'
+          import { executeJobs } from './lib/job-executor.mjs';
+          const execution = await executeJobs([
+            { id: 'fast', run: async () => ['ok'] },
+            { id: 'flaky', run: async () => { throw new Error('deterministic schema failure'); } }
+          ], { concurrency: 2, timeoutMs: 1000, maxAttempts: 2, deadlineMs: 5000 });
+          if (execution.results.length !== 2) throw new Error('Executor result count mismatch.');
+          if (execution.results[0].status !== 'fulfilled') throw new Error('Healthy source was not fulfilled.');
+          if (execution.results[1].attempts !== 1) throw new Error('Deterministic failure was incorrectly retried.');
+          if (execution.meta.fulfilled + execution.meta.rejected !== execution.meta.jobs) throw new Error('Executor accounting mismatch.');
+          console.log(JSON.stringify(execution.meta, null, 2));
+          NODE
+
+      - name: Confirm production function budget was expanded safely
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const config = JSON.parse(readFileSync('vercel.json', 'utf8'));
+          if (config?.functions?.['api/scan.js']?.maxDuration !== 60) {
+            throw new Error('Production scan maxDuration must be exactly 60 seconds.');
+          }
+          const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
+          if (packageJson.version !== '5.8.0') throw new Error(`Unexpected package version: ${packageJson.version}`);
+          NODE
+
+      - name: Refuse promotion if main moved outside candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after the candidate branch was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Commit verified integration and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add lib/job-executor.mjs tests/job-executor.test.mjs api/scan.js lib/tier0-ingestion.mjs package.json vercel.json
+          git rm -f .build/scan-executor-v5.8.ready scripts/apply-scan-executor-v5.8.mjs .github/workflows/apply-scan-executor-v5-8.yml
+          git commit -m 'Add bounded concurrent scan execution and source timing evidence'
+          git push origin HEAD:sol/scan-executor-v5-8
+          git push origin HEAD:main
