@@ -1,0 +1,223 @@
+name: Verify exact ABG Pulse production release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/**'
+      - 'lib/**'
+      - 'config/**'
+      - 'data/**'
+      - 'index.html'
+      - 'deploy-index.html'
+      - 'app.js'
+      - 'styles.css'
+      - 'vercel.json'
+      - 'package.json'
+      - '.github/workflows/verify-production-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-exact-production-release
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
+      EXPECTED_SHA: ${{ github.sha }}
+    steps:
+      - name: Wait for the exact Git commit to reach production
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          for attempt in $(seq 1 36); do
+            home_code=$(curl -L -sS --max-time 25 -o evidence/home.html -w '%{http_code}' "$PRODUCTION_URL" || true)
+            health_code=$(curl -L -sS --max-time 25 -o evidence/health.json -w '%{http_code}' "$PRODUCTION_URL/api/health" || true)
+            deployed_sha=$(node --input-type=module -e "
+              import { readFileSync } from 'node:fs';
+              try {
+                const payload = JSON.parse(readFileSync('evidence/health.json', 'utf8'));
+                process.stdout.write(payload?.deployment?.commitSha || '');
+              } catch { process.stdout.write(''); }
+            " || true)
+            if [ "$home_code" = "200" ] \
+              && grep -qi 'ABG Pulse' evidence/home.html \
+              && [ "$health_code" = "200" ] \
+              && [ "$deployed_sha" = "$EXPECTED_SHA" ]; then
+              echo "Exact production commit $EXPECTED_SHA is live on attempt $attempt."
+              exit 0
+            fi
+            echo "Attempt $attempt: home=$home_code health=$health_code deployed=${deployed_sha:-missing} expected=$EXPECTED_SHA"
+            sleep 15
+          done
+          echo 'Exact production commit did not become healthy within the release window.'
+          cat evidence/health.json 2>/dev/null || true
+          exit 1
+
+      - name: Capture every trust endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 120 "$PRODUCTION_URL/api/scan" -o evidence/scan.json
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 60 "$PRODUCTION_URL/api/coverage" -o evidence/coverage.json
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 60 "$PRODUCTION_URL/api/dependability" -o evidence/dependability.json
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 60 "$PRODUCTION_URL/api/source-health" -o evidence/source-health.json
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 60 "$PRODUCTION_URL/api/progress" -o evidence/progress.json
+
+      - name: Verify governed universe and deployment provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const health = JSON.parse(readFileSync('evidence/health.json', 'utf8'));
+          const actual = health?.entityUniverse?.actual || {};
+          if (health?.deployment?.commitSha !== process.env.EXPECTED_SHA) throw new Error('Production commit provenance mismatch.');
+          if (health?.entityUniverse?.reconciled !== true) throw new Error('Official entity universe is not reconciled.');
+          if (actual.officialCompanies !== 42) throw new Error(`Expected 42 official companies; received ${actual.officialCompanies}`);
+          if (actual.officialLeadership !== 40) throw new Error(`Expected 40 official leadership entries; received ${actual.officialLeadership}`);
+          if (actual.totalEntities < 192) throw new Error(`Governed entity graph regressed to ${actual.totalEntities}`);
+          console.log(JSON.stringify({ deployment: health.deployment, entityUniverse: actual }, null, 2));
+          NODE
+
+      - name: Verify discovery, Tier-0 and source-health instrumentation
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const scan = JSON.parse(readFileSync('evidence/scan.json', 'utf8'));
+          const meta = scan?.meta || {};
+          if (meta.serviceVersion !== '6.0.0') throw new Error(`Expected scan service 6.0.0; received ${meta.serviceVersion}`);
+          if (!Array.isArray(meta.sourceChecks) || meta.sourceChecks.length < 1) throw new Error('Source-health detail is absent.');
+          if (!Number.isFinite(meta.queryCount) || meta.queryCount < 1) throw new Error('No source checks were attempted.');
+          if (!meta.queryPlan || !Object.values(meta.queryPlan.gates || {}).every(Boolean)) throw new Error('Entity-complete query-plan gates failed.');
+          if (meta.tier0?.validation?.valid !== true) throw new Error('NSE/SEC Tier-0 configuration failed validation.');
+          if (meta.bse?.validation?.valid !== true) throw new Error('BSE Tier-0 configuration failed validation.');
+          if ((meta.tier0?.configuredJobs || 0) < 11) throw new Error('Expected at least 11 NSE/SEC Tier-0 jobs.');
+          if ((meta.bse?.configuredJobs || 0) < 10) throw new Error('Expected at least 10 BSE Tier-0 jobs.');
+          if (!meta.execution || meta.execution.jobs !== meta.sourceChecks.length) throw new Error('Scan-executor accounting is inconsistent.');
+          if (meta.execution.fulfilled + meta.execution.rejected !== meta.execution.jobs) throw new Error('Scan-executor results do not balance.');
+          if (!Number.isFinite(meta.execution.durationMs)) throw new Error('Scan duration is not measured.');
+          if (meta.sourceChecks.some((check) => !Number.isFinite(Number(check.attempts)) || !('durationMs' in check))) throw new Error('Per-source execution evidence is incomplete.');
+          if (!meta.sourceHealth?.summary || !meta.sourceHealth?.gates) throw new Error('Source-health summary is absent.');
+          console.log(JSON.stringify({
+            serviceVersion: meta.serviceVersion,
+            checks: meta.queryCount,
+            successful: meta.successfulQueries,
+            execution: meta.execution,
+            tier0: meta.sourceHealth.summary,
+            queryPlan: meta.queryPlan.summary
+          }, null, 2));
+          NODE
+
+      - name: Verify claim-level evidence and fail-closed publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const scan = JSON.parse(readFileSync('evidence/scan.json', 'utf8'));
+          const events = scan.events || [];
+          const evidence = scan?.meta?.evidence;
+          if (!evidence || evidence.events !== events.length) throw new Error('Evidence summary does not reconcile with event count.');
+          for (const event of events) {
+            const chain = event.evidenceChain;
+            if (!chain || !chain.chainHash || !chain.evidenceHash) throw new Error(`Event ${event.id} has no auditable evidence chain.`);
+            if (!Array.isArray(chain.evidence) || chain.evidence.length < 1) throw new Error(`Event ${event.id} has no evidence record.`);
+            if (!Array.isArray(chain.claimGroups) || !event.evidencePolicy) throw new Error(`Event ${event.id} has no claim policy.`);
+            const bucket = String(event?.intelligence?.classification || event.classification || '').toLowerCase().replace(/[^a-z]/g, '');
+            if (bucket === 'mustknow' && event.evidencePolicy.mustKnowEligible !== true) throw new Error(`Unverified event ${event.id} entered Must Know.`);
+            if (bucket === 'mustknow' && event.evidencePolicy.disputed === true) throw new Error(`Disputed event ${event.id} entered Must Know.`);
+          }
+          if ((evidence.unsupportedMaterialClaims || 0) > 0 && events.some((event) => {
+            const bucket = String(event?.intelligence?.classification || event.classification || '').toLowerCase().replace(/[^a-z]/g, '');
+            return bucket === 'mustknow' && (event.evidencePolicy?.unsupportedMaterialClaimCount || 0) > 0;
+          })) throw new Error('Must Know contains an unsupported material claim.');
+          console.log(JSON.stringify(evidence, null, 2));
+          NODE
+
+      - name: Verify noise controls remain effective
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const scan = JSON.parse(readFileSync('evidence/scan.json', 'utf8'));
+          const events = scan.events || [];
+          const stockNoise = /buy call|sell call|target price|stock recommendation|multibagger|share price target|top stocks? to buy/i;
+          const bad = events.filter((event) => stockNoise.test(`${event.title || ''} ${event.summary || ''}`));
+          if (bad.length) throw new Error(`Generic stock-tip events leaked into production: ${bad.map((event) => event.id).join(', ')}`);
+          const publicOnly = events.filter((event) => {
+            const evidence = event.evidenceChain?.evidence || [];
+            return evidence.length > 0 && evidence.every((item) => /reddit|public-conversation|social/i.test(`${item.channel || ''} ${item.provider || ''} ${item.domain || ''}`));
+          });
+          if (publicOnly.length) throw new Error(`Public-conversation-only events leaked into news cards: ${publicOnly.map((event) => event.id).join(', ')}`);
+          NODE
+
+      - name: Verify transparency and honest objective status
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const coverage = JSON.parse(readFileSync('evidence/coverage.json', 'utf8'));
+          const dependability = JSON.parse(readFileSync('evidence/dependability.json', 'utf8'));
+          const sourceHealth = JSON.parse(readFileSync('evidence/source-health.json', 'utf8'));
+          const progress = JSON.parse(readFileSync('evidence/progress.json', 'utf8'));
+          if (!coverage.summary || !coverage.gaps || !coverage.queryPlan) throw new Error('Coverage transparency is incomplete.');
+          if (typeof dependability.objectiveAchieved !== 'boolean') throw new Error('Dependability truth field is missing.');
+          if (dependability.objectiveAchieved === true && dependability.currentConsecutivePassDays < 30) throw new Error('Dependability was claimed before 30 passing days.');
+          if (!Number.isFinite(sourceHealth.readySourcePct)) throw new Error('Source baseline readiness is missing.');
+          if (!Number.isFinite(progress.completion) || !Array.isArray(progress.milestones)) throw new Error('Job Meter is incomplete.');
+          console.log(JSON.stringify({
+            jobMeter: progress.completion,
+            dependability: {
+              achieved: dependability.objectiveAchieved,
+              passDays: dependability.currentConsecutivePassDays,
+              remaining: dependability.daysRemaining
+            },
+            sourceLearning: {
+              status: sourceHealth.status,
+              readyPct: sourceHealth.readySourcePct
+            },
+            coverage: coverage.summary
+          }, null, 2));
+          NODE
+
+      - name: Create tamper-evident release manifest
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
+          import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+          const files = existsSync('evidence') ? readdirSync('evidence').filter((file) => file !== 'release-manifest.json') : [];
+          const manifest = {
+            verifiedAt: new Date().toISOString(),
+            productionUrl: process.env.PRODUCTION_URL,
+            expectedCommit: process.env.EXPECTED_SHA,
+            files: {}
+          };
+          for (const file of files) {
+            const content = readFileSync(`evidence/${file}`);
+            manifest.files[file] = { bytes: content.length, sha256: createHash('sha256').update(content).digest('hex') };
+          }
+          writeFileSync('evidence/release-manifest.json', `${JSON.stringify(manifest, null, 2)}\n`);
+          NODE
+
+      - name: Preserve production verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: abg-pulse-production-release-${{ github.sha }}
+          path: evidence/
+          if-no-files-found: error
+          retention-days: 90
