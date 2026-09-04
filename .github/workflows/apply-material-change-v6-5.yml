@@ -1,0 +1,188 @@
+name: Apply and promote ABG Pulse material change intelligence v6.5
+
+on:
+  push:
+    branches:
+      - sol/material-change-v6-5
+    paths:
+      - '.build/material-change-v6.5.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: abg_pulse_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d abg_pulse_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: abg_pulse_test
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Confirm persistent intelligence foundation exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f db/migrations/001_abg_pulse_core.sql
+          test -f db/test-canary-v2.sql
+          test -f lib/persistence.mjs
+          test -f api/persist.js
+          test -f api/history.js
+
+      - name: Apply deterministic material-change integration
+        run: node scripts/apply-material-change-v6.5.mjs
+
+      - name: Install without bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run full JavaScript verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Create Supabase-compatible test roles
+        shell: bash
+        run: |
+          set -euo pipefail
+          for role in anon authenticated service_role; do
+            psql -tAc "select 1 from pg_roles where rolname='${role}'" | grep -q 1 || psql -v ON_ERROR_STOP=1 -c "create role ${role} nologin;"
+          done
+
+      - name: Apply persistence and notification migrations
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f db/migrations/001_abg_pulse_core.sql
+          psql -v ON_ERROR_STOP=1 -f db/migrations/002_material_notifications.sql
+          psql -v ON_ERROR_STOP=1 -f db/test-canary-v2.sql
+
+      - name: Prove notification reservation is idempotent
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 <<'SQL'
+          create temporary table notification_change(payload jsonb not null);
+          insert into notification_change(payload) values ($change$
+          {
+            "eventId": "event-1",
+            "type": "new",
+            "score": 88,
+            "notificationEligible": true,
+            "notificationKey": "notification-key-1",
+            "alertSummary": "Canary Company announced a verified ₹1,000 crore investment.",
+            "reasons": ["new Must Know development", "new direct authoritative evidence"],
+            "signals": [{"name":"new_must_know","weight":70}],
+            "event": {"id":"event-1","title":"Canary Company announces a ₹1,000 crore investment"}
+          }
+          $change$::jsonb);
+
+          DO $verify$
+          declare
+            v_first jsonb;
+            v_second jsonb;
+            v_marked jsonb;
+          begin
+            select public.pulse_reserve_notifications(jsonb_build_array(payload), 'test-webhook') into v_first from notification_change;
+            if (v_first->>'reserved')::integer <> 1 then raise exception 'First notification reservation failed: %', v_first; end if;
+
+            select public.pulse_reserve_notifications(jsonb_build_array(payload), 'test-webhook') into v_second from notification_change;
+            if (v_second->>'reserved')::integer <> 0 or (v_second->>'duplicatesSuppressed')::integer <> 1 then
+              raise exception 'Duplicate notification was not suppressed: %', v_second;
+            end if;
+
+            select public.pulse_mark_notification('notification-key-1', 'sent', '{"statusCode":200}'::jsonb, null) into v_marked;
+            if v_marked->>'status' <> 'sent' or (v_marked->>'attemptCount')::integer <> 1 then
+              raise exception 'Delivery outcome was not recorded: %', v_marked;
+            end if;
+          end;
+          $verify$;
+          SQL
+          psql -v ON_ERROR_STOP=1 -tAc "select count(*) from public.pulse_notifications where notification_key='notification-key-1' and status='sent';" | grep -qx 1
+
+      - name: Prove non-eligible changes cannot enter the delivery ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          result=$(psql -v ON_ERROR_STOP=1 -tAc "select public.pulse_reserve_notifications('[{\"eventId\":\"event-1\",\"type\":\"material_update\",\"score\":20,\"notificationEligible\":false,\"notificationKey\":\"suppressed-key\",\"alertSummary\":\"No material change\"}]'::jsonb, 'test-webhook');")
+          echo "$result" | grep -q '"reserved": 0'
+          psql -v ON_ERROR_STOP=1 -tAc "select count(*) from public.pulse_notifications where notification_key='suppressed-key';" | grep -qx 0
+
+      - name: Verify least-privilege notification grants
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 <<'SQL'
+          DO $verify$
+          begin
+            if has_function_privilege('anon', 'public.pulse_reserve_notifications(jsonb,text)', 'EXECUTE') then raise exception 'anon can reserve notifications'; end if;
+            if has_function_privilege('authenticated', 'public.pulse_mark_notification(text,text,jsonb,text)', 'EXECUTE') then raise exception 'authenticated can mark notifications'; end if;
+            if not has_function_privilege('service_role', 'public.pulse_recent_notification_keys(integer)', 'EXECUTE') then raise exception 'service_role cannot read notification keys'; end if;
+          end;
+          $verify$;
+          SQL
+
+      - name: Verify the n8n workflow is silent unless material
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const workflow = JSON.parse(readFileSync('n8n/material-change-alerts.json', 'utf8'));
+          const serialized = JSON.stringify(workflow).toLowerCase();
+          if (workflow.active !== false) throw new Error('Workflow must remain inactive until authorised infrastructure is connected.');
+          if (/gmail|outlook|imap|smtp/.test(serialized)) throw new Error('Email dependency leaked into the alert workflow.');
+          const names = new Set(workflow.nodes.map((node) => node.name));
+          for (const name of ['Evaluate material changes','Persist current scan','Reserve unseen notifications','Deliver alert webhook','Record delivery outcome','No notification required']) {
+            if (!names.has(name)) throw new Error(`Missing n8n node: ${name}`);
+          }
+          NODE
+
+      - name: Refuse promotion if main moved outside candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after this candidate was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Commit verified material-change system and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add lib/material-change.mjs tests/material-change.test.mjs api/material-changes.js db/migrations/002_material_notifications.sql api/notifications.js n8n/material-change-alerts.json tests/n8n-alert-workflow.test.mjs docs/NOTIFICATIONS.md api/persist.js api/corrections.js api/health.js package.json vercel.json data/release.json .github/workflows/verify-production-release.yml CHANGELOG.md
+          git rm -f .build/material-change-v6.5.ready scripts/apply-material-change-v6.5.mjs .github/workflows/apply-material-change-v6-5.yml
+          git commit -m 'Add silent-unless-material notification intelligence'
+          git push origin HEAD:sol/material-change-v6-5
+          git push origin HEAD:main
