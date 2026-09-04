@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4efe8">
+  <meta name="description" content="ABG Pulse trust, coverage and dependability status at a glance.">
+  <title>ABG Pulse — Trust Centre</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --canvas: #f4efe8;
+      --paper: #fffdf9;
+      --ink: #27211f;
+      --muted: #6f6660;
+      --line: #ddd2c7;
+      --brand: #733148;
+      --brand-soft: #f1e2e7;
+      --good: #256b58;
+      --good-soft: #e4f1ec;
+      --watch: #9a651d;
+      --watch-soft: #f7ecd8;
+      --risk: #a53d36;
+      --risk-soft: #f8e2df;
+      --unknown: #6f6660;
+      --unknown-soft: #eee9e4;
+      --shadow: 0 18px 55px rgba(50, 38, 32, .08);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--canvas); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 90% 5%, rgba(115, 49, 72, .08), transparent 28rem),
+        var(--canvas);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    button, a { font: inherit; }
+    a { color: inherit; }
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 26px 0 64px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 34px; }
+    .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+    .mark {
+      width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+      background: var(--brand); color: white; font-weight: 800; letter-spacing: -.03em;
+      box-shadow: 0 8px 20px rgba(115,49,72,.2);
+    }
+    .brand-copy strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 24px; line-height: 1; }
+    .brand-copy small { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .16em; margin-top: 5px; font-weight: 750; }
+    .top-actions { display: flex; gap: 10px; }
+    .button {
+      min-height: 44px; border: 1px solid var(--line); border-radius: 13px; padding: 0 16px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: rgba(255,253,249,.82); color: var(--ink); text-decoration: none; font-weight: 750;
+      cursor: pointer; transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 7px 18px rgba(50,38,32,.08); }
+    .button.primary { background: var(--brand); color: white; border-color: var(--brand); }
+    .button:focus-visible, summary:focus-visible, a:focus-visible { outline: 3px solid rgba(115,49,72,.32); outline-offset: 3px; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr); gap: 22px; align-items: stretch; }
+    .hero-card, .card {
+      background: rgba(255,253,249,.94); border: 1px solid rgba(215,203,193,.92);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .hero-card { padding: clamp(25px, 5vw, 46px); }
+    .eyebrow { color: var(--brand); font-size: 12px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 14px; }
+    h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(38px, 6vw, 68px); line-height: .98; letter-spacing: -.045em; max-width: 780px; }
+    .lede { margin: 21px 0 0; color: var(--muted); font-size: clamp(17px, 2vw, 21px); max-width: 760px; }
+    .verdict-card { padding: 26px; display: flex; flex-direction: column; justify-content: space-between; }
+    .status-row { display: flex; align-items: center; gap: 10px; }
+    .status-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--unknown); box-shadow: 0 0 0 6px var(--unknown-soft); }
+    .status-dot.good { background: var(--good); box-shadow: 0 0 0 6px var(--good-soft); }
+    .status-dot.watch { background: var(--watch); box-shadow: 0 0 0 6px var(--watch-soft); }
+    .status-dot.risk { background: var(--risk); box-shadow: 0 0 0 6px var(--risk-soft); }
+    .status-label { font-weight: 850; }
+    .verdict { margin: 32px 0 0; }
+    .verdict strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 34px; line-height: 1.04; letter-spacing: -.025em; }
+    .verdict p { color: var(--muted); margin: 11px 0 0; }
+    .timestamp { margin-top: 28px; font-size: 12px; color: var(--muted); }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+    .metric { background: rgba(255,253,249,.94); border: 1px solid var(--line); border-radius: 18px; padding: 19px; min-height: 152px; }
+    .metric-top { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
+    .metric-label { color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .metric-value { font-family: Georgia, "Times New Roman", serif; font-size: 38px; line-height: 1; margin-top: 24px; letter-spacing: -.025em; }
+    .metric-note { color: var(--muted); font-size: 13px; margin-top: 10px; }
+    .info {
+      border: 0; background: var(--unknown-soft); color: var(--muted); width: 24px; height: 24px;
+      border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 900; cursor: help;
+    }
+    .section { margin-top: 42px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 15px; }
+    .section-heading h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(28px, 4vw, 40px); letter-spacing: -.03em; line-height: 1.04; }
+    .section-heading p { margin: 0; color: var(--muted); max-width: 600px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card { padding: 24px; box-shadow: 0 10px 35px rgba(50,38,32,.055); }
+    .card h3 { margin: 0; font-size: 17px; }
+    .card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 850; background: var(--unknown-soft); color: var(--unknown); }
+    .pill.good { background: var(--good-soft); color: var(--good); }
+    .pill.watch { background: var(--watch-soft); color: var(--watch); }
+    .pill.risk { background: var(--risk-soft); color: var(--risk); }
+    .progress { height: 9px; background: var(--unknown-soft); border-radius: 99px; overflow: hidden; margin-top: 18px; }
+    .progress > span { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--brand); transition: width .55s ease; }
+    .kv { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(221,210,199,.72); }
+    .kv:last-child { border-bottom: 0; padding-bottom: 0; }
+    .kv span { color: var(--muted); }
+    .kv strong { text-align: right; }
+    details { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 15px; }
+    summary { color: var(--brand); font-weight: 800; cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 7px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+"; width: 21px; height: 21px; border-radius: 50%; background: var(--brand-soft); display: grid; place-items: center; }
+    details[open] summary::before { content: "−"; }
+    details p, details li { color: var(--muted); font-size: 14px; }
+    .gap-list { display: grid; gap: 10px; margin-top: 17px; }
+    .gap { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 13px; border-radius: 14px; background: var(--watch-soft); }
+    .gap .dot { width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: var(--watch); }
+    .gap strong { font-size: 14px; }
+    .gap small { color: var(--muted); display: block; margin-top: 3px; }
+    .gap em { color: var(--watch); font-style: normal; font-size: 12px; font-weight: 850; }
+    .source-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    .source-table th, .source-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); font-size: 14px; vertical-align: top; }
+    .source-table th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+    .source-table td:last-child, .source-table th:last-child { text-align: right; }
+    .empty { border: 1px dashed var(--line); padding: 18px; border-radius: 14px; color: var(--muted); margin-top: 14px; }
+    .error-box { margin-top: 22px; background: var(--risk-soft); color: var(--risk); border: 1px solid rgba(165,61,54,.22); padding: 16px; border-radius: 14px; display: none; }
+    .footer { margin-top: 44px; color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    .skeleton { color: transparent !important; border-radius: 7px; background: linear-gradient(90deg, #eee7e0 20%, #f8f3ed 45%, #eee7e0 70%); background-size: 300% 100%; animation: shimmer 1.2s infinite; }
+    @keyframes shimmer { to { background-position: -150% 0; } }
+    @media (max-width: 860px) {
+      .hero, .two-col { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: 1fr 1fr; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 20px, 1180px); padding-top: 14px; }
+      .topbar { margin-bottom: 22px; }
+      .brand-copy small { display: none; }
+      .top-actions .button:first-child { display: none; }
+      .hero-card, .verdict-card, .card { border-radius: 18px; }
+      .hero-card { padding: 26px 21px; }
+      .verdict-card, .card { padding: 20px; }
+      .metric-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .metric { min-height: 140px; padding: 15px; }
+      .metric-value { font-size: 33px; }
+      .source-table th:nth-child(2), .source-table td:nth-child(2) { display: none; }
+      .gap { grid-template-columns: 8px minmax(0, 1fr); }
+      .gap em { grid-column: 2; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Back to ABG Pulse">
+        <span class="mark" aria-hidden="true">ABG</span>
+        <span class="brand-copy"><strong>ABG Pulse</strong><small>Corporate intelligence</small></span>
+      </a>
+      <nav class="top-actions" aria-label="Trust Centre actions">
+        <a class="button" href="/">Today’s brief</a>
+        <button class="button primary" id="refresh" type="button">Refresh status</button>
+      </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-card">
+        <div class="eyebrow">Trust Centre</div>
+        <h1 id="page-title">Can I trust today’s brief?</h1>
+        <p class="lede">One place to see what is working, what remains unproven, which sources failed, and how close ABG Pulse is to its full objective.</p>
+      </div>
+      <aside class="hero-card verdict-card" aria-live="polite">
+        <div class="status-row"><span class="status-dot" id="verdict-dot"></span><span class="status-label" id="verdict-label">Checking evidence…</span></div>
+        <div class="verdict">
+          <strong id="verdict-title">Please wait</strong>
+          <p id="verdict-copy">Reading production health, coverage, source and dependability evidence.</p>
+        </div>
+        <div class="timestamp" id="checked-at">Not checked yet</div>
+      </aside>
+    </section>
+
+    <div class="metric-grid" aria-label="Trust summary">
+      <article class="metric">
+        <div class="metric-top"><span class="metric-label">Objective complete</span><button class="info" type="button" title="Yes only after all product gates and the 30-day dependability proof pass." aria-label="Explain objective completion">?</button></div>
+        <div class="metric-value skeleton" id="objective">No</div>
+        <div class="metric-note" id="objective-note">Evidence gate</div>
+      </article>
+      <article class="metric">
+        <div class="metric-top"><span class="metric-label">Job Meter</span><button class="info" type="button" title="Evidence-weighted progress. Designed but unconnected work does not count as complete." aria-label="Explain Job Meter">?</button></div>
+        <div class="metric-value skeleton" id="job-meter">—%</div>
+        <div class="metric-note">Verified build progress</div>
+      </article>
+      <article class="metric">
+        <div class="metric-top"><span class="metric-label">Source health</span><button class="info" type="button" title="Share of sources whose operating baselines are mature enough to detect abnormal silence. This is not recall." aria-label="Explain source health">?</button></div>
+        <div class="metric-value skeleton" id="source-ready">—%</div>
+        <div class="metric-note" id="source-ready-note">Baseline readiness</div>
+      </article>
+      <article class="metric">
+        <div class="metric-top"><span class="metric-label">Proof streak</span><button class="info" type="button" title="Consecutive days passing recall, precision, evidence and Tier-0 outage gates against an independent reference set." aria-label="Explain proof streak">?</button></div>
+        <div class="metric-value skeleton" id="proof-streak">—/30</div>
+        <div class="metric-note" id="proof-note">Independent benchmark</div>
+      </article>
+    </div>
+
+    <div class="error-box" id="error-box" role="alert"></div>
+
+    <section class="section" aria-labelledby="operational-title">
+      <div class="section-heading">
+        <h2 id="operational-title">What is operational now</h2>
+        <p>Concrete production capabilities—not promises, design files or test-only fixtures.</p>
+      </div>
+      <div class="two-col">
+        <article class="card">
+          <div class="card-head"><h3>Production system</h3><span class="pill" id="system-pill">Checking</span></div>
+          <div class="kv"><span>Release</span><strong id="release-version">—</strong></div>
+          <div class="kv"><span>Exact Git commit</span><strong id="commit-sha">—</strong></div>
+          <div class="kv"><span>Operating mode</span><strong id="operating-mode">—</strong></div>
+          <div class="kv"><span>Official company entries</span><strong id="company-count">—</strong></div>
+          <div class="kv"><span>Official leadership entries</span><strong id="leader-count">—</strong></div>
+          <details><summary>What this means</summary><p>Healthy production means the public interface and trust endpoints respond. It does not, by itself, prove that the scanner found every material development.</p></details>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>Configured coverage</h3><span class="pill" id="coverage-pill">Checking</span></div>
+          <div class="kv"><span>Governed entities</span><strong id="entity-count">—</strong></div>
+          <div class="kv"><span>Direct-source coverage</span><strong id="direct-coverage">—</strong></div>
+          <div class="kv"><span>Discovery coverage</span><strong id="discovery-coverage">—</strong></div>
+          <div class="kv"><span>Tier-0 sources configured</span><strong id="tier0-count">—</strong></div>
+          <div class="progress" aria-hidden="true"><span id="coverage-progress"></span></div>
+          <details><summary>How coverage is calculated</summary><p>Each priority entity must have a bounded discovery query and direct authoritative-source mapping where available. Registered domains are not counted as directly monitored merely because their names appear in a list.</p></details>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="gaps-title">
+      <div class="section-heading">
+        <h2 id="gaps-title">What remains unproven</h2>
+        <p>Gaps stay visible until evidence closes them. Quietly hiding them would make the dashboard prettier and the product worse.</p>
+      </div>
+      <div class="two-col">
+        <article class="card">
+          <div class="card-head"><h3>Objective gaps</h3><span class="pill watch" id="gap-count">Loading</span></div>
+          <div class="gap-list" id="gap-list"><div class="empty">Reading milestone evidence…</div></div>
+          <details><summary>Why these remain open</summary><p>Completion requires entity depth, direct authoritative ingestion, shared persistence, security, calibrated intelligence models, measured usability and the independent 30-day proof. A green deployment cannot substitute for any of these.</p></details>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>Dependability proof</h3><span class="pill" id="proof-pill">Not proven</span></div>
+          <div class="kv"><span>Independent reference set</span><strong id="reference-status">—</strong></div>
+          <div class="kv"><span>Passing days</span><strong id="pass-days">—</strong></div>
+          <div class="kv"><span>Days remaining</span><strong id="days-remaining">—</strong></div>
+          <div class="kv"><span>Critical-event recall gate</span><strong>100%</strong></div>
+          <div class="kv"><span>Weighted recall gate</span><strong>≥98%</strong></div>
+          <div class="kv"><span>Unsupported material claims</span><strong>0</strong></div>
+          <details><summary>Why 30 days cannot be skipped</summary><p>Dependability is a real-world property. It needs repeated comparison with an independently assembled daily reference set, including misses, false positives, corrections and source failures.</p></details>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sources-title">
+      <div class="section-heading">
+        <h2 id="sources-title">Source failures and blind spots</h2>
+        <p>An HTTP 200 is not automatically healthy. Schema drift, abnormal silence and access challenges are failures too.</p>
+      </div>
+      <article class="card">
+        <div class="card-head"><h3>Latest source-health evidence</h3><span class="pill" id="source-pill">Checking</span></div>
+        <div id="source-content"><div class="empty">Reading source-health evidence…</div></div>
+        <details><summary>How source health works</summary><p>Each source receives a rolling operating baseline. Explicit fetch errors, invalid schemas, unexpected volume drops and registry drift are surfaced. A legitimate day with no filings is allowed only where the source explicitly supports empty results.</p></details>
+      </article>
+    </section>
+
+    <section class="section" aria-labelledby="definitions-title">
+      <div class="section-heading"><h2 id="definitions-title">Plain-English definitions</h2><p>Every important label should be understandable without a methodology degree.</p></div>
+      <div class="two-col">
+        <article class="card">
+          <h3>Must Know</h3>
+          <p class="metric-note">Material enough to affect strategy, reputation, regulation, leadership, capital or a major business—and backed by a Tier-0 source or two independent source origins.</p>
+          <details><summary>Evidence rule</summary><p>A disputed or material single-source claim cannot remain Must Know. It is held in Watch until verified.</p></details>
+        </article>
+        <article class="card">
+          <h3>Watch</h3>
+          <p class="metric-note">Potentially important, evolving or disputed. Worth monitoring, but not yet strong enough for decisive action.</p>
+          <details><summary>Evidence rule</summary><p>Unresolved contradictions, credible single-source reports and emerging narrative risk belong here.</p></details>
+        </article>
+        <article class="card">
+          <h3>Media Tone</h3>
+          <p class="metric-note">Language used by observed publishers about the entity or event. It is not the same as broad public sentiment.</p>
+          <details><summary>What it cannot claim</summary><p>It cannot represent people who did not publish, nor closed social platforms that are not licensed and connected.</p></details>
+        </article>
+        <article class="card">
+          <h3>Observed Public Sentiment</h3>
+          <p class="metric-note">Tone in the public-conversation channels actually observed, shown with sample size and confidence.</p>
+          <details><summary>What “observed” protects against</summary><p>It prevents a narrow sample from being presented as the opinion of the whole public.</p></details>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>ABG Pulse Trust Centre · evidence before confidence</span>
+      <span id="footer-release">Release status unavailable</span>
+    </footer>
+  </main>
+
+  <script>
+    const endpoints = {
+      health: '/api/health',
+      coverage: '/api/coverage',
+      sourceHealth: '/api/source-health',
+      dependability: '/api/dependability',
+      progress: '/api/progress',
+      release: '/api/release'
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const text = (id, value) => { const node = $(id); if (node) { node.textContent = value ?? '—'; node.classList.remove('skeleton'); } };
+    const pct = (value) => Number.isFinite(Number(value)) ? `${Math.round(Number(value) * 10) / 10}%` : '—';
+    const shortSha = (value) => value ? String(value).slice(0, 9) : 'Not exposed';
+    const title = (value) => String(value || '').replace(/_/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
+    const statusClass = (state) => state === 'good' ? 'good' : state === 'risk' ? 'risk' : state === 'watch' ? 'watch' : '';
+    function setPill(id, label, state = '') {
+      const node = $(id); if (!node) return;
+      node.textContent = label; node.className = `pill ${statusClass(state)}`.trim();
+    }
+    function setVerdict(state, label, heading, copy) {
+      $('verdict-dot').className = `status-dot ${statusClass(state)}`.trim();
+      text('verdict-label', label); text('verdict-title', heading); text('verdict-copy', copy);
+    }
+    async function fetchJson(url) {
+      const response = await fetch(url, { cache: 'no-store', headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`);
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) throw new Error(`${url} did not return JSON`);
+      return response.json();
+    }
+    function milestoneGaps(progress) {
+      const milestones = Array.isArray(progress?.milestones) ? progress.milestones : [];
+      return milestones
+        .filter((item) => Number(item.completion) < 100)
+        .sort((a, b) => Number(a.completion) - Number(b.completion) || Number(b.weight) - Number(a.weight))
+        .slice(0, 8);
+    }
+    function renderGaps(progress) {
+      const gaps = milestoneGaps(progress);
+      setPill('gap-count', gaps.length ? `${gaps.length} priority gaps` : 'No open gaps', gaps.length ? 'watch' : 'good');
+      $('gap-list').innerHTML = gaps.length ? gaps.map((gap) => `
+        <div class="gap">
+          <span class="dot" aria-hidden="true"></span>
+          <span><strong>${escapeHtml(gap.title || gap.id)}</strong><small>${escapeHtml(gap.nextAction || gap.outcome || 'Acceptance evidence is incomplete.')}</small></span>
+          <em>${Math.round(Number(gap.completion) || 0)}%</em>
+        </div>`).join('') : '<div class="empty">Every weighted milestone has passed its evidence gate.</div>';
+    }
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[character]));
+    }
+    function renderSourceHealth(sourceHealth, scanHealth) {
+      const failures = [
+        ...(Array.isArray(scanHealth?.failures) ? scanHealth.failures : []),
+        ...(Array.isArray(scanHealth?.silentFailures) ? scanHealth.silentFailures : [])
+      ];
+      const unique = [...new Map(failures.map((item) => [item.sourceId || item.name, item])).values()];
+      const last = sourceHealth?.lastEvaluation?.summary || scanHealth?.summary || {};
+      const unhealthy = Number(last.explicitFailures || 0) + Number(last.silentFailures || 0);
+      setPill('source-pill', unhealthy ? `${unhealthy} needs attention` : sourceHealth?.status === 'ready' ? 'Baselines ready' : 'Learning baselines', unhealthy ? 'risk' : sourceHealth?.status === 'ready' ? 'good' : 'watch');
+      if (!unique.length) {
+        $('source-content').innerHTML = `<div class="empty">${sourceHealth?.status === 'ready' ? 'No explicit or silent failures in the latest measured evidence.' : 'No latest failure list is available. Source baselines are still learning; this is not proof that every source is healthy.'}</div>`;
+        return;
+      }
+      $('source-content').innerHTML = `<div style="overflow:auto"><table class="source-table"><thead><tr><th>Source</th><th>Issue</th><th>Status</th></tr></thead><tbody>${unique.slice(0, 20).map((row) => `<tr><td><strong>${escapeHtml(row.provider || row.sourceId || 'Unknown source')}</strong><br><small>${escapeHtml(row.sourceId || '')}</small></td><td>${escapeHtml((row.issues || []).map(title).join(', ') || row.error || 'Health gate failed')}</td><td><span class="pill risk">Attention</span></td></tr>`).join('')}</tbody></table></div>`;
+    }
+
+    async function refresh() {
+      $('refresh').disabled = true; text('checked-at', 'Checking production evidence…');
+      const entries = await Promise.allSettled(Object.entries(endpoints).map(async ([key, url]) => [key, await fetchJson(url)]));
+      const data = {}; const failures = [];
+      for (const result of entries) {
+        if (result.status === 'fulfilled') data[result.value[0]] = result.value[1];
+        else failures.push(result.reason?.message || 'Unknown endpoint failure');
+      }
+      const health = data.health || {};
+      const coverage = data.coverage || {};
+      const sourceHealth = data.sourceHealth || {};
+      const dependability = data.dependability || {};
+      const progress = data.progress || {};
+      const release = data.release || {};
+
+      text('objective', dependability.objectiveAchieved === true ? 'Yes' : 'No');
+      text('objective-note', dependability.objectiveAchieved === true ? 'All proof gates passed' : 'Not yet proven');
+      text('job-meter', pct(progress.completion));
+      text('source-ready', pct(sourceHealth.readySourcePct));
+      text('source-ready-note', `${sourceHealth.readySources ?? 0} of ${sourceHealth.learnedSources ?? sourceHealth.configuredSources ?? 0} learned sources ready`);
+      text('proof-streak', `${dependability.currentConsecutivePassDays ?? 0}/${dependability.proofWindowDays ?? 30}`);
+      text('proof-note', `${dependability.daysRemaining ?? 30} passing days remaining`);
+
+      const systemHealthy = ['ok', 'degraded'].includes(health.status) && Boolean(health?.deployment?.commitSha);
+      setPill('system-pill', systemHealthy ? 'Operational' : 'Needs attention', systemHealthy ? 'good' : 'risk');
+      text('release-version', release?.release?.version || health?.release?.version || '—');
+      text('commit-sha', shortSha(health?.deployment?.commitSha));
+      text('operating-mode', title(health.mode || 'unknown'));
+      text('company-count', health?.entityUniverse?.actual?.officialCompanies ?? '—');
+      text('leader-count', health?.entityUniverse?.actual?.officialLeadership ?? '—');
+      text('entity-count', health?.entityUniverse?.actual?.totalEntities ?? coverage?.summary?.priorityEntities ?? '—');
+      text('direct-coverage', pct(coverage?.summary?.directCoveragePct));
+      text('discovery-coverage', pct(coverage?.summary?.discoveryCoveragePct));
+      const tier0Count = Number(health?.tier0?.nseInstruments || 0) + Number(health?.tier0?.bseInstruments || 0) + Number(health?.tier0?.secRegistrants || 0) + Number(health?.tier0?.regulatorSources || 0);
+      text('tier0-count', tier0Count || '—');
+      $('coverage-progress').style.width = `${Math.max(0, Math.min(100, Number(coverage?.summary?.fullCoveragePct || 0)))}%`;
+      const coverageComplete = coverage?.status === 'complete';
+      setPill('coverage-pill', coverageComplete ? 'Complete' : 'Gaps visible', coverageComplete ? 'good' : 'watch');
+
+      text('reference-status', title(dependability?.referenceSet?.status || 'not connected'));
+      text('pass-days', dependability.verifiedDays ?? 0);
+      text('days-remaining', dependability.daysRemaining ?? 30);
+      setPill('proof-pill', dependability.objectiveAchieved === true ? 'Proven' : 'Not proven', dependability.objectiveAchieved === true ? 'good' : 'watch');
+      renderGaps(progress);
+      renderSourceHealth(sourceHealth, data.scan?.meta?.sourceHealth);
+
+      const evidenceHealthy = failures.length === 0;
+      if (dependability.objectiveAchieved === true && evidenceHealthy) {
+        setVerdict('good', 'Objective achieved', 'Dependability proven', 'Every objective gate, including the independent proof window, has passed.');
+      } else if (systemHealthy && evidenceHealthy) {
+        setVerdict('watch', 'Operational, not fully proven', 'Useful with visible limits', 'The production system is working. Source, coverage and 30-day proof gaps remain explicit.');
+      } else {
+        setVerdict('risk', 'Trust evidence incomplete', 'Do not rely on silence', 'One or more production trust endpoints failed. Treat “no news” as unverified until the system recovers.');
+      }
+
+      const now = new Date();
+      text('checked-at', `Checked ${now.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}`);
+      text('footer-release', `Release ${release?.release?.version || health?.release?.version || 'unknown'} · ${shortSha(health?.deployment?.commitSha)}`);
+      $('error-box').style.display = failures.length ? 'block' : 'none';
+      $('error-box').textContent = failures.length ? `Trust data incomplete: ${failures.join(' · ')}` : '';
+      $('refresh').disabled = false;
+    }
+
+    $('refresh').addEventListener('click', refresh);
+    refresh().catch((error) => {
+      setVerdict('risk', 'Trust check failed', 'Do not rely on silence', error.message);
+      $('error-box').style.display = 'block'; $('error-box').textContent = error.message;
+      $('refresh').disabled = false;
+    });
+  </script>
+</body>
+</html>
