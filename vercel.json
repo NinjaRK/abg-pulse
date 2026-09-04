@@ -37,31 +37,31 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/deploy-index.html"
+      "destination": "/index.html"
     },
     {
       "source": "/today",
-      "destination": "/deploy-index.html"
+      "destination": "/index.html"
     },
     {
       "source": "/watching",
-      "destination": "/deploy-index.html"
+      "destination": "/index.html"
     },
     {
       "source": "/radar",
-      "destination": "/deploy-index.html"
+      "destination": "/index.html"
     },
     {
       "source": "/ask",
-      "destination": "/deploy-index.html"
+      "destination": "/index.html"
     },
     {
       "source": "/search",
-      "destination": "/deploy-index.html"
+      "destination": "/index.html"
     },
     {
       "source": "/control",
-      "destination": "/deploy-index.html"
+      "destination": "/index.html"
     }
   ],
   "functions": {
@@ -73,6 +73,11 @@
     },
     "api/social-ingest.js": {
       "maxDuration": 15
+    }
+  },
+  "git": {
+    "deploymentEnabled": {
+      "live-data": false
     }
   }
 }

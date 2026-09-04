@@ -284,7 +284,7 @@ const METHODOLOGY = {
   gaps: { title: 'What We May Have Missed', lead: 'Shows source failures, thin corroboration and visible coverage gaps.', formula: 'Post-scan checks inspect provider errors, entity-universe reconciliation, public-conversation availability and evidence quality.', note: 'No warning means no configured anomaly—not guaranteed completeness.' },
   audit: { title: 'Auditability', lead: 'Makes the path from event to score, label and source traceable.', formula: 'Entity → event → claim/evidence → intelligence score → classification.', note: 'Explainability cannot improve the quality of a weak source.' },
   scores: { title: 'How the Scores Work', lead: 'Each score answers a different question so consequence, truth, public response and attention are never confused.', formula: 'Materiality = consequence · Certainty = evidence · Momentum = attention · Media tone = published language · Observed public sentiment = accessible public conversation · Forecast = future importance · Drift = framing risk.', note: 'The platform exposes its rules rather than hiding heuristics behind “AI”.' },
-  progress: { title: 'Job Meter', lead: 'The weighted percentage of the full product objective that has been completed with evidence.', formula: 'Overall completion = sum of each milestone weight × its verified completion percentage. Milestone weights total 100%.', note: 'Designed, coded or locally tested work is not counted as operational when the required live connection, external verification or elapsed benchmark is still missing.' }
+  progress: { title: 'Job Meter', lead: 'Two numbers prevent activity from being confused with achievement: verified completion and implementation completed.', formula: 'Verified = weighted work with acceptance evidence. Built = weighted code or operating capability already implemented. The amber gap is built work still awaiting live or independent proof.', note: 'The verified number is the product truth. The built number shows momentum without pretending that unproven work is delivered.' }
 };
 
 function toneClass(value) {
@@ -795,20 +795,41 @@ function renderEntityUniverse() {
   $('#universe-verification-note').innerHTML = `${companyPass && leadershipPass ? '<strong>Local reconciliation passed.</strong>' : '<strong>Local reconciliation incomplete.</strong>'} Verified ${escapeHtml(verified)} against the <a href="${escapeHtml(safeUrl(counts.officialCompanyUrl))}" target="_blank" rel="noopener noreferrer">official company register ↗</a> and <a href="${escapeHtml(safeUrl(counts.officialLeadershipUrl))}" target="_blank" rel="noopener noreferrer">official leadership register ↗</a>.${liveProof} Roles and entities remain date-sensitive.`;
 }
 
+function boundedPercent(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return 0;
+  return Math.max(0, Math.min(100, number));
+}
+
+function weightedProgress(milestones = [], field = 'completion') {
+  const weightTotal = milestones.reduce((sum, milestone) => sum + Number(milestone.weight || 0), 0);
+  if (!weightTotal) return 0;
+  const weighted = milestones.reduce((sum, milestone) => {
+    const value = field === 'implementationCompletion'
+      ? (milestone.implementationCompletion ?? milestone.completion ?? 0)
+      : (milestone.completion ?? 0);
+    return sum + Number(milestone.weight || 0) * boundedPercent(value) / 100;
+  }, 0);
+  return Math.round(weighted / weightTotal * 100);
+}
+
 function buildProgressSnapshot() {
   const plan = state.buildPlan && typeof state.buildPlan === 'object' ? state.buildPlan : {};
   const milestones = Array.isArray(plan.milestones) ? plan.milestones : [];
   const weightTotal = milestones.reduce((sum, milestone) => sum + Number(milestone.weight || 0), 0);
-  const weighted = milestones.reduce((sum, milestone) => sum + Number(milestone.weight || 0) * Number(milestone.completion || 0) / 100, 0);
-  const overall = weightTotal ? Math.round(weighted / weightTotal * 100) : 0;
+  const verified = weightedProgress(milestones, 'completion');
+  const built = Math.max(verified, weightedProgress(milestones, 'implementationCompletion'));
+  const builtAwaitingProof = Math.max(0, built - verified);
+  const notYetBuilt = Math.max(0, 100 - built);
   const counts = milestones.reduce((acc, milestone) => {
     const key = String(milestone.status || 'not_started').replaceAll('_', '-');
     acc[key] = (acc[key] || 0) + 1;
     return acc;
   }, {});
   const dependencies = Array.isArray(plan.resources?.externalDependencies) ? plan.resources.externalDependencies : [];
-  const activeDependencies = dependencies.filter((item) => !['available', 'connected', 'complete'].includes(String(item.currentState || '').toLowerCase()));
-  return { plan, milestones, weightTotal, overall, counts, activeDependencies };
+  const activeDependencies = dependencies.filter((item) => !['available', 'connected', 'complete', 'resolved'].includes(String(item.currentState || '').toLowerCase()));
+  const activeMilestones = milestones.filter((item) => item.active === true);
+  return { plan, milestones, weightTotal, verified, built, builtAwaitingProof, notYetBuilt, counts, activeDependencies, activeMilestones };
 }
 
 function buildStatusLabel(status = '') {
@@ -817,37 +838,72 @@ function buildStatusLabel(status = '') {
 
 function renderBuildProgress() {
   const snapshot = buildProgressSnapshot();
-  const { plan, milestones, overall, counts, activeDependencies } = snapshot;
+  const {
+    plan,
+    milestones,
+    verified,
+    built,
+    builtAwaitingProof,
+    notYetBuilt,
+    counts,
+    activeDependencies,
+    activeMilestones
+  } = snapshot;
   const sidebarValue = $('#sidebar-build-progress');
   if (!sidebarValue) return;
-  sidebarValue.textContent = `${overall}%`;
-  $('#sidebar-build-progress-bar').style.width = `${overall}%`;
-  $('#sidebar-build-progress-copy').textContent = `${counts.complete || 0} complete · ${counts['in-progress'] || 0} in progress · ${counts.blocked || 0} blocked`;
 
-  $('#objective-progress-value').textContent = `${overall}%`;
-  $('#objective-progress-bar').style.width = `${overall}%`;
-  $('#objective-progress-track').setAttribute('aria-valuenow', String(overall));
+  sidebarValue.textContent = `${verified}%`;
+  $('#sidebar-build-progress-bar').style.width = `${verified}%`;
+  $('#sidebar-build-progress-copy').textContent = `${built}% built · ${builtAwaitingProof}% awaiting proof · ${notYetBuilt}% not built`;
+
+  $('#objective-progress-value').textContent = `${verified}%`;
+  $('#objective-progress-built-value').textContent = `${built}% built`;
+  $('#objective-progress-bar').style.width = `${verified}%`;
+  $('#objective-progress-proof-bar').style.left = `${verified}%`;
+  $('#objective-progress-proof-bar').style.width = `${builtAwaitingProof}%`;
+  $('#objective-progress-track').setAttribute('aria-valuenow', String(verified));
+  $('#objective-progress-track').setAttribute('aria-valuetext', `${verified}% verified, ${built}% built`);
   $('#objective-progress-objective').textContent = plan.objective || 'Progress is counted only when milestone evidence exists.';
   $('#objective-progress-meta').innerHTML = [
-    ['complete', counts.complete || 0, 'complete'],
-    ['in-progress', counts['in-progress'] || 0, 'in progress'],
-    ['blocked', counts.blocked || 0, 'blocked'],
-    ['not-started', counts['not-started'] || 0, 'not started'],
-    ['dependency', activeDependencies.length, 'external dependencies']
+    ['verified', `${verified}%`, 'verified complete'],
+    ['built', `${built}%`, 'built'],
+    ['proof', `${builtAwaitingProof}%`, 'awaiting proof'],
+    ['unbuilt', `${notYetBuilt}%`, 'not yet built'],
+    ['dependency', activeDependencies.length, 'unresolved dependencies']
   ].map(([cls, value, label]) => `<span class="progress-chip ${escapeHtml(cls)}"><i></i><strong>${escapeHtml(value)}</strong> ${escapeHtml(label)}</span>`).join('');
   $('#milestone-summary-count').textContent = `${milestones.length} milestones · weighted`;
   $('#resource-summary-count').textContent = `${activeDependencies.length} unresolved`;
 
+  const sprint = plan.programme?.currentSprint || {};
+  const sprintTarget = $('#active-sprint');
+  if (sprintTarget) {
+    const deliverables = Array.isArray(sprint.deliverables) ? sprint.deliverables : [];
+    sprintTarget.innerHTML = sprint.name ? `
+      <div class="sprint-head">
+        <div><span>Active build</span><strong>${escapeHtml(sprint.name)}</strong></div>
+        <span class="sprint-count">${activeMilestones.length} active milestone${activeMilestones.length === 1 ? '' : 's'}</span>
+      </div>
+      <p>${escapeHtml(sprint.objective || '')}</p>
+      ${deliverables.length ? `<div class="sprint-deliverables">${deliverables.map((item) => `<span>${escapeHtml(item)}</span>`).join('')}</div>` : ''}
+    ` : '<p>No active sprint is recorded.</p>';
+  }
+
   $('#milestone-list').innerHTML = milestones.map((milestone) => {
     const statusClass = String(milestone.status || 'not_started').replaceAll('_', '-');
     const evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
-    return `<details class="milestone-card" ${milestone.status === 'in_progress' || milestone.status === 'blocked' ? 'open' : ''}>
+    const verifiedMilestone = boundedPercent(milestone.completion || 0);
+    const builtMilestone = Math.max(verifiedMilestone, boundedPercent(milestone.implementationCompletion ?? milestone.completion ?? 0));
+    const proofGap = Math.max(0, builtMilestone - verifiedMilestone);
+    return `<details class="milestone-card ${milestone.active ? 'active' : ''}" ${milestone.active || milestone.status === 'blocked' ? 'open' : ''}>
       <summary>
         <span class="milestone-id">${escapeHtml(milestone.id)}</span>
         <span class="milestone-title"><strong>${escapeHtml(milestone.title)}</strong><small>${escapeHtml(buildStatusLabel(milestone.status))} · weight ${escapeHtml(milestone.weight)}%</small></span>
-        <span class="milestone-score"><strong>${escapeHtml(milestone.completion)}%</strong><small>verified</small></span>
+        <span class="milestone-score"><strong>${escapeHtml(verifiedMilestone)}%</strong><small>verified · ${escapeHtml(builtMilestone)}% built</small></span>
       </summary>
-      <div class="milestone-progress-track"><i style="width:${Math.max(0, Math.min(100, Number(milestone.completion || 0)))}%"></i></div>
+      <div class="milestone-progress-track" aria-label="${escapeHtml(milestone.title)} progress">
+        <i class="verified" style="width:${verifiedMilestone}%"></i>
+        <i class="proof" style="left:${verifiedMilestone}%;width:${proofGap}%"></i>
+      </div>
       <div class="milestone-card-body">
         <span class="milestone-status ${escapeHtml(statusClass)}">${escapeHtml(buildStatusLabel(milestone.status))}</span>
         <p><strong>Outcome:</strong> ${escapeHtml(milestone.outcome)}</p>
@@ -1184,7 +1240,10 @@ async function scanLiveSources({ manual = false, periodChange = false } = {}) {
     const params = new URLSearchParams({ start: new Date(state.periodWindow.start).toISOString(), end: new Date(state.periodWindow.end).toISOString() });
     try {
       payload = await fetchJson(`/api/scan?${params}`, { timeout: 26000 });
-    } catch {
+    } catch (error) {
+      const localFallbackAllowed = ['localhost', '127.0.0.1'].includes(location.hostname)
+        || new URLSearchParams(location.search).has('direct-discovery');
+      if (!localFallbackAllowed) throw error;
       payload = await directGdeltScan();
     }
     const liveEvents = Array.isArray(payload?.events) ? payload.events : [];

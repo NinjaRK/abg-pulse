@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { liveSnapshotUrl, shouldUseGovernedSnapshot } from '../lib/live-snapshot.mjs';
 
 const entities = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entities.json', import.meta.url)), 'utf8'));
 const entityUniverse = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entity-universe-summary.json', import.meta.url)), 'utf8'));
@@ -23,7 +24,8 @@ export default async function handler(req, res) {
   const configured = {
     database: Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY),
     ingestion: Boolean(process.env.INGEST_SECRET),
-    closedSocialListening: Boolean(process.env.SOCIAL_LISTENING_PROVIDER)
+    closedSocialListening: Boolean(process.env.SOCIAL_LISTENING_PROVIDER),
+    governedSnapshot: shouldUseGovernedSnapshot({ headers: {} })
   };
   let databaseReachable = null;
   if (configured.database) {
@@ -37,7 +39,13 @@ export default async function handler(req, res) {
   const universeReconciled = counts.officialCompanies === entityUniverse.officialCompanyEntries && counts.officialLeadership === entityUniverse.officialLeadershipEntries;
   return send(res, databaseReachable === false ? 503 : 200, {
     status: databaseReachable === false ? 'degraded' : 'ok',
-    mode: configured.database ? 'persistent' : 'live-on-demand',
+    mode: configured.database ? 'persistent' : (configured.governedSnapshot ? 'governed-snapshot' : 'live-on-demand'),
+    ingestion: {
+      deliveryMode: configured.governedSnapshot ? 'governed-snapshot' : 'live-fanout',
+      snapshotUrl: configured.governedSnapshot ? liveSnapshotUrl() : null,
+      refreshCadenceMinutes: configured.governedSnapshot ? 30 : null,
+      failClosedWhenStale: configured.governedSnapshot
+    },
     deployment: {
       environment: process.env.VERCEL_ENV || process.env.VERCEL_TARGET_ENV || 'local',
       commitSha: process.env.VERCEL_GIT_COMMIT_SHA || null,
