@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "meaning": "Direct official regulator publication pages checked independently of media pickup. A parser, access or schema failure is surfaced as a Tier-0 source failure.",
+  "sources": [
+    {
+      "id": "rbi-press-releases",
+      "name": "Reserve Bank of India press releases",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx",
+      "authority": "RBI",
+      "tier": "tier0",
+      "rightsStatus": "metadata-and-link",
+      "cadence": "on-demand",
+      "enabled": true,
+      "maxItems": 80
+    },
+    {
+      "id": "sebi-press-releases",
+      "name": "SEBI press releases",
+      "url": "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=6&ssid=25&smid=0",
+      "authority": "SEBI",
+      "tier": "tier0",
+      "rightsStatus": "metadata-and-link",
+      "cadence": "on-demand",
+      "enabled": true,
+      "maxItems": 80
+    },
+    {
+      "id": "sebi-orders",
+      "name": "SEBI orders and rulings",
+      "url": "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=2&ssid=9&smid=0",
+      "authority": "SEBI",
+      "tier": "tier0",
+      "rightsStatus": "metadata-and-link",
+      "cadence": "on-demand",
+      "enabled": true,
+      "maxItems": 100
+    },
+    {
+      "id": "cci-press-releases",
+      "name": "Competition Commission of India press releases",
+      "url": "https://www.cci.gov.in/media-gallery/press-release",
+      "authority": "CCI",
+      "tier": "tier0",
+      "rightsStatus": "metadata-and-link",
+      "cadence": "on-demand",
+      "enabled": true,
+      "maxItems": 80
+    },
+    {
+      "id": "irdai-press-releases",
+      "name": "IRDAI press releases",
+      "url": "https://irdai.gov.in/press-releases",
+      "authority": "IRDAI",
+      "tier": "tier0",
+      "rightsStatus": "metadata-and-link",
+      "cadence": "on-demand",
+      "enabled": true,
+      "maxItems": 80
+    },
+    {
+      "id": "trai-press-releases",
+      "name": "TRAI press releases",
+      "url": "https://www.trai.gov.in/release-publication/press-release",
+      "authority": "TRAI",
+      "tier": "tier0",
+      "rightsStatus": "metadata-and-link",
+      "cadence": "on-demand",
+      "enabled": true,
+      "maxItems": 80
+    },
+    {
+      "id": "dot-press-releases",
+      "name": "Department of Telecommunications press releases",
+      "url": "https://dot.gov.in/press-release",
+      "authority": "Department of Telecommunications",
+      "tier": "tier0",
+      "rightsStatus": "metadata-and-link",
+      "cadence": "on-demand",
+      "enabled": true,
+      "maxItems": 80
+    },
+    {
+      "id": "mca-news-updates",
+      "name": "Ministry of Corporate Affairs news and updates",
+      "url": "https://www.mca.gov.in/content/mca/global/en/notifications-tender/news-updates.html",
+      "authority": "Ministry of Corporate Affairs",
+      "tier": "tier0",
+      "rightsStatus": "metadata-and-link",
+      "cadence": "on-demand",
+      "enabled": true,
+      "maxItems": 80
+    }
+  ]
+}
