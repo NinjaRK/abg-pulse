@@ -1,0 +1,167 @@
+name: Apply and promote ABG Pulse persistence v6.4
+
+on:
+  push:
+    branches:
+      - sol/persistence-v6-4
+    paths:
+      - '.build/persistence-v6.4.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: abg_pulse_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d abg_pulse_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: abg_pulse_test
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Apply deterministic persistence integration and hardening
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/run-persistence-v6.4.mjs
+          node scripts/harden-persistence-v6.4.mjs
+
+      - name: Install without bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run full JavaScript verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Create Supabase-compatible test roles
+        shell: bash
+        run: |
+          set -euo pipefail
+          for role in anon authenticated service_role; do
+            if ! psql -tAc "select 1 from pg_roles where rolname='${role}'" | grep -q 1; then
+              psql -v ON_ERROR_STOP=1 -c "create role ${role} nologin;"
+            fi
+          done
+
+      - name: Apply the migration to real PostgreSQL
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f db/migrations/001_abg_pulse_core.sql
+
+      - name: Run end-to-end persistence canary twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f db/test-canary-v2.sql
+
+      - name: Prove idempotency collisions fail closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if psql -v ON_ERROR_STOP=1 -c "select public.pulse_persist_scan('{\"idempotencyKey\":\"canary-scan-2026-09-03\",\"windowStart\":\"2026-09-03T00:00:00Z\",\"windowEnd\":\"2026-09-05T00:00:00Z\",\"events\":[],\"sourceChecks\":[]}'::jsonb);"; then
+            echo 'A reused idempotency key accepted a different payload.'
+            exit 1
+          fi
+          echo 'Idempotency collision was rejected as required.'
+
+      - name: Prove evidence and audit records are append-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          if psql -v ON_ERROR_STOP=1 -c "update public.pulse_evidence set title='tampered' where event_id='event-1';"; then
+            echo 'Immutable evidence accepted an update.'
+            exit 1
+          fi
+          if psql -v ON_ERROR_STOP=1 -c "delete from public.pulse_audit_log;"; then
+            echo 'Audit log accepted deletion.'
+            exit 1
+          fi
+          echo 'Append-only evidence and audit gates passed.'
+
+      - name: Verify RLS and least-privilege function grants
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 <<'SQL'
+          DO $verify$
+          declare
+            v_missing integer;
+            v_policies integer;
+          begin
+            select count(*) into v_missing
+            from pg_class c join pg_namespace n on n.oid = c.relnamespace
+            where n.nspname = 'public'
+              and c.relname like 'pulse_%'
+              and c.relkind = 'r'
+              and not c.relrowsecurity;
+            if v_missing <> 0 then raise exception '% pulse tables are missing RLS', v_missing; end if;
+
+            select count(*) into v_policies from pg_policies where schemaname = 'public' and tablename like 'pulse_%';
+            if v_policies <> 0 then raise exception 'Public identity policies must not be created before governance approval'; end if;
+
+            if has_function_privilege('anon', 'public.pulse_persist_scan(jsonb)', 'EXECUTE') then raise exception 'anon can execute pulse_persist_scan'; end if;
+            if has_function_privilege('authenticated', 'public.pulse_record_correction(jsonb)', 'EXECUTE') then raise exception 'authenticated can execute pulse_record_correction'; end if;
+            if not has_function_privilege('service_role', 'public.pulse_persist_scan(jsonb)', 'EXECUTE') then raise exception 'service_role cannot persist scans'; end if;
+          end;
+          $verify$;
+          SQL
+
+      - name: Verify storage status and canonical feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -tAc "select (public.pulse_storage_status()->>'schemaVersion') = '6.4.0';" | grep -qx t
+          psql -v ON_ERROR_STOP=1 -tAc "select count(*) from public.pulse_current_feed where id='event-1' and classification='Must Know';" | grep -qx 1
+          psql -v ON_ERROR_STOP=1 -tAc "select count(*) from public.pulse_corrections where event_id='event-1' and status='pending';" | grep -qx 1
+
+      - name: Refuse promotion if main moved outside candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after this candidate was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Commit verified persistence foundation and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add db/migrations/001_abg_pulse_core.sql db/test-canary-v2.sql lib/persistence.mjs tests/persistence.test.mjs api/persist.js api/history.js api/storage-status.js api/corrections.js docs/PERSISTENCE.md api/health.js vercel.json package.json data/release.json .github/workflows/verify-production-release.yml CHANGELOG.md
+          git rm -f .build/persistence-v6.4.ready scripts/apply-persistence-v6.4.mjs scripts/run-persistence-v6.4.mjs scripts/harden-persistence-v6.4.mjs .github/workflows/apply-persistence-v6-4.yml db/test-canary.sql
+          git commit -m 'Add auditable persistent intelligence foundation'
+          git push origin HEAD:sol/persistence-v6-4
+          git push origin HEAD:main
