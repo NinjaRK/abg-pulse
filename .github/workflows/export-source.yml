@@ -1,0 +1,36 @@
+name: Export ABG Pulse source snapshot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/export-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out exact main source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Create source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > SOURCE_COMMIT.txt
+          tar --exclude=.git --exclude=node_modules -czf /tmp/abg-pulse-source.tgz .
+
+      - name: Upload source archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: abg-pulse-source-${{ github.sha }}
+          path: /tmp/abg-pulse-source.tgz
+          if-no-files-found: error
+          retention-days: 1
