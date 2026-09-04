@@ -1,0 +1,64 @@
+name: Apply ABG Pulse governed snapshot architecture
+
+on:
+  push:
+    branches:
+      - sol/governed-snapshot-v5-3
+    paths:
+      - '.bootstrap/governed-snapshot-v5.3.retry'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out snapshot branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Decode and apply governed snapshot patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import base64, gzip, hashlib
+          encoded = Path('.bootstrap/governed-snapshot-v5.3.patch.gz.b64').read_text().strip()
+          compressed = base64.b64decode(encoded, validate=True)
+          patch = gzip.decompress(compressed)
+          Path('/tmp/governed-snapshot-v5.3.patch').write_bytes(patch)
+          print(f'Decoded {len(patch)}-byte patch; sha256={hashlib.sha256(patch).hexdigest()}')
+          PY
+          git apply --check /tmp/governed-snapshot-v5.3.patch
+          git apply /tmp/governed-snapshot-v5.3.patch
+
+      - name: Run full automated verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+          node --check scripts/refresh-snapshot.mjs
+          python -m json.tool package.json >/dev/null
+          python -m json.tool vercel.json >/dev/null
+
+      - name: Commit verified snapshot architecture
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add api/scan.js tests/scan.test.mjs scripts/refresh-snapshot.mjs .github/workflows/refresh-live-snapshot.yml package.json vercel.json
+          git rm -f .bootstrap/governed-snapshot-v5.3.ready .bootstrap/governed-snapshot-v5.3.retry .bootstrap/governed-snapshot-v5.3.patch.gz.b64 .github/workflows/apply-governed-snapshot-v5-3.yml
+          git commit -m 'Add governed scheduled snapshot architecture'
+          git push origin HEAD:sol/governed-snapshot-v5-3
