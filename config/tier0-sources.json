@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "meaning": "Direct authoritative sources checked independently of media discovery. Failure or abnormal silence is surfaced and never treated as proof that nothing happened.",
+  "nse": {
+    "enabled": true,
+    "sourceId": "nse-corporate-announcements",
+    "tier": "tier0",
+    "rightsStatus": "metadata-and-link",
+    "cadence": "on-demand",
+    "homepage": "https://www.nseindia.com/",
+    "endpoint": "https://www.nseindia.com/api/corporate-announcements",
+    "instruments": [
+      { "symbol": "GRASIM", "companyContains": "Grasim Industries", "enabled": true },
+      { "symbol": "HINDALCO", "companyContains": "Hindalco Industries", "enabled": true },
+      { "symbol": "ULTRACEMCO", "companyContains": "UltraTech Cement", "enabled": true },
+      { "symbol": "ABCAPITAL", "companyContains": "Aditya Birla Capital", "enabled": true },
+      { "symbol": "ABFRL", "companyContains": "Aditya Birla Fashion and Retail", "enabled": true },
+      { "symbol": "IDEA", "companyContains": "Vodafone Idea", "enabled": true },
+      { "symbol": "ABSLAMC", "companyContains": "Aditya Birla Sun Life AMC", "enabled": true },
+      { "symbol": "BIRLAMONEY", "companyContains": "Aditya Birla Money", "enabled": true },
+      { "symbol": "PILANIINVS", "companyContains": "Pilani Investment", "enabled": true },
+      { "symbol": "TANFACIND", "companyContains": "Tanfac Industries", "enabled": true }
+    ]
+  },
+  "sec": {
+    "enabled": true,
+    "sourceId": "sec-edgar-submissions",
+    "tier": "tier0",
+    "rightsStatus": "public-filing-metadata-and-link",
+    "cadence": "on-demand",
+    "endpointTemplate": "https://data.sec.gov/submissions/CIK{cik}.json",
+    "userAgent": "ABG-Pulse/5.5 contact https://github.com/NinjaRK/abg-pulse",
+    "registrants": [
+      { "cik": "0001304280", "companyContains": "Novelis", "enabled": true }
+    ]
+  }
+}
