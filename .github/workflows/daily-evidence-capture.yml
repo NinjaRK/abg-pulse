@@ -1,0 +1,99 @@
+name: Capture ABG Pulse daily production evidence
+
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: abg-pulse-daily-evidence
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
+    steps:
+      - name: Define the previous UTC day
+        shell: bash
+        run: |
+          echo "WINDOW_END=$(date -u +%Y-%m-%dT00:00:00.000Z)" >> "$GITHUB_ENV"
+          echo "WINDOW_START=$(date -u -d '1 day ago' +%Y-%m-%dT00:00:00.000Z)" >> "$GITHUB_ENV"
+          echo "EVIDENCE_DATE=$(date -u -d '1 day ago' +%Y-%m-%d)" >> "$GITHUB_ENV"
+
+      - name: Capture health, coverage, dependability and scan evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 60 "$PRODUCTION_URL/api/health" -o evidence/health.json
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 60 "$PRODUCTION_URL/api/coverage" -o evidence/coverage.json
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 60 "$PRODUCTION_URL/api/dependability" -o evidence/dependability.json
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 120 \
+            "$PRODUCTION_URL/api/scan?start=$WINDOW_START&end=$WINDOW_END" \
+            -o evidence/scan.json
+
+      - name: Create tamper-evident manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const files = ['health.json', 'coverage.json', 'dependability.json', 'scan.json'];
+          const manifest = {
+            evidenceDate: process.env.EVIDENCE_DATE,
+            windowStart: process.env.WINDOW_START,
+            windowEnd: process.env.WINDOW_END,
+            capturedAt: new Date().toISOString(),
+            productionUrl: process.env.PRODUCTION_URL,
+            files: {}
+          };
+          for (const file of files) {
+            const content = readFileSync(`evidence/${file}`);
+            manifest.files[file] = {
+              bytes: content.length,
+              sha256: createHash('sha256').update(content).digest('hex')
+            };
+          }
+          const scan = JSON.parse(readFileSync('evidence/scan.json', 'utf8'));
+          manifest.scanSummary = {
+            queryCount: scan?.meta?.queryCount ?? null,
+            successfulQueries: scan?.meta?.successfulQueries ?? null,
+            eventCount: Array.isArray(scan?.events) ? scan.events.length : null,
+            registryReconciled: scan?.meta?.registryReconciled ?? null
+          };
+          writeFileSync('evidence/manifest.json', `${JSON.stringify(manifest, null, 2)}\n`);
+          NODE
+
+      - name: Reject structurally invalid evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const health = JSON.parse(readFileSync('evidence/health.json', 'utf8'));
+          const coverage = JSON.parse(readFileSync('evidence/coverage.json', 'utf8'));
+          const dependability = JSON.parse(readFileSync('evidence/dependability.json', 'utf8'));
+          const scan = JSON.parse(readFileSync('evidence/scan.json', 'utf8'));
+          if (!['ok', 'degraded'].includes(health.status)) throw new Error('Health endpoint is not operational.');
+          if (!coverage.summary || !coverage.gaps) throw new Error('Coverage evidence is incomplete.');
+          if (typeof dependability.objectiveAchieved !== 'boolean') throw new Error('Dependability evidence is incomplete.');
+          if (!Array.isArray(scan.events) || !Array.isArray(scan?.meta?.sourceChecks)) throw new Error('Scan evidence is incomplete.');
+          if (!Number.isFinite(scan?.meta?.queryCount) || scan.meta.queryCount < 1) throw new Error('No source checks were attempted.');
+          console.log('Daily evidence structure passed.');
+          NODE
+
+      - name: Upload immutable daily evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: abg-pulse-evidence-${{ env.EVIDENCE_DATE }}
+          path: evidence/
+          if-no-files-found: error
+          retention-days: 90
