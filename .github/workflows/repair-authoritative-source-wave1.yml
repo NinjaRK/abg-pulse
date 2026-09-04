@@ -1,0 +1,40 @@
+name: Repair authoritative-source wave 1 generator
+
+on:
+  push:
+    branches:
+      - sol/authoritative-source-wave1
+    paths:
+      - '.github/workflows/repair-authoritative-source-wave1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Correct deterministic regulator date fixture and retrigger generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('.github/workflows/apply-authoritative-source-wave1.yml')
+          text = path.read_text()
+          old = '03 September 2026'
+          new = 'September 03, 2026'
+          if old not in text:
+              raise SystemExit('Expected fixture was not found')
+          path.write_text(text.replace(old, new))
+          PY
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add .github/workflows/apply-authoritative-source-wave1.yml
+          git rm .github/workflows/repair-authoritative-source-wave1.yml
+          git commit -m 'Repair authoritative-source deterministic fixture'
+          git push origin HEAD:sol/authoritative-source-wave1

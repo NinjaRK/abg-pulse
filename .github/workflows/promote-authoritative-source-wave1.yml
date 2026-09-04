@@ -1,0 +1,54 @@
+name: Promote verified authoritative-source wave 1
+
+on:
+  push:
+    branches:
+      - sol/authoritative-source-wave1
+    paths:
+      - 'authoritative.mjs'
+      - 'config/authoritative-sources.json'
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out implementation branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Reconcile with current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git fetch origin main
+          git merge --no-edit origin/main
+
+      - name: Run full release gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+          node -e "const s=require('./config/authoritative-sources.json'); if(s.length < 16) process.exit(1); console.log('Authoritative sources:', s.length)"
+
+      - name: Remove one-time generators and promote exact tested tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm -f .github/workflows/apply-authoritative-source-wave1.yml .github/workflows/promote-authoritative-source-wave1.yml || true
+          if ! git diff --cached --quiet; then
+            git commit -m 'Finalize authoritative-source wave 1 release'
+          fi
+          git push origin HEAD:main
