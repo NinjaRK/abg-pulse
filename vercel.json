@@ -73,6 +73,15 @@
     },
     "api/social-ingest.js": {
       "maxDuration": 15
+    },
+    "api/cron-scan.js": {
+      "maxDuration": 60
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron-scan",
+      "schedule": "7 * * * *"
+    }
+  ]
 }

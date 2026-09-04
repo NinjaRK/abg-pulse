@@ -33,3 +33,10 @@
 - Hardened official-source date extraction against cross-card date leakage.
 - Fixed restricted-storage initialization in QA/private browsing contexts.
 - Expanded automated coverage to 26 passing tests.
+
+## 5.4.0 — persistence orchestration
+
+- Added a secure Vercel Cron scan-to-ingest endpoint.
+- Added idempotent two-hour overlap scanning for missed-window resilience.
+- Kept automation dormant until server-side database and secrets are connected.
+- Added deterministic authentication, configuration and orchestration tests.

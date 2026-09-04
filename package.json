@@ -1,6 +1,6 @@
 {
   "name": "abg-pulse",
-  "version": "5.0.1",
+  "version": "5.4.0",
   "private": true,
   "type": "module",
   "description": "Governed ABG corporate-intelligence PWA with transparent weighted milestone job meter and explicit resource dependencies.",
@@ -8,7 +8,7 @@
     "postinstall": "node bootstrap.mjs",
     "serve": "node scripts/serve.mjs",
     "test": "node --test tests/*.test.mjs && node tests/validate-data.mjs",
-    "check": "node --check app.js && node --check core.mjs && node --check official.mjs && node --check api/scan.js && node --check api/events.js && node --check api/ingest.js && node --check api/social-ingest.js && node --check api/health.js && node --check api/progress.js && node tests/validate-data.mjs"
+    "check": "node --check app.js && node --check core.mjs && node --check official.mjs && node --check api/scan.js && node --check api/events.js && node --check api/ingest.js && node --check api/social-ingest.js && node --check api/health.js && node --check api/progress.js && node tests/validate-data.mjs && node --check api/cron-scan.js"
   },
   "engines": {
     "node": ">=20 <25"
