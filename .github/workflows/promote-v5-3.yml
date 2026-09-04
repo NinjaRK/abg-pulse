@@ -1,0 +1,81 @@
+name: Promote verified ABG Pulse v5.3 instrumentation
+
+on:
+  push:
+    branches:
+      - sol/dependability-instrumentation-v5-3
+    paths:
+      - '.promote/dependability-v5.3.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install without running bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run all objective gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+          node --check lib/coverage.mjs
+          node --check lib/dependability.mjs
+          node --check lib/source-health.mjs
+          node --check lib/registry-diff.mjs
+          node --check api/coverage.js
+          node --check api/dependability.js
+          node --check scripts/evaluate-dependability.mjs
+          node --check scripts/evaluate-source-health.mjs
+          node --check scripts/compare-registry.mjs
+
+      - name: Enforce fail-closed objective truth
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const ledger = JSON.parse(readFileSync('data/dependability-ledger.json', 'utf8'));
+          if (ledger.status !== 'not_started' && (!Array.isArray(ledger.days) || ledger.days.length < 30)) {
+            throw new Error('The dependability ledger cannot advance without evidence.');
+          }
+          if (ledger.referenceSet?.owner !== 'independent') throw new Error('Reference-set independence was weakened.');
+          const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
+          if (!packageJson.scripts?.test) throw new Error('Test command is missing.');
+          console.log('Objective-truth gate passed.');
+          NODE
+
+      - name: Confirm main has not moved outside the candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after this branch was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Record verified promotion and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git rm -f .promote/dependability-v5.3.ready
+          git commit -m 'Promote verified dependability instrumentation'
+          git push origin HEAD:main
