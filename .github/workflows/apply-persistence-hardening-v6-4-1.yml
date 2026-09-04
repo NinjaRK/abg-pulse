@@ -1,0 +1,115 @@
+name: Apply and promote ABG Pulse persistence hardening v6.4.1
+
+on:
+  push:
+    branches:
+      - sol/persistence-hardening-v6-4-1
+    paths:
+      - '.build/persistence-v6.4.1.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: abg_pulse_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d abg_pulse_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: abg_pulse_test
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Confirm the persistence foundation is present
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f db/migrations/001_abg_pulse_core.sql
+          test -f db/test-canary-v2.sql
+          test -f lib/persistence.mjs
+          test -f api/storage-status.js
+
+      - name: Apply immutable snapshot hardening
+        run: node scripts/harden-persistence-snapshots-v6.4.1.mjs
+
+      - name: Install without bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run all JavaScript checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Create Supabase-compatible test roles
+        shell: bash
+        run: |
+          set -euo pipefail
+          for role in anon authenticated service_role; do
+            psql -tAc "select 1 from pg_roles where rolname='${role}'" | grep -q 1 || psql -v ON_ERROR_STOP=1 -c "create role ${role} nologin;"
+          done
+
+      - name: Apply schema and execute the end-to-end canary
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -f db/migrations/001_abg_pulse_core.sql
+          psql -v ON_ERROR_STOP=1 -f db/test-canary-v2.sql
+
+      - name: Prove snapshot creation and immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -tAc "select count(*) from public.pulse_article_snapshots where article_id='evidence-1' and content_fingerprint='fingerprint-1';" | grep -qx 1
+          if psql -v ON_ERROR_STOP=1 -c "update public.pulse_article_snapshots set title='tampered' where article_id='evidence-1';"; then
+            echo 'Immutable article snapshot accepted an update.'
+            exit 1
+          fi
+
+      - name: Refuse promotion if main moved outside candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after this candidate was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Commit verified hardening and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add db/migrations/001_abg_pulse_core.sql db/test-canary-v2.sql package.json data/release.json CHANGELOG.md
+          git rm -f .build/persistence-v6.4.1.ready scripts/harden-persistence-snapshots-v6.4.1.mjs .github/workflows/apply-persistence-hardening-v6-4-1.yml
+          git commit -m 'Preserve immutable article retrieval snapshots'
+          git push origin HEAD:sol/persistence-hardening-v6-4-1
+          git push origin HEAD:main
