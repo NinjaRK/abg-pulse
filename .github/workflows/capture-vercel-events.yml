@@ -1,0 +1,38 @@
+name: Capture Vercel deployment diagnostics
+
+on:
+  repository_dispatch:
+    types:
+      - vercel.deployment.ready
+      - vercel.deployment.success
+      - vercel.deployment.error
+      - vercel.deployment.failed
+      - vercel.deployment.canceled
+      - vercel.deployment.ignored
+      - vercel.deployment.skipped
+      - vercel.deployment.pending
+      - vercel.deployment.promoted
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Capture complete event payload
+        env:
+          EVENT_JSON: ${{ toJson(github.event) }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s\n' "$EVENT_JSON" | tee vercel-event.json
+          echo "Event name: $GITHUB_EVENT_NAME"
+          echo "Action: ${GITHUB_EVENT_ACTION:-unknown}"
+      - name: Upload diagnostic payload
+        uses: actions/upload-artifact@v4
+        with:
+          name: vercel-event-${{ github.run_id }}
+          path: vercel-event.json
+          retention-days: 7
