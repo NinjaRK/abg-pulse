@@ -1,0 +1,131 @@
+name: Apply and promote ABG Pulse operational learning v5.9
+
+on:
+  push:
+    branches:
+      - sol/operational-learning-v5-9
+    paths:
+      - '.build/operational-learning-v5.9.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out candidate with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Apply deterministic operational-learning integration patch
+        run: node scripts/apply-operational-learning-v5.9.mjs
+
+      - name: Install without bootstrap side effects
+        run: npm install --ignore-scripts
+
+      - name: Run full product verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Verify baseline learner and benchmark runner fail closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/abg-learning
+          cat > /tmp/abg-learning/scan.json <<'JSON'
+          {
+            "events": [
+              {
+                "id": "event-1",
+                "title": "UltraTech acquires 51% of Example Cement for Rs 3,954 crore",
+                "entityIds": ["ultratech"],
+                "publishedAt": "2026-09-03T12:00:00Z",
+                "classification": "must_know",
+                "claims": [{"id":"claim-1","material":true,"evidence":["https://example.com/disclosure/123"]}]
+              }
+            ],
+            "meta": {
+              "scannedAt": "2026-09-04T00:00:00Z",
+              "queryCount": 2,
+              "successfulQueries": 2,
+              "eventCount": 1,
+              "sourceHealth": {"summary":{"tier0ExplicitFailures":0,"tier0SilentFailures":0}},
+              "sourceChecks": [
+                {"name":"source-a","provider":"Official","tier":"tier0","ok":true,"status":"healthy","itemCount":1,"emptyIsValid":true,"schemaValidated":true,"durationMs":20},
+                {"name":"source-b","provider":"News","tier":"tier1","ok":true,"status":"healthy","itemCount":5,"durationMs":30}
+              ]
+            }
+          }
+          JSON
+          cat > /tmp/abg-learning/baselines.json <<'JSON'
+          {"_meta":{"minimumSamplesBeforeEnforcement":5}}
+          JSON
+          node scripts/update-source-health-baselines.mjs /tmp/abg-learning/scan.json /tmp/abg-learning/baselines.json /tmp/abg-learning/learned.json
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const learned = JSON.parse(readFileSync('/tmp/abg-learning/learned.json', 'utf8'));
+          if (learned._meta.learnedSourceCount !== 2) throw new Error('Baseline learner did not record every source.');
+          if (learned._meta.status !== 'learning') throw new Error('One sample must not be called a ready baseline.');
+          NODE
+          cat > /tmp/abg-learning/reference.json <<'JSON'
+          {
+            "date":"2026-09-03",
+            "assembledIndependently":true,
+            "reviewer":"automated-test",
+            "method":"Independent official-source test fixture",
+            "events":[{
+              "id":"reference-1",
+              "title":"UltraTech Cement acquires 51% stake in Example Cement for Rs 3,954 crore",
+              "materiality":"critical",
+              "entities":["ultratech"],
+              "occurredAt":"2026-09-03T10:00:00Z",
+              "sources":[{"url":"https://example.com/disclosure/123","tier":"tier0"}]
+            }]
+          }
+          JSON
+          node scripts/run-daily-benchmark.mjs /tmp/abg-learning/reference.json /tmp/abg-learning/scan.json /tmp/abg-learning/benchmark.json
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const result = JSON.parse(readFileSync('/tmp/abg-learning/benchmark.json', 'utf8'));
+          if (!result.evaluation.pass) throw new Error('Valid independent benchmark fixture did not pass.');
+          if (result.matching.summary.matches !== 1) throw new Error('Reference matching failed.');
+          NODE
+
+      - name: Confirm source-health API remains explicit about limitations
+        shell: bash
+        run: |
+          grep -q "does not measure recall" api/source-health.js
+          grep -q "Independent recall benchmarking" api/health.js
+
+      - name: Refuse promotion if main moved outside candidate history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD || {
+            echo 'Main moved after the candidate branch was created; refusing unsafe promotion.'
+            exit 1
+          }
+
+      - name: Commit verified integration and fast-forward main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add lib/benchmark-matcher.mjs tests/benchmark-matcher.test.mjs scripts/update-source-health-baselines.mjs scripts/run-daily-benchmark.mjs api/source-health.js api/health.js api/dependability.js .github/workflows/learn-source-baselines.yml package.json
+          git rm -f .build/operational-learning-v5.9.ready scripts/apply-operational-learning-v5.9.mjs .github/workflows/apply-operational-learning-v5-9.yml
+          git commit -m 'Add operational source learning and benchmark matching'
+          git push origin HEAD:sol/operational-learning-v5-9
+          git push origin HEAD:main
