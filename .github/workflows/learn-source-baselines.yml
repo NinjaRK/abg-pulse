@@ -1,0 +1,95 @@
+name: Learn ABG Pulse source-health baselines
+
+on:
+  schedule:
+    - cron: '45 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: abg-pulse-source-baseline-learning
+  cancel-in-progress: false
+
+jobs:
+  learn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
+    steps:
+      - name: Check out current source of truth
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Fetch a fresh production scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 120 \
+            "$PRODUCTION_URL/api/scan" \
+            -o evidence/scan.json
+
+      - name: Learn transparent per-source baselines
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp data/source-health-baselines.json evidence/baselines-before.json
+          node scripts/update-source-health-baselines.mjs \
+            evidence/scan.json \
+            data/source-health-baselines.json \
+            data/source-health-baselines.json
+          cp data/source-health-baselines.json evidence/baselines-after.json
+          node scripts/evaluate-source-health.mjs \
+            evidence/scan.json \
+            data/source-health-baselines.json \
+            evidence/source-health-evaluation.json || true
+
+      - name: Validate learned data before committing
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('data/source-health-baselines.json', 'utf8'));
+          const { _meta, ...sources } = payload;
+          if (!_meta || !Number.isFinite(Number(_meta.minimumSamplesBeforeEnforcement))) throw new Error('Baseline metadata is invalid.');
+          if (!Object.keys(sources).length) throw new Error('No source baselines were learned.');
+          for (const [sourceId, row] of Object.entries(sources)) {
+            if (!Array.isArray(row.samples) || row.samples.length > 30) throw new Error(`Invalid sample history for ${sourceId}.`);
+            if (row.samples.some((sample) => !sample.date || !Number.isFinite(Number(sample.itemCount)))) throw new Error(`Invalid sample for ${sourceId}.`);
+          }
+          console.log(JSON.stringify(_meta, null, 2));
+          NODE
+
+      - name: Commit the new operating evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/source-health-baselines.json; then
+            echo 'No baseline change to commit.'
+            exit 0
+          fi
+          git config user.name 'ABG Pulse Evidence Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/source-health-baselines.json
+          git commit -m "Record source-health operating evidence $(date -u +%Y-%m-%d)"
+          git push origin HEAD:main
+
+      - name: Preserve the full learning evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: abg-pulse-source-baselines-${{ github.run_id }}
+          path: evidence/
+          if-no-files-found: error
+          retention-days: 90
