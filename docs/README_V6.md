@@ -1,0 +1,1 @@
+See `OBJECTIVE_AND_MILESTONES_V6.md` for the governing objective, evidence-weighted Job Meter, remaining milestones and critical path. The v6 build baseline is 40% verified complete; built-but-unverified work does not inflate that figure.
