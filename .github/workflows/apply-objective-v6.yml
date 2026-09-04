@@ -49,9 +49,11 @@ jobs:
         run: |
           set -euo pipefail
           rm -f .bootstrap/objective-v6.ready .bootstrap/objective-v6.patch.gz.b64.*
-          rm -f .github/workflows/apply-objective-v6.yml
+          rm -f .github/workflows/refresh-live-snapshot.yml
           git config user.name 'ABG Pulse Build Bot'
           git config user.email 'actions@users.noreply.github.com'
           git add -A
+          git restore --staged .github/workflows/apply-objective-v6.yml || true
+          git restore .github/workflows/apply-objective-v6.yml || true
           git commit -m 'Build objective-led milestones, dual Job Meter and governed snapshots'
           git push origin HEAD:sol/objective-milestones-v6
