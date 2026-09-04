@@ -1,0 +1,56 @@
+name: ABG Pulse objective gates
+
+on:
+  push:
+    branches:
+      - 'sol/**'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install
+        run: npm install --ignore-scripts
+
+      - name: Run existing product tests
+        run: npm test
+
+      - name: Run syntax and governed-data checks
+        run: npm run check
+
+      - name: Check new dependability instrumentation
+        run: |
+          node --check lib/coverage.mjs
+          node --check lib/dependability.mjs
+          node --check api/coverage.js
+          node --check api/dependability.js
+          node --check scripts/evaluate-dependability.mjs
+
+      - name: Confirm dependability claims remain fail-closed
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const ledger = JSON.parse(readFileSync('data/dependability-ledger.json', 'utf8'));
+          if (ledger.status === 'proven' && (!Array.isArray(ledger.days) || ledger.days.length < 30)) {
+            throw new Error('Dependability cannot be marked proven without 30 daily records.');
+          }
+          if (ledger.referenceSet?.status === 'connected' && ledger.referenceSet?.owner !== 'independent') {
+            throw new Error('The reference set must remain independent of the production scanner.');
+          }
+          console.log('Dependability claim gate passed.');
+          NODE
