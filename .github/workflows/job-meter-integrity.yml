@@ -1,0 +1,31 @@
+name: Verify ABG Pulse Job Meter integrity
+
+on:
+  pull_request:
+    paths:
+      - 'data/build-milestones.json'
+      - 'api/progress.js'
+      - 'tests/progress-meter.test.mjs'
+      - 'docs/OBJECTIVE_AND_MILESTONES_V6.md'
+  push:
+    branches: [main]
+    paths:
+      - 'data/build-milestones.json'
+      - 'api/progress.js'
+      - 'tests/progress-meter.test.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-job-meter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run Job Meter integrity tests
+        run: node --test tests/progress-meter.test.mjs
