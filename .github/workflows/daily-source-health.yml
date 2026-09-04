@@ -1,0 +1,55 @@
+name: Audit ABG Pulse source health
+
+on:
+  schedule:
+    - cron: '15 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
+    steps:
+      - name: Check out source-health evaluator
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Fetch a fresh production scan
+        run: |
+          mkdir -p source-health
+          curl -L -fS --retry 3 --retry-delay 5 --max-time 120 "$PRODUCTION_URL/api/scan" -o source-health/scan.json
+
+      - name: Evaluate explicit and silent source failures
+        shell: bash
+        run: |
+          set +e
+          node scripts/evaluate-source-health.mjs \
+            source-health/scan.json \
+            data/source-health-baselines.json \
+            source-health/evaluation.json
+          result=$?
+          set -e
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('source-health/evaluation.json', 'utf8'));
+          console.log(JSON.stringify(payload.evaluation.summary, null, 2));
+          NODE
+          exit "$result"
+
+      - name: Preserve source-health evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: abg-pulse-source-health-${{ github.run_id }}
+          path: source-health/
+          if-no-files-found: error
+          retention-days: 90
