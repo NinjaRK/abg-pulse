@@ -36,7 +36,7 @@ test('scan keeps corporate developments and rejects stock tips, snippet-only rou
     assert.ok(body.meta.rejectionReasons.routine_market_advice >= 1);
     assert.ok(body.meta.rejectionReasons.entity_only_in_snippet >= 1);
     assert.ok(body.meta.rejectionReasons.public_question >= 1);
-    assert.equal(body.meta.serviceVersion, '5.2.0');
+    assert.equal(body.meta.serviceVersion, '6.0.0');
   } finally {
     global.fetch = prev;
   }

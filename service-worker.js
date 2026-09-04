@@ -1,4 +1,4 @@
-const CACHE_NAME = 'abg-pulse-shell-v5';
+const CACHE_NAME = 'abg-pulse-shell-v6';
 const SHELL = [
   '/', '/index.html', '/styles.css', '/app.js', '/core.mjs',
   '/manifest.webmanifest', '/assets/icon.svg', '/assets/icon-192.png', '/assets/icon-512.png',

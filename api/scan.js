@@ -13,6 +13,12 @@ import {
   attachRelatedPublicConversation
 } from '../core.mjs';
 import { fetchOfficialSource, auditOfficialRegistry } from '../official.mjs';
+import {
+  SnapshotError,
+  isAuthorisedFullScan,
+  loadLiveSnapshot,
+  shouldUseGovernedSnapshot
+} from '../lib/live-snapshot.mjs';
 
 // Literal asset paths ensure Vercel includes every governed JSON file in the
 // serverless function bundle.
@@ -212,11 +218,8 @@ function buildJobs(window) {
   return jobs;
 }
 
-export default async function handler(req, res) {
-  if (req.method !== 'GET') return send(res, 405, { error: 'method_not_allowed' });
-
-  const startedAt = new Date();
-  const window = requestedWindow(req, startedAt);
+export async function performLiveScan({ window, startedAt = new Date() } = {}) {
+  if (!window?.start || !window?.end) throw new TypeError('performLiveScan requires an ISO start and end window.');
   const jobs = buildJobs(window);
   try {
     const settled = await Promise.allSettled(jobs.map((job) => runWithTimeout(job.run, job.provider === 'Official source' || job.provider === 'Official registry' ? 7000 : 9000)));
@@ -273,13 +276,14 @@ export default async function handler(req, res) {
     const providerSummary = [...new Set(jobs.map((job) => job.provider))];
     const registryAudits = sourceChecks.map((check) => check.registryAudit).filter(Boolean);
 
-    return send(res, 200, {
+    return {
       events,
       entityUniverse,
       meta: {
         scannedAt: new Date().toISOString(),
+        deliveryMode: 'live-fanout',
         providers: providerSummary,
-        serviceVersion: '5.2.0',
+        serviceVersion: '6.0.0',
         queryCount: jobs.length,
         officialSourceCount: officialSources.length,
         registryAudits,
@@ -303,26 +307,76 @@ export default async function handler(req, res) {
         errors,
         windowStart: window.start,
         windowEnd: window.end,
-        requestedWindowStart: window.requestedStart,
-        windowCapped: window.capped
+        requestedWindowStart: window.requestedStart || window.start,
+        windowCapped: Boolean(window.capped)
       }
-    }, true);
+    };
   } catch (error) {
-    return send(res, 502, {
+    return {
       error: 'live_scan_failed',
       message: String(error?.message || error),
       events: [],
       entityUniverse,
       meta: {
         scannedAt: new Date().toISOString(),
-        serviceVersion: '5.2.0',
+        deliveryMode: 'live-fanout',
+        serviceVersion: '6.0.0',
         queryCount: jobs.length,
         successfulQueries: 0,
         sourceChecks: [],
         errors: [{ provider: 'scan', query: 'all', error: String(error?.message || error) }],
         windowStart: window.start,
-        windowEnd: window.end
+        windowEnd: window.end,
+        requestedWindowStart: window.requestedStart || window.start,
+        windowCapped: Boolean(window.capped)
       }
-    });
+    };
   }
+}
+
+export default async function handler(req, res) {
+  if (req.method !== 'GET') return send(res, 405, { error: 'method_not_allowed' });
+
+  const startedAt = new Date();
+  const window = requestedWindow(req, startedAt);
+  const forceLiveScan = isAuthorisedFullScan(req);
+
+  if (shouldUseGovernedSnapshot(req) && !forceLiveScan) {
+    try {
+      const payload = await loadLiveSnapshot({
+        window,
+        now: startedAt,
+        staleAfterMinutes: Number(process.env.LIVE_SNAPSHOT_STALE_MINUTES || 90),
+        minimumSuccessRatio: Number(process.env.LIVE_SNAPSHOT_MIN_SUCCESS_RATIO || 0.2)
+      });
+      return send(res, 200, payload, true);
+    } catch (error) {
+      const snapshotError = error instanceof SnapshotError
+        ? error
+        : new SnapshotError('snapshot_read_failed', String(error?.message || error), 503);
+      return send(res, snapshotError.status, {
+        error: snapshotError.code,
+        message: snapshotError.message,
+        detail: snapshotError.detail,
+        events: [],
+        entityUniverse,
+        meta: {
+          scannedAt: new Date().toISOString(),
+          deliveryMode: 'governed-snapshot',
+          serviceVersion: '6.0.0',
+          sourceChecks: [],
+          queryCount: 0,
+          successfulQueries: 0,
+          errors: [{ provider: 'governed-snapshot', query: 'live-snapshot', error: snapshotError.message }],
+          windowStart: window.start,
+          windowEnd: window.end,
+          requestedWindowStart: window.requestedStart,
+          windowCapped: window.capped
+        }
+      });
+    }
+  }
+
+  const payload = await performLiveScan({ window, startedAt });
+  return send(res, 200, payload, true);
 }
