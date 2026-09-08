@@ -1,0 +1,265 @@
+name: Build authoritative event integration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-authoritative-event-integration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: build-authoritative-event-integration
+  cancel-in-progress: false
+
+jobs:
+  build-test-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BRANCH: sol/integrate-authoritative-events-v6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Create a fresh integration branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git switch -C "$BRANCH" origin/main
+      - name: Integrate direct authoritative records into live event generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const path = 'api/scan.js';
+          let source = readFileSync(path, 'utf8');
+          const helperMarker = 'export async function fetchAuthoritativeSnapshotArticles';
+          if (!source.includes(helperMarker)) {
+            const entityAnchor = "const entityUniverse = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entity-universe-summary.json', import.meta.url)), 'utf8'));";
+            const anchorIndex = source.indexOf(entityAnchor);
+            if (anchorIndex < 0) throw new Error('Could not locate the entity-universe load anchor in api/scan.js.');
+            const insertionPoint = anchorIndex + entityAnchor.length;
+            const helper = `
+
+const AUTHORITATIVE_SNAPSHOT_URL = process.env.AUTHORITATIVE_SNAPSHOT_URL || 'https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/authoritative-wave1.json';
+const AUTHORITATIVE_SNAPSHOT_STALE_MINUTES = Math.max(30, Math.min(1440, Number(process.env.AUTHORITATIVE_SNAPSHOT_STALE_MINUTES || 120)));
+
+export async function fetchAuthoritativeSnapshotArticles({ window, fetchImpl = fetch, now = new Date(), url = AUTHORITATIVE_SNAPSHOT_URL } = {}) {
+  if (!window?.start || !window?.end) throw new TypeError('Authoritative snapshot integration requires a start and end window.');
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  try {
+    const response = await fetchImpl(url, {
+      redirect: 'follow',
+      signal: controller.signal,
+      headers: { Accept: 'application/json', 'User-Agent': 'ABG-Pulse/1.0 authoritative event integration' }
+    });
+    if (!response.ok) throw new Error(\`Authoritative snapshot returned HTTP \${response.status}.\`);
+    const payload = await response.json();
+    if (!Array.isArray(payload?.records)) throw new Error('Authoritative snapshot records are missing.');
+    if (!Array.isArray(payload?.sourceChecks)) throw new Error('Authoritative snapshot source checks are missing.');
+    if (payload?.quality?.publishable !== true) throw new Error('Authoritative snapshot did not pass its publication gate.');
+    const generatedAt = new Date(payload.generatedAt);
+    if (Number.isNaN(generatedAt.getTime())) throw new Error('Authoritative snapshot generation time is invalid.');
+    const ageMinutes = Math.max(0, (now.getTime() - generatedAt.getTime()) / 60000);
+    if (ageMinutes > AUTHORITATIVE_SNAPSHOT_STALE_MINUTES) {
+      throw new Error(\`Authoritative snapshot is stale at \${Math.round(ageMinutes)} minutes.\`);
+    }
+    const startMs = new Date(window.start).getTime();
+    const endMs = new Date(window.end).getTime();
+    return payload.records
+      .filter((record) => {
+        const publishedAt = new Date(record.publishedAt).getTime();
+        return Number.isFinite(publishedAt) && publishedAt >= startMs && publishedAt <= endMs;
+      })
+      .map((record) => ({
+        title: record.title,
+        description: record.description || '',
+        link: record.url,
+        url: record.url,
+        sourceUrl: record.url,
+        publishedAt: record.publishedAt,
+        pubDate: record.publishedAt,
+        source: record.authority || record.sourceName || 'Official authority',
+        sourceName: record.sourceName || record.authority || 'Official authority',
+        provider: 'Direct authoritative snapshot',
+        tier: 0,
+        official: true,
+        entityHints: Array.isArray(record.entityHints) ? record.entityHints : [],
+        authoritativeSourceId: record.sourceId || null,
+        filingType: record.filingType || null,
+        category: record.category || 'Official disclosure',
+        rights: record.rights || 'public-official-metadata',
+        attachmentUrl: record.attachmentUrl || null,
+        snapshotGeneratedAt: payload.generatedAt,
+        snapshotSourceCommit: payload?.source?.commitSha || null
+      }));
+  } catch (error) {
+    if (error?.name === 'AbortError') throw new Error('Authoritative snapshot request timed out.');
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}`;
+            source = `${source.slice(0, insertionPoint)}${helper}${source.slice(insertionPoint)}`;
+          }
+
+          const jobMarker = "provider: 'Direct authoritative snapshot'";
+          if (!source.includes(jobMarker)) {
+            const buildStart = source.indexOf('function buildJobs(window)');
+            if (buildStart < 0) throw new Error('Could not locate buildJobs(window).');
+            const returnAnchor = '\n  return jobs;\n}';
+            const returnIndex = source.indexOf(returnAnchor, buildStart);
+            if (returnIndex < 0) throw new Error('Could not locate the buildJobs return anchor.');
+            const job = `
+  if (process.env.AUTHORITATIVE_SNAPSHOT_DISABLED !== '1') {
+    jobs.push({
+      provider: 'Direct authoritative snapshot',
+      query: 'SEC/NSE/BSE and regulator wave one',
+      run: () => fetchAuthoritativeSnapshotArticles({ window })
+    });
+  }
+`;
+            source = `${source.slice(0, returnIndex)}${job}${source.slice(returnIndex)}`;
+          }
+          writeFileSync(path, source);
+          NODE
+      - name: Add direct-event integration tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > tests/authoritative-event-integration.test.mjs <<'EOF'
+          import test from 'node:test';
+          import assert from 'node:assert/strict';
+          import { fetchAuthoritativeSnapshotArticles } from '../api/scan.js';
+
+          const window = {
+            start: '2026-09-08T00:00:00.000Z',
+            end: '2026-09-08T12:00:00.000Z'
+          };
+
+          const validPayload = {
+            generatedAt: '2026-09-08T11:30:00.000Z',
+            quality: { publishable: true },
+            source: { commitSha: 'abc123' },
+            sourceChecks: [{ sourceId: 'sec-novelis', ok: true }],
+            records: [
+              {
+                sourceId: 'sec-novelis',
+                sourceName: 'SEC EDGAR — Novelis Inc.',
+                authority: 'U.S. Securities and Exchange Commission',
+                title: 'Novelis Inc. — Current report',
+                description: 'Current report',
+                url: 'https://www.sec.gov/example.htm',
+                publishedAt: '2026-09-08T10:00:00.000Z',
+                filingType: '8-K',
+                rights: 'public-filing-metadata',
+                entityHints: ['novelis']
+              },
+              {
+                sourceId: 'sec-novelis',
+                title: 'Old filing',
+                url: 'https://www.sec.gov/old.htm',
+                publishedAt: '2026-08-01T10:00:00.000Z',
+                entityHints: ['novelis']
+              }
+            ]
+          };
+
+          const response = (payload, status = 200) => ({
+            ok: status >= 200 && status < 300,
+            status,
+            json: async () => payload
+          });
+
+          test('authoritative records enter the scan as Tier-0 traceable articles', async () => {
+            const articles = await fetchAuthoritativeSnapshotArticles({
+              window,
+              now: new Date('2026-09-08T12:00:00.000Z'),
+              fetchImpl: async () => response(validPayload)
+            });
+            assert.equal(articles.length, 1);
+            assert.equal(articles[0].provider, 'Direct authoritative snapshot');
+            assert.equal(articles[0].tier, 0);
+            assert.equal(articles[0].official, true);
+            assert.deepEqual(articles[0].entityHints, ['novelis']);
+            assert.equal(articles[0].snapshotSourceCommit, 'abc123');
+            assert.match(articles[0].url, /^https:\/\/www\.sec\.gov\//);
+          });
+
+          test('stale authoritative evidence fails closed instead of entering the feed', async () => {
+            await assert.rejects(() => fetchAuthoritativeSnapshotArticles({
+              window,
+              now: new Date('2026-09-08T16:00:00.000Z'),
+              fetchImpl: async () => response(validPayload)
+            }), /stale/i);
+          });
+
+          test('unpublishable authoritative snapshots fail closed', async () => {
+            await assert.rejects(() => fetchAuthoritativeSnapshotArticles({
+              window,
+              now: new Date('2026-09-08T12:00:00.000Z'),
+              fetchImpl: async () => response({ ...validPayload, quality: { publishable: false } })
+            }), /publication gate/i);
+          });
+
+          test('HTTP failures stay visible to source-health handling', async () => {
+            await assert.rejects(() => fetchAuthoritativeSnapshotArticles({
+              window,
+              now: new Date('2026-09-08T12:00:00.000Z'),
+              fetchImpl: async () => response({}, 503)
+            }), /HTTP 503/);
+          });
+          EOF
+      - name: Run complete regression and syntax gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          node --check api/scan.js
+      - name: Rebase onto the latest main and re-run the focused gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add api/scan.js tests/authoritative-event-integration.test.mjs
+          git commit -m 'Integrate direct authoritative evidence into event generation'
+          git fetch origin main
+          git rebase origin/main
+          node --test tests/authoritative-event-integration.test.mjs
+          npm test
+          git push --force-with-lease origin HEAD:"$BRANCH"
+      - name: Create or update the pull request
+        shell: bash
+        run: |
+          set -euo pipefail
+          pr_number=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --base main --state open --json number --jq '.[0].number // empty')
+          if [ -z "$pr_number" ]; then
+            gh pr create \
+              --repo "$GITHUB_REPOSITORY" \
+              --head "$BRANCH" \
+              --base main \
+              --title 'Integrate direct authoritative evidence into the ABG Pulse feed' \
+              --body 'Adds the separately governed SEC/NSE/BSE/regulator snapshot to event generation as traceable Tier-0 evidence. Stale, malformed or unpublishable snapshots fail closed. The full regression suite and focused integration tests must pass before promotion.'
+            pr_number=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --base main --state open --json number --jq '.[0].number')
+          fi
+          echo "PR_NUMBER=$pr_number" >> "$GITHUB_ENV"
+      - name: Merge the tested integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh pr merge "$PR_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --squash \
+            --delete-branch \
+            --subject 'Integrate direct authoritative evidence into event generation'
