@@ -1,0 +1,81 @@
+name: Verify authoritative source production endpoint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/authoritative.js'
+      - 'config/authoritative-sources-wave1.json'
+      - 'lib/authoritative-sources.mjs'
+      - 'scripts/refresh-authoritative-wave1.mjs'
+      - '.github/workflows/refresh-authoritative-wave1.yml'
+      - '.github/workflows/verify-authoritative-production.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-authoritative-production
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
+      EXPECTED_SHA: ${{ github.sha }}
+    steps:
+      - name: Wait for the exact production commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 32); do
+            code=$(curl -L -sS --max-time 30 -o /tmp/health.json -w '%{http_code}' "$PRODUCTION_URL/api/health" || true)
+            deployed_sha=$(node --input-type=module -e "
+              import { readFileSync } from 'node:fs';
+              try { process.stdout.write(JSON.parse(readFileSync('/tmp/health.json','utf8'))?.deployment?.commitSha || '') } catch { process.stdout.write('') }
+            " || true)
+            if [ "$code" = '200' ] && [ "$deployed_sha" = "$EXPECTED_SHA" ]; then
+              echo "Exact commit $EXPECTED_SHA is live."
+              exit 0
+            fi
+            echo "Attempt $attempt: health=$code deployed=${deployed_sha:-missing} expected=$EXPECTED_SHA"
+            sleep 15
+          done
+          echo 'Exact production commit did not become live within the verification window.'
+          exit 1
+      - name: Verify fail-closed authoritative endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L -fS --max-time 60 "$PRODUCTION_URL/api/authoritative?hours=24" -o /tmp/authoritative.json
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('/tmp/authoritative.json', 'utf8'));
+          if (!Array.isArray(payload.records)) throw new Error('Authoritative records are missing.');
+          if (payload?.meta?.deliveryMode !== 'governed-authoritative-snapshot') throw new Error('Wrong authoritative delivery mode.');
+          if (!Array.isArray(payload?.meta?.sourceChecks) || payload.meta.sourceChecks.length < 1) throw new Error('Source-health evidence is missing.');
+          if (!Number.isFinite(payload?.meta?.ageMinutes)) throw new Error('Snapshot freshness is missing.');
+          if (payload.meta.ageMinutes > payload.meta.staleAfterMinutes) throw new Error('Stale authoritative data was served.');
+          if (!payload.meta.sourceCommit) throw new Error('Snapshot source commit is missing.');
+          console.log(JSON.stringify({
+            records: payload.records.length,
+            sources: payload.meta.sourceCount,
+            successfulSources: payload.meta.successfulSourceCount,
+            failedSources: payload.meta.failedSourceCount,
+            ageMinutes: payload.meta.ageMinutes,
+            sourceCommit: payload.meta.sourceCommit
+          }, null, 2));
+          NODE
+      - name: Upload production proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: authoritative-production-${{ github.sha }}
+          path: |
+            /tmp/health.json
+            /tmp/authoritative.json
+          if-no-files-found: warn
+          retention-days: 30
