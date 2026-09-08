@@ -1,0 +1,64 @@
+name: Verify installation preserves source
+
+on:
+  push:
+    branches: [sol/install-integrity-20260908]
+  pull_request:
+    paths:
+      - 'bootstrap.mjs'
+      - 'package.json'
+      - 'tests/install-integrity.test.mjs'
+      - '.github/workflows/install-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: install-integrity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Preserve exact checked-out source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/install-integrity
+          git rev-parse HEAD > /tmp/install-integrity/SOURCE_COMMIT.txt
+          git archive --format=tar.gz HEAD > /tmp/install-integrity/source.tgz
+      - name: Install and reject changes to tracked application source
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --package-lock=false --ignore-scripts=false --no-audit --no-fund 2>&1 | tee /tmp/install-integrity/install.log
+          git diff --name-only > /tmp/install-integrity/changed-paths.txt
+          if ! git diff --quiet; then
+            echo 'FAIL: installation changed tracked source.'
+            cat /tmp/install-integrity/changed-paths.txt
+            exit 1
+          fi
+          echo 'PASS: installation left tracked source unchanged.'
+      - name: Run product regression tests after installation
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test 2>&1 | tee /tmp/install-integrity/tests.log
+          npm run check 2>&1 | tee /tmp/install-integrity/check.log
+      - name: Upload source and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: install-integrity-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/install-integrity/
+          if-no-files-found: error
+          retention-days: 14
