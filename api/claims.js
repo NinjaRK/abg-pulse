@@ -21,7 +21,7 @@ function boundedNumber(value, fallback, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, number));
 }
 
-const normalize = (value = '') => String(value).toLowerCase().replace(/\s+/g, ' ').trim();
+const normalize = (value = '') => String(value ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
 
 export function validateClaimEvidenceGraph(payload, { now = new Date(), staleAfterMinutes = DEFAULT_STALE_MINUTES } = {}) {
   if (!payload || typeof payload !== 'object') throw Object.assign(new Error('Claim-evidence graph is not an object.'), { code: 'claim_graph_invalid' });
