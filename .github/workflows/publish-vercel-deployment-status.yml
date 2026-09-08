@@ -1,0 +1,112 @@
+name: Publish Vercel deployment status
+
+on:
+  repository_dispatch:
+    types:
+      - vercel.deployment.ready
+      - vercel.deployment.success
+      - vercel.deployment.error
+      - vercel.deployment.failed
+      - vercel.deployment.canceled
+      - vercel.deployment.ignored
+      - vercel.deployment.skipped
+      - vercel.deployment.pending
+      - vercel.deployment.promoted
+      - vercel.deployment.blocked
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-vercel-deployment-status
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build a transparent deployment-status record
+        env:
+          EVENT_JSON: ${{ toJson(github.event) }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_ACTION: ${{ github.event.action }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/deployment-status
+          node --input-type=module <<'NODE'
+          import { writeFileSync } from 'node:fs';
+          const event = JSON.parse(process.env.EVENT_JSON || '{}');
+          const action = process.env.EVENT_ACTION || 'manual';
+          const payload = event.client_payload || {};
+          const deployment = payload.deployment || payload;
+          const normalizedAction = String(action).toLowerCase();
+          const healthy = /ready|success|promoted/.test(normalizedAction);
+          const terminalFailure = /failed|error|blocked|canceled/.test(normalizedAction);
+          const record = {
+            schemaVersion: '1.0.0',
+            observedAt: new Date().toISOString(),
+            eventName: process.env.EVENT_NAME,
+            action,
+            state: healthy ? 'healthy' : (terminalFailure ? 'failed' : 'pending'),
+            project: {
+              id: deployment.projectId || deployment.project_id || payload.projectId || null,
+              name: deployment.projectName || deployment.name || payload.projectName || 'abg-pulse-intelligence-v4'
+            },
+            deployment: {
+              id: deployment.id || deployment.uid || payload.deploymentId || null,
+              url: deployment.url || payload.url || null,
+              inspectorUrl: deployment.inspectorUrl || payload.inspectorUrl || null,
+              target: deployment.target || payload.target || null,
+              environment: deployment.environment || payload.environment || null,
+              readyState: deployment.readyState || deployment.state || payload.readyState || null,
+              errorCode: deployment.errorCode || payload.errorCode || null,
+              errorMessage: deployment.errorMessage || payload.errorMessage || null
+            },
+            git: {
+              repository: deployment.gitRepo || deployment.repository || payload.repository || 'NinjaRK/abg-pulse',
+              branch: deployment.gitBranch || deployment.branch || payload.gitBranch || null,
+              commitSha: deployment.gitCommitSha || deployment.sha || payload.gitCommitSha || payload.sha || null,
+              commitMessage: deployment.gitCommitMessage || payload.gitCommitMessage || null
+            },
+            rawKeys: Object.keys(payload).sort()
+          };
+          writeFileSync('/tmp/deployment-status/deployment-status.json', `${JSON.stringify(record, null, 2)}\n`);
+          NODE
+      - name: Publish status to the non-deploying live-data branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Deployment Observer'
+          git config user.email 'actions@users.noreply.github.com'
+          rm -rf /tmp/abg-pulse-status-live-data
+          if git ls-remote --exit-code --heads origin live-data >/dev/null 2>&1; then
+            git fetch origin live-data:refs/remotes/origin/live-data
+            git worktree add -B live-data /tmp/abg-pulse-status-live-data origin/live-data
+          else
+            echo 'live-data branch is not available.'
+            exit 1
+          fi
+          mkdir -p /tmp/abg-pulse-status-live-data/data
+          cp /tmp/deployment-status/deployment-status.json /tmp/abg-pulse-status-live-data/data/deployment-status.json
+          cd /tmp/abg-pulse-status-live-data
+          git add data/deployment-status.json
+          if git diff --cached --quiet; then
+            echo 'Deployment status is unchanged.'
+            exit 0
+          fi
+          git commit -m 'Update observed Vercel deployment status [skip ci]'
+          git push origin HEAD:live-data
+      - name: Upload immutable diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vercel-status-${{ github.run_id }}
+          path: /tmp/deployment-status/deployment-status.json
+          if-no-files-found: warn
+          retention-days: 30
