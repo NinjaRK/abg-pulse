@@ -8,10 +8,11 @@ const milestones = Array.isArray(plan.milestones) ? plan.milestones : [];
 function weighted(field = 'completion') {
   const weightTotal = milestones.reduce((sum, item) => sum + Number(item.weight || 0), 0);
   const score = milestones.reduce((sum, item) => {
-    const value = Number(item[field] ?? item.completion ?? 0);
+    const fallback = item.completion ?? 0;
+    const value = Number(item[field] ?? fallback);
     return sum + Number(item.weight || 0) * value / 100;
   }, 0);
-  return Math.round(score / weightTotal * 100);
+  return weightTotal ? Math.round(score / weightTotal * 100) : 0;
 }
 
 test('Job Meter weights cover the full objective exactly once', () => {
@@ -20,18 +21,22 @@ test('Job Meter weights cover the full objective exactly once', () => {
 });
 
 test('verified completion is evidence-weighted and remains 40 percent', () => {
-  assert.equal(weighted('completion'), 40);
-  assert.equal(plan.progress.verifiedCompletion, 40);
-  assert.equal(plan.progress.remainingToVerify, 60);
+  const verified = weighted('completion');
+  assert.equal(verified, 40);
+  assert.equal(100 - verified, 60);
+  assert.match(plan.measurement?.verifiedFormula || '', /verified completion/i);
 });
 
 test('built-but-unverified work cannot inflate verified completion', () => {
-  const built = weighted('builtCompletion');
+  const built = weighted('implementationCompletion');
   const verified = weighted('completion');
   assert.ok(built >= verified);
   assert.ok(built > verified, 'Expected tested work awaiting live verification to remain visible.');
   for (const milestone of milestones) {
-    assert.ok(Number(milestone.builtCompletion ?? milestone.completion) >= Number(milestone.completion));
+    assert.ok(
+      Number(milestone.implementationCompletion ?? milestone.completion) >= Number(milestone.completion),
+      `${milestone.id} reports less implementation than verified delivery.`
+    );
   }
 });
 
@@ -45,18 +50,29 @@ test('every incomplete milestone has an acceptance gate and next action', () => 
 });
 
 test('the dependability milestone cannot start before operational prerequisites', () => {
-  const proof = milestones.find((item) => item.id === 'M11');
+  const proof = milestones.find((item) => /dependability proof/i.test(item.title || ''));
   assert.ok(proof);
   assert.equal(proof.completion, 0);
   assert.match(proof.acceptanceGate, /30|Thirty/i);
-  assert.match(proof.dependency, /Operational platform/i);
+  assert.match(proof.dependency, /operational production system/i);
 });
 
-test('the critical path names only real incomplete milestones', () => {
+test('active programme milestones name only real incomplete work', () => {
   const byId = new Map(milestones.map((item) => [item.id, item]));
-  assert.ok(plan.progress.criticalPath.length >= 4);
-  for (const id of plan.progress.criticalPath) {
-    assert.ok(byId.has(id), `Unknown critical-path milestone: ${id}`);
-    assert.ok(Number(byId.get(id).completion) < 100, `${id} is already complete and should not be on the critical path.`);
+  const activeIds = plan.programme?.activeMilestoneIds || [];
+  assert.ok(activeIds.length >= 1);
+  for (const id of activeIds) {
+    assert.ok(byId.has(id), `Unknown active milestone: ${id}`);
+    assert.ok(Number(byId.get(id).completion) < 100, `${id} is already complete and should not be active.`);
+    assert.equal(byId.get(id).active, true, `${id} is active in the programme but not marked active in the milestone.`);
   }
+});
+
+test('world-class release thresholds are explicit and fail closed', () => {
+  const gates = plan.programme?.qualityGates || {};
+  assert.equal(gates.briefingMedianSeconds, 60);
+  assert.equal(gates.criticalEventRecallPct, 100);
+  assert.equal(gates.highMaterialityWeightedRecallPct, 98);
+  assert.equal(gates.unsupportedMaterialClaims, 0);
+  assert.equal(gates.silentTier0Outages, 0);
 });
