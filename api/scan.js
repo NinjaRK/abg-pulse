@@ -97,11 +97,20 @@ function articleInWindow(article, window) {
   return Boolean(published && published >= new Date(window.start) && published <= new Date(window.end));
 }
 
-async function runWithTimeout(run, milliseconds = 8500) {
+export async function runWithTimeout(run, milliseconds = 8500) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), milliseconds);
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      controller.abort();
+      const error = new Error(`Source check exceeded ${milliseconds}ms`);
+      error.code = 'source_timeout';
+      reject(error);
+    }, milliseconds);
+  });
+  const work = Promise.resolve().then(() => run(controller.signal));
   try {
-    return await run(controller.signal);
+    return await Promise.race([work, timeout]);
   } finally {
     clearTimeout(timer);
   }
