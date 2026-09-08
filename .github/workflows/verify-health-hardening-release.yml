@@ -1,0 +1,156 @@
+name: Verify health hardening release
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-health-hardening-release.yml'
+      - 'api/persistence-health.js'
+      - 'lib/persistence-freshness.mjs'
+      - 'api/claims.js'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-health-hardening-release.yml'
+      - 'api/persistence-health.js'
+      - 'lib/persistence-freshness.mjs'
+      - 'api/claims.js'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run source release gates
+        run: |
+          npm test
+          npm run check
+          node --check api/persistence-health.js
+          node --check lib/persistence-freshness.mjs
+          node --check api/claims.js
+      - name: Read-only production contract and deployment proof
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { execFileSync } from 'node:child_process';
+          import { writeFileSync, mkdirSync, appendFileSync } from 'node:fs';
+          const base = 'https://abg-pulse-intelligence-v4.vercel.app';
+          const expected = process.env.EXPECTED_SHA;
+          assert.match(expected, /^[a-f0-9]{40}$/);
+          const report = { expectedCommit: expected, verifiedAt: null, productionUrl: base,
+            deploymentVerified: false, contractVerified: false, databaseOperational: false,
+            claimsOperational: false, productionReadiness: 'unverified', writesPerformed: false };
+          mkdirSync('/tmp/health-release-proof', { recursive: true });
+          async function read(path) {
+            const url = new URL(path, base);
+            url.searchParams.set('releaseProbe', `${Date.now()}`);
+            const response = await fetch(url, { method: 'GET', redirect: 'error',
+              headers: { Accept: 'application/json', 'Cache-Control': 'no-cache' },
+              signal: AbortSignal.timeout(30_000) });
+            const type = response.headers.get('content-type') || '';
+            const text = await response.text();
+            let body = null;
+            if (type.includes('application/json')) {
+              try { body = JSON.parse(text); } catch { /* Validated by the caller. */ }
+            }
+            return { httpStatus: response.status, cacheControl: response.headers.get('cache-control'),
+              contentType: type, body };
+          }
+          function containsExpected(deployed) {
+            if (!/^[a-f0-9]{40}$/.test(deployed || '')) return false;
+            if (deployed === expected) return true;
+            try {
+              execFileSync('git', ['fetch', '--quiet', 'origin', deployed], { stdio: 'pipe', timeout: 30_000 });
+              execFileSync('git', ['merge-base', '--is-ancestor', expected, deployed], { stdio: 'pipe', timeout: 10_000 });
+              return true;
+            } catch { return false; }
+          }
+          try {
+            for (let attempt = 0; attempt < 18; attempt++) {
+              try {
+                const health = await read('/api/health');
+                const deployed = health.body?.deployment?.commitSha;
+                if (health.httpStatus === 200 && containsExpected(deployed)) {
+                  report.deployedCommit = deployed;
+                  report.deploymentVerified = true;
+                  break;
+                }
+              } catch { /* Bounded retry while deployment becomes available. */ }
+              await new Promise((resolve) => setTimeout(resolve, 5_000));
+            }
+            assert.equal(report.deploymentVerified, true, 'Production must contain the tested release commit.');
+            const home = await read('/');
+            assert.equal(home.httpStatus, 200, 'Homepage must load.');
+            report.homepageHttpStatus = home.httpStatus;
+            const persistence = await read('/api/persistence-health');
+            assert.ok(persistence.contentType.includes('application/json'), 'Health must return JSON.');
+            assert.match(persistence.cacheControl || '', /(?:^|,)\s*no-store\s*(?:,|$)/i,
+              'Health responses must not be cached.');
+            assert.ok([200, 503].includes(persistence.httpStatus), 'Unexpected health HTTP status.');
+            assert.equal(typeof persistence.body?.operational, 'boolean', 'Operational truth must be explicit.');
+            assert.equal(persistence.body.operational, persistence.httpStatus === 200);
+            if (persistence.body.operational) {
+              assert.equal(persistence.body.status, 'operational');
+              for (const key of ['configured', 'reachable', 'hasIngestedGraph',
+                'latestRunHasNoUnsupportedMaterialClaims', 'auditTrailPresent', 'rlsComplete',
+                'freshnessConfigValid', 'clockValid', 'timestampValid', 'timestampNotFuture']) {
+                assert.equal(persistence.body.quality?.[key], true, `Missing operational gate: ${key}`);
+              }
+              assert.equal(persistence.body.quality.stale, false);
+              assert.equal(persistence.body.freshness?.reason, 'fresh');
+            } else {
+              assert.ok(['not_configured', 'unavailable', 'degraded'].includes(persistence.body.status));
+            }
+            report.persistence = { httpStatus: persistence.httpStatus, status: persistence.body.status,
+              operational: persistence.body.operational, cacheControl: persistence.cacheControl,
+              checkedAt: persistence.body.checkedAt, error: persistence.body.error || null };
+            report.databaseOperational = persistence.body.operational;
+            const claims = await read('/api/claims?summaryOnly=true');
+            assert.ok(claims.body && [200, 503].includes(claims.httpStatus), 'Claims must return structured success or a visible failure.');
+            if (claims.httpStatus === 200) {
+              assert.equal(claims.body.quality?.publishable, true);
+              assert.equal(claims.body.quality?.unsupportedMaterialClaimCount, 0);
+              assert.ok(Number(claims.body.summary?.claimCount) > 0, 'Live claims must not be empty.');
+              assert.equal(claims.body.filteredSummary?.claimCount, claims.body.summary.claimCount,
+                'An omitted search must not hide live claims.');
+              report.claimsOperational = true;
+            } else {
+              assert.equal(claims.body.failedClosed, true);
+            }
+            report.claims = { httpStatus: claims.httpStatus, error: claims.body.error || null,
+              claimCount: claims.body.filteredSummary?.claimCount ?? null,
+              generatedAt: claims.body.generatedAt || null };
+            report.contractVerified = true;
+            report.productionReadiness = report.databaseOperational && report.claimsOperational
+              ? 'runtime_checks_passed_not_a_long_term_dependability_proof' : 'blocked_by_runtime_dependencies';
+          } catch (error) {
+            report.verificationError = error.message;
+            process.exitCode = 1;
+          } finally {
+            report.verifiedAt = new Date().toISOString();
+            writeFileSync('/tmp/health-release-proof/release.json', `${JSON.stringify(report, null, 2)}\n`);
+            console.log(JSON.stringify(report, null, 2));
+            if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+              `## Read-only production verification\n\n\`\`\`json\n${JSON.stringify(report, null, 2)}\n\`\`\`\n`);
+          }
+          NODE
+      - name: Preserve production verification evidence
+        if: always() && github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: health-hardening-release-${{ github.sha }}
+          path: /tmp/health-release-proof/release.json
+          if-no-files-found: warn
+          retention-days: 30
