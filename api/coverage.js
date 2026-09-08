@@ -2,11 +2,25 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { buildCoverageAudit } from '../lib/coverage.mjs';
 
-const readJson = (path) => JSON.parse(readFileSync(fileURLToPath(new URL(path, import.meta.url)), 'utf8'));
-const entities = readJson('../data/entities.json');
-const sourceRegistry = readJson('../data/source-registry.json');
-const officialSources = readJson('../config/official-sources.json');
-const queryGroups = readJson('../config/queries.json');
+// Keep every runtime asset path literal. Vercel traces serverless-function files
+// statically; a generic readJson(path) helper can build successfully while the
+// JSON files are omitted from the deployed function bundle.
+const entities = JSON.parse(readFileSync(
+  fileURLToPath(new URL('../data/entities.json', import.meta.url)),
+  'utf8'
+));
+const sourceRegistry = JSON.parse(readFileSync(
+  fileURLToPath(new URL('../data/source-registry.json', import.meta.url)),
+  'utf8'
+));
+const officialSources = JSON.parse(readFileSync(
+  fileURLToPath(new URL('../config/official-sources.json', import.meta.url)),
+  'utf8'
+));
+const queryGroups = JSON.parse(readFileSync(
+  fileURLToPath(new URL('../config/queries.json', import.meta.url)),
+  'utf8'
+));
 
 function send(res, status, body) {
   res.statusCode = status;
