@@ -3,7 +3,7 @@ name: Apply reviewed install-integrity repair once
 on:
   push:
     branches: [sol/install-integrity-20260908]
-    paths: ['scripts/install-integrity-reviewed.patch.gz.b64']
+    paths: ['scripts/install-integrity-reviewed.patch.02']
 
 permissions:
   contents: write
@@ -29,7 +29,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/install-repair-proof
-          base64 --decode scripts/install-integrity-reviewed.patch.gz.b64 | gzip -dc > /tmp/install-repair-proof/repair.patch
+          cat scripts/install-integrity-reviewed.patch.00 scripts/install-integrity-reviewed.patch.01 scripts/install-integrity-reviewed.patch.02 > /tmp/install-repair-proof/repair.patch
           echo 'e6f70f3fcea5601926d64c7a3fe8bfe16fbb2856269ef51e64a1e07b9effaa1e  /tmp/install-repair-proof/repair.patch' | sha256sum --check
           git apply --check /tmp/install-repair-proof/repair.patch
           git apply /tmp/install-repair-proof/repair.patch
@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git rm scripts/install-integrity-reviewed.patch.gz.b64 .github/workflows/apply-install-integrity-once.yml
+          git rm scripts/install-integrity-reviewed.patch.00 scripts/install-integrity-reviewed.patch.01 scripts/install-integrity-reviewed.patch.02 scripts/install-integrity-reviewed.patch.gz.b64 .github/workflows/apply-install-integrity-once.yml
           git config user.name 'ABG Pulse Build Bot'
           git config user.email 'actions@users.noreply.github.com'
           git commit -m 'Preserve installed source, restore claim search and expose snapshot coverage gaps'
