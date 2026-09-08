@@ -1,0 +1,65 @@
+name: Harden authoritative regulator entity hints
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/harden-authoritative-regulator-hints.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  harden:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prevent generic regulator publications from inheriting ABG entity hints
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const modulePath = 'lib/authoritative-sources.mjs';
+          let source = readFileSync(modulePath, 'utf8');
+          const oldLine = "    entityHints: Array.isArray(input.entityHints) && input.entityHints.length ? input.entityHints : (source.entityIds || []),";
+          const newLines = "    entityHints: Array.isArray(input.entityHints) && input.entityHints.length\n      ? input.entityHints\n      : (['sec-submissions', 'nse-announcements', 'bse-announcements'].includes(source.adapter) ? (source.entityIds || []) : []),";
+          if (source.includes(oldLine)) {
+            source = source.replace(oldLine, newLines);
+            writeFileSync(modulePath, source);
+          } else if (!source.includes("['sec-submissions', 'nse-announcements', 'bse-announcements'].includes(source.adapter)")) {
+            throw new Error('Could not locate the authoritative entity-hint rule.');
+          }
+
+          const testPath = 'tests/authoritative-sources.test.mjs';
+          let tests = readFileSync(testPath, 'utf8');
+          const assertion = "  assert.deepEqual(records[0].entityHints, []);";
+          const anchor = "  assert.equal(records[0].tier, 0);\n});";
+          if (!tests.includes(assertion)) {
+            if (!tests.includes(anchor)) throw new Error('Could not locate the regulator-listing test anchor.');
+            tests = tests.replace(anchor, `  assert.equal(records[0].tier, 0);\n${assertion}\n});`);
+            writeFileSync(testPath, tests);
+          }
+          NODE
+      - name: Run complete regression suite
+        run: npm test
+      - name: Commit only after tests pass
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add lib/authoritative-sources.mjs tests/authoritative-sources.test.mjs
+          if git diff --cached --quiet; then
+            echo 'Regulator hint hardening is already present.'
+            exit 0
+          fi
+          git commit -m 'Prevent false ABG matches from generic regulator listings'
+          git push origin HEAD:main
