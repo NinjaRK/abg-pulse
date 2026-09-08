@@ -1,0 +1,60 @@
+name: Repair claim persistence verifier
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/repair-persistence-verifier.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Make schema assertions exact and repository-safe
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('.github/workflows/verify-claim-persistence-build.yml')
+          text = path.read_text()
+          old = """          select 'rls=' || count(*)
+          from pg_class c join pg_namespace n on n.oid = c.relnamespace
+          where n.nspname = 'public' and c.relname like 'pulse_%' and c.relrowsecurity;
+"""
+          new = """          select 'rls=' || count(*)
+          from pg_class c join pg_namespace n on n.oid = c.relnamespace
+          where n.nspname = 'public'
+            and c.relname in (
+              'pulse_claim_graph_runs','pulse_events','pulse_evidence','pulse_claims',
+              'pulse_claim_evidence','pulse_corrections','pulse_contradictions','pulse_audit_log'
+            )
+            and c.relrowsecurity;
+"""
+          if old in text:
+              text = text.replace(old, new)
+          elif new not in text:
+              raise SystemExit('RLS assertion anchor not found.')
+          old_grep = "          grep -q '^rpc=pulse_ingest_claim_graph(jsonb,text,text,text)$' /tmp/schema-proof.txt\n"
+          new_grep = "          grep -Eq '^rpc=(public\\.)?pulse_ingest_claim_graph\\(jsonb,text,text,text\\)$' /tmp/schema-proof.txt\n"
+          if old_grep in text:
+              text = text.replace(old_grep, new_grep)
+          elif new_grep not in text:
+              raise SystemExit('RPC assertion anchor not found.')
+          path.write_text(text)
+          PY
+          git rm .github/workflows/repair-persistence-verifier.yml
+      - name: Commit repair
+        run: |
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add .github/workflows/verify-claim-persistence-build.yml
+          git commit -m 'Harden persistence schema verification'
+          git push origin HEAD:main
