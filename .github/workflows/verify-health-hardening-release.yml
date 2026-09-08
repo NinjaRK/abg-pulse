@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-health-hardening-release.yml'
+      - '.github/workflows/verify-persistence-health-build.yml'
+      - 'tests/persistence-verification-workflow.test.mjs'
       - 'api/persistence-health.js'
       - 'lib/persistence-freshness.mjs'
       - 'api/claims.js'
@@ -14,6 +16,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-health-hardening-release.yml'
+      - '.github/workflows/verify-persistence-health-build.yml'
+      - 'tests/persistence-verification-workflow.test.mjs'
       - 'api/persistence-health.js'
       - 'lib/persistence-freshness.mjs'
       - 'api/claims.js'
