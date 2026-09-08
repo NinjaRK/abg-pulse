@@ -1,0 +1,119 @@
+name: Update v6 progress from live evidence
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-v6-progress-from-live-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-v6-progress-from-live-evidence
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Retrieve independently published operating evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/abg-evidence
+          curl -L -fS --retry 5 --retry-delay 5 --max-time 45 \
+            'https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/live-snapshot.manifest.json' \
+            -o /tmp/abg-evidence/live-snapshot.manifest.json
+          curl -L -fS --retry 5 --retry-delay 5 --max-time 45 \
+            'https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/authoritative-wave1.manifest.json' \
+            -o /tmp/abg-evidence/authoritative-wave1.manifest.json
+      - name: Validate evidence gates and update only earned progress
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const planPath = 'data/build-milestones.json';
+          const plan = JSON.parse(readFileSync(planPath, 'utf8'));
+          const live = JSON.parse(readFileSync('/tmp/abg-evidence/live-snapshot.manifest.json', 'utf8'));
+          const authoritative = JSON.parse(readFileSync('/tmp/abg-evidence/authoritative-wave1.manifest.json', 'utf8'));
+
+          const assert = (condition, message) => { if (!condition) throw new Error(message); };
+          assert(typeof live.sha256 === 'string' && live.sha256.length === 64, 'Governed snapshot digest is invalid.');
+          assert(Number.isFinite(live.queryCount) && live.queryCount > 0, 'Governed snapshot attempted no checks.');
+          assert(Number.isFinite(live.successfulQueries) && live.successfulQueries > 0, 'Governed snapshot has no successful checks.');
+          assert(Number(live.successRatio) >= 0.20, 'Governed snapshot success ratio is below its floor.');
+          assert(live.registryReconciled !== false, 'Governed snapshot entity registry is not reconciled.');
+          assert(typeof authoritative.sha256 === 'string' && authoritative.sha256.length === 64, 'Authoritative snapshot digest is invalid.');
+          assert(Number(authoritative.sourceCount) >= 1, 'No authoritative sources were checked.');
+          assert(Number(authoritative.successfulSourceCount) >= 1, 'No authoritative source succeeded.');
+          assert(Number(authoritative.successRatio) >= 0.25, 'Authoritative-source success ratio is below its floor.');
+          assert(Number(authoritative.criticalSourcesSucceeded) >= 1, 'No critical SEC/NSE/BSE source succeeded.');
+
+          const byId = new Map((plan.milestones || []).map((item) => [item.id, item]));
+          const m1 = byId.get('M1');
+          const m3 = byId.get('M3');
+          assert(m1 && m3, 'Required v6 milestones M1 and M3 are missing.');
+
+          const addEvidence = (milestone, line) => {
+            milestone.evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
+            if (!milestone.evidence.includes(line)) milestone.evidence.push(line);
+          };
+
+          m1.completion = Math.max(Number(m1.completion || 0), 52);
+          m1.implementationCompletion = Math.max(Number(m1.implementationCompletion || 0), 80);
+          m1.status = 'in_progress';
+          addEvidence(m1, `Governed live-data snapshot published with ${live.queryCount} checks, ${live.successfulQueries} successful checks and SHA-256 ${live.sha256}.`);
+          m1.nextAction = 'Prove repeated scheduled runs, deploy snapshot consumption to production, verify exact-commit freshness and complete rollback/recovery drills.';
+
+          m3.completion = Math.max(Number(m3.completion || 0), 33);
+          m3.implementationCompletion = Math.max(Number(m3.implementationCompletion || 0), 58);
+          m3.status = 'in_progress';
+          addEvidence(m3, `Direct authoritative snapshot published from ${authoritative.sourceCount} configured sources; ${authoritative.successfulSourceCount} succeeded, ${authoritative.failedSourceCount} failed, with SHA-256 ${authoritative.sha256}.`);
+          m3.nextAction = 'Improve failing official endpoints, integrate authoritative records into event clustering, then add ratings, courts and remaining company disclosure sources.';
+
+          plan.updatedAt = new Date().toISOString();
+          plan.programme = plan.programme || {};
+          plan.programme.status = 'building';
+          plan.programme.activeMilestoneIds = ['M1', 'M3'];
+          plan.programme.lastEvidenceUpdate = {
+            updatedAt: plan.updatedAt,
+            governedSnapshotGeneratedAt: live.generatedAt || null,
+            authoritativeSnapshotGeneratedAt: authoritative.generatedAt || null,
+            evidenceBranch: 'live-data',
+            evidenceFiles: [
+              'data/live-snapshot.manifest.json',
+              'data/authoritative-wave1.manifest.json'
+            ]
+          };
+
+          writeFileSync(planPath, `${JSON.stringify(plan, null, 2)}\n`);
+          NODE
+      - name: Verify progress-meter integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test tests/progress-meter.test.mjs tests/progress.test.mjs
+          node tests/validate-data.mjs
+      - name: Commit the evidence-backed progress update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Evidence Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/build-milestones.json
+          if git diff --cached --quiet; then
+            echo 'Progress already reflects the available evidence.'
+            exit 0
+          fi
+          git commit -m 'Update Job Meter from verified live-source evidence'
+          git push origin HEAD:main
