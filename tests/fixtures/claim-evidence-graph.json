@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-09-08T10:00:00.000Z",
+  "sourceCommit": "fixture-commit-abc123",
+  "input": {
+    "governedSnapshotGeneratedAt": "2026-09-08T09:55:00.000Z",
+    "governedSnapshotSourceCommit": "fixture-commit-abc123"
+  },
+  "quality": {
+    "publishable": true,
+    "unsupportedMaterialClaimCount": 0,
+    "potentialContradictionCount": 1
+  },
+  "summary": {
+    "eventCount": 1,
+    "claimCount": 2,
+    "factClaimCount": 1,
+    "interpretationCount": 1,
+    "evidenceCount": 1,
+    "supportedFactClaims": 1,
+    "provisionalFactClaims": 0,
+    "unsupportedFactClaims": 0
+  },
+  "eventSummaries": [
+    {
+      "eventId": "fixture-event-1",
+      "entityIds": ["fixture-company"],
+      "claimIds": ["fixture-claim-1", "fixture-claim-2"],
+      "evidenceIds": ["fixture-evidence-1"],
+      "unsupportedFactClaims": 0,
+      "provisionalFactClaims": 0,
+      "lifecycle": "observed"
+    }
+  ],
+  "claims": [
+    {
+      "id": "fixture-claim-1",
+      "eventId": "fixture-event-1",
+      "entityIds": ["fixture-company"],
+      "kind": "fact",
+      "text": "Fixture Company filed an official disclosure.",
+      "normalizedText": "fixture company filed an official disclosure",
+      "sequence": 1,
+      "supportStatus": "supported",
+      "supportReason": "Direct official evidence",
+      "supportConfidence": 0.98,
+      "evidenceIds": ["fixture-evidence-1"],
+      "evidenceCount": 1,
+      "independentEvidenceCount": 1,
+      "observedAt": "2026-09-08T09:54:00.000Z",
+      "lifecycle": "observed",
+      "sourceEventVersion": 1
+    },
+    {
+      "id": "fixture-claim-2",
+      "eventId": "fixture-event-1",
+      "entityIds": ["fixture-company"],
+      "kind": "interpretation",
+      "text": "The filing may affect the narrative.",
+      "normalizedText": "filing may affect narrative",
+      "sequence": 2,
+      "supportStatus": "interpretation",
+      "supportReason": "Explicit interpretation",
+      "supportConfidence": null,
+      "evidenceIds": ["fixture-evidence-1"],
+      "evidenceCount": 1,
+      "independentEvidenceCount": 1,
+      "observedAt": "2026-09-08T09:54:00.000Z",
+      "lifecycle": "observed",
+      "sourceEventVersion": 1
+    }
+  ],
+  "evidence": [
+    {
+      "id": "fixture-evidence-1",
+      "eventId": "fixture-event-1",
+      "authority": "Fixture Exchange",
+      "title": "Fixture disclosure",
+      "url": "https://exchange.example.test/fixture-disclosure",
+      "publishedAt": "2026-09-08T09:50:00.000Z",
+      "tier": 0,
+      "official": true,
+      "provider": "Fixture provider",
+      "sourceId": "fixture-source",
+      "attachmentUrl": "https://exchange.example.test/fixture-disclosure.pdf",
+      "rights": "public-exchange-metadata",
+      "snapshotSourceCommit": "fixture-commit-abc123"
+    }
+  ],
+  "corrections": [],
+  "contradictions": [
+    {
+      "id": "fixture-contradiction-1",
+      "claimIds": ["fixture-claim-1", "fixture-claim-2"],
+      "entityIds": ["fixture-company"],
+      "lexicalOverlap": 0.5,
+      "reason": "Fixture human-review signal",
+      "status": "potential"
+    }
+  ]
+}
