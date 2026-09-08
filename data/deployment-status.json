@@ -1,21 +1,21 @@
 {
   "schemaVersion": "1.0.0",
-  "observedAt": "2026-09-08T06:07:56.863Z",
+  "observedAt": "2026-09-08T06:08:46.319Z",
   "eventName": "repository_dispatch",
-  "action": "vercel.deployment.promoted",
-  "state": "healthy",
+  "action": "vercel.deployment.pending",
+  "state": "pending",
   "project": {
     "id": null,
     "name": "abg-pulse-intelligence-v4"
   },
   "deployment": {
-    "id": "dpl_4aQJjPt8VPfCuFWEioQ88rWJfG6Q",
-    "url": "https://abg-pulse-intelligence-v4-7q0hxirgu-ninjarks-projects.vercel.app",
+    "id": "dpl_3ypGJBZmHWL6ooqs9drhzrsvyZ8V",
+    "url": "https://abg-pulse-intelligence-v4-3zggzv2il-ninjarks-projects.vercel.app",
     "inspectorUrl": null,
     "target": null,
     "environment": "production",
     "readyState": {
-      "type": "promoted"
+      "type": "pending"
     },
     "errorCode": null,
     "errorMessage": null
@@ -27,6 +27,7 @@
     "commitMessage": null
   },
   "rawKeys": [
+    "alias",
     "environment",
     "git",
     "id",
