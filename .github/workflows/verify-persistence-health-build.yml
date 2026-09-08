@@ -12,6 +12,7 @@ on:
       - 'lib/persistence-freshness.mjs'
       - 'tests/persistence-health-api.test.mjs'
       - 'tests/persistence-freshness-regression.test.mjs'
+      - 'tests/persistence-verification-workflow.test.mjs'
       - 'bootstrap.mjs'
       - 'tests/bootstrap-*.test.mjs'
   pull_request:
@@ -22,12 +23,13 @@ on:
       - 'lib/persistence-freshness.mjs'
       - 'tests/persistence-health-api.test.mjs'
       - 'tests/persistence-freshness-regression.test.mjs'
+      - 'tests/persistence-verification-workflow.test.mjs'
       - 'bootstrap.mjs'
       - 'tests/bootstrap-*.test.mjs'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: verify-persistence-health-${{ github.ref }}
@@ -61,6 +63,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -124,46 +127,42 @@ jobs:
         run: |
           npm test
           npm run check
-      - name: Record tested health implementation without claiming a live database
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        shell: bash
+      - name: Preserve progress values and repository files
         run: |
-          set -euo pipefail
-          node --input-type=module <<'NODE'
-          import { readFileSync, writeFileSync } from 'node:fs';
-          const path = 'data/build-milestones.json';
-          const plan = JSON.parse(readFileSync(path, 'utf8'));
-          const milestone = plan.milestones.find((item) => item.id === 'M4');
-          if (!milestone) throw new Error('M4 persistence milestone is missing.');
-          const line = 'Persistence-health RPC and API passed PostgreSQL 16 and mocked runtime tests: RLS, evidence counts, recency, audit presence and unsupported-material-claim safety are evaluated without leaking credentials. Production database remains unconnected.';
-          milestone.implementationCompletion = Math.max(Number(milestone.implementationCompletion || 0), 82);
-          milestone.evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
-          if (!milestone.evidence.includes(line)) milestone.evidence.push(line);
-          milestone.nextAction = 'Connect production Postgres/Supabase, apply migrations, ingest the live graph, prove correction propagation, schedule health monitoring, and complete backup/restore.';
-          plan.updatedAt = new Date().toISOString();
-          plan.programme = plan.programme || {};
-          plan.programme.lastBuildVerification = {
-            ...(plan.programme.lastBuildVerification || {}),
-            persistenceHealth: {
-              verifiedAt: plan.updatedAt,
-              postgresVersion: 16,
-              migration: 'db/migrations/004_persistence_health.sql',
-              healthRpc: 'pulse_persistence_health',
-              productionDatabaseConnected: false
-            }
-          };
-          writeFileSync(path, `${JSON.stringify(plan, null, 2)}\n`);
-          NODE
           node --test tests/progress-meter.test.mjs tests/progress.test.mjs
-          git config user.name 'ABG Pulse Build Verification Bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add data/build-milestones.json
-          if git diff --cached --quiet; then
-            echo 'Persistence health implementation is already recorded.'
-          else
-            git commit -m 'Record tested persistence health capability'
-            git push origin HEAD:main
-          fi
+          git diff --exit-code HEAD -- data/build-milestones.json
+      - name: Record isolated database evidence without changing progress
+        env:
+          TESTED_COMMIT: ${{ github.sha }}
+          VERIFICATION_RUN_ID: ${{ github.run_id }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+          const empty = JSON.parse(readFileSync('/tmp/health-empty.json', 'utf8'));
+          const ingested = JSON.parse(readFileSync('/tmp/health-ingested.json', 'utf8'));
+          assert.equal(empty.quality.hasIngestedGraph, false);
+          assert.equal(ingested.quality.hasIngestedGraph, true);
+          const proof = {
+            testedCommit: process.env.TESTED_COMMIT,
+            workflowRunId: process.env.VERIFICATION_RUN_ID,
+            verifiedAt: new Date().toISOString(),
+            environment: 'isolated_ci_postgresql_16',
+            healthRpc: 'pulse_persistence_health',
+            emptyDatabasePassed: true,
+            ingestedFixturePassed: true,
+            fixtureCounts: ingested.counts,
+            rls: ingested.rls,
+            progressChanged: false,
+            productionDatabaseTested: false,
+            productionDatabaseConnected: null,
+            caveat: 'This evidence proves the isolated database contract, not production readiness. Progress scores are unchanged.'
+          };
+          writeFileSync('/tmp/persistence-build-verification.json', `${JSON.stringify(proof, null, 2)}\n`);
+          if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+            `## Isolated database verification\n\n\`\`\`json\n${JSON.stringify(proof, null, 2)}\n\`\`\`\n`);
+          console.log(JSON.stringify(proof, null, 2));
+          NODE
       - name: Upload immutable health proof
         if: always()
         uses: actions/upload-artifact@v4
@@ -173,5 +172,6 @@ jobs:
             /tmp/health-empty.json
             /tmp/ingest-health-fixture.json
             /tmp/health-ingested.json
+            /tmp/persistence-build-verification.json
           if-no-files-found: warn
           retention-days: 90
