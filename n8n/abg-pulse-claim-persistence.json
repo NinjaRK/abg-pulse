@@ -1,0 +1,263 @@
+{
+  "name": "ABG Pulse — Persist Claim Evidence",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "25,55 * * * *"
+            }
+          ]
+        }
+      },
+      "id": "7d81e56c-739a-4958-9740-97b8d83a92b1",
+      "name": "Every 30 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -820,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.ABG_PULSE_BASE_URL || 'https://abg-pulse-intelligence-v4.vercel.app'}}/api/claims?summaryOnly=true",
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "f277ff8a-a7fc-4efc-83d9-f7dfb209599e",
+      "name": "Verify Published Claim Graph",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -580,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.ABG_PULSE_BASE_URL || 'https://abg-pulse-intelligence-v4.vercel.app'}}/api/persist-claims",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Ingest-Secret",
+              "value": "={{$env.ABG_PULSE_INGEST_SECRET}}"
+            },
+            {
+              "name": "X-Request-Id",
+              "value": "={{'n8n-claim-persist-' + $now.toUTC().toFormat('yyyyLLdd-HHmm')}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ actor: 'n8n-claim-persistence' }) }}",
+        "options": {
+          "timeout": 120000,
+          "response": {
+            "response": {
+              "neverError": false,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "af3aed85-4339-4b17-9dc0-bc4fe110fae5",
+      "name": "Persist Claim Graph",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -330,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.ABG_PULSE_BASE_URL || 'https://abg-pulse-intelligence-v4.vercel.app'}}/api/persistence-health",
+        "options": {
+          "timeout": 60000,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "4eb9546f-f61e-4cb0-829a-04b0c4ed7f53",
+      "name": "Verify Persistence Health",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4c1d2620-6d69-478d-b947-481506362ee8",
+              "leftValue": "={{$json.operational}}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "aad9b503-67a9-4d74-a246-2817e8069fae",
+      "name": "Persistence Operational?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        170,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { ok: true, workflow: 'ABG Pulse claim persistence', persistedAt: new Date().toISOString(), health: $json } }];"
+      },
+      "id": "6904afef-179a-4935-ad57-c3e980b84e67",
+      "name": "Record Success",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        430,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const health = $json; throw new Error('ABG Pulse persistence health failed: ' + JSON.stringify({ status: health.status, error: health.error, quality: health.quality }));"
+      },
+      "id": "9a7c3762-21fa-4af9-870b-359229e0d6aa",
+      "name": "Fail Visibly",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        430,
+        220
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every 30 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Verify Published Claim Graph",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Published Claim Graph": {
+      "main": [
+        [
+          {
+            "node": "Persist Claim Graph",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Persist Claim Graph": {
+      "main": [
+        [
+          {
+            "node": "Verify Persistence Health",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Persistence Health": {
+      "main": [
+        [
+          {
+            "node": "Persistence Operational?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Persistence Operational?": {
+      "main": [
+        [
+          {
+            "node": "Record Success",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fail Visibly",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "executionTimeout": 300
+  },
+  "versionId": "ebc9e020-6624-4abd-a9af-8545282c0dc4",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": ""
+  },
+  "tags": [
+    {
+      "name": "ABG Pulse"
+    },
+    {
+      "name": "Claim Evidence"
+    },
+    {
+      "name": "Production"
+    }
+  ]
+}
