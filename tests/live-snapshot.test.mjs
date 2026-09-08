@@ -69,6 +69,14 @@ function request() {
   };
 }
 
+function restoreEnvironment(previous) {
+  for (const [key, value] of Object.entries(previous)) {
+    if (key === 'fetch') continue;
+    if (value === undefined) delete process.env[key]; else process.env[key] = value;
+  }
+  global.fetch = previous.fetch;
+}
+
 test('production defaults to governed snapshot delivery while local tests default to live mode', () => {
   assert.equal(shouldUseGovernedSnapshot({}, {}), false);
   assert.equal(shouldUseGovernedSnapshot({}, { VERCEL_ENV: 'production' }), true);
@@ -125,11 +133,15 @@ test('production scan route serves one governed snapshot request', async () => {
     VERCEL_ENV: process.env.VERCEL_ENV,
     ABG_SCAN_MODE: process.env.ABG_SCAN_MODE,
     LIVE_SNAPSHOT_URL: process.env.LIVE_SNAPSHOT_URL,
+    LIVE_SNAPSHOT_STALE_MINUTES: process.env.LIVE_SNAPSHOT_STALE_MINUTES,
     fetch: global.fetch
   };
   process.env.VERCEL_ENV = 'production';
   delete process.env.ABG_SCAN_MODE;
   process.env.LIVE_SNAPSHOT_URL = 'https://example.com/live-snapshot.json';
+  // The fixture has a fixed timestamp. Disable elapsed wall-clock sensitivity
+  // here so this route-contract test remains deterministic in future years.
+  process.env.LIVE_SNAPSHOT_STALE_MINUTES = '10000000';
   let calls = 0;
   global.fetch = async (url) => {
     calls += 1;
@@ -145,11 +157,7 @@ test('production scan route serves one governed snapshot request', async () => {
     assert.equal(body.meta.deliveryMode, 'governed-snapshot');
     assert.equal(body.events.length, 1);
   } finally {
-    for (const [key, value] of Object.entries(previous)) {
-      if (key === 'fetch') continue;
-      if (value === undefined) delete process.env[key]; else process.env[key] = value;
-    }
-    global.fetch = previous.fetch;
+    restoreEnvironment(previous);
   }
 });
 
@@ -158,11 +166,13 @@ test('production scan route returns 503 when the snapshot is stale', async () =>
     VERCEL_ENV: process.env.VERCEL_ENV,
     ABG_SCAN_MODE: process.env.ABG_SCAN_MODE,
     LIVE_SNAPSHOT_URL: process.env.LIVE_SNAPSHOT_URL,
+    LIVE_SNAPSHOT_STALE_MINUTES: process.env.LIVE_SNAPSHOT_STALE_MINUTES,
     fetch: global.fetch
   };
   process.env.VERCEL_ENV = 'production';
   delete process.env.ABG_SCAN_MODE;
   process.env.LIVE_SNAPSHOT_URL = 'https://example.com/live-snapshot.json';
+  process.env.LIVE_SNAPSHOT_STALE_MINUTES = '90';
   global.fetch = async () => ({ ok: true, status: 200, json: async () => snapshot({ generatedAt: '2026-09-04T06:00:00.000Z' }) });
   try {
     const res = mockResponse();
@@ -170,11 +180,7 @@ test('production scan route returns 503 when the snapshot is stale', async () =>
     assert.equal(res.statusCode, 503);
     assert.equal(res.json().error, 'snapshot_stale');
   } finally {
-    for (const [key, value] of Object.entries(previous)) {
-      if (key === 'fetch') continue;
-      if (value === undefined) delete process.env[key]; else process.env[key] = value;
-    }
-    global.fetch = previous.fetch;
+    restoreEnvironment(previous);
   }
 });
 
