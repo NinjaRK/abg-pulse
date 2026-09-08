@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-09-08T10:10:39.675Z",
+  "sha256": "866d084963bf2b457804304a411c0944d62ab632fd0a57b2eb10f5b6e4e8908a",
+  "bytes": 266894,
+  "sourceCommit": "1b7566ad247ecbf446737efd3de87e5f57d4ddb1",
+  "input": {
+    "governedSnapshotGeneratedAt": "2026-09-08T09:32:03.894Z",
+    "governedSnapshotAgeMinutes": 38.6,
+    "governedSnapshotSourceCommit": "1b7566ad247ecbf446737efd3de87e5f57d4ddb1",
+    "governedSnapshotWorkflowRunId": "34210508536",
+    "governedSnapshotEventCount": 60
+  },
+  "summary": {
+    "eventCount": 60,
+    "claimCount": 60,
+    "factClaimCount": 60,
+    "interpretationCount": 0,
+    "evidenceCount": 166,
+    "supportedFactClaims": 3,
+    "provisionalFactClaims": 57,
+    "unsupportedFactClaims": 0
+  },
+  "quality": {
+    "materialityFloor": 65,
+    "unsupportedMaterialClaimCount": 0,
+    "potentialContradictionCount": 0,
+    "publishable": true,
+    "rule": "No unsupported factual claim at or above the materiality floor may be published as a dependable claim graph."
+  },
+  "workflow": {
+    "repository": "NinjaRK/abg-pulse",
+    "runId": "34214034143",
+    "runAttempt": "1",
+    "workflow": "Refresh claim-level evidence graph"
+  }
+}
