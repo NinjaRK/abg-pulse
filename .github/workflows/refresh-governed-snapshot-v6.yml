@@ -1,0 +1,151 @@
+name: Refresh governed ABG Pulse snapshot
+
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/refresh-governed-snapshot-v6.yml'
+      - 'scripts/generate-governed-snapshot-v6.mjs'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: abg-pulse-governed-snapshot
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out exact production source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generate a fresh 30-day governed snapshot
+        env:
+          SNAPSHOT_LOOKBACK_DAYS: '30'
+          SNAPSHOT_VALID_FOR_MINUTES: '90'
+          SNAPSHOT_MIN_SUCCESS_RATIO: '0.20'
+          SNAPSHOT_OUTPUT: out/live-snapshot.json
+          SNAPSHOT_MANIFEST_OUTPUT: out/live-snapshot.manifest.json
+        run: node scripts/generate-governed-snapshot-v6.mjs
+
+      - name: Verify snapshot integrity and operating gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
+          import { readFileSync } from 'node:fs';
+          const snapshotText = readFileSync('out/live-snapshot.json', 'utf8');
+          const snapshot = JSON.parse(snapshotText);
+          const manifest = JSON.parse(readFileSync('out/live-snapshot.manifest.json', 'utf8'));
+          const digest = createHash('sha256').update(snapshotText).digest('hex');
+          if (digest !== manifest.sha256) throw new Error('Snapshot digest does not match its manifest.');
+          if (!Array.isArray(snapshot.events)) throw new Error('Snapshot events are missing.');
+          if (!Array.isArray(snapshot?.meta?.sourceChecks)) throw new Error('Source checks are missing.');
+          if (!Number.isFinite(snapshot?.meta?.queryCount) || snapshot.meta.queryCount < 1) throw new Error('No source checks were attempted.');
+          if (!Number.isFinite(snapshot?.meta?.successfulQueries)) throw new Error('Successful source count is missing.');
+          if (snapshot.meta.snapshotSuccessRatio < 0.20) throw new Error('Source success ratio is below the governed floor.');
+          if (snapshot.meta.registryReconciled === false) throw new Error('Entity registry is not reconciled.');
+          if (new Date(snapshot.expiresAt) <= new Date(snapshot.generatedAt)) throw new Error('Snapshot expiry is invalid.');
+          console.log(JSON.stringify({
+            generatedAt: snapshot.generatedAt,
+            expiresAt: snapshot.expiresAt,
+            events: snapshot.events.length,
+            checks: snapshot.meta.queryCount,
+            successfulChecks: snapshot.meta.successfulQueries,
+            successRatio: snapshot.meta.snapshotSuccessRatio,
+            digest
+          }, null, 2));
+          NODE
+
+      - name: Publish only governed data to the live-data branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Snapshot Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          rm -rf /tmp/abg-pulse-live-data
+          if git ls-remote --exit-code --heads origin live-data >/dev/null 2>&1; then
+            git fetch origin live-data:refs/remotes/origin/live-data
+            git worktree add -B live-data /tmp/abg-pulse-live-data origin/live-data
+          else
+            git worktree add --detach /tmp/abg-pulse-live-data
+            cd /tmp/abg-pulse-live-data
+            git switch --orphan live-data
+            git rm -rf . >/dev/null 2>&1 || true
+            cd "$GITHUB_WORKSPACE"
+          fi
+          mkdir -p /tmp/abg-pulse-live-data/data
+          cp out/live-snapshot.json /tmp/abg-pulse-live-data/data/live-snapshot.json
+          cp out/live-snapshot.manifest.json /tmp/abg-pulse-live-data/data/live-snapshot.manifest.json
+          cat > /tmp/abg-pulse-live-data/README.md <<'EOF'
+          # ABG Pulse live-data
+
+          Machine-generated, public-source intelligence snapshot. Do not edit manually.
+          The manifest contains freshness, provenance and SHA-256 integrity evidence.
+          EOF
+          cat > /tmp/abg-pulse-live-data/vercel.json <<'EOF'
+          {
+            "$schema": "https://openapi.vercel.sh/vercel.json",
+            "git": {
+              "deploymentEnabled": {
+                "live-data": false
+              }
+            }
+          }
+          EOF
+          cd /tmp/abg-pulse-live-data
+          git add data README.md vercel.json
+          if git diff --cached --quiet; then
+            echo 'Snapshot is unchanged; nothing to publish.'
+            exit 0
+          fi
+          git commit -m "Refresh governed ABG Pulse snapshot [skip ci]"
+          git push origin HEAD:live-data
+
+      - name: Verify published snapshot is retrievable
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/live-snapshot.json"
+          for attempt in $(seq 1 12); do
+            code=$(curl -L -sS --max-time 30 -o /tmp/published-snapshot.json -w '%{http_code}' "$url" || true)
+            if [ "$code" = '200' ]; then
+              node --input-type=module <<'NODE'
+              import { readFileSync } from 'node:fs';
+              const payload = JSON.parse(readFileSync('/tmp/published-snapshot.json', 'utf8'));
+              if (!Array.isArray(payload.events)) throw new Error('Published snapshot has no events array.');
+              if (!payload?.source?.commitSha) throw new Error('Published snapshot provenance is missing.');
+              console.log(`Published ${payload.events.length} governed events from ${payload.source.commitSha}.`);
+              NODE
+              exit 0
+            fi
+            echo "Attempt $attempt returned HTTP $code; retrying in 10 seconds."
+            sleep 10
+          done
+          echo 'Published snapshot could not be retrieved.'
+          exit 1
+
+      - name: Upload immutable refresh evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governed-snapshot-${{ github.run_id }}-${{ github.sha }}
+          path: |
+            out/live-snapshot.json
+            out/live-snapshot.manifest.json
+          if-no-files-found: error
+          retention-days: 30
