@@ -91,8 +91,10 @@ jobs:
             git fetch origin live-data
             git switch --force-create live-data origin/live-data
           else
+            # Modern Git creates a genuinely empty orphan worktree. `git rm .`
+            # fails when there is no index, so clean untracked remnants instead.
             git switch --orphan live-data
-            git rm -rf .
+            git clean -fdx
           fi
           cp /tmp/live-snapshot.publish.json live-snapshot.json
           cat > README.md <<'TXT'
