@@ -3,11 +3,13 @@ import {
   persistenceConfigFromEnv,
   safePersistenceDiagnostic
 } from '../lib/persistence.mjs';
+import { evaluatePersistenceFreshness } from '../lib/persistence-freshness.mjs';
 
 function send(res, status, payload) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.setHeader('Cache-Control', status === 200 ? 'private, max-age=30, stale-while-revalidate=60' : 'no-store');
+  // Each check must report current evidence, not a cached operational result.
+  res.setHeader('Cache-Control', 'no-store');
   res.end(JSON.stringify(payload));
 }
 
@@ -29,17 +31,20 @@ export default async function handler(req, res) {
     if (!health || health.ok !== true) {
       return send(res, 503, {
         status: 'degraded',
+        operational: false,
         error: 'persistence_health_invalid',
         message: 'Database returned an invalid persistence-health response.',
         persistence: safePersistenceDiagnostic(config)
       });
     }
     const latestRun = health.latestRun && typeof health.latestRun === 'object' ? health.latestRun : null;
-    const graphAgeMinutes = latestRun?.ingested_at
-      ? Math.max(0, Math.round((Date.now() - new Date(latestRun.ingested_at).getTime()) / 60_000))
-      : null;
-    const staleAfterMinutes = Math.max(30, Math.min(24 * 60, Number(process.env.PERSISTENCE_STALE_MINUTES || 180)));
-    const stale = graphAgeMinutes === null || !Number.isFinite(graphAgeMinutes) || graphAgeMinutes > staleAfterMinutes;
+    const checkedAt = Date.now();
+    const freshness = evaluatePersistenceFreshness({
+      ingestedAt: latestRun?.ingested_at,
+      staleAfterMinutes: process.env.PERSISTENCE_STALE_MINUTES,
+      now: checkedAt
+    });
+    const { graphAgeMinutes, staleAfterMinutes, stale } = freshness;
     const rls = health.rls || {};
     const requiredTables = [
       'pulse_claim_graph_runs','pulse_events','pulse_evidence','pulse_claims',
@@ -53,6 +58,10 @@ export default async function handler(req, res) {
       latestRunHasNoUnsupportedMaterialClaims: health.quality?.latestRunHasNoUnsupportedMaterialClaims === true,
       auditTrailPresent: health.quality?.auditTrailPresent === true,
       rlsComplete,
+      freshnessConfigValid: freshness.configValid,
+      clockValid: freshness.clockValid,
+      timestampValid: freshness.timestampValid,
+      timestampNotFuture: freshness.timestampNotFuture,
       stale,
       graphAgeMinutes,
       staleAfterMinutes
@@ -64,10 +73,14 @@ export default async function handler(req, res) {
       status: operational ? 'operational' : 'degraded',
       operational,
       quality,
+      freshness: {
+        reason: freshness.reason,
+        clockSkewToleranceSeconds: freshness.clockSkewToleranceSeconds
+      },
       latestRun,
       counts: health.counts || {},
       rls,
-      checkedAt: new Date().toISOString(),
+      checkedAt: new Date(checkedAt).toISOString(),
       persistence: safePersistenceDiagnostic(config),
       caveat: 'Operational means the database is reachable, recently ingested, protected by RLS and contains an audit trail. Backup restore is measured separately.'
     });
