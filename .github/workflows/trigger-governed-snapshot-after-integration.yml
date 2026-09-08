@@ -1,0 +1,21 @@
+name: Trigger governed snapshot after authoritative integration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/trigger-governed-snapshot-after-integration.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger the governed snapshot refresh on current main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh-governed-snapshot-v6.yml --repo "$GITHUB_REPOSITORY" --ref main
