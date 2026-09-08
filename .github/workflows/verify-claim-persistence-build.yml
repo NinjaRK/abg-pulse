@@ -1,0 +1,225 @@
+name: Verify claim-evidence persistence build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-claim-persistence-build.yml'
+      - 'db/migrations/002_claim_evidence_audit.sql'
+      - 'lib/persistence.mjs'
+      - 'api/persist-claims.js'
+      - 'tests/persistence.test.mjs'
+      - 'tests/persist-claims-api.test.mjs'
+      - 'tests/fixtures/claim-evidence-graph.json'
+  pull_request:
+    paths:
+      - 'db/migrations/002_claim_evidence_audit.sql'
+      - 'lib/persistence.mjs'
+      - 'api/persist-claims.js'
+      - 'tests/persistence.test.mjs'
+      - 'tests/persist-claims-api.test.mjs'
+      - 'tests/fixtures/claim-evidence-graph.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-claim-persistence-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: abg_pulse_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d abg_pulse_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: abg_pulse_test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run persistence and claim regressions
+        run: |
+          node --test tests/claim-evidence.test.mjs tests/claims-api.test.mjs
+          node --test tests/persistence.test.mjs tests/persist-claims-api.test.mjs
+          node --check lib/persistence.mjs
+          node --check api/persist-claims.js
+
+      - name: Install PostgreSQL client when absent
+        shell: bash
+        run: |
+          if ! command -v psql >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y postgresql-client
+          fi
+
+      - name: Create Supabase-compatible test roles
+        shell: bash
+        run: |
+          psql -v ON_ERROR_STOP=1 <<'SQL'
+          do $$ begin create role anon nologin; exception when duplicate_object then null; end $$;
+          do $$ begin create role authenticated nologin; exception when duplicate_object then null; end $$;
+          do $$ begin create role service_role nologin bypassrls; exception when duplicate_object then null; end $$;
+          SQL
+
+      - name: Apply the claim-evidence migration to PostgreSQL 16
+        run: psql -v ON_ERROR_STOP=1 -f db/migrations/002_claim_evidence_audit.sql
+
+      - name: Verify tables, indexes, RLS and transactional RPC exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -At <<'SQL' > /tmp/schema-proof.txt
+          select 'tables=' || count(*)
+          from information_schema.tables
+          where table_schema = 'public'
+            and table_name in (
+              'pulse_claim_graph_runs','pulse_events','pulse_evidence','pulse_claims',
+              'pulse_claim_evidence','pulse_corrections','pulse_contradictions','pulse_audit_log'
+            );
+          select 'rls=' || count(*)
+          from pg_class c join pg_namespace n on n.oid = c.relnamespace
+          where n.nspname = 'public' and c.relname like 'pulse_%' and c.relrowsecurity;
+          select 'rpc=' || coalesce(to_regprocedure('public.pulse_ingest_claim_graph(jsonb,text,text,text)')::text, 'missing');
+          SQL
+          cat /tmp/schema-proof.txt
+          grep -qx 'tables=8' /tmp/schema-proof.txt
+          grep -q '^rls=8$' /tmp/schema-proof.txt
+          grep -q '^rpc=pulse_ingest_claim_graph(jsonb,text,text,text)$' /tmp/schema-proof.txt
+
+      - name: Prove transactional ingestion and idempotency
+        shell: bash
+        run: |
+          set -euo pipefail
+          graph=$(cat tests/fixtures/claim-evidence-graph.json)
+          manifest=$(printf 'a%.0s' {1..64})
+          psql -v ON_ERROR_STOP=1 -v graph="$graph" -v manifest="$manifest" -At <<'SQL' > /tmp/ingest-first.json
+          select public.pulse_ingest_claim_graph(:'graph'::jsonb, :'manifest', 'github-actions-test', 'fixture-request-1')::text;
+          SQL
+          psql -v ON_ERROR_STOP=1 -v graph="$graph" -v manifest="$manifest" -At <<'SQL' > /tmp/ingest-second.json
+          select public.pulse_ingest_claim_graph(:'graph'::jsonb, :'manifest', 'github-actions-test', 'fixture-request-1')::text;
+          SQL
+          psql -v ON_ERROR_STOP=1 -At <<'SQL' > /tmp/database-counts.txt
+          select 'runs=' || count(*) from public.pulse_claim_graph_runs;
+          select 'events=' || count(*) from public.pulse_events;
+          select 'claims=' || count(*) from public.pulse_claims;
+          select 'evidence=' || count(*) from public.pulse_evidence;
+          select 'links=' || count(*) from public.pulse_claim_evidence;
+          select 'corrections=' || count(*) from public.pulse_corrections;
+          select 'contradictions=' || count(*) from public.pulse_contradictions;
+          select 'audits=' || count(*) from public.pulse_audit_log;
+          SQL
+          cat /tmp/ingest-first.json
+          cat /tmp/database-counts.txt
+          grep -qx 'runs=1' /tmp/database-counts.txt
+          grep -qx 'events=1' /tmp/database-counts.txt
+          grep -qx 'claims=2' /tmp/database-counts.txt
+          grep -qx 'evidence=1' /tmp/database-counts.txt
+          grep -qx 'links=2' /tmp/database-counts.txt
+          grep -qx 'corrections=0' /tmp/database-counts.txt
+          grep -qx 'contradictions=1' /tmp/database-counts.txt
+          grep -qx 'audits=2' /tmp/database-counts.txt
+
+      - name: Prove unsupported material claims fail closed inside the database
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const graph = JSON.parse(readFileSync('tests/fixtures/claim-evidence-graph.json', 'utf8'));
+          graph.quality.publishable = false;
+          graph.quality.unsupportedMaterialClaimCount = 1;
+          writeFileSync('/tmp/blocked-graph.json', JSON.stringify(graph));
+          NODE
+          graph=$(cat /tmp/blocked-graph.json)
+          if psql -v ON_ERROR_STOP=1 -v graph="$graph" -At <<'SQL'
+          select public.pulse_ingest_claim_graph(:'graph'::jsonb, null, 'github-actions-test', 'blocked-request')::text;
+          SQL
+          then
+            echo 'Database accepted an unsupported material claim graph.'
+            exit 1
+          else
+            echo 'Database correctly rejected the unsupported material claim graph.'
+          fi
+
+      - name: Run full product regression and data validation
+        run: |
+          npm test
+          node tests/validate-data.mjs
+
+      - name: Record built progress without claiming a live database
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const path = 'data/build-milestones.json';
+          const plan = JSON.parse(readFileSync(path, 'utf8'));
+          const milestone = plan.milestones.find((item) => item.id === 'M4');
+          if (!milestone) throw new Error('M4 persistence milestone is missing.');
+          const line = 'Transactional claim/evidence schema and RPC applied successfully to PostgreSQL 16; idempotency, RLS, audit logging and unsupported-material-claim rejection passed. Production database remains unconnected.';
+          milestone.implementationCompletion = Math.max(Number(milestone.implementationCompletion || 0), 70);
+          milestone.evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
+          if (!milestone.evidence.includes(line)) milestone.evidence.push(line);
+          milestone.nextAction = 'Connect an authorised production Postgres/Supabase project, apply migrations, configure service-role and ingestion secrets, ingest the live graph, then prove backup and restore.';
+          plan.updatedAt = new Date().toISOString();
+          plan.programme = plan.programme || {};
+          plan.programme.lastBuildVerification = {
+            ...(plan.programme.lastBuildVerification || {}),
+            claimPersistence: {
+              verifiedAt: plan.updatedAt,
+              postgresVersion: 16,
+              migration: 'db/migrations/002_claim_evidence_audit.sql',
+              tables: 8,
+              transactionalRpc: 'pulse_ingest_claim_graph',
+              liveDatabaseConnected: false
+            }
+          };
+          writeFileSync(path, `${JSON.stringify(plan, null, 2)}\n`);
+          NODE
+          node --test tests/progress-meter.test.mjs tests/progress.test.mjs
+          git config user.name 'ABG Pulse Build Verification Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/build-milestones.json
+          if git diff --cached --quiet; then
+            echo 'Built progress is already recorded.'
+          else
+            git commit -m 'Record tested claim persistence implementation'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload database verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: claim-persistence-proof-${{ github.run_id }}-${{ github.sha }}
+          path: |
+            /tmp/schema-proof.txt
+            /tmp/ingest-first.json
+            /tmp/ingest-second.json
+            /tmp/database-counts.txt
+          if-no-files-found: warn
+          retention-days: 90
