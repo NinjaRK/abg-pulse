@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "observedAt": "2026-09-08T10:10:40.970Z",
+  "observedAt": "2026-09-08T10:10:53.532Z",
   "eventName": "repository_dispatch",
-  "action": "vercel.deployment.failed",
-  "state": "failed",
+  "action": "vercel.deployment.pending",
+  "state": "pending",
   "project": {
     "id": null,
     "name": "abg-pulse-intelligence-v4"
@@ -15,8 +15,7 @@
     "target": null,
     "environment": "production",
     "readyState": {
-      "detail": "deployment_blocked",
-      "type": "failed"
+      "type": "pending"
     },
     "errorCode": null,
     "errorMessage": null
