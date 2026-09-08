@@ -1,0 +1,45 @@
+name: Repair claim-evidence progress workflow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/repair-claim-progress-workflow.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Repair invalid Node import and remove this one-time repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('.github/workflows/record-claim-evidence-progress.yml')
+          text = path.read_text()
+          bad = "          import { execFileSync, writeFileSync } from 'node:child_process';\n"
+          good = "          import { execFileSync } from 'node:child_process';\n"
+          if bad in text:
+              path.write_text(text.replace(bad, good))
+          elif good not in text:
+              raise SystemExit('Expected import line was not found.')
+          PY
+          git rm .github/workflows/repair-claim-progress-workflow.yml
+      - name: Commit the repaired evidence gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add .github/workflows/record-claim-evidence-progress.yml
+          git commit -m 'Repair claim-evidence progress verification workflow'
+          git push origin HEAD:main
