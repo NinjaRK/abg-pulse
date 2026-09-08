@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "observedAt": "2026-09-08T06:02:41.955Z",
+  "observedAt": "2026-09-08T06:02:53.881Z",
   "eventName": "repository_dispatch",
-  "action": "vercel.deployment.success",
+  "action": "vercel.deployment.ready",
   "state": "healthy",
   "project": {
     "id": null,
@@ -15,7 +15,8 @@
     "target": null,
     "environment": "production",
     "readyState": {
-      "type": "success"
+      "detail": "before_alias",
+      "type": "ready"
     },
     "errorCode": null,
     "errorMessage": null
