@@ -495,13 +495,14 @@ function renderCoverageDialog(events = periodEvents(), coverage = coverageSnapsh
     : '<div class="empty-state"><h2>No event evidence in this window</h2><p>This does not mean the registry was not checked; it means no source is attached to a qualifying event in the selected period.</p></div>';
 
   const scannedAt = state.liveMeta?.scannedAt || state.lastScanAt;
+  const coverageNotice = state.liveMeta?.snapshot?.coverageNotice || '';
   const scanCopy = coverage.attemptedChecks
     ? `${coverage.successfulChecks} of ${coverage.attemptedChecks} configured automated checks succeeded${scannedAt ? ` at ${formatDate(scannedAt, true)}` : ''}.`
     : 'No live-scan health record is available in this session. The evidence record remains usable, but successful-check coverage cannot be claimed.';
   const capCopy = state.liveMeta?.windowCapped
     ? 'The automated live scan was capped to the latest 30 days. The selected period still filters all evidence already stored in Pulse.'
     : '';
-  $('#coverage-scan-health').innerHTML = `<div class="coverage-scan-card"><strong>${escapeHtml(scanCopy)}</strong><p>${escapeHtml((state.liveMeta?.providers || []).join(' · ') || 'Providers not yet metered.')}</p>${capCopy ? `<p><strong>${escapeHtml(capCopy)}</strong></p>` : ''}${coverage.errors.length ? `<ul class="coverage-error-list">${coverage.errors.slice(0, 8).map((error) => `<li>${escapeHtml(error.provider || 'Source check')} · ${escapeHtml(error.query || 'unknown')} · ${escapeHtml(error.error || 'degraded')}</li>`).join('')}</ul>` : ''}</div>`;
+  $('#coverage-scan-health').innerHTML = `<div class="coverage-scan-card"><strong>${escapeHtml(scanCopy)}</strong><p>${escapeHtml((state.liveMeta?.providers || []).join(' · ') || 'Providers not yet metered.')}</p>${coverageNotice ? `<p><strong>${escapeHtml(coverageNotice)}</strong></p>` : ''}${capCopy ? `<p><strong>${escapeHtml(capCopy)}</strong></p>` : ''}${coverage.errors.length ? `<ul class="coverage-error-list">${coverage.errors.slice(0, 8).map((error) => `<li>${escapeHtml(error.provider || 'Source check')} · ${escapeHtml(error.query || 'unknown')} · ${escapeHtml(error.error || 'degraded')}</li>`).join('')}</ul>` : ''}</div>`;
 }
 
 function renderToday() {
@@ -1000,6 +1001,10 @@ function renderAll() {
 function updateLastScanLabel() {
   const label = $('#last-scan-label');
   if (state.liveStatus === 'loading') label.textContent = 'Scanning live public sources…';
+  else if (state.liveStatus === 'success' && state.liveMeta?.snapshot) {
+    const snapshot = state.liveMeta.snapshot;
+    label.textContent = `Checked through ${formatDate(snapshot.coverageThrough || snapshot.windowEnd, true)}${snapshot.coverageComplete ? '' : ' · newer period not yet checked'}`;
+  }
   else if (state.liveStatus === 'success' && state.lastScanAt) label.textContent = `Live scan ${relativeTime(state.lastScanAt)}`;
   else if (state.liveStatus === 'error') label.textContent = 'Verified brief active · live discovery degraded';
   else label.textContent = 'Forward monitoring active';

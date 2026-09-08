@@ -32,7 +32,7 @@ jobs:
       - name: Check out production source
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.sha }}
           fetch-depth: 0
 
       - name: Set up Node.js
@@ -151,21 +151,21 @@ jobs:
               "$PRODUCTION_SCAN_URL?start=$start&end=$end&refresh=$GITHUB_RUN_ID" || true)
             if [ "$code" = "200" ]; then
               node --input-type=module <<'NODE' && consumer=true && break || true
-              import { readFileSync } from 'node:fs';
-              const payload = JSON.parse(readFileSync('/tmp/production-scan.json', 'utf8'));
-              if (!Array.isArray(payload.events)) throw new Error('Production consumer returned no events array.');
-              if (payload?.meta?.deliveryMode !== 'governed-snapshot') throw new Error(`Unexpected delivery mode: ${payload?.meta?.deliveryMode}`);
-              if (payload?.meta?.snapshot?.fresh !== true) throw new Error('Production snapshot is not marked fresh.');
-              if (payload?.meta?.snapshot?.sourceCommit !== process.env.GITHUB_SHA) {
-                throw new Error(`Production consumed ${payload?.meta?.snapshot?.sourceCommit}; expected ${process.env.GITHUB_SHA}.`);
-              }
-              console.log(JSON.stringify({
-                deliveryMode: payload.meta.deliveryMode,
-                sourceCommit: payload.meta.snapshot.sourceCommit,
-                ageMinutes: payload.meta.snapshot.ageMinutes,
-                events: payload.events.length
-              }, null, 2));
-              NODE
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('/tmp/production-scan.json', 'utf8'));
+          if (!Array.isArray(payload.events)) throw new Error('Production consumer returned no events array.');
+          if (payload?.meta?.deliveryMode !== 'governed-snapshot') throw new Error(`Unexpected delivery mode: ${payload?.meta?.deliveryMode}`);
+          if (payload?.meta?.snapshot?.fresh !== true) throw new Error('Production snapshot is not marked fresh.');
+          if (payload?.meta?.snapshot?.sourceCommit !== process.env.GITHUB_SHA) {
+            throw new Error(`Production consumed ${payload?.meta?.snapshot?.sourceCommit}; expected ${process.env.GITHUB_SHA}.`);
+          }
+          console.log(JSON.stringify({
+            deliveryMode: payload.meta.deliveryMode,
+            sourceCommit: payload.meta.snapshot.sourceCommit,
+            ageMinutes: payload.meta.snapshot.ageMinutes,
+            events: payload.events.length
+          }, null, 2));
+          NODE
             fi
             echo "Attempt $attempt: production consumer returned HTTP $code or stale data; retrying in 10 seconds."
             sleep 10
