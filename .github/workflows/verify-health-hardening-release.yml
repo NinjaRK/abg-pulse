@@ -8,6 +8,8 @@ on:
       - 'api/persistence-health.js'
       - 'lib/persistence-freshness.mjs'
       - 'api/claims.js'
+      - 'bootstrap.mjs'
+      - 'tests/bootstrap-*.test.mjs'
   push:
     branches: [main]
     paths:
@@ -15,6 +17,8 @@ on:
       - 'api/persistence-health.js'
       - 'lib/persistence-freshness.mjs'
       - 'api/claims.js'
+      - 'bootstrap.mjs'
+      - 'tests/bootstrap-*.test.mjs'
 
 permissions:
   contents: read
@@ -37,6 +41,7 @@ jobs:
           node --check api/persistence-health.js
           node --check lib/persistence-freshness.mjs
           node --check api/claims.js
+          node --check bootstrap.mjs
       - name: Read-only production contract and deployment proof
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
@@ -50,8 +55,8 @@ jobs:
           const expected = process.env.EXPECTED_SHA;
           assert.match(expected, /^[a-f0-9]{40}$/);
           const report = { expectedCommit: expected, verifiedAt: null, productionUrl: base,
-            deploymentVerified: false, contractVerified: false, databaseOperational: false,
-            claimsOperational: false, productionReadiness: 'unverified', writesPerformed: false };
+            deploymentVerified: false, contractVerified: false, databaseOperational: null,
+            claimsOperational: null, productionReadiness: 'unverified', writesPerformed: false };
           mkdirSync('/tmp/health-release-proof', { recursive: true });
           async function read(path) {
             const url = new URL(path, base);
@@ -82,12 +87,14 @@ jobs:
               try {
                 const health = await read('/api/health');
                 const deployed = health.body?.deployment?.commitSha;
+                report.observedHealth = { httpStatus: health.httpStatus, status: health.body?.status || null,
+                  commitSha: deployed || null, environment: health.body?.deployment?.environment || null };
                 if (health.httpStatus === 200 && containsExpected(deployed)) {
                   report.deployedCommit = deployed;
                   report.deploymentVerified = true;
                   break;
                 }
-              } catch { /* Bounded retry while deployment becomes available. */ }
+              } catch (error) { report.lastDeploymentProbeError = error.message; }
               await new Promise((resolve) => setTimeout(resolve, 5_000));
             }
             assert.equal(report.deploymentVerified, true, 'Production must contain the tested release commit.');
@@ -128,6 +135,7 @@ jobs:
               report.claimsOperational = true;
             } else {
               assert.equal(claims.body.failedClosed, true);
+              report.claimsOperational = false;
             }
             report.claims = { httpStatus: claims.httpStatus, error: claims.body.error || null,
               claimCount: claims.body.filteredSummary?.claimCount ?? null,
