@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import { configurationPreflight, EXPECTED_PROJECT } from '../scripts/production-preflight.mjs';
+const env={SUPABASE_URL:`https://${EXPECTED_PROJECT}.supabase.co`,SUPABASE_SERVICE_ROLE_KEY:'test-only-private-value',INGEST_SECRET:'test-only-ingest-value'};
+test('configuration preflight accepts intended project without claiming a real connection',()=>{const r=configurationPreflight(env);assert.equal(r.configurationReady,true);assert.equal(r.databaseConnected,null);assert.equal(r.productionTested,false);assert.ok(!JSON.stringify(r).includes(env.SUPABASE_SERVICE_ROLE_KEY));});
+for(const url of ['https://habtpdilcziurxnotbrf.supabase.co','http://kzqymboxilxvdgacwypy.supabase.co','https://kzqymboxilxvdgacwypy.supabase.co.evil.test','https://user:secret@kzqymboxilxvdgacwypy.supabase.co','https://kzqymboxilxvdgacwypy.supabase.co/?token=1']) test(`preflight refuses wrong or unsafe project URL ${url}`,()=>assert.equal(configurationPreflight({...env,SUPABASE_URL:url}).configurationReady,false));
+test('preflight blocks public credentials and missing configuration',()=>{assert.equal(configurationPreflight({...env,NEXT_PUBLIC_SERVICE_ROLE_KEY:env.SUPABASE_SERVICE_ROLE_KEY}).configurationReady,false);assert.equal(configurationPreflight({}).configurationReady,false);});
