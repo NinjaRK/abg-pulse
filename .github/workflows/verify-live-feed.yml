@@ -45,6 +45,11 @@ jobs:
           mkdir -p /tmp/live-feed-proof
           git rev-parse HEAD > /tmp/live-feed-proof/SOURCE_COMMIT.txt
           git archive --format=tar.gz -o /tmp/live-feed-proof/source.tar.gz HEAD
+      - name: Verify exact deployed code and real production feed
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          EXPECTED_DEPLOYMENT_SHA: ${{ github.sha }}
+        run: node scripts/verify-live-feed.mjs /tmp/live-feed-proof/runtime.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:

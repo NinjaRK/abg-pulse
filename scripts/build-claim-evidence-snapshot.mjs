@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { buildClaimEvidenceGraph, findPotentialContradictions } from '../lib/claim-evidence.mjs';
 
-const DEFAULT_LIVE_SNAPSHOT_URL = 'https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/live-snapshot.json';
+import { DEFAULT_LIVE_SNAPSHOT_URL } from '../lib/live-snapshot.mjs';
 const boundedNumber = (value, fallback, minimum, maximum) => {
   const number = Number(value);
   if (!Number.isFinite(number)) return fallback;

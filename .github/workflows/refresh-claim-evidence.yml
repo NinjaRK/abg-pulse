@@ -13,6 +13,8 @@ on:
       - 'tests/claim-evidence.test.mjs'
       - 'api/claims.js'
       - 'tests/claims-api.test.mjs'
+      - 'lib/live-snapshot.mjs'
+      - 'tests/live-feed-integration.test.mjs'
 
 permissions:
   contents: write
@@ -45,7 +47,7 @@ jobs:
 
       - name: Build evidence graph from the latest governed snapshot
         env:
-          CLAIM_EVIDENCE_INPUT_URL: https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/live-snapshot.json
+          CLAIM_EVIDENCE_INPUT_URL: https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/live-snapshot.json
           CLAIM_EVIDENCE_INPUT_STALE_MINUTES: '180'
           CLAIM_EVIDENCE_FETCH_TIMEOUT_MS: '30000'
           UNSUPPORTED_MATERIALITY_FLOOR: '65'
@@ -129,13 +131,13 @@ jobs:
             code=$(curl -L -sS --max-time 30 -o /tmp/published-claim-evidence.json -w '%{http_code}' "$url" || true)
             if [ "$code" = '200' ]; then
               node --input-type=module <<'NODE'
-              import { readFileSync } from 'node:fs';
-              const graph = JSON.parse(readFileSync('/tmp/published-claim-evidence.json', 'utf8'));
-              if (graph.quality?.publishable !== true) throw new Error('Published graph is not marked publishable.');
-              if (Number(graph.quality?.unsupportedMaterialClaimCount) !== 0) throw new Error('Published graph contains unsupported material claims.');
-              if (!graph.sourceCommit) throw new Error('Published graph source commit is missing.');
-              console.log(`Published ${graph.summary.claimCount} claims linked to ${graph.summary.evidenceCount} evidence records from ${graph.sourceCommit}.`);
-              NODE
+          import { readFileSync } from 'node:fs';
+          const graph = JSON.parse(readFileSync('/tmp/published-claim-evidence.json', 'utf8'));
+          if (graph.quality?.publishable !== true) throw new Error('Published graph is not marked publishable.');
+          if (Number(graph.quality?.unsupportedMaterialClaimCount) !== 0) throw new Error('Published graph contains unsupported material claims.');
+          if (!graph.sourceCommit) throw new Error('Published graph source commit is missing.');
+          console.log(`Published ${graph.summary.claimCount} claims linked to ${graph.summary.evidenceCount} evidence records from ${graph.sourceCommit}.`);
+          NODE
               exit 0
             fi
             echo "Attempt $attempt returned HTTP $code; retrying in 10 seconds."

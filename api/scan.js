@@ -355,6 +355,7 @@ export default async function handler(req, res) {
       const payload = await loadLiveSnapshot({
         window,
         now: startedAt,
+        allowTrailingLag: true,
         staleAfterMinutes: Number(process.env.LIVE_SNAPSHOT_STALE_MINUTES || 90),
         minimumSuccessRatio: Number(process.env.LIVE_SNAPSHOT_MIN_SUCCESS_RATIO || 0.2)
       });
