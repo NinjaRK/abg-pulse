@@ -1,0 +1,27 @@
+name: Trigger governed snapshot after official-source fallback hardening
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/trigger-governed-snapshot-after-fallback.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger authoritative refresh first
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh-authoritative-wave1.yml --repo "$GITHUB_REPOSITORY" --ref main
+      - name: Allow direct-source evidence to publish
+        run: sleep 120
+      - name: Trigger governed event snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run refresh-governed-snapshot-v6.yml --repo "$GITHUB_REPOSITORY" --ref main
