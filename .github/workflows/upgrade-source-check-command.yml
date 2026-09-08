@@ -1,0 +1,44 @@
+name: Upgrade repository source-check command
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/upgrade-source-check-command.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Replace fragile static syntax list with repository-wide verification
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const path = 'package.json';
+          const packageJson = JSON.parse(readFileSync(path, 'utf8'));
+          packageJson.scripts = packageJson.scripts || {};
+          packageJson.scripts.check = 'node scripts/check-source.mjs && node tests/validate-data.mjs';
+          packageJson.scripts['test:claims'] = 'node --test tests/claim-evidence.test.mjs tests/claims-api.test.mjs tests/persistence.test.mjs tests/persist-claims-api.test.mjs tests/corrections-api.test.mjs';
+          packageJson.scripts['test:coverage'] = 'node --test tests/entity-source-coverage.test.mjs tests/authoritative-sources.test.mjs tests/authoritative-api.test.mjs tests/authoritative-event-integration.test.mjs tests/authoritative-fallbacks.test.mjs';
+          writeFileSync(path, `${JSON.stringify(packageJson, null, 2)}\n`);
+          NODE
+          npm run check
+          npm test
+          git rm .github/workflows/upgrade-source-check-command.yml
+      - name: Commit tested package scripts
+        run: |
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add package.json scripts/check-source.mjs
+          git commit -m 'Run repository-wide source and evidence checks'
+          git push origin HEAD:main
