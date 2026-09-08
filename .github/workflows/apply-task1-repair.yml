@@ -1,0 +1,46 @@
+name: Apply exact tested Task 1 repair
+
+on:
+  push:
+    branches: ['fix/live-feed-task1-20260908']
+    paths: ['.github/workflows/apply-task1-repair.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply only the locally tested source blobs
+        run: python scripts/apply-task1-repair.py
+      - name: Prove the exact source and preserve all existing tests
+        run: |
+          mkdir -p /tmp/task1-proof
+          npm test > /tmp/task1-proof/product-tests.log 2>&1
+          npm run check > /tmp/task1-proof/syntax-check.log 2>&1
+          git diff --check
+          git diff --exit-code HEAD -- data/build-milestones.json tests/progress.test.mjs tests/progress-meter.test.mjs
+      - name: Commit reviewed changes to the review branch only
+        run: |
+          git config user.name 'ABG Pulse Repair Verification'
+          git config user.email 'actions@users.noreply.github.com'
+          git add .github/workflows/refresh-claim-evidence.yml .github/workflows/refresh-live-snapshot.yml .github/workflows/verify-live-feed.yml api/scan.js app.js lib/live-snapshot.mjs scripts/build-claim-evidence-snapshot.mjs
+          git rm .github/workflows/apply-task1-repair.yml scripts/apply-task1-repair.py
+          git commit -m 'Repair canonical live feed paths, publication checks and visible rolling-window lag'
+          git rev-parse HEAD > /tmp/task1-proof/SOURCE_COMMIT.txt
+          git push origin HEAD:fix/live-feed-task1-20260908
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: task1-exact-repair-${{ github.run_id }}
+          path: /tmp/task1-proof/
+          retention-days: 14
+          if-no-files-found: error
