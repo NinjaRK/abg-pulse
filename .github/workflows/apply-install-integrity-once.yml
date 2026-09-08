@@ -3,7 +3,7 @@ name: Apply reviewed install-integrity repair once
 on:
   push:
     branches: [sol/install-integrity-20260908]
-    paths: ['scripts/install-integrity-reviewed.patch.02']
+    paths: ['.github/workflows/apply-install-integrity-once.yml']
 
 permissions:
   contents: write
@@ -24,16 +24,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify and apply the locally reviewed diff
+      - name: Verify and apply the locally reviewed application diff
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p /tmp/install-repair-proof
           cat scripts/install-integrity-reviewed.patch.00 scripts/install-integrity-reviewed.patch.01 scripts/install-integrity-reviewed.patch.02 > /tmp/install-repair-proof/repair.patch
           echo 'e6f70f3fcea5601926d64c7a3fe8bfe16fbb2856269ef51e64a1e07b9effaa1e  /tmp/install-repair-proof/repair.patch' | sha256sum --check
-          git apply --check /tmp/install-repair-proof/repair.patch
-          git apply /tmp/install-repair-proof/repair.patch
-          git add bootstrap.mjs api/claims.js tests/claims-api.test.mjs tests/install-integrity.test.mjs lib/live-snapshot.mjs api/scan.js tests/live-snapshot.test.mjs app.js .github/workflows/ci.yml .github/workflows/install-integrity.yml .github/workflows/verify-production.yml docs/INSTALL_INTEGRITY_20260908.md
+          git apply --check --exclude='.github/workflows/*' /tmp/install-repair-proof/repair.patch
+          git apply --exclude='.github/workflows/*' /tmp/install-repair-proof/repair.patch
+          git add bootstrap.mjs api/claims.js tests/claims-api.test.mjs tests/install-integrity.test.mjs lib/live-snapshot.mjs api/scan.js tests/live-snapshot.test.mjs app.js docs/INSTALL_INTEGRITY_20260908.md
       - name: Verify real installation preserves the repaired source
         shell: bash
         run: |
@@ -46,11 +46,11 @@ jobs:
           set -euo pipefail
           npm test 2>&1 | tee /tmp/install-repair-proof/tests.log
           npm run check 2>&1 | tee /tmp/install-repair-proof/check.log
-      - name: Commit tested source and remove the one-time delivery mechanism
+      - name: Commit tested application source without modifying workflow permissions
         shell: bash
         run: |
           set -euo pipefail
-          git rm scripts/install-integrity-reviewed.patch.00 scripts/install-integrity-reviewed.patch.01 scripts/install-integrity-reviewed.patch.02 scripts/install-integrity-reviewed.patch.gz.b64 .github/workflows/apply-install-integrity-once.yml
+          git rm scripts/install-integrity-reviewed.patch.00 scripts/install-integrity-reviewed.patch.01 scripts/install-integrity-reviewed.patch.02 scripts/install-integrity-reviewed.patch.gz.b64
           git config user.name 'ABG Pulse Build Bot'
           git config user.email 'actions@users.noreply.github.com'
           git commit -m 'Preserve installed source, restore claim search and expose snapshot coverage gaps'
