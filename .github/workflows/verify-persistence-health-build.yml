@@ -9,12 +9,21 @@ on:
       - 'db/migrations/003_editorial_corrections.sql'
       - 'db/migrations/004_persistence_health.sql'
       - 'api/persistence-health.js'
+      - 'lib/persistence-freshness.mjs'
       - 'tests/persistence-health-api.test.mjs'
+      - 'tests/persistence-freshness-regression.test.mjs'
+      - 'bootstrap.mjs'
+      - 'tests/bootstrap-*.test.mjs'
   pull_request:
     paths:
+      - '.github/workflows/verify-persistence-health-build.yml'
       - 'db/migrations/004_persistence_health.sql'
       - 'api/persistence-health.js'
+      - 'lib/persistence-freshness.mjs'
       - 'tests/persistence-health-api.test.mjs'
+      - 'tests/persistence-freshness-regression.test.mjs'
+      - 'bootstrap.mjs'
+      - 'tests/bootstrap-*.test.mjs'
   workflow_dispatch:
 
 permissions:
