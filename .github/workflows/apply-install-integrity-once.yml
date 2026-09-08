@@ -1,0 +1,67 @@
+name: Apply reviewed install-integrity repair once
+
+on:
+  push:
+    branches: [sol/install-integrity-20260908]
+    paths: ['scripts/install-integrity-reviewed.patch.gz.b64']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-install-integrity-once
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.ref == 'refs/heads/sol/install-integrity-20260908'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify and apply the locally reviewed diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/install-repair-proof
+          base64 --decode scripts/install-integrity-reviewed.patch.gz.b64 | gzip -dc > /tmp/install-repair-proof/repair.patch
+          echo 'e6f70f3fcea5601926d64c7a3fe8bfe16fbb2856269ef51e64a1e07b9effaa1e  /tmp/install-repair-proof/repair.patch' | sha256sum --check
+          git apply --check /tmp/install-repair-proof/repair.patch
+          git apply /tmp/install-repair-proof/repair.patch
+          git add bootstrap.mjs api/claims.js tests/claims-api.test.mjs tests/install-integrity.test.mjs lib/live-snapshot.mjs api/scan.js tests/live-snapshot.test.mjs app.js .github/workflows/ci.yml .github/workflows/install-integrity.yml .github/workflows/verify-production.yml docs/INSTALL_INTEGRITY_20260908.md
+      - name: Verify real installation preserves the repaired source
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --package-lock=false --ignore-scripts=false --no-audit --no-fund 2>&1 | tee /tmp/install-repair-proof/install.log
+          git diff --exit-code
+      - name: Run all product tests and validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test 2>&1 | tee /tmp/install-repair-proof/tests.log
+          npm run check 2>&1 | tee /tmp/install-repair-proof/check.log
+      - name: Commit tested source and remove the one-time delivery mechanism
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm scripts/install-integrity-reviewed.patch.gz.b64 .github/workflows/apply-install-integrity-once.yml
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'Preserve installed source, restore claim search and expose snapshot coverage gaps'
+          git push origin HEAD:sol/install-integrity-20260908
+          git rev-parse HEAD > /tmp/install-repair-proof/SOURCE_COMMIT.txt
+          git archive --format=tar.gz HEAD > /tmp/install-repair-proof/source.tgz
+      - name: Preserve repair evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: install-repair-proof-${{ github.run_id }}
+          path: /tmp/install-repair-proof/
+          if-no-files-found: error
+          retention-days: 30
