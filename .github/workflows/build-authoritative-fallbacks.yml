@@ -1,0 +1,242 @@
+name: Build authoritative source fallback resilience
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-authoritative-fallbacks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: build-authoritative-source-fallbacks
+  cancel-in-progress: false
+
+jobs:
+  build-test-merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BRANCH: sol/authoritative-fallback-resilience
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Create fresh branch
+        run: |
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git switch -C "$BRANCH" origin/main
+      - name: Add governed fallback endpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const path = 'config/authoritative-sources-wave1.json';
+          const registry = JSON.parse(readFileSync(path, 'utf8'));
+          const fallbacks = {
+            'sec-novelis': [
+              { adapter: 'official-html-listing', endpoint: 'https://www.sec.gov/edgar/browse/?CIK=1304280&owner=exclude', reason: 'Official EDGAR company browse fallback' }
+            ],
+            'nse-abg-listed': [
+              { adapter: 'official-html-listing', endpoint: 'https://www.nseindia.com/companies-listing/corporate-filings-announcements', reason: 'Official NSE announcement-listing fallback' }
+            ],
+            'bse-abg-listed': [
+              { adapter: 'official-html-listing', endpoint: 'https://www.bseindia.com/corporates/ann.html', reason: 'Official BSE announcement-listing fallback' }
+            ],
+            'sebi-releases': [
+              { adapter: 'official-html-listing', endpoint: 'https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListingAll=yes', reason: 'Official SEBI all-listings fallback' }
+            ],
+            'rbi-releases': [
+              { adapter: 'official-html-listing', endpoint: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx', reason: 'Official RBI legacy press-release fallback' }
+            ],
+            'cci-releases': [
+              { adapter: 'official-html-listing', endpoint: 'https://www.cci.gov.in/antitrust/press-release', reason: 'Official CCI alternate press-release route' }
+            ],
+            'irdai-releases': [
+              { adapter: 'official-html-listing', endpoint: 'https://irdai.gov.in/press-release', reason: 'Official IRDAI alternate press-release route' }
+            ],
+            'pfrda-releases': [
+              { adapter: 'official-html-listing', endpoint: 'https://www.pfrda.org.in/index1.cshtml?lsid=162', reason: 'Official PFRDA legacy publication index' }
+            ],
+            'trai-releases': [
+              { adapter: 'official-html-listing', endpoint: 'https://www.trai.gov.in/notifications/press-release', reason: 'Official TRAI alternate press-release route' }
+            ]
+          };
+          for (const source of registry.sources) source.fallbacks = fallbacks[source.id] || [];
+          registry.version = '1.1.0';
+          registry.updatedAt = new Date().toISOString();
+          writeFileSync(path, `${JSON.stringify(registry, null, 2)}\n`);
+          NODE
+      - name: Add explicit primary-to-fallback execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const path = 'lib/authoritative-sources.mjs';
+          let source = readFileSync(path, 'utf8');
+          const marker = 'export async function fetchAuthoritativeSourceWithFallback';
+          if (!source.includes(marker)) {
+            const anchor = 'export async function fetchAuthoritativeWave';
+            const index = source.indexOf(anchor);
+            if (index < 0) throw new Error('Could not locate fetchAuthoritativeWave.');
+            const helper = `export async function fetchAuthoritativeSourceWithFallback(source, options = {}) {
+  const fallbacks = Array.isArray(source.fallbacks) ? source.fallbacks : [];
+  const candidates = [
+    { adapter: source.adapter, endpoint: source.endpoint, bootstrapUrl: source.bootstrapUrl || null, reason: 'primary' },
+    ...fallbacks
+  ];
+  const attempts = [];
+  for (let index = 0; index < candidates.length; index += 1) {
+    const candidate = candidates[index];
+    const candidateSource = {
+      ...source,
+      ...candidate,
+      id: source.id,
+      name: source.name,
+      authority: source.authority,
+      rights: source.rights,
+      fallbacks: undefined
+    };
+    try {
+      const result = await fetchAuthoritativeSource(candidateSource, options);
+      return {
+        ...result,
+        endpoint: source.endpoint,
+        endpointUsed: candidateSource.endpoint,
+        adapterUsed: candidateSource.adapter,
+        fallbackUsed: index > 0,
+        fallbackReason: index > 0 ? (candidate.reason || null) : null,
+        attempts: [...attempts, { endpoint: candidateSource.endpoint, adapter: candidateSource.adapter, ok: true }]
+      };
+    } catch (error) {
+      attempts.push({
+        endpoint: candidateSource.endpoint,
+        adapter: candidateSource.adapter,
+        ok: false,
+        code: error?.code || 'source_fetch_failed',
+        message: String(error?.message || error)
+      });
+    }
+  }
+  throw new AuthoritativeSourceError(
+    'all_source_endpoints_failed',
+    \`All configured endpoints failed for \${source.id}.\`,
+    { attempts }
+  );
+}
+
+`;
+            source = `${source.slice(0, index)}${helper}${source.slice(index)}`;
+          }
+          const oldCall = 'results.push(await fetchAuthoritativeSource(source, { start, end, fetchImpl, timeoutMs }));';
+          const newCall = 'results.push(await fetchAuthoritativeSourceWithFallback(source, { start, end, fetchImpl, timeoutMs }));';
+          if (source.includes(oldCall)) source = source.replace(oldCall, newCall);
+          else if (!source.includes(newCall)) throw new Error('Could not locate authoritative wave fetch call.');
+          writeFileSync(path, source);
+          NODE
+      - name: Add fallback regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > tests/authoritative-fallbacks.test.mjs <<'EOF'
+          import test from 'node:test';
+          import assert from 'node:assert/strict';
+          import { fetchAuthoritativeSourceWithFallback } from '../lib/authoritative-sources.mjs';
+
+          const source = {
+            id: 'test-regulator',
+            name: 'Test regulator',
+            authority: 'Test authority',
+            adapter: 'official-html-listing',
+            endpoint: 'https://primary.example.test/releases',
+            fallbacks: [{
+              adapter: 'official-html-listing',
+              endpoint: 'https://fallback.example.test/releases',
+              reason: 'official alternate route'
+            }],
+            jurisdiction: 'IN',
+            tier: 0,
+            rights: 'public-regulator-metadata',
+            cadenceMinutes: 60,
+            entityIds: [],
+            active: true
+          };
+
+          const response = (status, text = '') => ({
+            ok: status >= 200 && status < 300,
+            status,
+            text: async () => text,
+            json: async () => ({})
+          });
+
+          test('a failed primary endpoint falls back only to a governed official route', async () => {
+            const calls = [];
+            const result = await fetchAuthoritativeSourceWithFallback(source, {
+              start: '2026-09-01T00:00:00.000Z',
+              end: '2026-09-08T23:59:59.999Z',
+              fetchImpl: async (url) => {
+                calls.push(String(url));
+                if (String(url).includes('primary')) return response(503);
+                return response(200, '<span>07 Sep 2026</span><a href="/release-1">A material official publication with a traceable title</a>');
+              }
+            });
+            assert.equal(result.ok, true);
+            assert.equal(result.fallbackUsed, true);
+            assert.equal(result.endpointUsed, 'https://fallback.example.test/releases');
+            assert.equal(result.fallbackReason, 'official alternate route');
+            assert.equal(result.attempts.length, 2);
+            assert.equal(result.attempts[0].ok, false);
+            assert.equal(result.attempts[1].ok, true);
+            assert.equal(calls.length, 2);
+          });
+
+          test('all endpoint failures remain explicit and include every attempt', async () => {
+            await assert.rejects(() => fetchAuthoritativeSourceWithFallback(source, {
+              start: '2026-09-01T00:00:00.000Z',
+              end: '2026-09-08T23:59:59.999Z',
+              fetchImpl: async () => response(503)
+            }), (error) => {
+              assert.equal(error.code, 'all_source_endpoints_failed');
+              assert.equal(error.detail.attempts.length, 2);
+              return true;
+            });
+          });
+          EOF
+      - name: Run complete regression suite
+        run: |
+          npm test
+          node --check lib/authoritative-sources.mjs
+          node --check scripts/refresh-authoritative-wave1.mjs
+      - name: Commit, rebase and push tested branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add config/authoritative-sources-wave1.json lib/authoritative-sources.mjs tests/authoritative-fallbacks.test.mjs
+          git commit -m 'Add governed fallback resilience for official sources'
+          git fetch origin main
+          git rebase origin/main
+          npm test
+          git push --force-with-lease origin HEAD:"$BRANCH"
+      - name: Create and merge reviewed change
+        shell: bash
+        run: |
+          set -euo pipefail
+          pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --base main --state open --json number --jq '.[0].number // empty')
+          if [ -z "$pr" ]; then
+            gh pr create --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --base main \
+              --title 'Add governed fallback resilience for direct official sources' \
+              --body 'Adds official-only fallback endpoints, records every attempt, exposes the endpoint actually used and fails closed when all routes fail. Complete regression tests pass before promotion.'
+            pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --base main --state open --json number --jq '.[0].number')
+          fi
+          gh pr merge "$pr" --repo "$GITHUB_REPOSITORY" --squash --delete-branch \
+            --subject 'Add governed fallback resilience for direct official sources'
