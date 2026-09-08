@@ -1,0 +1,114 @@
+name: Verify n8n claim persistence workflow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-n8n-claim-persistence.yml'
+      - 'n8n/abg-pulse-claim-persistence.json'
+      - 'scripts/validate-n8n-workflows.mjs'
+      - 'tests/n8n-claim-persistence.test.mjs'
+  pull_request:
+    paths:
+      - 'n8n/abg-pulse-claim-persistence.json'
+      - 'scripts/validate-n8n-workflows.mjs'
+      - 'tests/n8n-claim-persistence.test.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-n8n-claim-persistence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run focused n8n workflow tests
+        run: node --test tests/n8n-claim-persistence.test.mjs
+      - name: Run secret-safety validator against the new workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/abg-pulse-n8n-validation
+          mkdir -p /tmp/abg-pulse-n8n-validation
+          cp n8n/abg-pulse-claim-persistence.json /tmp/abg-pulse-n8n-validation/
+          N8N_WORKFLOW_DIR=/tmp/abg-pulse-n8n-validation node scripts/validate-n8n-workflows.mjs \
+            | tee /tmp/n8n-validation.json
+      - name: Verify required environment variables and fail-visible path
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const text = readFileSync('n8n/abg-pulse-claim-persistence.json', 'utf8');
+          const workflow = JSON.parse(text);
+          const required = ['ABG_PULSE_BASE_URL', 'ABG_PULSE_INGEST_SECRET'];
+          for (const name of required) {
+            if (!text.includes(`$env.${name}`)) throw new Error(`Missing n8n environment reference: ${name}`);
+          }
+          if (workflow.active !== false) throw new Error('Workflow must be imported inactive.');
+          const failure = workflow.nodes.find((node) => node.name === 'Fail Visibly');
+          if (!failure?.parameters?.jsCode?.includes('throw new Error')) throw new Error('Failure path does not fail the execution visibly.');
+          console.log(JSON.stringify({ name: workflow.name, nodes: workflow.nodes.length, requiredEnvironment: required }, null, 2));
+          NODE
+      - name: Run complete product regression suite
+        run: |
+          npm test
+          npm run check
+      - name: Record tested orchestration implementation without claiming a running n8n instance
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const path = 'data/build-milestones.json';
+          const plan = JSON.parse(readFileSync(path, 'utf8'));
+          const milestone = plan.milestones.find((item) => item.id === 'M4');
+          if (!milestone) throw new Error('M4 persistence/orchestration milestone is missing.');
+          const line = 'Importable n8n claim-persistence workflow passed structural, secret-safety, idempotency and visible-failure tests. It remains inactive until an authorised n8n workspace and production database are connected.';
+          milestone.implementationCompletion = Math.max(Number(milestone.implementationCompletion || 0), 86);
+          milestone.evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
+          if (!milestone.evidence.includes(line)) milestone.evidence.push(line);
+          milestone.nextAction = 'Connect production Postgres/Supabase and an authorised n8n workspace, configure secrets, run a canary, then activate the schedule and prove retries and alerting.';
+          plan.updatedAt = new Date().toISOString();
+          plan.programme = plan.programme || {};
+          plan.programme.lastBuildVerification = {
+            ...(plan.programme.lastBuildVerification || {}),
+            n8nClaimPersistence: {
+              verifiedAt: plan.updatedAt,
+              workflow: 'n8n/abg-pulse-claim-persistence.json',
+              importable: true,
+              active: false,
+              runningWorkspaceConnected: false
+            }
+          };
+          writeFileSync(path, `${JSON.stringify(plan, null, 2)}\n`);
+          NODE
+          node --test tests/progress-meter.test.mjs tests/progress.test.mjs
+          git config user.name 'ABG Pulse Build Verification Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/build-milestones.json
+          if git diff --cached --quiet; then
+            echo 'n8n implementation progress is already recorded.'
+          else
+            git commit -m 'Record tested n8n claim persistence workflow'
+            git push origin HEAD:main
+          fi
+      - name: Upload n8n verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: n8n-claim-persistence-proof-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/n8n-validation.json
+          if-no-files-found: warn
+          retention-days: 90
