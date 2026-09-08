@@ -14,6 +14,11 @@ function boundedRatio(value, fallback) {
   return Number.isFinite(number) ? Math.max(0, Math.min(1, number)) : fallback;
 }
 
+export function writeCliResultAndExit(stream, payload, exitCode, exit = process.exit) {
+  const text = typeof payload === 'string' ? payload : JSON.stringify(payload, null, 2);
+  stream.write(`${text}\n`, () => exit(exitCode));
+}
+
 export async function generateLiveSnapshot({
   now = validDate(process.env.SNAPSHOT_NOW),
   spanDays = Number(process.env.SNAPSHOT_SPAN_DAYS || 30),
@@ -46,7 +51,7 @@ export async function generateLiveSnapshot({
   const generatedAt = end.toISOString();
   const snapshot = {
     schemaVersion: 1,
-    serviceVersion: '6.0.0',
+    serviceVersion: '6.1.0',
     generatedAt,
     windowStart: start.toISOString(),
     windowEnd: end.toISOString(),
@@ -98,9 +103,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const outputPath = process.argv[2] || 'live-snapshot.json';
   try {
     const result = await writeLiveSnapshot(outputPath);
-    console.log(JSON.stringify({ status: 'published', ...result }, null, 2));
+    // Some upstream fetch implementations can leave sockets alive even after an
+    // AbortSignal fires. The file has already been atomically written, so flush
+    // the result and terminate the CLI rather than letting orphan handles keep a
+    // scheduled refresh open for several minutes.
+    writeCliResultAndExit(process.stdout, { status: 'published', ...result }, 0);
   } catch (error) {
-    console.error(`ABG Pulse snapshot refresh failed: ${error?.stack || error}`);
-    process.exitCode = 1;
+    writeCliResultAndExit(process.stderr, `ABG Pulse snapshot refresh failed: ${error?.stack || error}`, 1);
   }
 }
