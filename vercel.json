@@ -73,6 +73,24 @@
     },
     "api/social-ingest.js": {
       "maxDuration": 15
+    },
+    "api/authoritative.js": {
+      "maxDuration": 15
+    },
+    "api/claims.js": {
+      "maxDuration": 15
+    },
+    "api/persist-claims.js": {
+      "maxDuration": 60
+    },
+    "api/corrections.js": {
+      "maxDuration": 30
+    },
+    "api/entity-source-coverage.js": {
+      "maxDuration": 10
+    },
+    "api/deployment-status.js": {
+      "maxDuration": 10
     }
   },
   "git": {
