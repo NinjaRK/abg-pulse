@@ -1,51 +1,51 @@
-import { readFileSync, readdirSync, writeFileSync, unlinkSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
-import { join } from 'node:path';
+import { readFileSync, statSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const chunkDirectory = '.bootstrap';
-const chunks = readdirSync(chunkDirectory)
-  .filter((name) => /^runtime\.b64\.\d+$/.test(name))
-  .sort();
+// Keep the existing postinstall entry point, but never unpack the historical
+// .bootstrap archive. Installation must preserve the exact checked-out source.
+export const REQUIRED_RUNTIME_FILES = Object.freeze([
+  'package.json', 'vercel.json', 'index.html', 'app.js', 'core.mjs', 'official.mjs',
+  'api/health.js', 'api/scan.js', 'api/progress.js', 'api/events.js',
+  'api/ingest.js', 'api/social-ingest.js', 'lib/live-snapshot.mjs',
+  'data/entities.json', 'data/entity-universe-summary.json',
+  'data/source-registry.json', 'data/build-milestones.json',
+  'config/queries.json', 'config/official-sources.json'
+]);
 
-if (!chunks.length) {
-  throw new Error('ABG Pulse runtime bundle chunks are missing.');
+/** Validate committed runtime assets without downloading, restoring or writing. */
+export function validateRuntime(root = fileURLToPath(new URL('.', import.meta.url))) {
+  const failures = [];
+  for (const relative of REQUIRED_RUNTIME_FILES) {
+    try {
+      const path = resolve(root, relative);
+      const stat = statSync(path);
+      if (!stat.isFile() || stat.size === 0) {
+        failures.push(`${relative}: missing or empty regular file`);
+        continue;
+      }
+      if (relative.endsWith('.json')) {
+        const parsed = JSON.parse(readFileSync(path, 'utf8'));
+        if (parsed === null || typeof parsed !== 'object') {
+          failures.push(`${relative}: expected a JSON object or array`);
+        }
+      }
+    } catch (error) {
+      failures.push(`${relative}: ${error instanceof SyntaxError ? 'invalid JSON' : error.code || 'unreadable'}`);
+    }
+  }
+  if (failures.length) {
+    throw new Error(`ABG Pulse runtime validation failed:\n${failures.join('\n')}\nRestore the missing source from the intended Git commit. Historical archives are not an installation fallback.`);
+  }
+  return { status: 'ok', checkedFiles: REQUIRED_RUNTIME_FILES.length, sourceMutated: false };
 }
 
-const encoded = chunks
-  .map((name) => readFileSync(join(chunkDirectory, name), 'utf8').trim())
-  .join('');
-
-const archivePath = '/tmp/abg-pulse-runtime.tar.gz';
-writeFileSync(archivePath, Buffer.from(encoded, 'base64'));
-execFileSync('tar', ['-xzf', archivePath, '-C', '.'], { stdio: 'inherit' });
-unlinkSync(archivePath);
-
-// Vercel traces filesystem assets statically. The original scan module used a
-// generic loadJson(relative) helper; that built successfully but omitted some
-// JSON files from the serverless function bundle, causing /api/scan to crash at
-// invocation. Convert every runtime data path to a literal URL before Vercel
-// performs its function trace.
-const scanPath = 'api/scan.js';
-let scanSource = readFileSync(scanPath, 'utf8');
-const dynamicLoads = `const loadJson = (relative) => JSON.parse(readFileSync(fileURLToPath(new URL(relative, import.meta.url)), 'utf8'));
-const entities = loadJson('../data/entities.json');
-const sources = loadJson('../data/source-registry.json');
-const queryGroups = loadJson('../config/queries.json');
-const officialSources = loadJson('../config/official-sources.json');
-const entityUniverse = loadJson('../data/entity-universe-summary.json');`;
-const staticLoads = `// Literal paths are required so Vercel includes each JSON asset in the function bundle.
-const entities = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entities.json', import.meta.url)), 'utf8'));
-const sources = JSON.parse(readFileSync(fileURLToPath(new URL('../data/source-registry.json', import.meta.url)), 'utf8'));
-const queryGroups = JSON.parse(readFileSync(fileURLToPath(new URL('../config/queries.json', import.meta.url)), 'utf8'));
-const officialSources = JSON.parse(readFileSync(fileURLToPath(new URL('../config/official-sources.json', import.meta.url)), 'utf8'));
-const entityUniverse = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entity-universe-summary.json', import.meta.url)), 'utf8'));`;
-
-if (scanSource.includes(dynamicLoads)) {
-  scanSource = scanSource.replace(dynamicLoads, staticLoads);
-  writeFileSync(scanPath, scanSource);
-  console.log('Patched /api/scan for deterministic Vercel JSON asset tracing.');
-} else if (!scanSource.includes("new URL('../data/source-registry.json', import.meta.url)")) {
-  throw new Error('ABG Pulse scan asset-tracing patch could not be verified.');
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  try {
+    const result = validateRuntime();
+    console.log(`ABG Pulse runtime validated: ${result.checkedFiles} committed files; source unchanged.`);
+  } catch (error) {
+    console.error(error.message);
+    process.exitCode = 1;
+  }
 }
-
-console.log(`ABG Pulse runtime restored from ${chunks.length} verified bundle chunks.`);

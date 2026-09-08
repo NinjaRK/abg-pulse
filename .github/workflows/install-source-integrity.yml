@@ -1,0 +1,65 @@
+name: Verify installation preserves committed source
+
+on:
+  push:
+    branches: [main, sol/install-source-integrity-20260908]
+    paths:
+      - 'bootstrap.mjs'
+      - 'package.json'
+      - 'tests/install-source-integrity.test.mjs'
+      - '.github/workflows/install-source-integrity.yml'
+  pull_request:
+    paths:
+      - 'bootstrap.mjs'
+      - 'package.json'
+      - 'tests/install-source-integrity.test.mjs'
+      - '.github/workflows/install-source-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: install-integrity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Archive the exact input source for reproducibility
+        run: |
+          git rev-parse HEAD > /tmp/install-source-commit.txt
+          git archive --format=tar.gz HEAD > /tmp/abg-pulse-install-source.tgz
+      - name: Test read-only bootstrap and real npm lifecycle
+        run: node --test tests/install-source-integrity.test.mjs | tee /tmp/install-integrity-tests.txt
+      - name: Install without rewriting tracked code or progress
+        run: |
+          npm install --package-lock=false --ignore-scripts=false --no-audit --no-fund
+          git diff --exit-code
+      - name: Run complete product regression suite
+        run: npm test | tee /tmp/install-product-tests.txt
+      - name: Validate syntax and governed data
+        run: npm run check | tee /tmp/install-product-check.txt
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: install-integrity-${{ github.run_id }}
+          path: |
+            /tmp/install-source-commit.txt
+            /tmp/abg-pulse-install-source.tgz
+            /tmp/install-integrity-tests.txt
+            /tmp/install-product-tests.txt
+            /tmp/install-product-check.txt
+          if-no-files-found: error
+          retention-days: 14
