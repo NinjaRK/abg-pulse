@@ -1,0 +1,169 @@
+name: Verify claim audit production capability
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-claim-audit-production.yml'
+      - 'api/claims.js'
+      - 'api/persist-claims.js'
+      - 'api/corrections.js'
+      - 'lib/claim-evidence.mjs'
+      - 'lib/persistence.mjs'
+      - 'db/migrations/002_claim_evidence_audit.sql'
+      - 'db/migrations/003_editorial_corrections.sql'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-claim-audit-production
+  cancel-in-progress: true
+
+jobs:
+  verify-and-record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      PRODUCTION_URL: https://abg-pulse-intelligence-v4.vercel.app
+      EXPECTED_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Wait for this exact commit in production
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/claim-production-proof
+          for attempt in $(seq 1 48); do
+            code=$(curl -L -sS --max-time 30 -o /tmp/claim-production-proof/health.json -w '%{http_code}' "$PRODUCTION_URL/api/health" || true)
+            deployed=$(node --input-type=module -e "
+              import { readFileSync } from 'node:fs';
+              try { process.stdout.write(JSON.parse(readFileSync('/tmp/claim-production-proof/health.json','utf8'))?.deployment?.commitSha || '') } catch { process.stdout.write('') }
+            " || true)
+            if [ "$code" = '200' ] && [ "$deployed" = "$EXPECTED_SHA" ]; then
+              echo "Exact production commit $EXPECTED_SHA verified."
+              exit 0
+            fi
+            echo "Attempt $attempt: health=$code deployed=${deployed:-missing} expected=$EXPECTED_SHA"
+            sleep 20
+          done
+          echo 'Exact claim-audit commit did not reach production.'
+          exit 1
+
+      - name: Verify public claim graph is fresh, traceable and material-claim safe
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L -fS --max-time 90 "$PRODUCTION_URL/api/claims?summaryOnly=true" \
+            -o /tmp/claim-production-proof/claims.json
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('/tmp/claim-production-proof/claims.json', 'utf8'));
+          if (payload.quality?.publishable !== true) throw new Error('Production claim graph is not publishable.');
+          if (Number(payload.quality?.unsupportedMaterialClaimCount) !== 0) throw new Error('Production claim graph contains unsupported material claims.');
+          if (!Number.isFinite(payload?.freshness?.ageMinutes)) throw new Error('Production claim freshness is missing.');
+          if (payload.freshness.ageMinutes > payload.freshness.staleAfterMinutes) throw new Error('Production claim graph is stale.');
+          if (Number(payload?.summary?.factClaimCount) < 1) throw new Error('Production claim graph has no factual claims.');
+          if (Number(payload?.summary?.evidenceCount) < 1) throw new Error('Production claim graph has no traceable evidence.');
+          if (payload?.filteredSummary?.unsupportedFactClaims > payload?.summary?.unsupportedFactClaims) throw new Error('Filtered claim summary is inconsistent.');
+          console.log(JSON.stringify({
+            generatedAt: payload.generatedAt,
+            sourceCommit: payload.sourceCommit,
+            ageMinutes: payload.freshness.ageMinutes,
+            events: payload.summary.eventCount,
+            facts: payload.summary.factClaimCount,
+            evidence: payload.summary.evidenceCount,
+            unsupportedMaterialClaims: payload.quality.unsupportedMaterialClaimCount
+          }, null, 2));
+          NODE
+
+      - name: Verify persistence readiness is honest and correction writes are protected
+        shell: bash
+        run: |
+          set -euo pipefail
+          persist_code=$(curl -L -sS --max-time 45 -o /tmp/claim-production-proof/persistence-readiness.json -w '%{http_code}' "$PRODUCTION_URL/api/persist-claims" || true)
+          if [ "$persist_code" != '200' ] && [ "$persist_code" != '503' ]; then
+            echo "Unexpected persistence-readiness HTTP status: $persist_code"
+            cat /tmp/claim-production-proof/persistence-readiness.json
+            exit 1
+          fi
+          correction_code=$(curl -L -sS --max-time 45 -o /tmp/claim-production-proof/correction-unauthorised.json -w '%{http_code}' \
+            "$PRODUCTION_URL/api/corrections?claimId=nonexistent" || true)
+          if [ "$correction_code" != '401' ]; then
+            echo "Correction endpoint did not fail closed for an unauthorised request: HTTP $correction_code"
+            cat /tmp/claim-production-proof/correction-unauthorised.json
+            exit 1
+          fi
+          PERSIST_CODE="$persist_code" node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('/tmp/claim-production-proof/persistence-readiness.json', 'utf8'));
+          const code = Number(process.env.PERSIST_CODE);
+          if (code === 200 && payload.status !== 'configured') throw new Error('Configured persistence endpoint returned inconsistent status.');
+          if (code === 503 && payload.status !== 'not_configured') throw new Error('Unconfigured persistence endpoint did not state the dependency honestly.');
+          if (JSON.stringify(payload).match(/service-role-key|SUPABASE_SERVICE_ROLE_KEY/i)) throw new Error('Persistence response leaked secret material.');
+          console.log(JSON.stringify({ persistenceHttpStatus: code, persistenceStatus: payload.status }, null, 2));
+          NODE
+
+      - name: Record only the production claim-audit proof earned
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const claims = JSON.parse(readFileSync('/tmp/claim-production-proof/claims.json', 'utf8'));
+          const readiness = JSON.parse(readFileSync('/tmp/claim-production-proof/persistence-readiness.json', 'utf8'));
+          const path = 'data/build-milestones.json';
+          const plan = JSON.parse(readFileSync(path, 'utf8'));
+          const milestone = plan.milestones.find((item) => item.id === 'M4');
+          if (!milestone) throw new Error('M4 persistence milestone is missing.');
+          const line = `Production claim audit endpoint passed on exact commit ${process.env.EXPECTED_SHA}: ${claims.summary.factClaimCount} factual claims, ${claims.summary.evidenceCount} evidence records and zero unsupported material claims.`;
+          milestone.completion = Math.max(Number(milestone.completion || 0), 35);
+          milestone.implementationCompletion = Math.max(Number(milestone.implementationCompletion || 0), 78);
+          milestone.status = 'in_progress';
+          milestone.evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
+          if (!milestone.evidence.includes(line)) milestone.evidence.push(line);
+          milestone.nextAction = readiness.status === 'configured'
+            ? 'Run the transactional live ingestion canary, prove correction propagation, then complete backup and restore testing.'
+            : 'Connect an authorised production Postgres/Supabase project, apply migrations and then run live ingestion, correction propagation and backup/restore proof.';
+          plan.updatedAt = new Date().toISOString();
+          plan.programme = plan.programme || {};
+          plan.programme.lastProductionProof = {
+            ...(plan.programme.lastProductionProof || {}),
+            claimAudit: {
+              verifiedAt: plan.updatedAt,
+              commitSha: process.env.EXPECTED_SHA,
+              factClaimCount: claims.summary.factClaimCount,
+              evidenceCount: claims.summary.evidenceCount,
+              unsupportedMaterialClaimCount: claims.quality.unsupportedMaterialClaimCount,
+              graphAgeMinutes: claims.freshness.ageMinutes,
+              productionDatabaseConfigured: readiness.status === 'configured'
+            }
+          };
+          writeFileSync(path, `${JSON.stringify(plan, null, 2)}\n`);
+          NODE
+          node --test tests/progress-meter.test.mjs tests/progress.test.mjs
+          git config user.name 'ABG Pulse Production Proof Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/build-milestones.json
+          if git diff --cached --quiet; then
+            echo 'Claim-audit production proof is already recorded.'
+          else
+            git commit -m 'Record verified production claim audit capability'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload immutable production proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: claim-audit-production-${{ github.sha }}
+          path: /tmp/claim-production-proof/
+          if-no-files-found: warn
+          retention-days: 90
