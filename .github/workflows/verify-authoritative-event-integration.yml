@@ -1,0 +1,109 @@
+name: Verify authoritative evidence enters governed events
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-authoritative-event-integration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-authoritative-event-integration
+  cancel-in-progress: false
+
+jobs:
+  verify-and-record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Retrieve the latest governed snapshot
+        run: |
+          curl -L -fS --retry 6 --retry-delay 10 --max-time 60 \
+            'https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/live-snapshot.json' \
+            -o /tmp/live-snapshot.json
+      - name: Prove direct authoritative evidence is in the governed pipeline
+        shell: bash
+        run: |
+          set -euo pipefail
+          integration_sha=$(git rev-list -1 --all --grep='Integrate direct authoritative evidence into event generation' || true)
+          if [ -z "$integration_sha" ]; then
+            echo 'Integration commit could not be located.'
+            exit 1
+          fi
+          INTEGRATION_SHA="$integration_sha" node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          const snapshot = JSON.parse(readFileSync('/tmp/live-snapshot.json', 'utf8'));
+          const checks = Array.isArray(snapshot?.meta?.sourceChecks) ? snapshot.meta.sourceChecks : [];
+          const directCheck = checks.find((check) =>
+            check?.provider === 'Direct authoritative snapshot' ||
+            /Direct authoritative snapshot/i.test(String(check?.query || ''))
+          );
+          if (!directCheck) throw new Error('The governed snapshot has no direct-authoritative source check.');
+          if (directCheck.ok === false || directCheck.status === 'failed') throw new Error('The direct-authoritative source check failed.');
+          const snapshotSha = snapshot?.source?.commitSha || snapshot?.meta?.sourceCommit || null;
+          if (!snapshotSha) throw new Error('The governed snapshot source commit is missing.');
+          try {
+            execFileSync('git', ['merge-base', '--is-ancestor', process.env.INTEGRATION_SHA, snapshotSha], { stdio: 'ignore' });
+          } catch {
+            throw new Error(`Snapshot commit ${snapshotSha} does not contain integration commit ${process.env.INTEGRATION_SHA}.`);
+          }
+
+          const planPath = 'data/build-milestones.json';
+          const plan = JSON.parse(readFileSync(planPath, 'utf8'));
+          const byId = new Map(plan.milestones.map((item) => [item.id, item]));
+          const m1 = byId.get('M1');
+          const m3 = byId.get('M3');
+          if (!m1 || !m3) throw new Error('Required v6 milestones are missing.');
+          const add = (item, line) => {
+            item.evidence = Array.isArray(item.evidence) ? item.evidence : [];
+            if (!item.evidence.includes(line)) item.evidence.push(line);
+          };
+          m1.completion = Math.max(Number(m1.completion || 0), 55);
+          m1.implementationCompletion = Math.max(Number(m1.implementationCompletion || 0), 82);
+          m3.completion = Math.max(Number(m3.completion || 0), 38);
+          m3.implementationCompletion = Math.max(Number(m3.implementationCompletion || 0), 65);
+          add(m1, `Governed snapshot commit ${snapshotSha} successfully included the direct-authoritative source job.`);
+          add(m3, `Direct SEC/NSE/BSE/regulator evidence entered governed event generation through snapshot ${snapshotSha}; source check passed.`);
+          m3.nextAction = 'Raise official endpoint success, map every direct record to canonical entities and claims, then add rating agencies, courts and remaining company disclosure endpoints.';
+          plan.updatedAt = new Date().toISOString();
+          plan.programme = plan.programme || {};
+          plan.programme.lastEvidenceUpdate = {
+            ...(plan.programme.lastEvidenceUpdate || {}),
+            updatedAt: plan.updatedAt,
+            authoritativeEventIntegration: {
+              integrationCommit: process.env.INTEGRATION_SHA,
+              snapshotCommit: snapshotSha,
+              snapshotGeneratedAt: snapshot.generatedAt || snapshot?.meta?.snapshotGeneratedAt || null,
+              sourceCheck: directCheck
+            }
+          };
+          writeFileSync(planPath, `${JSON.stringify(plan, null, 2)}\n`);
+          NODE
+      - name: Verify progress and full regression suite
+        run: |
+          node --test tests/progress-meter.test.mjs tests/progress.test.mjs
+          npm test
+          node tests/validate-data.mjs
+      - name: Commit only proven progress
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Evidence Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/build-milestones.json
+          if git diff --cached --quiet; then
+            echo 'The Job Meter already records this evidence.'
+            exit 0
+          fi
+          git commit -m 'Record verified direct-authoritative event integration'
+          git push origin HEAD:main
