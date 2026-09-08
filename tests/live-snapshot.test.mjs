@@ -205,3 +205,73 @@ test('snapshot generator rejects a weak scan and records provenance for a health
     /Snapshot rejected/
   );
 });
+
+test('current period can use a fresh snapshot but exposes the unchecked tail', () => {
+  const window = { start: '2026-09-04T08:00:00.000Z', end: '2026-09-04T10:20:00.000Z' };
+  const result = filterLiveSnapshot(snapshot(), window, {
+    now: new Date(window.end), allowFreshTail: true
+  });
+  assert.equal(result.events.length, 1);
+  assert.equal(result.meta.snapshot.coverageComplete, false);
+  assert.equal(result.meta.snapshot.pendingTail.minutes, 20);
+  assert.equal(result.meta.snapshot.pendingTail.reason, 'awaiting_scheduled_capture');
+  assert.equal(result.meta.windowEnd, '2026-09-04T10:00:00.000Z');
+  assert.equal(result.meta.requestedWindowEnd, window.end);
+});
+
+test('strict callers still reject incomplete snapshot windows', () => {
+  assert.throws(() => filterLiveSnapshot(snapshot(), {
+    start: '2026-09-04T08:00:00.000Z', end: '2026-09-04T10:20:00.000Z'
+  }, { now: new Date('2026-09-04T10:20:00.000Z') }),
+  (error) => error.code === 'snapshot_window_incomplete');
+});
+
+test('fresh-tail allowance does not hide missing history, future periods or stale coverage', () => {
+  for (const window of [
+    { start: '2026-08-01T08:00:00.000Z', end: '2026-09-04T10:20:00.000Z' },
+    { start: '2026-09-04T10:05:00.000Z', end: '2026-09-04T10:20:00.000Z' },
+    { start: '2026-09-04T08:00:00.000Z', end: '2026-09-04T11:00:00.000Z' }
+  ]) {
+    assert.throws(() => filterLiveSnapshot(snapshot(), window, {
+      now: new Date('2026-09-04T10:20:00.000Z'), allowFreshTail: true
+    }), (error) => error.code === 'snapshot_window_incomplete');
+  }
+  assert.throws(() => filterLiveSnapshot(snapshot(), {
+    start: '2026-09-04T08:00:00.000Z', end: '2026-09-04T10:20:00.000Z'
+  }, { now: new Date('2026-09-04T12:00:00.000Z'), allowFreshTail: true }),
+  (error) => error.code === 'snapshot_stale');
+});
+
+test('default current-period API serves checked overlap with one snapshot fetch', async () => {
+  const previous = {
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    ABG_SCAN_MODE: process.env.ABG_SCAN_MODE,
+    LIVE_SNAPSHOT_STALE_MINUTES: process.env.LIVE_SNAPSHOT_STALE_MINUTES,
+    SNAPSHOT_REFRESH_SECRET: process.env.SNAPSHOT_REFRESH_SECRET,
+    fetch: global.fetch
+  };
+  const capturedAt = new Date(Date.now() - 20 * 60_000);
+  process.env.VERCEL_ENV = 'production';
+  delete process.env.ABG_SCAN_MODE;
+  delete process.env.SNAPSHOT_REFRESH_SECRET;
+  process.env.LIVE_SNAPSHOT_STALE_MINUTES = '90';
+  let calls = 0;
+  global.fetch = async () => {
+    calls += 1;
+    return { ok: true, json: async () => snapshot({
+      generatedAt: capturedAt.toISOString(), windowEnd: capturedAt.toISOString(),
+      windowStart: new Date(capturedAt.getTime() - 30 * 86400000).toISOString(),
+      events: [event('current', new Date(capturedAt.getTime() - 60_000).toISOString())]
+    }) };
+  };
+  try {
+    const res = mockResponse();
+    await scanHandler({ method: 'GET', url: '/api/scan', headers: {} }, res);
+    assert.equal(res.statusCode, 200);
+    assert.equal(calls, 1);
+    assert.equal(res.json().events.length, 1);
+    assert.equal(res.json().meta.snapshot.coverageComplete, false);
+    assert.equal(res.json().meta.windowEnd, capturedAt.toISOString());
+    assert.equal(res.headers.get('cache-control'), 'no-store');
+  } finally { restoreEnvironment(previous); }
+});

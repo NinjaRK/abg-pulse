@@ -127,3 +127,16 @@ test('claim graph loader accepts valid JSON', async () => {
   const result = await loadClaimEvidenceGraph({ fetchImpl, url: 'https://example.test/claims.json' });
   assert.equal(result.claims.length, 3);
 });
+
+
+test('absent, null, empty or whitespace search does not filter all claims out', () => {
+  const expected = payload.claims.map((claim) => claim.id);
+  for (const search of [undefined, null, '', '   ']) {
+    assert.deepEqual(filterClaims(payload.claims, { search }).map((claim) => claim.id), expected);
+  }
+  assert.equal(projectClaimGraph(payload).filteredSummary.claimCount, expected.length);
+});
+
+test('an explicit non-matching search still returns no claims', () => {
+  assert.deepEqual(filterClaims(payload.claims, { search: 'not-present-in-evidence' }), []);
+});

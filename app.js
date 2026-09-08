@@ -968,6 +968,8 @@ function renderControlRoom() {
 
 function buildCoverageGaps(events) {
   const gaps = [];
+  const pendingTail = state.liveMeta?.snapshot?.pendingTail;
+  if (pendingTail) gaps.push({ title: 'Latest part of this period is not yet checked', copy: `Sources were checked through ${formatDate(pendingTail.start, true)} IST. The following ${Math.ceil(pendingTail.minutes)} minutes await the next scheduled capture; this is not a claim of no new developments.` });
   if (state.liveStatus === 'error') gaps.push({ title: 'Open-web discovery temporarily unavailable', copy: 'The last successful local live record remains visible, but one or more discovery providers could not be refreshed in this session.' });
   const providerErrors = Array.isArray(state.liveMeta?.errors) ? state.liveMeta.errors : [];
   if (providerErrors.length) gaps.push({ title: `${providerErrors.length} configured source check${providerErrors.length === 1 ? '' : 's'} degraded`, copy: providerErrors.slice(0, 3).map((item) => `${item.provider}: ${item.query}`).join(' · ') });
@@ -999,9 +1001,12 @@ function renderAll() {
 
 function updateLastScanLabel() {
   const label = $('#last-scan-label');
-  if (state.liveStatus === 'loading') label.textContent = 'Scanning live public sources…';
-  else if (state.liveStatus === 'success' && state.lastScanAt) label.textContent = `Live scan ${relativeTime(state.lastScanAt)}`;
-  else if (state.liveStatus === 'error') label.textContent = 'Verified brief active · live discovery degraded';
+  if (state.liveStatus === 'loading') label.textContent = 'Loading latest checked news…';
+  else if (state.liveStatus === 'success' && state.lastScanAt) {
+    const through = state.liveMeta?.snapshot?.coveredThrough;
+    label.textContent = through ? `Checked through ${formatDate(through, true)} IST` : `Last scan ${relativeTime(state.lastScanAt)}`;
+  }
+  else if (state.liveStatus === 'error') label.textContent = 'Refresh failed · saved items may be outdated';
   else label.textContent = 'Forward monitoring active';
 }
 
@@ -1254,7 +1259,13 @@ async function scanLiveSources({ manual = false, periodChange = false } = {}) {
       .filter((event) => Date.now() - new Date(event.updatedAt || event.publishedAt).getTime() <= 45 * 24 * 60 * 60 * 1000)
       .slice(0, 250);
     state.lastScanAt = payload?.meta?.scannedAt || new Date().toISOString();
-    state.liveMeta = { ...(payload?.meta || {}), windowStart: state.periodWindow.start, windowEnd: state.periodWindow.end };
+    state.liveMeta = {
+      ...(payload?.meta || {}),
+      windowStart: payload?.meta?.windowStart || state.periodWindow.start,
+      windowEnd: payload?.meta?.windowEnd || state.periodWindow.end,
+      requestedWindowStart: state.periodWindow.start,
+      requestedWindowEnd: state.periodWindow.end
+    };
     state.liveStatus = 'success';
     const known = new Set(loadJsonStorage(STORAGE.knownEvents, state.demoMode ? state.demoEvents.map((event) => event.id) : []));
     state.newEventIds = new Set(liveEvents.filter((event) => !known.has(event.id) && (event.intelligence?.materiality || 0) >= 55).map((event) => event.id));

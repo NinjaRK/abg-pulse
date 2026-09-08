@@ -1,51 +1,51 @@
-import { readFileSync, readdirSync, writeFileSync, unlinkSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
-import { join } from 'node:path';
+import { lstatSync, readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const chunkDirectory = '.bootstrap';
-const chunks = readdirSync(chunkDirectory)
-  .filter((name) => /^runtime\.b64\.\d+$/.test(name))
-  .sort();
+// Compatibility entry point for existing npm/Vercel install settings.
+// Install must validate the checked-out source, never restore an old archive.
+export const REQUIRED_RUNTIME_FILES = Object.freeze([
+  'api/health.js', 'api/progress.js', 'api/scan.js',
+  'core.mjs', 'official.mjs', 'lib/live-snapshot.mjs'
+]);
+export const REQUIRED_JSON_SHAPES = Object.freeze({
+  'data/entities.json': 'array',
+  'data/source-registry.json': 'array',
+  'data/entity-universe-summary.json': 'object',
+  'data/build-milestones.json': 'object',
+  'config/queries.json': 'array',
+  'config/official-sources.json': 'array'
+});
+const scriptPath = fileURLToPath(import.meta.url);
 
-if (!chunks.length) {
-  throw new Error('ABG Pulse runtime bundle chunks are missing.');
+/** Validate committed assets without writing files or running archive tools. */
+export function validateRuntime(root = dirname(scriptPath)) {
+  const paths = [...REQUIRED_RUNTIME_FILES, ...Object.keys(REQUIRED_JSON_SHAPES)];
+  for (const relative of paths) {
+    let stat;
+    try { stat = lstatSync(resolve(root, relative)); }
+    catch { throw new Error(`Required runtime file is missing: ${relative}. Restore tracked source from Git, not a runtime archive.`); }
+    if (!stat.isFile()) throw new Error(`Required runtime path is not a regular file: ${relative}.`);
+    if (stat.size === 0) throw new Error(`Required runtime file is empty: ${relative}.`);
+  }
+  for (const [relative, shape] of Object.entries(REQUIRED_JSON_SHAPES)) {
+    let value;
+    try { value = JSON.parse(readFileSync(resolve(root, relative), 'utf8')); }
+    catch { throw new Error(`Required runtime JSON is invalid: ${relative}.`); }
+    const valid = shape === 'array'
+      ? Array.isArray(value)
+      : value !== null && typeof value === 'object' && !Array.isArray(value);
+    if (!valid) throw new Error(`Required runtime JSON must be an ${shape}: ${relative}.`);
+  }
+  return { checkedFiles: paths.length, sourceModified: false, archiveRestored: false };
 }
 
-const encoded = chunks
-  .map((name) => readFileSync(join(chunkDirectory, name), 'utf8').trim())
-  .join('');
-
-const archivePath = '/tmp/abg-pulse-runtime.tar.gz';
-writeFileSync(archivePath, Buffer.from(encoded, 'base64'));
-execFileSync('tar', ['-xzf', archivePath, '-C', '.'], { stdio: 'inherit' });
-unlinkSync(archivePath);
-
-// Vercel traces filesystem assets statically. The original scan module used a
-// generic loadJson(relative) helper; that built successfully but omitted some
-// JSON files from the serverless function bundle, causing /api/scan to crash at
-// invocation. Convert every runtime data path to a literal URL before Vercel
-// performs its function trace.
-const scanPath = 'api/scan.js';
-let scanSource = readFileSync(scanPath, 'utf8');
-const dynamicLoads = `const loadJson = (relative) => JSON.parse(readFileSync(fileURLToPath(new URL(relative, import.meta.url)), 'utf8'));
-const entities = loadJson('../data/entities.json');
-const sources = loadJson('../data/source-registry.json');
-const queryGroups = loadJson('../config/queries.json');
-const officialSources = loadJson('../config/official-sources.json');
-const entityUniverse = loadJson('../data/entity-universe-summary.json');`;
-const staticLoads = `// Literal paths are required so Vercel includes each JSON asset in the function bundle.
-const entities = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entities.json', import.meta.url)), 'utf8'));
-const sources = JSON.parse(readFileSync(fileURLToPath(new URL('../data/source-registry.json', import.meta.url)), 'utf8'));
-const queryGroups = JSON.parse(readFileSync(fileURLToPath(new URL('../config/queries.json', import.meta.url)), 'utf8'));
-const officialSources = JSON.parse(readFileSync(fileURLToPath(new URL('../config/official-sources.json', import.meta.url)), 'utf8'));
-const entityUniverse = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entity-universe-summary.json', import.meta.url)), 'utf8'));`;
-
-if (scanSource.includes(dynamicLoads)) {
-  scanSource = scanSource.replace(dynamicLoads, staticLoads);
-  writeFileSync(scanPath, scanSource);
-  console.log('Patched /api/scan for deterministic Vercel JSON asset tracing.');
-} else if (!scanSource.includes("new URL('../data/source-registry.json', import.meta.url)")) {
-  throw new Error('ABG Pulse scan asset-tracing patch could not be verified.');
+if (process.argv[1] && resolve(process.argv[1]) === scriptPath) {
+  try {
+    const result = validateRuntime();
+    console.log(`ABG Pulse: validated ${result.checkedFiles} committed runtime files; no source files were changed.`);
+  } catch (error) {
+    console.error(`ABG Pulse runtime validation failed: ${error.message}`);
+    process.exitCode = 1;
+  }
 }
-
-console.log(`ABG Pulse runtime restored from ${chunks.length} verified bundle chunks.`);
