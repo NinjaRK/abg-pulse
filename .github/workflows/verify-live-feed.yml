@@ -1,0 +1,54 @@
+name: Verify live feed integration
+
+on:
+  push:
+    branches: [main, 'fix/live-feed-task1-20260908']
+    paths:
+      - '.github/workflows/verify-live-feed.yml'
+      - '.github/workflows/refresh-live-snapshot.yml'
+      - '.github/workflows/refresh-claim-evidence.yml'
+      - 'lib/live-snapshot.mjs'
+      - 'scripts/build-claim-evidence-snapshot.mjs'
+      - 'scripts/verify-live-feed.mjs'
+      - 'tests/live-feed*.test.mjs'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-live-feed.yml'
+      - '.github/workflows/refresh-live-snapshot.yml'
+      - '.github/workflows/refresh-claim-evidence.yml'
+      - 'lib/live-snapshot.mjs'
+      - 'scripts/build-claim-evidence-snapshot.mjs'
+      - 'scripts/verify-live-feed.mjs'
+      - 'tests/live-feed*.test.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run complete regression and syntax gates
+        run: |
+          npm test
+          npm run check
+      - name: Preserve exact tracked source for reproducible verification
+        run: |
+          mkdir -p /tmp/live-feed-proof
+          git rev-parse HEAD > /tmp/live-feed-proof/SOURCE_COMMIT.txt
+          git archive --format=tar.gz -o /tmp/live-feed-proof/source.tar.gz HEAD
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-feed-source-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/live-feed-proof/
+          if-no-files-found: error
+          retention-days: 7
