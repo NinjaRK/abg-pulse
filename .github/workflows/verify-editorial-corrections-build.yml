@@ -1,0 +1,234 @@
+name: Verify append-only editorial corrections
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-editorial-corrections-build.yml'
+      - 'db/migrations/002_claim_evidence_audit.sql'
+      - 'db/migrations/003_editorial_corrections.sql'
+      - 'api/corrections.js'
+      - 'tests/corrections-api.test.mjs'
+      - 'tests/fixtures/claim-evidence-graph.json'
+  pull_request:
+    paths:
+      - 'db/migrations/003_editorial_corrections.sql'
+      - 'api/corrections.js'
+      - 'tests/corrections-api.test.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-editorial-corrections-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: abg_pulse_corrections_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d abg_pulse_corrections_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: abg_pulse_corrections_test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run correction API and persistence tests
+        run: |
+          node --test tests/corrections-api.test.mjs tests/persistence.test.mjs tests/persist-claims-api.test.mjs
+          node --check api/corrections.js
+
+      - name: Ensure PostgreSQL client is present
+        run: |
+          if ! command -v psql >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y postgresql-client
+          fi
+
+      - name: Create Supabase-compatible roles and apply migrations
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 <<'SQL'
+          do $$ begin create role anon nologin; exception when duplicate_object then null; end $$;
+          do $$ begin create role authenticated nologin; exception when duplicate_object then null; end $$;
+          do $$ begin create role service_role nologin bypassrls; exception when duplicate_object then null; end $$;
+          SQL
+          psql -v ON_ERROR_STOP=1 -f db/migrations/002_claim_evidence_audit.sql
+          psql -v ON_ERROR_STOP=1 -f db/migrations/003_editorial_corrections.sql
+
+      - name: Seed a claim graph transactionally
+        shell: bash
+        run: |
+          set -euo pipefail
+          graph=$(cat tests/fixtures/claim-evidence-graph.json)
+          manifest=$(printf 'b%.0s' {1..64})
+          psql -v ON_ERROR_STOP=1 -v graph="$graph" -v manifest="$manifest" -At <<'SQL' > /tmp/seed-result.json
+          select public.pulse_ingest_claim_graph(:'graph'::jsonb, :'manifest', 'correction-test-seed', 'seed-request')::text;
+          SQL
+          cat /tmp/seed-result.json
+
+      - name: Prove correction, idempotency, history and immutable original text
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -v ON_ERROR_STOP=1 -At <<'SQL' > /tmp/correction-first.json
+          select public.pulse_apply_correction(
+            'fixture-claim-1',
+            'Fixture Company filed a revised official disclosure.',
+            array['fixture-evidence-1'],
+            'A subsequent filing corrected the original wording.',
+            'editor-fixture',
+            'correction-request-1'
+          )::text;
+          SQL
+          psql -v ON_ERROR_STOP=1 -At <<'SQL' > /tmp/correction-replay.json
+          select public.pulse_apply_correction(
+            'fixture-claim-1',
+            'Fixture Company filed a revised official disclosure.',
+            array['fixture-evidence-1'],
+            'A subsequent filing corrected the original wording.',
+            'editor-fixture',
+            'correction-request-1'
+          )::text;
+          SQL
+          psql -v ON_ERROR_STOP=1 -At <<'SQL' > /tmp/claim-history.json
+          select public.pulse_get_claim_history('fixture-claim-1')::text;
+          SQL
+          psql -v ON_ERROR_STOP=1 -At <<'SQL' > /tmp/correction-counts.txt
+          select 'original=' || text from public.pulse_claims where id = 'fixture-claim-1';
+          select 'lifecycle=' || lifecycle from public.pulse_claims where id = 'fixture-claim-1';
+          select 'corrections=' || count(*) from public.pulse_corrections where claim_id = 'fixture-claim-1';
+          select 'audits=' || count(*) from public.pulse_audit_log where action = 'correct' and object_id = 'fixture-claim-1';
+          SQL
+          cat /tmp/correction-first.json
+          cat /tmp/correction-replay.json
+          cat /tmp/claim-history.json
+          cat /tmp/correction-counts.txt
+          grep -q '"idempotentReplay" : false\|"idempotentReplay": false' /tmp/correction-first.json
+          grep -q '"idempotentReplay" : true\|"idempotentReplay": true' /tmp/correction-replay.json
+          grep -qx 'original=Fixture Company filed an official disclosure.' /tmp/correction-counts.txt
+          grep -qx 'lifecycle=corrected' /tmp/correction-counts.txt
+          grep -qx 'corrections=1' /tmp/correction-counts.txt
+          grep -qx 'audits=1' /tmp/correction-counts.txt
+          grep -q 'Fixture Company filed a revised official disclosure.' /tmp/claim-history.json
+          grep -q 'Fixture Company filed an official disclosure.' /tmp/claim-history.json
+
+      - name: Prove correction misuse fails closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if psql -v ON_ERROR_STOP=1 -At <<'SQL'
+          select public.pulse_apply_correction(
+            'fixture-claim-1', 'Invalid evidence correction', array['missing-evidence'],
+            'Should fail', 'editor-fixture', 'bad-evidence-request'
+          )::text;
+          SQL
+          then
+            echo 'Unknown evidence was accepted.'
+            exit 1
+          fi
+          if psql -v ON_ERROR_STOP=1 -At <<'SQL'
+          select public.pulse_apply_correction(
+            'fixture-claim-2', 'Interpretation rewrite', array['fixture-evidence-1'],
+            'Should fail', 'editor-fixture', 'interpretation-request'
+          )::text;
+          SQL
+          then
+            echo 'An interpretation was incorrectly treated as a factual correction.'
+            exit 1
+          fi
+          if psql -v ON_ERROR_STOP=1 -At <<'SQL'
+          select public.pulse_apply_correction(
+            'fixture-claim-1', 'A different correction using the same request.', array['fixture-evidence-1'],
+            'Should fail', 'editor-fixture', 'correction-request-1'
+          )::text;
+          SQL
+          then
+            echo 'A reused request id mutated the correction.'
+            exit 1
+          fi
+
+      - name: Run full product regression suite
+        run: |
+          npm test
+          node tests/validate-data.mjs
+
+      - name: Record tested implementation without claiming live editorial operation
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const path = 'data/build-milestones.json';
+          const plan = JSON.parse(readFileSync(path, 'utf8'));
+          const milestone = plan.milestones.find((item) => item.id === 'M4');
+          if (!milestone) throw new Error('M4 persistence milestone is missing.');
+          const line = 'Append-only correction and claim-history RPCs passed PostgreSQL 16 tests: accountable actor, evidence validation, idempotent replay, immutable original text and audit logging. Production editorial access remains unconnected.';
+          milestone.implementationCompletion = Math.max(Number(milestone.implementationCompletion || 0), 78);
+          milestone.evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
+          if (!milestone.evidence.includes(line)) milestone.evidence.push(line);
+          milestone.nextAction = 'Connect production database and identity, ingest the live claim graph, restrict correction rights by role, and prove end-to-end correction propagation and backup restore.';
+          plan.updatedAt = new Date().toISOString();
+          plan.programme = plan.programme || {};
+          plan.programme.lastBuildVerification = {
+            ...(plan.programme.lastBuildVerification || {}),
+            editorialCorrections: {
+              verifiedAt: plan.updatedAt,
+              postgresVersion: 16,
+              migration: 'db/migrations/003_editorial_corrections.sql',
+              correctionRpc: 'pulse_apply_correction',
+              historyRpc: 'pulse_get_claim_history',
+              liveEditorialAccessConnected: false
+            }
+          };
+          writeFileSync(path, `${JSON.stringify(plan, null, 2)}\n`);
+          NODE
+          node --test tests/progress-meter.test.mjs tests/progress.test.mjs
+          git config user.name 'ABG Pulse Build Verification Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/build-milestones.json
+          if git diff --cached --quiet; then
+            echo 'Correction implementation progress is already recorded.'
+          else
+            git commit -m 'Record tested append-only correction implementation'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload correction audit proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: editorial-correction-proof-${{ github.run_id }}-${{ github.sha }}
+          path: |
+            /tmp/seed-result.json
+            /tmp/correction-first.json
+            /tmp/correction-replay.json
+            /tmp/claim-history.json
+            /tmp/correction-counts.txt
+          if-no-files-found: warn
+          retention-days: 90
