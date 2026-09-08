@@ -1,0 +1,21 @@
+name: Trigger authoritative event integration proof
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/trigger-authoritative-integration-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run the evidence gate against the latest published snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run verify-authoritative-event-integration.yml --repo "$GITHUB_REPOSITORY" --ref main
