@@ -48,7 +48,9 @@ test('dependability endpoint remains explicit that proof is incomplete', () => {
   assert.equal(body.objectiveAchieved, false);
   assert.equal(body.proofWindowDays, 30);
   assert.ok(Number.isFinite(body.daysRemaining));
-  assert.ok(Array.isArray(body.acceptanceGates));
+  assert.equal(typeof body.acceptanceGates, 'object');
+  assert.equal(body.acceptanceGates.criticalEventRecallPct, 100);
+  assert.equal(body.acceptanceGates.unsupportedMaterialClaims, 0);
 });
 
 test('serverless coverage assets use literal traceable paths', () => {
