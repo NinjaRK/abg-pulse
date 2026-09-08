@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "observedAt": "2026-09-08T06:31:48.602Z",
+  "observedAt": "2026-09-08T06:32:00.415Z",
   "eventName": "repository_dispatch",
-  "action": "vercel.deployment.ready",
+  "action": "vercel.deployment.promoted",
   "state": "healthy",
   "project": {
     "id": null,
@@ -15,8 +15,7 @@
     "target": null,
     "environment": "production",
     "readyState": {
-      "detail": "before_alias",
-      "type": "ready"
+      "type": "promoted"
     },
     "errorCode": null,
     "errorMessage": null
@@ -28,7 +27,6 @@
     "commitMessage": null
   },
   "rawKeys": [
-    "alias",
     "environment",
     "git",
     "id",
