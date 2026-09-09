@@ -1,0 +1,598 @@
+name: Apply authoritative-source wave 1
+
+on:
+  push:
+    branches:
+      - sol/authoritative-source-wave1
+    paths:
+      - '.github/workflows/apply-authoritative-source-wave1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out source branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Add governed authoritative adapters
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json, textwrap
+
+          authoritative_sources = [
+            {
+              "id": "sec-novelis-filings",
+              "kind": "sec-submissions",
+              "name": "US SEC EDGAR — Novelis Inc.",
+              "url": "https://data.sec.gov/submissions/CIK0001304280.json",
+              "domain": "sec.gov",
+              "jurisdiction": "United States",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 30,
+              "rights": "official-public-record",
+              "entityNames": ["Novelis", "Novelis Inc."],
+              "cik": "0001304280"
+            },
+            {
+              "id": "nse-corporate-announcements",
+              "kind": "nse-announcements",
+              "name": "NSE Corporate Announcements",
+              "url": "https://www.nseindia.com/api/corporate-announcements",
+              "landingUrl": "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
+              "domain": "nseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "symbols": {
+                "GRASIM": "Grasim Industries",
+                "ULTRACEMCO": "UltraTech Cement",
+                "HINDALCO": "Hindalco Industries",
+                "ABCAPITAL": "Aditya Birla Capital",
+                "IDEA": "Vodafone Idea",
+                "ABFRL": "Aditya Birla Fashion and Retail",
+                "ABSLAMC": "Aditya Birla Sun Life AMC",
+                "CENTURYTEX": "Century Textiles and Industries"
+              }
+            },
+            {
+              "id": "bse-grasim-announcements",
+              "kind": "bse-announcements",
+              "name": "BSE Corporate Announcements — Grasim Industries",
+              "url": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+              "domain": "bseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "scripCode": "500300",
+              "entityName": "Grasim Industries"
+            },
+            {
+              "id": "bse-ultratech-announcements",
+              "kind": "bse-announcements",
+              "name": "BSE Corporate Announcements — UltraTech Cement",
+              "url": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+              "domain": "bseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "scripCode": "532538",
+              "entityName": "UltraTech Cement"
+            },
+            {
+              "id": "bse-hindalco-announcements",
+              "kind": "bse-announcements",
+              "name": "BSE Corporate Announcements — Hindalco Industries",
+              "url": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+              "domain": "bseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "scripCode": "500440",
+              "entityName": "Hindalco Industries"
+            },
+            {
+              "id": "bse-abcapital-announcements",
+              "kind": "bse-announcements",
+              "name": "BSE Corporate Announcements — Aditya Birla Capital",
+              "url": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+              "domain": "bseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "scripCode": "540691",
+              "entityName": "Aditya Birla Capital"
+            },
+            {
+              "id": "bse-vodafone-idea-announcements",
+              "kind": "bse-announcements",
+              "name": "BSE Corporate Announcements — Vodafone Idea",
+              "url": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+              "domain": "bseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "scripCode": "532822",
+              "entityName": "Vodafone Idea"
+            },
+            {
+              "id": "bse-abfrl-announcements",
+              "kind": "bse-announcements",
+              "name": "BSE Corporate Announcements — Aditya Birla Fashion and Retail",
+              "url": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+              "domain": "bseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "scripCode": "535755",
+              "entityName": "Aditya Birla Fashion and Retail"
+            },
+            {
+              "id": "bse-absl-amc-announcements",
+              "kind": "bse-announcements",
+              "name": "BSE Corporate Announcements — Aditya Birla Sun Life AMC",
+              "url": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+              "domain": "bseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "scripCode": "543374",
+              "entityName": "Aditya Birla Sun Life AMC"
+            },
+            {
+              "id": "bse-century-textiles-announcements",
+              "kind": "bse-announcements",
+              "name": "BSE Corporate Announcements — Century Textiles and Industries",
+              "url": "https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w",
+              "domain": "bseindia.com",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 15,
+              "rights": "official-public-record",
+              "scripCode": "500040",
+              "entityName": "Century Textiles and Industries"
+            },
+            {
+              "id": "sebi-publications",
+              "kind": "official-html-index",
+              "name": "SEBI Orders, News and Publications",
+              "url": "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=1&ssid=7&smid=0",
+              "domain": "sebi.gov.in",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 60,
+              "rights": "official-public-record"
+            },
+            {
+              "id": "rbi-press-releases",
+              "kind": "official-html-index",
+              "name": "Reserve Bank of India Press Releases",
+              "url": "https://website.rbi.org.in/web/rbi/press-releases",
+              "domain": "rbi.org.in",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 60,
+              "rights": "official-public-record"
+            },
+            {
+              "id": "cci-orders",
+              "kind": "official-html-index",
+              "name": "Competition Commission of India Orders",
+              "url": "https://www.cci.gov.in/antitrust/orders/details",
+              "domain": "cci.gov.in",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 120,
+              "rights": "official-public-record"
+            },
+            {
+              "id": "irdai-press-releases",
+              "kind": "official-html-index",
+              "name": "IRDAI Press Releases",
+              "url": "https://irdai.gov.in/press-releases",
+              "domain": "irdai.gov.in",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 120,
+              "rights": "official-public-record"
+            },
+            {
+              "id": "pfrda-press-releases",
+              "kind": "official-html-index",
+              "name": "PFRDA Press Releases",
+              "url": "https://www.pfrda.org.in/web/pfrda/press-releases",
+              "domain": "pfrda.org.in",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 120,
+              "rights": "official-public-record"
+            },
+            {
+              "id": "trai-releases",
+              "kind": "official-html-index",
+              "name": "TRAI Releases and Publications",
+              "url": "https://www.trai.gov.in/release-publication",
+              "domain": "trai.gov.in",
+              "jurisdiction": "India",
+              "language": "en",
+              "tier": 0,
+              "cadenceMinutes": 120,
+              "rights": "official-public-record"
+            }
+          ]
+
+          Path('config').mkdir(exist_ok=True)
+          Path('config/authoritative-sources.json').write_text(json.dumps(authoritative_sources, indent=2) + '\n')
+
+          module = r'''
+          const ABG_TERMS = [
+            'aditya birla', 'birla group', 'grasim', 'ultratech', 'hindalco',
+            'novelis', 'vodafone idea', 'aditya birla capital', 'abfrl',
+            'aditya birla fashion', 'aditya birla sun life', 'century textiles',
+            'birla carbon', 'essel mining', 'utkal alumina'
+          ];
+
+          function text(value = '') {
+            return String(value ?? '').replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+          }
+
+          function date(value) {
+            if (!value) return null;
+            const parsed = new Date(value);
+            return Number.isNaN(parsed.getTime()) ? null : parsed;
+          }
+
+          function iso(value) {
+            const parsed = date(value);
+            return parsed ? parsed.toISOString() : null;
+          }
+
+          function withinWindow(value, window) {
+            const parsed = date(value);
+            if (!parsed) return false;
+            return parsed >= new Date(window.start) && parsed <= new Date(window.end);
+          }
+
+          function headers(extra = {}) {
+            return {
+              Accept: 'application/json,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+              'Accept-Language': 'en-IN,en;q=0.9',
+              'User-Agent': 'ABGPulse/5.3 corporate-intelligence research contact: public-source-monitor',
+              ...extra
+            };
+          }
+
+          export function parseSecSubmissions(payload, source, window) {
+            const recent = payload?.filings?.recent || {};
+            const forms = Array.isArray(recent.form) ? recent.form : [];
+            return forms.map((form, index) => {
+              const filedAt = recent.filingDate?.[index];
+              const accession = String(recent.accessionNumber?.[index] || '').replace(/-/g, '');
+              const document = recent.primaryDocument?.[index] || '';
+              const description = text(recent.primaryDocDescription?.[index] || recent.items?.[index] || '');
+              const entityName = source.entityNames?.[0] || payload?.name || 'Novelis';
+              if (!accession || !document || !withinWindow(filedAt, window)) return null;
+              return {
+                title: `${entityName} filed ${form || 'a disclosure'} with the US SEC${description ? ` — ${description}` : ''}`,
+                description: `Official SEC filing by ${payload?.name || entityName}. Form ${form || 'not stated'}; filed ${filedAt}.`,
+                url: `https://www.sec.gov/Archives/edgar/data/${String(source.cik || payload?.cik || '').replace(/^0+/, '')}/${accession}/${document}`,
+                domain: 'sec.gov',
+                publishedAt: `${filedAt}T12:00:00Z`,
+                sourceName: source.name,
+                provider: 'Authoritative disclosure',
+                channel: 'news',
+                language: source.language || 'en',
+                queryGroup: source.id,
+                authoritative: true,
+                sourceTier: 0
+              };
+            }).filter(Boolean);
+          }
+
+          export function normalizeNseAnnouncements(payload, source, window) {
+            const rows = Array.isArray(payload) ? payload : (Array.isArray(payload?.data) ? payload.data : []);
+            const symbolMap = source.symbols || {};
+            return rows.map((row) => {
+              const symbol = String(row.symbol || row.sm_symbol || row.SYMBOL || '').toUpperCase().trim();
+              const entityName = symbolMap[symbol];
+              const publishedAt = iso(row.an_dt || row.sort_date || row.broadcastDateTime || row.date || row.exchdisstime);
+              if (!entityName || !publishedAt || !withinWindow(publishedAt, window)) return null;
+              const subject = text(row.desc || row.subject || row.attchmntText || row.sm_name || 'Corporate announcement');
+              const attachment = row.attchmntFile || row.attachment || row.fileName || '';
+              const url = attachment ? (String(attachment).startsWith('http') ? attachment : `https://nsearchives.nseindia.com/corporate/${String(attachment).replace(/^\/+/, '')}`) : source.landingUrl;
+              return {
+                title: `${entityName}: ${subject}`,
+                description: `Official NSE corporate announcement for ${entityName}.`,
+                url,
+                domain: 'nseindia.com',
+                publishedAt,
+                sourceName: source.name,
+                provider: 'Authoritative disclosure',
+                channel: 'news',
+                language: source.language || 'en',
+                queryGroup: source.id,
+                authoritative: true,
+                sourceTier: 0
+              };
+            }).filter(Boolean);
+          }
+
+          export function normalizeBseAnnouncements(payload, source, window) {
+            const rows = Array.isArray(payload) ? payload : (Array.isArray(payload?.Table) ? payload.Table : (Array.isArray(payload?.Table1) ? payload.Table1 : []));
+            return rows.map((row) => {
+              const publishedAt = iso(row.DT_TM || row.NEWS_DT || row.DISSEMINATED_DT || row.date || row.dateTime);
+              if (!publishedAt || !withinWindow(publishedAt, window)) return null;
+              const subject = text(row.NEWSSUB || row.HEADLINE || row.CATEGORYNAME || row.SUBCATNAME || row.MORE || 'Corporate announcement');
+              const attachment = row.ATTACHMENTNAME || row.ATTACHMENT || row.NEWSURL || row.NSURL || '';
+              const url = attachment ? (String(attachment).startsWith('http') ? attachment : `https://www.bseindia.com/xml-data/corpfiling/AttachLive/${String(attachment).replace(/^\/+/, '')}`) : 'https://www.bseindia.com/corporates/ann.html';
+              return {
+                title: `${source.entityName}: ${subject}`,
+                description: `Official BSE corporate announcement for ${source.entityName}.`,
+                url,
+                domain: 'bseindia.com',
+                publishedAt,
+                sourceName: source.name,
+                provider: 'Authoritative disclosure',
+                channel: 'news',
+                language: source.language || 'en',
+                queryGroup: source.id,
+                authoritative: true,
+                sourceTier: 0
+              };
+            }).filter(Boolean);
+          }
+
+          export function parseOfficialHtmlIndex(html, source, window) {
+            const anchors = [...String(html).matchAll(/<a\b([^>]*)href=["']([^"']+)["']([^>]*)>([\s\S]*?)<\/a>/gi)];
+            const results = [];
+            for (const match of anchors) {
+              const label = text(match[4]);
+              if (label.length < 12 || label.length > 300) continue;
+              const lower = label.toLowerCase();
+              if (!ABG_TERMS.some((term) => lower.includes(term))) continue;
+              const contextStart = Math.max(0, match.index - 250);
+              const contextEnd = Math.min(String(html).length, match.index + match[0].length + 250);
+              const context = text(String(html).slice(contextStart, contextEnd));
+              const dateMatch = context.match(/\b(?:0?[1-9]|[12][0-9]|3[01])[-\/.](?:0?[1-9]|1[0-2])[-\/.](?:20\d{2})\b|\b(?:20\d{2})[-\/](?:0?[1-9]|1[0-2])[-\/](?:0?[1-9]|[12][0-9]|3[01])\b|\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+(?:0?[1-9]|[12][0-9]|3[01]),?\s+20\d{2}\b/i);
+              const publishedAt = dateMatch ? iso(dateMatch[0]) : null;
+              if (!publishedAt || !withinWindow(publishedAt, window)) continue;
+              let url;
+              try { url = new URL(match[2], source.url).toString(); } catch { continue; }
+              results.push({
+                title: label,
+                description: `Official publication identified on ${source.name}.`,
+                url,
+                domain: source.domain,
+                publishedAt,
+                sourceName: source.name,
+                provider: 'Authoritative disclosure',
+                channel: 'news',
+                language: source.language || 'en',
+                queryGroup: source.id,
+                authoritative: true,
+                sourceTier: 0
+              });
+            }
+            return [...new Map(results.map((item) => [item.url, item])).values()].slice(0, 50);
+          }
+
+          async function fetchSec(source, signal, window) {
+            const response = await fetch(source.url, { signal, headers: headers({ Accept: 'application/json', 'User-Agent': 'ABGPulse/5.3 public-record monitor admin@adityabirla.com' }) });
+            if (!response.ok) throw new Error(`${source.id} ${response.status}`);
+            return parseSecSubmissions(await response.json(), source, window);
+          }
+
+          async function fetchNse(source, signal, window) {
+            const landing = await fetch(source.landingUrl, { signal, headers: headers({ Accept: 'text/html' }) });
+            if (!landing.ok) throw new Error(`${source.id} landing ${landing.status}`);
+            const cookie = (landing.headers.getSetCookie?.() || []).map((value) => value.split(';')[0]).join('; ');
+            const from = new Date(window.start).toLocaleDateString('en-GB').replaceAll('/', '-');
+            const to = new Date(window.end).toLocaleDateString('en-GB').replaceAll('/', '-');
+            const params = new URLSearchParams({ index: 'equities', from_date: from, to_date: to });
+            const response = await fetch(`${source.url}?${params}`, {
+              signal,
+              headers: headers({ Accept: 'application/json', Referer: source.landingUrl, Cookie: cookie })
+            });
+            if (!response.ok) throw new Error(`${source.id} ${response.status}`);
+            return normalizeNseAnnouncements(await response.json(), source, window);
+          }
+
+          async function fetchBse(source, signal, window) {
+            const ymd = (value) => new Date(value).toISOString().slice(0, 10).replaceAll('-', '');
+            const params = new URLSearchParams({
+              pageno: '1', strCat: '-1', strPrevDate: ymd(window.start), strScrip: source.scripCode,
+              strSearch: 'P', strToDate: ymd(window.end), strType: 'C', subcategory: '-1'
+            });
+            const response = await fetch(`${source.url}?${params}`, {
+              signal,
+              headers: headers({ Accept: 'application/json', Origin: 'https://www.bseindia.com', Referer: 'https://www.bseindia.com/' })
+            });
+            if (!response.ok) throw new Error(`${source.id} ${response.status}`);
+            return normalizeBseAnnouncements(await response.json(), source, window);
+          }
+
+          async function fetchHtml(source, signal, window) {
+            const response = await fetch(source.url, { signal, headers: headers({ Accept: 'text/html,application/xhtml+xml' }) });
+            if (!response.ok) throw new Error(`${source.id} ${response.status}`);
+            return parseOfficialHtmlIndex(await response.text(), source, window);
+          }
+
+          export async function fetchAuthoritativeSource(source, signal, window) {
+            if (!source?.rights?.startsWith('official-')) throw new Error(`Unapproved source rights for ${source?.id || 'unknown source'}`);
+            if (source.kind === 'sec-submissions') return fetchSec(source, signal, window);
+            if (source.kind === 'nse-announcements') return fetchNse(source, signal, window);
+            if (source.kind === 'bse-announcements') return fetchBse(source, signal, window);
+            if (source.kind === 'official-html-index') return fetchHtml(source, signal, window);
+            throw new Error(`Unsupported authoritative source kind: ${source.kind}`);
+          }
+          '''
+          Path('authoritative.mjs').write_text(textwrap.dedent(module).lstrip())
+
+          scan_path = Path('api/scan.js')
+          scan = scan_path.read_text()
+          old_import = "import { fetchOfficialSource, auditOfficialRegistry } from '../official.mjs';"
+          new_import = old_import + "\nimport { fetchAuthoritativeSource } from '../authoritative.mjs';"
+          if "fetchAuthoritativeSource" not in scan:
+            if old_import not in scan:
+              raise SystemExit('scan import anchor not found')
+            scan = scan.replace(old_import, new_import, 1)
+
+          old_assets = "const officialSources = JSON.parse(readFileSync(fileURLToPath(new URL('../config/official-sources.json', import.meta.url)), 'utf8'));\nconst entityUniverse"
+          new_assets = "const officialSources = JSON.parse(readFileSync(fileURLToPath(new URL('../config/official-sources.json', import.meta.url)), 'utf8'));\nconst authoritativeSources = JSON.parse(readFileSync(fileURLToPath(new URL('../config/authoritative-sources.json', import.meta.url)), 'utf8'));\nconst entityUniverse"
+          if "authoritative-sources.json" not in scan:
+            if old_assets not in scan:
+              raise SystemExit('scan asset anchor not found')
+            scan = scan.replace(old_assets, new_assets, 1)
+
+          official_loop = "  for (const source of officialSources) {\n    jobs.push({ provider: source.registrySource ? 'Official registry' : 'Official source', id: source.id, run: (signal) => source.registrySource ? auditOfficialRegistry(source, entities, signal) : fetchOfficialSource(source, signal) });\n  }"
+          authoritative_loop = "  for (const source of authoritativeSources) {\n    jobs.push({ provider: 'Authoritative disclosure', id: source.id, run: (signal) => fetchAuthoritativeSource(source, signal, window) });\n  }\n" + official_loop
+          if "provider: 'Authoritative disclosure'" not in scan:
+            if official_loop not in scan:
+              raise SystemExit('scan jobs anchor not found')
+            scan = scan.replace(official_loop, authoritative_loop, 1)
+
+          old_timeout = "jobs.map((job) => runWithTimeout(job.run, job.provider === 'Official source' || job.provider === 'Official registry' ? 7000 : 9000))"
+          new_timeout = "jobs.map((job) => runWithTimeout(job.run, job.provider === 'Authoritative disclosure' ? 12000 : (job.provider === 'Official source' || job.provider === 'Official registry' ? 7000 : 9000)))"
+          if old_timeout in scan:
+            scan = scan.replace(old_timeout, new_timeout, 1)
+
+          old_meta = "officialSourceCount: officialSources.length,"
+          new_meta = "officialSourceCount: officialSources.length,\n        authoritativeSourceCount: authoritativeSources.length,"
+          if "authoritativeSourceCount" not in scan:
+            if old_meta not in scan:
+              raise SystemExit('scan metadata anchor not found')
+            scan = scan.replace(old_meta, new_meta, 1)
+
+          scan = scan.replace("serviceVersion: '5.2.0'", "serviceVersion: '5.3.0'")
+          scan_path.write_text(scan)
+
+          tests = r'''
+          import test from 'node:test';
+          import assert from 'node:assert/strict';
+          import { parseSecSubmissions, normalizeNseAnnouncements, normalizeBseAnnouncements, parseOfficialHtmlIndex } from '../authoritative.mjs';
+
+          const window = { start: '2026-09-01T00:00:00.000Z', end: '2026-09-05T23:59:59.999Z' };
+
+          test('SEC submissions become official Novelis filing events', () => {
+            const source = { id: 'sec-novelis', name: 'SEC', cik: '0001304280', entityNames: ['Novelis'], language: 'en' };
+            const payload = { name: 'Novelis Inc.', filings: { recent: {
+              form: ['8-K', '10-K'], filingDate: ['2026-09-03', '2026-05-01'], accessionNumber: ['0001304280-26-000111', 'old'],
+              primaryDocument: ['novelis-8k.htm', 'old.htm'], primaryDocDescription: ['Current report', 'Annual report']
+            } } };
+            const items = parseSecSubmissions(payload, source, window);
+            assert.equal(items.length, 1);
+            assert.match(items[0].title, /Novelis filed 8-K/);
+            assert.equal(items[0].sourceTier, 0);
+            assert.match(items[0].url, /Archives\/edgar\/data\/1304280\/000130428026000111/);
+          });
+
+          test('NSE normalisation admits only governed ABG symbols in period', () => {
+            const source = { id: 'nse', name: 'NSE', landingUrl: 'https://nseindia.com', symbols: { GRASIM: 'Grasim Industries' } };
+            const rows = [
+              { symbol: 'GRASIM', desc: 'Board meeting outcome', an_dt: '2026-09-03T10:00:00Z', attchmntFile: 'x.pdf' },
+              { symbol: 'RELIANCE', desc: 'Unrelated', an_dt: '2026-09-03T10:00:00Z' }
+            ];
+            const items = normalizeNseAnnouncements(rows, source, window);
+            assert.equal(items.length, 1);
+            assert.match(items[0].title, /^Grasim Industries:/);
+          });
+
+          test('BSE normalisation anchors generic disclosure titles to the governed company', () => {
+            const source = { id: 'bse', name: 'BSE', entityName: 'UltraTech Cement' };
+            const payload = { Table: [{ NEWSSUB: 'Regulation 30 disclosure', DT_TM: '2026-09-03T08:30:00Z', ATTACHMENTNAME: 'u.pdf' }] };
+            const items = normalizeBseAnnouncements(payload, source, window);
+            assert.equal(items.length, 1);
+            assert.match(items[0].title, /^UltraTech Cement:/);
+            assert.equal(items[0].authoritative, true);
+          });
+
+          test('regulator HTML parser retains only ABG-specific dated records', () => {
+            const source = { id: 'sebi', name: 'SEBI', url: 'https://www.sebi.gov.in/list', domain: 'sebi.gov.in' };
+            const html = `<div>03 September 2026 <a href="/order/1">Order in the matter of Aditya Birla Capital Limited</a></div>
+              <div>03 September 2026 <a href="/order/2">Order in an unrelated matter</a></div>`;
+            const items = parseOfficialHtmlIndex(html, source, window);
+            assert.equal(items.length, 1);
+            assert.match(items[0].url, /order\/1/);
+          });
+          '''
+          Path('tests').mkdir(exist_ok=True)
+          Path('tests/authoritative.test.mjs').write_text(textwrap.dedent(tests).lstrip())
+
+          pkg_path = Path('package.json')
+          package = json.loads(pkg_path.read_text())
+          check = package['scripts'].get('check', '')
+          if 'authoritative.mjs' not in check:
+            check = check.replace('node --check official.mjs', 'node --check official.mjs && node --check authoritative.mjs')
+          package['scripts']['check'] = check
+          package['version'] = '5.3.0'
+          pkg_path.write_text(json.dumps(package, indent=2) + '\n')
+
+          release = {
+            "version": "5.3.0",
+            "releaseId": "authoritative-source-wave1-2026-09-04",
+            "title": "Direct exchange, regulator and SEC source wave 1",
+            "expectedMinimumTests": 54,
+            "sourceCount": len(authoritative_sources)
+          }
+          Path('data/release.json').write_text(json.dumps(release, indent=2) + '\n')
+
+          changelog_path = Path('CHANGELOG.md')
+          changelog = changelog_path.read_text() if changelog_path.exists() else '# Changelog\n'
+          entry = """\n## 5.3.0 — authoritative source wave 1\n\n- Added direct official adapters for SEC EDGAR, NSE and BSE corporate announcements.\n- Added governed regulator-index watches for SEBI, RBI, CCI, IRDAI, PFRDA and TRAI.\n- Added explicit source rights, jurisdiction, cadence and tier metadata.\n- Added deterministic unit tests for official filing normalisation and filtering.\n- Exposed authoritative-source count and service version in live-scan metadata.\n"""
+          if '## 5.3.0' not in changelog:
+            changelog_path.write_text(changelog.rstrip() + '\n' + entry)
+          PY
+
+      - name: Run complete verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test
+          npm run check
+
+      - name: Commit verified implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'ABG Pulse Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add authoritative.mjs config/authoritative-sources.json api/scan.js tests/authoritative.test.mjs package.json data/release.json CHANGELOG.md
+          git commit -m 'Add direct authoritative disclosure source wave 1'
+          git push origin HEAD:sol/authoritative-source-wave1
