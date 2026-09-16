@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-09-15T18:55:38.715Z",
-  "expiresAt": "2026-09-15T20:25:38.715Z",
+  "generatedAt": "2026-09-16T00:45:50.190Z",
+  "expiresAt": "2026-09-16T02:15:50.190Z",
   "source": {
     "repository": "NinjaRK/abg-pulse",
     "commitSha": "6b5b0524737ac3d2344c3954426ca7e1fb51d542",
     "workflow": "Refresh governed ABG Pulse snapshot",
-    "workflowRunId": "35010488395",
+    "workflowRunId": "35041338197",
     "workflowRunAttempt": "1"
   },
   "window": {
-    "start": "2026-08-16T18:55:38.715Z",
-    "end": "2026-09-15T18:55:38.715Z",
+    "start": "2026-08-17T00:45:50.190Z",
+    "end": "2026-09-16T00:45:50.190Z",
     "lookbackDays": 30
   },
   "events": [
@@ -178,8 +178,8 @@
       "intelligence": {
         "materiality": 100,
         "certainty": 76,
-        "momentum": 98,
-        "trendChange": 100,
+        "momentum": 88,
+        "trendChange": 0,
         "sentiment": 0,
         "mediaTone": 0,
         "publicSentiment": {
@@ -192,9 +192,9 @@
         "reputationImpact": 9,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 82,
-          "p24": 98,
-          "p72": 99,
+          "p6": 80,
+          "p24": 97,
+          "p72": 98,
           "drivers": [
             "rapid media acceleration",
             "broad independent-source pickup",
@@ -221,7 +221,7 @@
         "vi",
         "bharti-airtel"
       ],
-      "publishedAt": "2026-09-07T02:21:48.000Z",
+      "publishedAt": "2026-09-07T07:00:00.000Z",
       "updatedAt": "2026-09-15T09:18:52.000Z",
       "sources": [
         {
@@ -252,9 +252,9 @@
           "official": false
         },
         {
-          "name": "Communications Today",
+          "name": "communicationstoday.co.in",
           "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQaDNGdTBvMTVPV1ZzbVJmbUtQbWRFSlg1MUtkV1JOQ3FvYWwwYlNNcGNYZzlGbzdVUEREaDVocFhDM29FUVV3MnNuZDhzTWFER2FMa2laY0Q4M2Mzb2tpenBtRUhnbkdJd0ZvUUQwNDRCU1QybC1IdmpRRHRuMDc1amhSdWYwdXpRSUFmSTNCODRqR256cnVHcll5QjN1NmI5QkZ6R2h5aDF4QQ?oc=5",
-          "publishedAt": "2026-09-07T02:21:48.000Z",
+          "publishedAt": "2026-09-07T07:00:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -266,7 +266,7 @@
         "materiality": 100,
         "certainty": 48,
         "momentum": 31,
-        "trendChange": 100,
+        "trendChange": -100,
         "sentiment": -6,
         "mediaTone": -6,
         "publicSentiment": {
@@ -346,7 +346,7 @@
           "official": false
         },
         {
-          "name": "pgurus.com",
+          "name": "PGurus",
           "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPcWFrMUljaDR0VFBxYVgxUnptTTBxVGtDdGtkX3hlcE96TUVuVHZmYl9Sekd1ZUdzVDJxNkdsU09QWWlkQ0ZLcnlWXzlSZ2Y2dV9nSlVoS0xvMk50UjNPU3AtVmVwLXJtaHA5V3lfdmp2SmdQMEk5MUNkS1dOXzdlTVhxQ0V6ZUEtcnNMaTJVUUIwUjNQUG8wMmdRMWlqZw?oc=5",
           "publishedAt": "2026-09-11T05:40:22.000Z",
           "tier": 3,
@@ -390,9 +390,214 @@
       "live": true
     },
     {
+      "id": "live-12ki3f8",
+      "headline": "Ultravolt: Aditya Birla Group Enters Wires & Cables",
+      "summary": "An official source has published this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "Coverage is accelerating across independent sources and may become more consequential even if the underlying facts remain unchanged.",
+      "bucket": "must",
+      "status": "confirmed",
+      "category": "Brand",
+      "entityIds": [
+        "abg",
+        "ultratech",
+        "kmb"
+      ],
+      "publishedAt": "2026-08-29T07:00:00.000Z",
+      "updatedAt": "2026-09-10T05:47:05.000Z",
+      "sources": [
+        {
+          "name": "adityabirla.com",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQNzE3Tjd5WEE5QjY4SjZpSHE1SjdWeWpIcUcySWIyTzExNGlQRzNENWZSVms0V3hyNnR0aFoxR0hXZ192cmZUcXNtZExpNmd0UGE2TllYSllzd29zVkk4WHd2X0FZU0RJZjhXb2Q1bnpzZmx3MGRHdy03dk5LcWFUcURkRXpqTVBRWjlCRTN6MEVzODMtRmFPQlZLclc2UXppR3FWVmg2M1lqRlR4bEw5bFh5bXFkTHNzdU5sV0pYM3MwdHQ3aUxOYjdKUQ?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 0,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "adityabirla.com",
+          "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxONTYyMnBiWVRzU0piWWRWQ0o1MC1aaDVWZGV6MWZacndpT1NNY1V1ZDdobFM4U3p1WTNtYnRFcFZsOERwNEg4Q29sRzhZMVJVUEE3M1QxMzJ3a2hSVTdEM0RHdHhRcnlkaEltQzQzd0J3TlVCZHVISUx3cl9EbDctaUotRzdzNWtsN2xGUmRqZ3k2dmpwb2o4MkxwVFdYMG43LXlZV3BLVzcyaDJjbTY3X3N3V3lDczZ5OGJMNG1jQ19GZGpITGxiUjJ4WnZGZklrWmJLLS00WE9MWTlqUGZDcVpIcWRyb1J3VTFDOWNIbGFBcmg5NV85OWxJb3VMcmwz?oc=5",
+          "publishedAt": "2026-09-02T07:00:00.000Z",
+          "tier": 0,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Business Today",
+          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQemU0MS1OTGVkckpkMTN6R0RaYWVhQURXaElZaDBmR1BHMHZxaUthRE9zaE9tdTRaNHhlTi1ncDF3RllyVFlrRmFHWjNIMXpydE5fSHdOUk1YcTNzSWVVY2Fad3o1SUZvN3RMRFJwOE9vZDZ6N0h3TjdUeDMtUGtqNHFHNUp3UnJkWTNZUGc5UW04ajhxRm53VzRNWU1PdENOV2N1MElhODBFdU1LUWpzQ1ZYRU9hcXVVSDVQRE5VNnN4dy1UVkY4U0VtdUFURllkeFhPZzVkN3R0Z09FWXB3?oc=5",
+          "publishedAt": "2026-09-07T15:45:31.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "realty.economictimes.indiatimes.com",
+          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNMUJVM1NuUmVjNURxX09KbzhTc3k4M1lvMDdFYi1aOGh5STRTUmlEYjg0eXVjNWZzQVVFY000TzVuUlpKM2psVHNFVFF6S0tNQUVjZHpUTklpQzgtSmh6UDZNNUgtLTJCdEVENUM2cVFtVnJWcWJxMkQtaUREVkg3NHo5XzEyUGxfQXdEbklPb0M1VHViZ2NZM2NuNjRxWjNnd2NlUXFUbzdqOVlpWk5FNWtiWkkyQmR1ZjV6bWk4TE1HTHNqM1A4ak9EZmttbHdYbVI4a1FnRnBvbFBrS19HTUN4VWtYRE9HYm5j0gHwAUFVX3lxTFAwWkZCVnc1WlVXaG9Ca1hRZTRHN0dabEYzSGFreXQ0dmh1ZDdsODRBRS03a094ZENkaEh6WVc0d3pFb0NNVmI4cUtuanJLbEU3UzNxcXB5eUpndEZfaG44T2VsV1VhekwtZExaUVhlNXgtS3g5dkpfbFZNSVVjS2ZUT2FiTWt4SC1NdnQtOVl6VHhJU1YzakFydHlILUJGVXpZZXhzSmFmdHNxOGdsRmtvV0xGdEtsRkhJdEhqck9rN2NLNjAwdlpheHJPS0drckRSeC05Mmt3QVZkM2FqSFNIN3Z4MkprZW9icmtXYzNwWA?oc=5",
+          "publishedAt": "2026-09-04T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "CNBC TV18",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVjEtSDZnR1RJRTNQRDUwNWxaQzNtTW9MOGxuZU5DUGhheHduWjU3TGZLemdEYm1Pa0xKSTh6cGVzcDFZSkdGZkVhdno1am5UTjdRVGtDbGwybGdHOVdtZHhhdVRGemk0b2ptY181NkFacTVmVl9yVWpZdV94V0FPNlRWMkNydGRpYWItWmdZSVdIc3FKZjZIRDRPZzhRcm9GTjJqbl9ndlJIUjBCeVV1c0hPZVpyM0h1Q18wQkhvWnc2bWVqbThqLTJuTF9ET0t10gHWAUFVX3lxTFBoaUctMWJGVHp4U3FHdVVUbXVzdTVXem5xVmFaU3pteDlYNEszLXR4dTRLOUs0TU0waXdSZW4wM2RGbHRzVUpOeEx3eUZneWNrREc3NzJRV2tvVjZhS3d4N2xMbzlWWDZrRHQwWVhabGlZbnVWaG41NmI0blJOdmV2SGtpdk5oQ1c1b040RU5xWHloUm95RVptdi1pYkJfVmVyX282aERtdTJmTWFraUQyYzlQZlhXZ1VMcHpDdzRjbEY5N0xoTFNxWi1KSm9yVG9PTXR6cVE?oc=5",
+          "publishedAt": "2026-09-03T14:06:35.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Moneycontrol.com",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPUllTOGstVW1fX0p2WVhVRTU2aXpFMFZvT0RwWXlZcm9pNnNmc0Y1aUtBb0pCRFlzTWFRcjdsWWwwUmtIaGpkTmRJeEthak5JQ213Z2JaU0t3Sl9IZ1JJUTRTYWxLbWlXZ0hmalhCUnYyQlZrLU4zUGltVWkzbXpxcEU5cllCWlZuUEsxQjNTdlJaR1h3b1AtQ0JFZ1A3ZXhObEw3S1cwQXNLLTRwdjZVYWVnVnRkMEUxZE9yM1lrSkY1OXpUSDR6LUgyWUswMEp2QzFtR3gzSUc2OHhzaXfSAeMBQVVfeXFMT2FuM2NOWHFja1VkOGNwUUNkblpNYkFMUXVaa1dOb2tCa1VMNHFxMFFQNmJ2dVRGT3RtaGdSckdfdW4xN3FoOHh2TkhJVDVyNloyZUx1Y3RRc2ZheDliY1JDYnpwUWFKaUphUWRzNFQ3Zm4wWXUyTXRreDdjUWtiT3MwWnlIaWJ1ZGxVMm03eFQ2NFp5MzZ3bHgyY293Y2s0ZmtReGtfUUVjalJfRHdEQWpYei1Xb3VadWxzcHpJOTBubzVYaDBLNmVZYm9kdDc5XzJmSm9FRXJHZlgtX19ZMFFEVUU?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Business Standard",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQdmxWcFV6VWpFVEhxWmNxLUhoaVdaTUlXRnBXSzVqWVlldEdCQjE3bUpyZld3Q01TYTZtcVJVdV9LWmtVXy1pMktPcGhBaFFuR1YxMXhMTGtDYVVJRktod0NRVTNTdGp5VUN3dk9nSjBDYmVJR01nNWNyWUtmVVlwTGxibUhCRHVuSExLTXlhbndWTy1xbUJ4SEU3dFlmd2VUZmxlbXZpRDJFVm5qdWdQMDNydmNucllNSVQyMlV2c3RxY2tpbUQ1M2I3aFREMVVTRUVNdTlR0gHbAUFVX3lxTE56ZW1Oa3dpODZSeVN1bGRzTFRTU3VEZnE5SkxjNXBXN1NNQTBYT0o0Yjd1cjQySnJxbmlpYVppMUJvaWJFV081dXh4bGRVeVlMbFFtNEdZcm9QTjZrQTFWOGFPSXU4Smo1cDBmbGRIVFE5VTh3bC1FSGxybzVkUVR3UndsSl9JNFNpSjRJRjhNV3l5anZnaUpoSmFGb1JTN1Z0SWVJS2dUSzVyVkFTWkRHeURmQ2U0WWhZYkFsbENERDBadWZTcF9JdW1obWRLanVDbHdDdnFPVGphWQ?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "The Hindu",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPaV9xZVpITG1UR3FtcjFBN1hGTFB0MnJ6MFIxY0pRaEtTMHdxWFFvd3JZelpXQlAxMFUxbjBWMWxxck43a3B2SHpYTDlCallUcm96akJWUnBLREhsMDVqeXlUd1pXeDJERVplU3dVQ1lxcW5iSUNBQkNvNXU1eHEwd1pWSkF4c21ZM21XV3p2cXZQdEgxd0NDUEtXbmlWb1JNTDNCNjNSMnNqVHlxX0RYVWF3YkpneFg4QlZB0gHCAUFVX3lxTE9EUFQ1QjhENkU2NHNrb2NiT2MxaGlDR0prR0M1TUVvb0lBMTdsSjVqTDRQSllWb2dpSVpza3dwOEhJTTVjVW82aUJNZVlUMXU5QU9ndHFsbnR4QUlnSkVIU1l0bF9VWno0b2FNdHBDTC1xb2c1WXlpamtCak1nSU84Q1hfdWlpNVZBVFRpTGxZeU0xRS0xTFp6YU4yeDZWbDJ0bVBfZjd0djFjYW1YLS03T05PVVU4YkpqdDJUSHdqd0tR?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Fortune India",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPOGdGdFU4eDkwUWRUR2x2Z3o4cVhJeHdxZGxxQ2cyU296VENrSHBoMVpkak04TU1wUjBHX09MSUJTM0QtRkZIdFJjNTM0X0hxUGJ1Zi1mcmtVUHRLcTV5SnRvY3pkbkJudy1PSGxPSmY2cUJWUWhoOFUzNFBnZG5oUkJna1lfQ290dUh1RlN1cmJuRUNHZGZpT1hYR1RxZTdwWDhyWlJ5SGpCc0pHYjRVYVFhMjZpMWxC0gHGAUFVX3lxTE5SMDg1WGlRRVNXRF9DRjFrV1JjVTBkYW05REJkNVp0eF9YaF9kX0dKbHM0V0I5LWlWMlNLSl9Da1ROQVdCcG9KS1g5TFc3MVB0VHNfanUtaGszN0N1RkpMaUZ3LTZwYmRvT1RpUUFxallGeHMwLXRQVk1WNURCcWZFcFhDNGZ5Uk9pSVBIbWJneWFCVTBudW9IX1htYzVBYzZTWXVBZ0NLdXZDTWtZaTNJMEtrdjVPalV3RHVIVkRyNXA3NjlrZw?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "The Economic Times",
+          "url": "https://news.google.com/rss/articles/CBMioAJBVV95cUxQaUpVcTBGdXNubnY5TEt0Ul85ZVRUTEgya3BlUng1VUx4NUtYakFDeEFMcEdMakJhNmxMN3ZraDFOUnVLalFuaVM2Mk5LWXRrSkl4dTlYUmoweERaSmEwdDllS0czNzVQNV9JMjlpNUt5WWZrZkxId0NhQVowT3NfNzctX2hycHN6RlJESUk3Ui1yeUVaemNNaXNmOVBqUnV2VUZ6bkNiT09tWFJVTUVyTE9YSWMydGliTXhHZjZ0YXNzMnZyUHdvNi1fVlVJVDhFREhDaFViUUJoc0h4bThJejJHM1pNSVJUZEF3QjRvdjhnY0Z5bDRIRWRmQmJCdWstdjZMU0lPQ0ZnTDNsOW15LUkyVkxKQlpVek5qUzlKTjbSAaYCQVVfeXFMTjlwVXBURE15UWVmd0duckdWYkc2b0o5QXVydjZPbVc4MzJ6REowQjRyYzZ0cE1oMnVEZUk1OW5MQjgtWXVzQmZLXzlocFFTZDFDUjBidnpkVk1Tek0wUllLRVhNTmkzd1VlMWFvQXNhNWY5UTJURmcyTjVIZUNjM0VSU29ZTGQzanY5NG1JcTBCSmFJeWUxNlFSR3haYVhzdjk0VFJiMjhqakFLMktMWm1hRGRwOWI3bzZ3a0lIN1R3THFsUDAtRUN0bWFkZ2QtNGV2VmxNaHNwbEhldHcwbFhhUmMxdnd6STJtUFJxZzhZM0hvcENuVTQ2UEROWk16V0VoQmQyVUdPQzhaS0F0ckFFOWtnSE9uMmVxN0VNd3hrSmhKYW5n?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "BusinessLine",
+          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOcTdWV1RHRnZ3dGwwdmE0WWljNF9SaUtRQ1FxSzNad2U2TzJuUHIwWTB6enlMcG14dk5sLWh4Y2dOeV9kLUdSaDlOclZQU3JjN1liLVM4Uy1KUU9hcmZpRjUyTHBwaVF5UjFTdEx4aFpUanF0WEFWaktGZnhPVnZWVU9CU3ROV2FIQ1lEck5LRV9uZXBsYmE2ODJJVnoyUEMzNlZBWVAtY2drUGpSSURYTXpnR1BMQnB5eUZ1eFc1ZFU5ODRtWWhmOXJHWXZ0c1I4a044cFBueWUwdzlPaTlTRtIB5wFBVV95cUxQVE1BbzRFSi1rak1MYzN4WDIyd0h1RzJGdGt5cDROdFNCZlFNbXIzeFNfSnNRVlRGZU5CUENaVTNMT1Vva09EU0J4dWlCS3VYa3BJVnpZWjBIZkZwZ2lrbU9nRkVqa1hpR2VJLVBWd0V6UXYxeHAxNk0zV0ZEWVJwT2dmQTBDTFBkNXJUSHRjMnlIejl6YjNCcWtmMmx2UHFGNVVnNjJ4SWJSbjVHcUVvY3diV1FYUWJLU1dUMzl6WjR3VTBaYzZVMEQ1RVAxNzc1OEtuNDhDa2owVHhrbURPQXZQLXh0blE?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "BusinessLine",
+          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQUTY2bnJpc3pfM1IydkpzSnZuR3oxSlczeUd6OFdCZDlxeFJ0bEpZQkp3UnJTRVZySklUVmFtVDFoOThSLTNaVFV6Q0s0UEQzeGUwZXJ4UzlqZVFocF9WNmpKbnVKWWtwWTZQUmdUWVFwNGJhOWVnRGlPVTQ3RkYyS19BQ1dqU2wxZUN0a3lmV2hncC1kQldKUlNUZUlrZk1BcUF2QjRZdjh3MU93WHJpQWNxdmZ2b0hUSkpaSF9EcXZLVVFCM0JDcmJYYXhJX1JKUGhMeDUtMTR1OUXSAeIBQVVfeXFMTkl4eEgwSTl4dnZyZ09US21BZ2xRX0RBS21kX2ltcUhGaWFJeGg1cHlEcThIYUZwQ3A3aVd5eElUbDBtQnJDRWZhMXpIWUVqcmNMNW9DMjNiRUlIdVBldFFoSE5CYzZYVDhCTEJCbXJFb0Z5YXZTVWwxMGxaSDRkNzdFN3JERFBvRWktQTRmaGpaMkY5SGpqbTJPazd4S0luWGkzUTYyeEEyMUtvanhNMF9mNGpUOFphYzJvZDF0Wmh0VWg5WlR5RlVfZHAtbEhLeU5oR2xnb3VYdGZqb2NqZGkzUQ?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Construction World",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQNzBQOGlxOWZPV2RQejRrd2dqTHR4TV9BdERSeG95bTh4UEY4amF0b3BHT2ljRG1vSC1kR0tjQ0Z1Tk80Ull3N0dWQXhfSUFkTmpPRkQ0Y3NJY283cXlCdnpWdXZHS2ZaOEw2N1N5RzI2dXVtb05ONzAtdkI4YV9xUkY0VnJlN2lHRW4zZS0xUVBmOHRJZmhDaUVzNmtWbkFqdzhRMmdTRDdZZlhGdmJGaERCai0?oc=5",
+          "publishedAt": "2026-09-10T05:47:05.000Z",
+          "tier": 2,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "tele.net.in",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPSGxkaFRBY19KUmpoUnNGWnlZTGF3dzc4RkpFWnZSVU81NGVxa1JxRFF5OGtFWUZwa0lxNFNESDFZTFFKYkJvcWw4bGRiZ1A3dVhZUVBzT2ROSzFTTjE1eEpBbllNRUozblJXZHJMVWROTDBraFUzWTBRbk5LWGFWTnFrb05RTVlKajM5ZWNmeTVaT1d2czltbXZOclBDRVNRZkFEaFBLaWNVZzE0bGxubUFHNjI?oc=5",
+          "publishedAt": "2026-09-04T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Construction Week India",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPVWRQVlpFNU9acHFBQThoUUttTzMyOHNTc1FKM08wVGpGeVFTelhGdVNPWi1rWVVjbWJCM2JGdTlTR1FIcjVZTHZCQ3JlclMxd19RQmEtWUpJZTBfRVJNRmNXdVRmODRxZ2VlVlJ6XzU4ODBPRGlXQl9yQUZPR1I4Rll2MmQ3Q1hsTzI1S1BtUGFTeEJlUnNmSVNQOTZwRzQ?oc=5",
+          "publishedAt": "2026-09-04T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "grihik.com",
+          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5ESzRDcUp3dXRkYjhfSUR5VVdyTjhVc1h2NUwxMHZoUTdUN1RGb2lCQmRKR0xyQlRFOXI0cUdIMGsxazJaM0tYSFltVllFLWFIc28wYklWSV8wcy05Tmk2bGs0Q0ZDV2E2TXc?oc=5",
+          "publishedAt": "2026-09-04T04:56:06.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 20,
+      "intelligence": {
+        "materiality": 100,
+        "certainty": 96,
+        "momentum": 100,
+        "trendChange": 0,
+        "sentiment": 8,
+        "mediaTone": 8,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 13,
+        "narrativeAlignment": 57,
+        "prediction": {
+          "p6": 84,
+          "p24": 100,
+          "p72": 100,
+          "drivers": [
+            "rapid media acceleration",
+            "broad independent-source pickup",
+            "high strategic or reputation consequence",
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "ACT NOW"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true,
+      "narrative": {
+        "officialFrame": "Ultravolt: Aditya Birla Group Enters Wires & Cables",
+        "emergingFrame": "Aditya Birla Group’s New Wires & Cables Business | Kumar Mangalam Birla On The Big Bet",
+        "score": 43,
+        "risk": "LOW",
+        "reasons": [],
+        "recommendation": "Monitor the framing and prepare a fact-based clarification if divergence accelerates."
+      }
+    },
+    {
       "id": "live-521qun",
       "headline": "Delhi HC dismisses UltraTech plea against Builders Association's Inclusion in CCI cement probe",
-      "summary": "Published coverage across 3 distinct source domains identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "This could affect UltraTech Cement Limited's regulatory, legal or financial position and merits verified senior-level awareness.",
       "bucket": "must",
       "status": "strong",
@@ -400,7 +605,7 @@
       "entityIds": [
         "ultratech"
       ],
-      "publishedAt": "2026-09-08T05:44:25.000Z",
+      "publishedAt": "2026-09-08T06:25:38.000Z",
       "updatedAt": "2026-09-08T07:41:46.000Z",
       "sources": [
         {
@@ -420,25 +625,16 @@
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
-        },
-        {
-          "name": "CNBC TV18",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOUmtieEZ2b19YR3Ftc2RzRUhLZjc5RGhETlVFaDlYcTRmZTE0MmJnLWpTS2hzMWIwSVNtMExzTDg4Q3haeFE1Sm5xRU1neDdLRlY1SDRVRmtMRFhkM1FTVDdJQWRCYzgtdGs5YWlBRjdJV3BrbzYxSmVpTlp0SDU3LTgwSFRFTlhoZDJzd1IwX01fMlA0eUJrd2l3RXphZEZDTGhQMG5XRDRvSUhxZkRIN3hMS2E0MmFfNXZDWnlJTnJxZV9aeWl2VWtodE9jaHFwV3BXdTJB0gHbAUFVX3lxTE13ZGp4ZVV3amQ2TjhQNk1ZOTFyUXN4WFlwOFRWYjc1dEUtZkdzeTM5LXdESHZkajRVREd3Y2dueVU2LV9YRkNreS1oV1VvX0ZSdWN0b2xnSV82NUxnQTg3aU9pYTBvNUt0VXNXNGgtRkJac3FKaGh5TUFkelRzc1BfWTZkTm11WmtqazcyZklQR3h0WHMtbjJqQ3NNYjlCWHNwY1lPYVF5cWVrZ1ZCcElIY2lmajNoR1Y5ZDJ3eHZnS0tvR0VJX0RuUG1pYURtNGdHemlQd2RFd1pNQQ?oc=5",
-          "publishedAt": "2026-09-08T05:44:25.000Z",
-          "tier": 1,
-          "provider": "Google News IN-hi",
-          "channel": "news",
-          "official": false
         }
       ],
-      "sourceCount": 3,
+      "sourceCount": 2,
       "intelligence": {
         "materiality": 100,
-        "certainty": 72,
-        "momentum": 26,
+        "certainty": 70,
+        "momentum": 20,
         "trendChange": 0,
-        "sentiment": -7,
-        "mediaTone": -7,
+        "sentiment": -10,
+        "mediaTone": -10,
         "publicSentiment": {
           "score": null,
           "sampleSize": 0,
@@ -446,12 +642,12 @@
           "confidence": "unavailable",
           "coverage": "No open-public conversation samples in this event."
         },
-        "reputationImpact": 5,
+        "reputationImpact": 4,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 54,
-          "p24": 74,
-          "p72": 81,
+          "p6": 49,
+          "p24": 69,
+          "p72": 78,
           "drivers": [
             "high strategic or reputation consequence"
           ],
@@ -522,214 +718,9 @@
       "live": true
     },
     {
-      "id": "live-12ki3f8",
-      "headline": "Ultravolt: Aditya Birla Group Enters Wires & Cables",
-      "summary": "An official source has published this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Coverage is accelerating across independent sources and may become more consequential even if the underlying facts remain unchanged.",
-      "bucket": "must",
-      "status": "confirmed",
-      "category": "Brand",
-      "entityIds": [
-        "abg",
-        "ultratech",
-        "kmb"
-      ],
-      "publishedAt": "2026-08-29T07:00:00.000Z",
-      "updatedAt": "2026-09-07T15:45:31.000Z",
-      "sources": [
-        {
-          "name": "adityabirla.com",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQNzE3Tjd5WEE5QjY4SjZpSHE1SjdWeWpIcUcySWIyTzExNGlQRzNENWZSVms0V3hyNnR0aFoxR0hXZ192cmZUcXNtZExpNmd0UGE2TllYSllzd29zVkk4WHd2X0FZU0RJZjhXb2Q1bnpzZmx3MGRHdy03dk5LcWFUcURkRXpqTVBRWjlCRTN6MEVzODMtRmFPQlZLclc2UXppR3FWVmg2M1lqRlR4bEw5bFh5bXFkTHNzdU5sV0pYM3MwdHQ3aUxOYjdKUQ?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 0,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "adityabirla.com",
-          "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxONTYyMnBiWVRzU0piWWRWQ0o1MC1aaDVWZGV6MWZacndpT1NNY1V1ZDdobFM4U3p1WTNtYnRFcFZsOERwNEg4Q29sRzhZMVJVUEE3M1QxMzJ3a2hSVTdEM0RHdHhRcnlkaEltQzQzd0J3TlVCZHVISUx3cl9EbDctaUotRzdzNWtsN2xGUmRqZ3k2dmpwb2o4MkxwVFdYMG43LXlZV3BLVzcyaDJjbTY3X3N3V3lDczZ5OGJMNG1jQ19GZGpITGxiUjJ4WnZGZklrWmJLLS00WE9MWTlqUGZDcVpIcWRyb1J3VTFDOWNIbGFBcmg5NV85OWxJb3VMcmwz?oc=5",
-          "publishedAt": "2026-09-02T07:00:00.000Z",
-          "tier": 0,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Business Today",
-          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQemU0MS1OTGVkckpkMTN6R0RaYWVhQURXaElZaDBmR1BHMHZxaUthRE9zaE9tdTRaNHhlTi1ncDF3RllyVFlrRmFHWjNIMXpydE5fSHdOUk1YcTNzSWVVY2Fad3o1SUZvN3RMRFJwOE9vZDZ6N0h3TjdUeDMtUGtqNHFHNUp3UnJkWTNZUGc5UW04ajhxRm53VzRNWU1PdENOV2N1MElhODBFdU1LUWpzQ1ZYRU9hcXVVSDVQRE5VNnN4dy1UVkY4U0VtdUFURllkeFhPZzVkN3R0Z09FWXB3?oc=5",
-          "publishedAt": "2026-09-07T15:45:31.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "CNBC TV18",
-          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVjEtSDZnR1RJRTNQRDUwNWxaQzNtTW9MOGxuZU5DUGhheHduWjU3TGZLemdEYm1Pa0xKSTh6cGVzcDFZSkdGZkVhdno1am5UTjdRVGtDbGwybGdHOVdtZHhhdVRGemk0b2ptY181NkFacTVmVl9yVWpZdV94V0FPNlRWMkNydGRpYWItWmdZSVdIc3FKZjZIRDRPZzhRcm9GTjJqbl9ndlJIUjBCeVV1c0hPZVpyM0h1Q18wQkhvWnc2bWVqbThqLTJuTF9ET0t10gHWAUFVX3lxTFBoaUctMWJGVHp4U3FHdVVUbXVzdTVXem5xVmFaU3pteDlYNEszLXR4dTRLOUs0TU0waXdSZW4wM2RGbHRzVUpOeEx3eUZneWNrREc3NzJRV2tvVjZhS3d4N2xMbzlWWDZrRHQwWVhabGlZbnVWaG41NmI0blJOdmV2SGtpdk5oQ1c1b040RU5xWHloUm95RVptdi1pYkJfVmVyX282aERtdTJmTWFraUQyYzlQZlhXZ1VMcHpDdzRjbEY5N0xoTFNxWi1KSm9yVG9PTXR6cVE?oc=5",
-          "publishedAt": "2026-09-03T14:06:35.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "The Hindu",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPaV9xZVpITG1UR3FtcjFBN1hGTFB0MnJ6MFIxY0pRaEtTMHdxWFFvd3JZelpXQlAxMFUxbjBWMWxxck43a3B2SHpYTDlCallUcm96akJWUnBLREhsMDVqeXlUd1pXeDJERVplU3dVQ1lxcW5iSUNBQkNvNXU1eHEwd1pWSkF4c21ZM21XV3p2cXZQdEgxd0NDUEtXbmlWb1JNTDNCNjNSMnNqVHlxX0RYVWF3YkpneFg4QlZB0gHCAUFVX3lxTE9EUFQ1QjhENkU2NHNrb2NiT2MxaGlDR0prR0M1TUVvb0lBMTdsSjVqTDRQSllWb2dpSVpza3dwOEhJTTVjVW82aUJNZVlUMXU5QU9ndHFsbnR4QUlnSkVIU1l0bF9VWno0b2FNdHBDTC1xb2c1WXlpamtCak1nSU84Q1hfdWlpNVZBVFRpTGxZeU0xRS0xTFp6YU4yeDZWbDJ0bVBfZjd0djFjYW1YLS03T05PVVU4YkpqdDJUSHdqd0tR?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "fortuneindia.com",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPOGdGdFU4eDkwUWRUR2x2Z3o4cVhJeHdxZGxxQ2cyU296VENrSHBoMVpkak04TU1wUjBHX09MSUJTM0QtRkZIdFJjNTM0X0hxUGJ1Zi1mcmtVUHRLcTV5SnRvY3pkbkJudy1PSGxPSmY2cUJWUWhoOFUzNFBnZG5oUkJna1lfQ290dUh1RlN1cmJuRUNHZGZpT1hYR1RxZTdwWDhyWlJ5SGpCc0pHYjRVYVFhMjZpMWxC0gHGAUFVX3lxTE5SMDg1WGlRRVNXRF9DRjFrV1JjVTBkYW05REJkNVp0eF9YaF9kX0dKbHM0V0I5LWlWMlNLSl9Da1ROQVdCcG9KS1g5TFc3MVB0VHNfanUtaGszN0N1RkpMaUZ3LTZwYmRvT1RpUUFxallGeHMwLXRQVk1WNURCcWZFcFhDNGZ5Uk9pSVBIbWJneWFCVTBudW9IX1htYzVBYzZTWXVBZ0NLdXZDTWtZaTNJMEtrdjVPalV3RHVIVkRyNXA3NjlrZw?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Business Standard",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQdmxWcFV6VWpFVEhxWmNxLUhoaVdaTUlXRnBXSzVqWVlldEdCQjE3bUpyZld3Q01TYTZtcVJVdV9LWmtVXy1pMktPcGhBaFFuR1YxMXhMTGtDYVVJRktod0NRVTNTdGp5VUN3dk9nSjBDYmVJR01nNWNyWUtmVVlwTGxibUhCRHVuSExLTXlhbndWTy1xbUJ4SEU3dFlmd2VUZmxlbXZpRDJFVm5qdWdQMDNydmNucllNSVQyMlV2c3RxY2tpbUQ1M2I3aFREMVVTRUVNdTlR0gHbAUFVX3lxTE56ZW1Oa3dpODZSeVN1bGRzTFRTU3VEZnE5SkxjNXBXN1NNQTBYT0o0Yjd1cjQySnJxbmlpYVppMUJvaWJFV081dXh4bGRVeVlMbFFtNEdZcm9QTjZrQTFWOGFPSXU4Smo1cDBmbGRIVFE5VTh3bC1FSGxybzVkUVR3UndsSl9JNFNpSjRJRjhNV3l5anZnaUpoSmFGb1JTN1Z0SWVJS2dUSzVyVkFTWkRHeURmQ2U0WWhZYkFsbENERDBadWZTcF9JdW1obWRLanVDbHdDdnFPVGphWQ?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "The Economic Times",
-          "url": "https://news.google.com/rss/articles/CBMioAJBVV95cUxQaUpVcTBGdXNubnY5TEt0Ul85ZVRUTEgya3BlUng1VUx4NUtYakFDeEFMcEdMakJhNmxMN3ZraDFOUnVLalFuaVM2Mk5LWXRrSkl4dTlYUmoweERaSmEwdDllS0czNzVQNV9JMjlpNUt5WWZrZkxId0NhQVowT3NfNzctX2hycHN6RlJESUk3Ui1yeUVaemNNaXNmOVBqUnV2VUZ6bkNiT09tWFJVTUVyTE9YSWMydGliTXhHZjZ0YXNzMnZyUHdvNi1fVlVJVDhFREhDaFViUUJoc0h4bThJejJHM1pNSVJUZEF3QjRvdjhnY0Z5bDRIRWRmQmJCdWstdjZMU0lPQ0ZnTDNsOW15LUkyVkxKQlpVek5qUzlKTjbSAaYCQVVfeXFMTjlwVXBURE15UWVmd0duckdWYkc2b0o5QXVydjZPbVc4MzJ6REowQjRyYzZ0cE1oMnVEZUk1OW5MQjgtWXVzQmZLXzlocFFTZDFDUjBidnpkVk1Tek0wUllLRVhNTmkzd1VlMWFvQXNhNWY5UTJURmcyTjVIZUNjM0VSU29ZTGQzanY5NG1JcTBCSmFJeWUxNlFSR3haYVhzdjk0VFJiMjhqakFLMktMWm1hRGRwOWI3bzZ3a0lIN1R3THFsUDAtRUN0bWFkZ2QtNGV2VmxNaHNwbEhldHcwbFhhUmMxdnd6STJtUFJxZzhZM0hvcENuVTQ2UEROWk16V0VoQmQyVUdPQzhaS0F0ckFFOWtnSE9uMmVxN0VNd3hrSmhKYW5n?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Business Today",
-          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOOXFGVU5Tc1ljUlNReGZxV1pYal8zRXhvdGNyZTFhUHZCMmJBaEwtWVRSNnFvSXlHcVVxamN1LWo0QjJ6d3dsQjZlNlZJRmZ5UE5UVVpzVXlVaGhoNUVYNUsyT3hBdC1nLXlYcXBnd09xeDFEaWF3b2RXbnIyV2xwdlRiLUtzU0FGbEZnYVhtTlRyNkJmbkc2RXhsMWNINWc1ZDQ3NVZiREZEdlhETnZRU1UxbHMxZXZNZmt5SEhNRWNKVlh0UExaTlBlc2hRU0pVQ1RkTHhqTnUyTVR1bUxtb1puWk5LREXSAewBQVVfeXFMTWlGX3AxUm96d3JSb3Jubkp4bFNDT1dvZDZYanU4X0x5WnBPb3lmdWlGbDN1d2dtZUZNcG82MElQTFQ2Y3JoT1NrWG5uOXlpR3lHV0tmZDZBczBBb1pTUUF5bDNjTk5uUjkwMldEcnVlQWpTbGlEY2JZUDhjY2Z1dW95SFVQVDdYeVVtOHdFNHViejZZTmNCVGJHTTh5eUkzUmI1eFFTVVNSbXUzZnZjMGx1eFN4RzFRQlBmOER6UUU1Qm5hdWh0MjRRc0R4WDJESk8yTUNhZjdaenBTYW9jLTRJZzgtTmU0VmIzdlA?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "BusinessLine",
-          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOcTdWV1RHRnZ3dGwwdmE0WWljNF9SaUtRQ1FxSzNad2U2TzJuUHIwWTB6enlMcG14dk5sLWh4Y2dOeV9kLUdSaDlOclZQU3JjN1liLVM4Uy1KUU9hcmZpRjUyTHBwaVF5UjFTdEx4aFpUanF0WEFWaktGZnhPVnZWVU9CU3ROV2FIQ1lEck5LRV9uZXBsYmE2ODJJVnoyUEMzNlZBWVAtY2drUGpSSURYTXpnR1BMQnB5eUZ1eFc1ZFU5ODRtWWhmOXJHWXZ0c1I4a044cFBueWUwdzlPaTlTRtIB5wFBVV95cUxQVE1BbzRFSi1rak1MYzN4WDIyd0h1RzJGdGt5cDROdFNCZlFNbXIzeFNfSnNRVlRGZU5CUENaVTNMT1Vva09EU0J4dWlCS3VYa3BJVnpZWjBIZkZwZ2lrbU9nRkVqa1hpR2VJLVBWd0V6UXYxeHAxNk0zV0ZEWVJwT2dmQTBDTFBkNXJUSHRjMnlIejl6YjNCcWtmMmx2UHFGNVVnNjJ4SWJSbjVHcUVvY3diV1FYUWJLU1dUMzl6WjR3VTBaYzZVMEQ1RVAxNzc1OEtuNDhDa2owVHhrbURPQXZQLXh0blE?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "BusinessLine",
-          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQUTY2bnJpc3pfM1IydkpzSnZuR3oxSlczeUd6OFdCZDlxeFJ0bEpZQkp3UnJTRVZySklUVmFtVDFoOThSLTNaVFV6Q0s0UEQzeGUwZXJ4UzlqZVFocF9WNmpKbnVKWWtwWTZQUmdUWVFwNGJhOWVnRGlPVTQ3RkYyS19BQ1dqU2wxZUN0a3lmV2hncC1kQldKUlNUZUlrZk1BcUF2QjRZdjh3MU93WHJpQWNxdmZ2b0hUSkpaSF9EcXZLVVFCM0JDcmJYYXhJX1JKUGhMeDUtMTR1OUXSAeIBQVVfeXFMTkl4eEgwSTl4dnZyZ09US21BZ2xRX0RBS21kX2ltcUhGaWFJeGg1cHlEcThIYUZwQ3A3aVd5eElUbDBtQnJDRWZhMXpIWUVqcmNMNW9DMjNiRUlIdVBldFFoSE5CYzZYVDhCTEJCbXJFb0Z5YXZTVWwxMGxaSDRkNzdFN3JERFBvRWktQTRmaGpaMkY5SGpqbTJPazd4S0luWGkzUTYyeEEyMUtvanhNMF9mNGpUOFphYzJvZDF0Wmh0VWg5WlR5RlVfZHAtbEhLeU5oR2xnb3VYdGZqb2NqZGkzUQ?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Construction World",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNRUdmS0wyWEtwWlJJVU4tLXZnZzN3bzF0TVpkRUFXX0FINlhrSFZmTFJsTmY1SlMwbHdhOHd5ai1jM3ZNNGMwb1dTb2FSLXJIemUxX3VTR05JV1VhbTktbUEwQlJIRUgyN2g1Zkwzc2s5a3dyWDY4NkVWNlFvV2RjZ2JyX2F5XzJudEY5TVRlZFJ5QkVLTU9mLXJmSFNOQ0FwY2lIYjBiMWgxSkVoT1lILVZQNlgwNU02V2VBZHB3?oc=5",
-          "publishedAt": "2026-09-04T07:00:00.000Z",
-          "tier": 2,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Construction Week India",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPVWRQVlpFNU9acHFBQThoUUttTzMyOHNTc1FKM08wVGpGeVFTelhGdVNPWi1rWVVjbWJCM2JGdTlTR1FIcjVZTHZCQ3JlclMxd19RQmEtWUpJZTBfRVJNRmNXdVRmODRxZ2VlVlJ6XzU4ODBPRGlXQl9yQUZPR1I4Rll2MmQ3Q1hsTzI1S1BtUGFTeEJlUnNmSVNQOTZwRzQ?oc=5",
-          "publishedAt": "2026-09-04T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "TradingView",
-          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPNUZhekF5RFcwbFZqOWZKbWlkSXpfMk9yTjhCSHNrSmRrNTBVc051SDVUWkJvNGo3cVBLTTZxb0VpRTlhWTNkTmRvQl91Q2NULS12OUZEV2hJdVBNUzJqMURTaDFrNGMweUpfM1c3YlVjUWJvQWNkYmRvUU5WOG9ibmFUd205dmJ0a214dTZXN1Y2cC1yWEhONmNyQnJjQlY2RlBtUERybE1VYmNacEZsaHdHR2FHUGY2MWNLenhVNUFUdm1xZlViWUREbjhBaGdCWlpjS2V4dXIwdFVHdUxqQktzTEV1UzQwamZB?oc=5",
-          "publishedAt": "2026-09-03T14:27:04.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "InvestyWise",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNMlB0VXl2blJIdkJwM05fMDd5azVlcUNITjVfMGFUVXZTMDBUR1E4b1N4X0NTSXZlTTNoSUhWcUN2VkdxOFctSGttSll2dmRNaHFjcXVHQllDTHdjZjlNRXplWGxVaDMyY0RrNzAyNFJobXljdjdXMWRkUDFUMzJFeG1qY2t1NTlMbWdWOHhFZw?oc=5",
-          "publishedAt": "2026-09-03T13:13:28.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Upstox",
-          "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNRkNCMkhNbXkxOGhIczBCS25hd20zeE5ZakZQUWp5NXdFRHNmZUhXZEZEaV9OQ09QQWwwZ2l0bG1CUnNIUHBNc0FqU1lmbjJYSHZ1NW9jNGxJQ193ZHNmLXh3Z0d6YkxxSlpwdi1VVFd3WXF6elBIdWUtcEZNUXZfXzh1MlBLamlKdmtITjh2UTZ6clBFeXVZZXU4Y3BDRXRDN0h1U01yZ3BPMldhZHZ3b1d5QkE5MHJjc0luTGRnbWZwcVNhWEluU1ZyTko4SFl0eXhPRHY4Y0I0LW9qTXZCR01ONkhYRjVvWGNxWVN6T0QwUQ?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 16,
-      "intelligence": {
-        "materiality": 100,
-        "certainty": 96,
-        "momentum": 100,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 13,
-        "narrativeAlignment": 57,
-        "prediction": {
-          "p6": 84,
-          "p24": 100,
-          "p72": 100,
-          "drivers": [
-            "rapid media acceleration",
-            "broad independent-source pickup",
-            "high strategic or reputation consequence",
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "ACT NOW"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true,
-      "narrative": {
-        "officialFrame": "Ultravolt: Aditya Birla Group Enters Wires & Cables",
-        "emergingFrame": "Aditya Birla Group’s New Wires & Cables Business | Kumar Mangalam Birla On The Big Bet",
-        "score": 43,
-        "risk": "LOW",
-        "reasons": [],
-        "recommendation": "Monitor the framing and prepare a fact-based clarification if divergence accelerates."
-      }
-    },
-    {
       "id": "live-1hf9hlo",
       "headline": "Vodafone Idea gets ₹363 crore GST relief as Supreme Court dismisses Centre's plea",
-      "summary": "Published coverage across 6 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "summary": "Published coverage across 5 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
       "bucket": "must",
       "status": "strong",
@@ -760,15 +751,6 @@
           "official": false
         },
         {
-          "name": "Business Standard",
-          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPRVFsVWl5VnVrNmxuX3FneWdwYjk0LVItbkJ6RGFMbHhDaElSczNyN3RkTS1qVUJtX0lZUjhMMl9qSHZWZ2R5T2NSUXVhRGN6YXRrVFdGTHVNTlVSNTdwRDFnTHlmSkZHUHoyVUsxNUVDdXVnNkRTd0lWTno5ZDAwblRMX1VpTUdRdnBVSk1sbGt6a05iMV9CdlJzWlkzaU10WnZrN2g3alBVRW9rODBiem9QblVWMUxldl9QeWhOQmxmblRkbWloS1pQempaY2FoaDRzVUw0NNIB3AFBVV95cUxQZkI0b0dYYTdBcDRpUWhEVUI2akhHOVBkNlJ6WmdjZmNieTZzdHhEVU5fQThEWE5iOUdaM0pDWDBJTTBpMTVpSnVvVl9taTZxUHdldEJDN2hpcWFETUlSbVNJUDdfalZCRjE5RW5jeFU0ZmkyTlptb0FMWWQya05mY2kyVUd3Wjdjam5tZjd1MUl4WV9LN0U5Q2hhSGdtVGhPU1BLWWprMDNQZVRnUlBrcndieFlvWmRmY0VpeGs5ZDlTR2dBX2x2NU4tdDM0NDhMNDBFMDNGMUxFRnE1?oc=5",
-          "publishedAt": "2026-09-07T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
           "name": "The New Indian Express",
           "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNTThrNk5rcGYweVZBRE5IUkpVcXROemZfdS1TX1BhWTZNOGxhSG9qUWhac1l2cWl6QjVibGJnenZwX0M2WjJITDZSQWk2V0lIbU5nczVXcW9ZejFteXVtaDBpcS1WdmxWMG9rNWVGTHZoTEtSTUFJNFkxdkx0SEt1Z2s2R1U1d0h6eHpQMGkzRG5yM0YyOVIzaFdfaG1GOE9sNzdUaTl0SHV0cGNVOWFWNU9DenNPNlQ0YmJVUTFOTTJVM0h3WDJIZ0hoQVhVRUdP0gHeAUFVX3lxTE9HVXdJaFFyclB3RG9yRGhVT3lOZFJtdEViVmUzWFE0WkhrTk9qTThGWWVoaWFELUEtN29wS2ZlTmNhdDlYM2FJeV96c0tFQkJ1eXlDcElrOTZJekdGUklNQm1wcV84V1NtSEJuMHdFdmF2VTh6ckVQVElwNUVLX0x1YlBTMzFjNnBjQUptd1dEV29FT0owSEN6V3dkbEJJb3U3c29fVDhnUGV0eVk3bGJMbUdiV1o3OWRFbmpxcGFNamQzZlR2b2xuZ0RoUWFpSGZkTDdNR19uckpqbkgxdw?oc=5",
           "publishedAt": "2026-09-07T15:39:55.000Z",
@@ -787,7 +769,7 @@
           "official": false
         },
         {
-          "name": "Bar and Bench",
+          "name": "barandbench.com",
           "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPeDg3bWoyN3U4UFdOQTlBUjA0Yl9XXzVwanNGME1IbDcwV3pCRXFkOTNlZERtMlRVUXpDRDR1QVgyYXQtMjk4aks0ZDlGa21xRTQzSlZVaTVfZk45Qk9QSy1XR0s3eDhXcTk5RExsWGlxZUx4ZGdoTUZ5emJkSm1HaDJkTFZQVXZ0R0Q2dnItN1EwbmNtQVp0VFU2ZGdURW5jeVFEQThrS0dNS04wVFA1Q29CZGY0b0Q1ZXc?oc=5",
           "publishedAt": "2026-09-07T06:46:02.000Z",
           "tier": 3,
@@ -796,14 +778,14 @@
           "official": false
         }
       ],
-      "sourceCount": 6,
+      "sourceCount": 5,
       "intelligence": {
         "materiality": 100,
         "certainty": 76,
-        "momentum": 44,
+        "momentum": 38,
         "trendChange": 0,
-        "sentiment": 1,
-        "mediaTone": 1,
+        "sentiment": -1,
+        "mediaTone": -1,
         "publicSentiment": {
           "score": null,
           "sampleSize": 0,
@@ -811,185 +793,17 @@
           "confidence": "unavailable",
           "coverage": "No open-public conversation samples in this event."
         },
-        "reputationImpact": 10,
+        "reputationImpact": 8,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 65,
-          "p24": 86,
-          "p72": 90,
+          "p6": 62,
+          "p24": 83,
+          "p72": 88,
           "drivers": [
             "broad independent-source pickup",
             "high strategic or reputation consequence"
           ],
           "posture": "ACT NOW"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-78rb7o",
-      "headline": "Aditya Birla Group enters wires and cables business with ₹1,800 crore investment",
-      "summary": "Published coverage across 4 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This may alter Aditya Birla Group's capital allocation, ownership or strategic growth trajectory.",
-      "bucket": "must",
-      "status": "strong",
-      "category": "Brand",
-      "entityIds": [
-        "abg"
-      ],
-      "publishedAt": "2026-09-03T07:00:00.000Z",
-      "updatedAt": "2026-09-05T07:00:00.000Z",
-      "sources": [
-        {
-          "name": "realty.economictimes.indiatimes.com",
-          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNMUJVM1NuUmVjNURxX09KbzhTc3k4M1lvMDdFYi1aOGh5STRTUmlEYjg0eXVjNWZzQVVFY000TzVuUlpKM2psVHNFVFF6S0tNQUVjZHpUTklpQzgtSmh6UDZNNUgtLTJCdEVENUM2cVFtVnJWcWJxMkQtaUREVkg3NHo5XzEyUGxfQXdEbklPb0M1VHViZ2NZM2NuNjRxWjNnd2NlUXFUbzdqOVlpWk5FNWtiWkkyQmR1ZjV6bWk4TE1HTHNqM1A4ak9EZmttbHdYbVI4a1FnRnBvbFBrS19HTUN4VWtYRE9HYm5j0gHwAUFVX3lxTFAwWkZCVnc1WlVXaG9Ca1hRZTRHN0dabEYzSGFreXQ0dmh1ZDdsODRBRS03a094ZENkaEh6WVc0d3pFb0NNVmI4cUtuanJLbEU3UzNxcXB5eUpndEZfaG44T2VsV1VhekwtZExaUVhlNXgtS3g5dkpfbFZNSVVjS2ZUT2FiTWt4SC1NdnQtOVl6VHhJU1YzakFydHlILUJGVXpZZXhzSmFmdHNxOGdsRmtvV0xGdEtsRkhJdEhqck9rN2NLNjAwdlpheHJPS0drckRSeC05Mmt3QVZkM2FqSFNIN3Z4MkprZW9icmtXYzNwWA?oc=5",
-          "publishedAt": "2026-09-04T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Moneycontrol.com",
-          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPUllTOGstVW1fX0p2WVhVRTU2aXpFMFZvT0RwWXlZcm9pNnNmc0Y1aUtBb0pCRFlzTWFRcjdsWWwwUmtIaGpkTmRJeEthak5JQ213Z2JaU0t3Sl9IZ1JJUTRTYWxLbWlXZ0hmalhCUnYyQlZrLU4zUGltVWkzbXpxcEU5cllCWlZuUEsxQjNTdlJaR1h3b1AtQ0JFZ1A3ZXhObEw3S1cwQXNLLTRwdjZVYWVnVnRkMEUxZE9yM1lrSkY1OXpUSDR6LUgyWUswMEp2QzFtR3gzSUc2OHhzaXfSAeMBQVVfeXFMT2FuM2NOWHFja1VkOGNwUUNkblpNYkFMUXVaa1dOb2tCa1VMNHFxMFFQNmJ2dVRGT3RtaGdSckdfdW4xN3FoOHh2TkhJVDVyNloyZUx1Y3RRc2ZheDliY1JDYnpwUWFKaUphUWRzNFQ3Zm4wWXUyTXRreDdjUWtiT3MwWnlIaWJ1ZGxVMm03eFQ2NFp5MzZ3bHgyY293Y2s0ZmtReGtfUUVjalJfRHdEQWpYei1Xb3VadWxzcHpJOTBubzVYaDBLNmVZYm9kdDc5XzJmSm9FRXJHZlgtX19ZMFFEVUU?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Dalal Street Investment Journal",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPQThNUW4yWEo4U3k0OE5fNzNKaW5YR2JkdjJCcGJ6ZVBsanRaUVJTZFBqMFlfdENZRmEyZjJ2QTVqWXVzbUlRM3h6S2Y4VC1uNTREVWRCcm9EbHMwOE1LNVZ4bVJMTXhHNzZaSldWU3RlYkd4X0dFVVNnZm8wUG9EelVxMVFZU0w2THlERVBVLW5Ta2g0S2IzLXhyRURjakRKNFljelJWXzR4WUdObU5aRnc4WkxZUk92dGpCd0RWbnU3amhMZktOdGthRQ?oc=5",
-          "publishedAt": "2026-09-05T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "tele.net.in",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPSGxkaFRBY19KUmpoUnNGWnlZTGF3dzc4RkpFWnZSVU81NGVxa1JxRFF5OGtFWUZwa0lxNFNESDFZTFFKYkJvcWw4bGRiZ1A3dVhZUVBzT2ROSzFTTjE1eEpBbllNRUozblJXZHJMVWROTDBraFUzWTBRbk5LWGFWTnFrb05RTVlKajM5ZWNmeTVaT1d2czltbXZOclBDRVNRZkFEaFBLaWNVZzE0bGxubUFHNjI?oc=5",
-          "publishedAt": "2026-09-04T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 4,
-      "intelligence": {
-        "materiality": 100,
-        "certainty": 74,
-        "momentum": 32,
-        "trendChange": 0,
-        "sentiment": 12,
-        "mediaTone": 12,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 16,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 58,
-          "p24": 79,
-          "p72": 85,
-          "drivers": [
-            "high strategic or reputation consequence"
-          ],
-          "posture": "PREPARE"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-tl56ka",
-      "headline": "Aditya Birla Group gets Rs 24,000 crore bank commitments for Shell deal, 70% more than planned",
-      "summary": "Published coverage across 4 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
-      "bucket": "must",
-      "status": "strong",
-      "category": "M&A",
-      "entityIds": [
-        "abg"
-      ],
-      "publishedAt": "2026-09-03T07:00:00.000Z",
-      "updatedAt": "2026-09-03T14:58:30.000Z",
-      "sources": [
-        {
-          "name": "The Economic Times",
-          "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxQdEd3QmNrbFJOa19xT2VyV0U3aS1uX3pBVnRVYzVZREVVcTM5azBXMks5Mml1YXV6eEJiWmQ3dmJ4MmJ4ek9LVFFaM2FYZjBDZGFkM0RpSGpvLXhQR3M2d2FrZzh3UHhRNG1UMm9qZl9SMU5ubWNKaEI3aXZIQ1Q3Y0RNNDZVcWdDR29Yc01pT01lWVhORFg2S3EzQW54MUJ2TnFlbDYtb2o1T3FoRWxQNEF6ZU0wMmo1QjNBc3VkY2pDcjBhNTFiWWtpTjJlYy12N3o1WFFuelhIWkxodDNZUEk0RE4tU2hWSFhiMkVVcWtlMU92c0VKdERKUjVtRFR4c29YajQxOHJMS1p1czdVTGY0UTLSAZoCQVVfeXFMTm1oTmhzZzM3eG96a3JGaVlkZnFEbnJXVENUNENzZTNJZ3RYdGZTYUFKZnRzTUFBejBlb21acUxsLVp1bUVwSld2VzBpS2FBTC1EMEwySk1BSFN6elkzMmlTeWtQb0hlYWhnUElNNmYtQ3dqb3M3dEl6eElYMXFvRzkwa0N3eGNZenJHSHZvU2ZXN0xQTERDa2JEWjhHeFNJSWNwTk1UcVJYc3hVQlJvLUh6MjR3LTcxSmNOZUZFY3kxWXNtRmdFMDBOWXJCZjNWTHJ2Yko0dTFRTWFYNE5DLWVMeDJHc3JBd1loSE8wV21wQ0JHVjdXY0laN3AtLTBpN2h3Sl9VVU1leE1QZWgtUXBBY0VsV1dvakh3?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "BusinessLine",
-          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOLWJkcDNpclYzN0dDOFhFYllhdVRxQlpzMmhlOVhUOXU4S3Q0ajdtX0Jva3NVNWgtbTNvTEJfV1RRWXU5Y1ZIdmVlbVhVbTNaVm9DVXhERjNYWmpDRzhCUGk4aHBUTkR2YVBEbnZIWUhCVlV1a2pvNDJlNlRiR3A0LXBoa1Fqd0htUHhTOXdZYm5nWXZlTm9wQTVwRXgyYndwVEhodThXcEE2RDFGMmlxblJOelhaQkZ3TEprNkNHUzF3b040anlRdE9RMFFPc01mWXE0RG9jWUNoTWZaeVdjbkNqeGJhVjNHTEHSAfABQVVfeXFMT1AzZklBc1pyWDhzTDczSnZQYjduWWEzcmpNZXdJY3FKczE1NW5qMTV6YTJ2RTZ5TEczbXZ3aUpaR1FVbG1NZHJobFNqaF9xbEt2UlRpeWY2Q3NiRG0tSll4MnpidUc1T1RQcnpGYzZ6RmNzQWE1NFJEV2NWWUpwbHhjZlZaTzFkZFAyZHk5U2FHS0RXVUI0UV9SRGtmUHl6VGYtZHN1R080VDhGWTJWc3U4OHR6eGU3TGVkOTNNYVQyamtZd1hWQkwzVW9JZWhiTE4wWmg1T21YdEVKZEwwMzZOa2ZzNzVuNXFNOFJKR3pj?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "TechStory",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQclZ1LVZFdi0zcHhERkkyMFpGVF9qWkxGWFpoR0x5WFM1VWw0V0VmUmlWNzJ1Z2ZNaUUtYzd4MlB6cHpSSXRabXNtSF80TUlDWWhoM2FTSkxMQWZOeGpXaDVmWXduR1FTcjByRGQ0c3F3bm5uQkdObXpBMTFWOUNLbkUxWTVwdm5hNW5mWTVCdmE0ZmQ4bS1oalBCb2l4d2tTU0wzNnhQQU5VSmI0X2c?oc=5",
-          "publishedAt": "2026-09-03T14:58:30.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "outlookbusiness.com",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOaER4Q0NHRE5acklBbDFuZ1lIMG5oUWRyNXVNOWZvWFF4STZsRktnN25jM3dLNzdLVWdJVW1BMlEwS1JfNFA4VzVWd1pudWFHRHRQY2NjaFk5MGMtNGNKTXBZX2lXWU5YQUpGWXJOTTBZbUdacHVYeHFpOXNjaUQtTFluSXZZS2VkSzk5ZGZlUF9TZ2FvOTJUa1FMejlqajBDSUlrbW53d2lXTmFQSzBmT2NZeVJ2cFZDN3huZm5RTjLSAc4BQVVfeXFMTXJIV29UVzJlOUxrdVlVS1ZrUnUyZUU0V2c2UkcxbXFyVHFXcEwzV3daVUM1LXhScHRDSUYwRHlZQkFpWGl3QUxaTkVVczhwT1ZPYkRPYXlIVzNNLUNuM1FteDJEcFpHbVdwSkhvekVPOUNOaWxqcndRb0poVGxNZEJmb0lSZ1hWbmdjSXBZTURTbEhPOGFWWk5zR1dkcERBVnRXeFFfeU54dXFURGV5dElFWDBZUzM2QjVyTFMwTGxMWW84NmdBU3JWRURnY1E?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 4,
-      "intelligence": {
-        "materiality": 100,
-        "certainty": 74,
-        "momentum": 32,
-        "trendChange": 0,
-        "sentiment": 9,
-        "mediaTone": 9,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 14,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 58,
-          "p24": 79,
-          "p72": 85,
-          "drivers": [
-            "high strategic or reputation consequence"
-          ],
-          "posture": "PREPARE"
         }
       },
       "flags": [
@@ -1098,15 +912,6 @@
           "official": false
         },
         {
-          "name": "The Economic Times",
-          "url": "https://news.google.com/rss/articles/CBMiqAJBVV95cUxOZEdoRUJZejRUY19raURhY2Z6SkhHcDdFODEzU2JnRUFkdjdDQnB4Y1BydkF6dnkyd0M4UEtsbnUtTFlQRWI0b2RnWE4tYkN4ZEg3bjhpdUF6bXFESjZwcU1wTlJjVU9wcHRfamlVb1dFaDI5YmU0Q2llYmNlWE9hMHd1SDluSTdyeDEtR2c5UlBWWmYybnc2M2h4MENBOWNPY0l2RjBSVVFsODhwbkRGME50eUpCR1p3VHVWeVFZVWpzclAwQkhOc1BXb191d2hpekFUTVhFa2dnUlNib2k5Z0JjWmN0U1FiMzhUVjBxUUpuZGZobHo0Y1duQU9NUl8zWVp4akVrckdtYWNMSnJqQkoxMnlSb1dvM1Y2ZmY0YlFSX1pxNkhhWtIBrgJBVV95cUxOd3FDUnNxbUZUSzdiSFoxOEU3STRXbVhkOGhjS293Rm1hUkZJdF8tMFVVcndRLWNrcXZ6UmZwWFQxeFVQN2swWXdvV1E4NlVtR3pSeS05VDd2M24tUUxyVUs0SWdXeV9EYTBDemJHRlk1czE0S2ZhT1EtSGZaeTc5b2p6eGxocGZ2UVdBc1VXOEMwajZGZWhhYnFyQ0NDUkYySjJzaDY4R1MzZlNCRWxJVm1IQXRWc0VicU5OenNhdUJuME9nazhVNVB5YS1jbFdJLVBiNUZWRFhpRUJqYXpCbVFPN21OcjJtUDQ0amYtU1JLdmZLNTZ3eDg5Y3ppeGNwd2d3SWVTWEVzYkZxc1oycjZCVzZ0TDQ0b3VOM2pEWi1TUzRMNE1TRXQ5bFpidw?oc=5",
-          "publishedAt": "2026-08-27T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
           "name": "Business Standard",
           "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOQmJhVGtiZ0dMWmY2cFpUQzFFTFdjQXY2bzVyWWR0bVAxaXJSc0dUd0VsOVgyMGhCYk91U09pYkE4R0tkLXJxYVVFNEFSOXRpM25vUW9HTVZIQzAxazgtVW5yQ1RJWlloU2x0cW9HTzhzTHc5Tm5TZnRLTE1qbWliY3hFMWRtMWRRenAyQ2JTa0toNTBwR0x2MGdIQndHMHdGWF9teFR5ZUNGbnpXM3ZRU0RPbGFBWUlFckI1Qm1BQ3doLU00MmgxRVYxN2d6LXlRQm1lNC0tb2NRN2R4bWx4Tzk1ajBXMXBhY3RsRlV1YkHSAfYBQVVfeXFMT2djMU8zSTh6bnNpUTRyQVVpSEVuZEZxeWtoUnJ2WW1XczhKMHQxdVpVSnpTbFNVX2Y1RnltMjE4cHpXOHN0amxKVVF6Z3pwYU9lbU1VWXJfM0lFQ3dYSllZNzM3eUFPYXR5UmZvQkRmNTF2VlZKWjJOWE9EMGZSd0l1aGYyTlBWVERYVTRkbF9nTTkzb0VZSzhQV3JQY1Zlem01ZEZiYzQ3LTdkdDQxb0x5c0xER1I4QlNyNzZBU1hVNUptSEJuX1JTdEtwYVdNdGJDTWc4V1dJWFRQMEhJYlZDODJ1bXlFaUVxQS15X3M1SUN5dFFn?oc=5",
           "publishedAt": "2026-08-27T07:00:00.000Z",
@@ -1134,7 +939,7 @@
           "official": false
         },
         {
-          "name": "GK Today",
+          "name": "gktoday.in",
           "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVmRyM2ItbGZTWEJJTVQ3TmQxQi1DbXpZTkVRd3VmbU85SmNmQVVOSGczeFE0WHZCVmlyUzdxNWp6YnN5LXg0U0gtRzd3WjBRSmpUS0NfVF9GZzBTYWQxcGVWYU5LM2RaMGN0akV6VWdQUWV5cnJEcEV0N21pVmFERWVNbm5QeUNy?oc=5",
           "publishedAt": "2026-08-27T07:00:00.000Z",
           "tier": 3,
@@ -1161,7 +966,7 @@
           "official": false
         },
         {
-          "name": "Wire & Cable India",
+          "name": "wirecable.in",
           "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB5T1pfOWxJUnhVbTJ1MWswRGlmRFl6WVhVRW5jeGQ4SlF6TUJBcHRkTVFUM2NPbTFudllvd2lRbm4xOWJxWnFnZXJlOHhkUl9ReWRTVlgtTGRKQQ?oc=5",
           "publishedAt": "2026-08-27T07:00:00.000Z",
           "tier": 3,
@@ -1213,9 +1018,18 @@
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
+        },
+        {
+          "name": "News on Projects",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPOU9LbVVkbDF6Vkg5dFZzUTlfU2FFakJjY0tiYW1kQXZ6dXpDZzRFaFFxS1RDT25DMVY4VVVZMlFma1ltMi1ZbW5odUpRb2RoQjYxQ2xOeWRNakVFcmxTaXJ0LTJpLVJOb3cxODZNNlVJVGlIb0wybEk4NW1CUUp3MGRYZ0I0UTgtUUZRcVlrMGE4QlJ6TVp1TmhZMHZmOTk0M3dhZDMtWXpTZw?oc=5",
+          "publishedAt": "2026-08-27T06:36:40.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
         }
       ],
-      "sourceCount": 17,
+      "sourceCount": 16,
       "intelligence": {
         "materiality": 100,
         "certainty": 100,
@@ -1397,74 +1211,8 @@
       "live": true
     },
     {
-      "id": "live-kvfg08",
-      "headline": "ET WLF 2026: Aditya Birla Group unveils $30 Billion investment plan across key businesses",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This may alter Aditya Birla Group's capital allocation, ownership or strategic growth trajectory.",
-      "bucket": "must",
-      "status": "strong",
-      "category": "Corporate",
-      "entityIds": [
-        "abg"
-      ],
-      "publishedAt": "2026-08-22T07:00:00.000Z",
-      "updatedAt": "2026-08-22T14:28:50.000Z",
-      "sources": [
-        {
-          "name": "The Economic Times",
-          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOZ1dyNlRWSnVyel90VGM0MTZVRFFJdHFmM2ZUdWhFNnNoMU9pZkg2eWh0WUs2UlVqY1pWR3pFVjZINW5EZjZPUmpIQUppSjQ2OW1oQzAxNVN2SkxsQnJaazJIMXdBU0kyZ20xN0NMQXNHWU1LbE9JbVRJQjgycEZXRmNZLVBVTUlFLXhYQVBjWjcxT2V2c0tHWE9hMmM0Wml1bjd6UnpDbHFqajlYVGhaQldjdXh4VlA1SHd0enJrNjRwM2VNQzQ4Z3JDYmFyVUpaN1Zpam8yOTNyRmdPRWxOV2lqd0rSAeoBQVVfeXFMTzRnTWlQYk9hcmdlQ0ZUUUMtVlp0YmtHZS1LX1U4elVPUzlmZjdETWI4bGI2M0NMcmNranpUaGtvUEdxLUhzVjBWZlZXeVhoa0lNc19Pc2tWdkRSbkZ5LWxnZkJxSnRBb1U1Vi16aVpNN2hCUW8wSzRSaGRsS3d2SHVhRE5fLTlGN0dWbXRIRzR3dUhRU0lKVmdzdzZzMFFVelZ4dzEtVmVXbk5BYnI2SHp2TXJCRm5nSXoyVkJSaXpsYkdLTXRlYi1HelJIWEdIYzl1UmxRTWRPQTl2N3IxbnR0OVg3a2pvY2dn?oc=5",
-          "publishedAt": "2026-08-22T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "NewsBytes",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQWWhpWm16cnVOekp2NDFZdnBOcTM5LWVCSUFwTFhtRkNsd0hUcnlKX2xHTGNKMjN2N3h5cXdwRVlTdnpyODljYkV6bE1BU3E2UUlISjBXVEZETlpjQWJFcmhMTjlfczRwMDNZektqWXdpNWNwVTE1TzZRT1ZmX1VJV2FxUUloLTJreGVNaDc5a05UM0hsZGU4cDVZUV9PamhvR1E?oc=5",
-          "publishedAt": "2026-08-22T14:28:50.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 2,
-      "intelligence": {
-        "materiality": 100,
-        "certainty": 70,
-        "momentum": 20,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 13,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 49,
-          "p24": 69,
-          "p72": 78,
-          "drivers": [
-            "high strategic or reputation consequence"
-          ],
-          "posture": "PREPARE"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-asddt4",
-      "headline": "Aditya Birla Capital gains 2.5% after gold loan entry, plans 1,000 branches",
+      "id": "live-w3rxeb",
+      "headline": "Aditya Birla Capital to enter gold loan market, targets 200-300 branches by March 2027",
       "summary": "Published coverage across 15 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "This may alter Aditya Birla Group's capital allocation, ownership or strategic growth trajectory.",
       "bucket": "must",
@@ -1478,15 +1226,6 @@
       "updatedAt": "2026-08-21T07:00:00.000Z",
       "sources": [
         {
-          "name": "Moneycontrol.com",
-          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQdzdBXzZPRHVBZWlneWVXYVY3eU9sTHNLNDk1TkZmTW8xTG1fQ1p5aVQ1RTM1YUhkTkdCZnpod3ZNX0h2TTcwSGJTZGtIM0dhTjhqT1RmOEV5ZzdNNHAxMjNUS25XMGZkZElHWEJPSlhiaGtXX24yNC1zZEpLU0lobzM5c0RxOGJSd1JFSGRnaWZvVkZSWWRrMGtXMV95dUhUdllveEZTdmFCVU0tLTA5ZHdvM2Y3U1NRNzFjVFhkSFZXc3VIQVVkeUN6Mm9wU3RFUUxR0gHYAUFVX3lxTE54ZTJFMEc1X2wtWEFvQmRpZURpVFAyRXBzWlNxOGFmbnUwZm1sdWtCbjBiOGtjbjZMNURoZkQxQmZzOWU4NDZuTTBqMExzc3dmR2xBMlVoYkUycDhZb0hoT3RfQUZvbXA1Mks1WXVCZ09IZkZsdWlYa3FkUTVXY09CLWo4YWhTMkRCamxkYXU1aHN3clBQZTVSV0RKTzNxRkZZTjNnOUF5QS1pU3U3RXVmRWNsQUtId2IwN184NEU1M0JMZ1h1MjZNNnZlQ0xac2hhNHRycnVsZw?oc=5",
-          "publishedAt": "2026-08-20T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
           "name": "BusinessLine",
           "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNY0Jjb3dha0UwVDNBc0RKVWVLYzhkQVRPTnpwbjN2WkMwOW55VE9BMzFKdG5kVlhBZ0pqX095MTM3dnBHYkNCeUZpNExnYzBCZnZ1WVZKMnJWUnMxTXBKaU5wakJ3OGR5a1lkR3FSWEtzRnlTaFkyWWxjZWhzenF2MFNCbm5aLVE2QjNvT0g4SDU3a1RyQlFiMmUzSDZ3bExrbkFTZHBOZXdFT05UQkNiZkVBVnR6ekZtUHdCTkx0MGtDRV90UlRGVjdzLXZzeVYzLXk4LdIB2wFBVV95cUxPSDNhd1NDOVgwNjJPUlBtT3FZQXpJWUo3LXRmQm5tYXZmOEJobkhoSnFnazVjSFBCY25tQXdTWkw0b1QzOWZqclpYZU5DdjZUSmZBS0hPVFJpbzZOeHFLSi1vaVd2enc0a2xUNVJnWW1pQ1p1ejM0LURiYnNDYVFBVUp6WmtZYWNMT0dMLXJXMXJhRXpBUFZrZDl6MXJpdGQxLUJUX3o3RTZMVUNIdHpBeHlBZ1hXcll0RFphankwT2RtWFZIZ0V4SFNfYU8yUXdLdTk4ZkFwNVZaZWs?oc=5",
           "publishedAt": "2026-08-20T07:00:00.000Z",
@@ -1496,8 +1235,17 @@
           "official": false
         },
         {
-          "name": "fortuneindia.com",
+          "name": "Fortune India",
           "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQaUhienp4M3A2LU1MeGg0bTNSVE1DMDZobXRrUDBaQklnWjBSQjkzdkF0TFNueXVFNkR0Tm5XcjJRWnc1VjgzRUZodV9Jdl9jTUc3b2o1dzR0N2dIRWQ0U3JfSmoybVdfOWFqVEE5QzVjMm9QaG9vZUlYNWNFUU9FenZKVUl1YUtudVoySU9vX3NZc0VNWnZmY0hMMDFlWnF0UF94Uk9Ia1h4YzZxNFo3WmtBRHZMdFBOS1BuMTd2NEdNMms2RzRLamZRT2dRRTUzNGxKQkh30gHjAUFVX3lxTE9taWNqU3VwaEhHSVVmUndkTDhyYi02Q25Nbm8tenJiQXlrX1pZcU1pYkVmRFBSdHRqS2J6MWZnbC04amlFa1J6TEFmSUxTYWxwOTJZRDh3XzU1ZVVXWWtoRHVVYjU3dG5jdVEyZkpIaGFzcUJiQlRmQWJ6cDViZjY5aGo0SDBPRzBFTGpsWU1lc2toTENGOEMxa2l6OTI5b0prT3gzeW5PcDY0REp2ZE14QTlNSkhyUmEwR1BBOGFySHljUUdxd3lJczh4dWktMzlGU2FaOEg0VWZ4OEhIS0hIeWE0?oc=5",
+          "publishedAt": "2026-08-20T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Moneycontrol.com",
+          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQdzdBXzZPRHVBZWlneWVXYVY3eU9sTHNLNDk1TkZmTW8xTG1fQ1p5aVQ1RTM1YUhkTkdCZnpod3ZNX0h2TTcwSGJTZGtIM0dhTjhqT1RmOEV5ZzdNNHAxMjNUS25XMGZkZElHWEJPSlhiaGtXX24yNC1zZEpLU0lobzM5c0RxOGJSd1JFSGRnaWZvVkZSWWRrMGtXMV95dUhUdllveEZTdmFCVU0tLTA5ZHdvM2Y3U1NRNzFjVFhkSFZXc3VIQVVkeUN6Mm9wU3RFUUxR0gHYAUFVX3lxTE54ZTJFMEc1X2wtWEFvQmRpZURpVFAyRXBzWlNxOGFmbnUwZm1sdWtCbjBiOGtjbjZMNURoZkQxQmZzOWU4NDZuTTBqMExzc3dmR2xBMlVoYkUycDhZb0hoT3RfQUZvbXA1Mks1WXVCZ09IZkZsdWlYa3FkUTVXY09CLWo4YWhTMkRCamxkYXU1aHN3clBQZTVSV0RKTzNxRkZZTjNnOUF5QS1pU3U3RXVmRWNsQUtId2IwN184NEU1M0JMZ1h1MjZNNnZlQ0xac2hhNHRycnVsZw?oc=5",
           "publishedAt": "2026-08-20T07:00:00.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
@@ -1658,6 +1406,122 @@
       "live": true
     },
     {
+      "id": "live-yhw9li",
+      "headline": "Vodafone Idea gets ₹363 crore GST relief as Supreme Court dismisses Centre's plea - CNBC TV18",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
+      "bucket": "must",
+      "status": "developing",
+      "category": "Regulatory",
+      "entityIds": [
+        "vi",
+        "supreme-court-india"
+      ],
+      "publishedAt": "2026-09-07T08:30:09.000Z",
+      "updatedAt": "2026-09-07T08:30:09.000Z",
+      "sources": [
+        {
+          "name": "LinkedIn",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNVUU4SEMzWXR1eTBLZTNFVXdBMk9nR3lIRDVoVWxwZUlfNm56VlhaUkV3Tkl5OTZYanBKZEwxUk03bzBkUjZBSmNjaUUzelh0Y3FGWXVMblFNWGJtSVpiY25jNW5GbjYxVzY0TC1fVTdUVlY3TkdEZWpfNU4xLVcwU3lCVjJpZm9RWTY5SlB0b0NOWndaN3BIYjdaVmNPbFpQdVpGaTZ6ZUJ4MDhtMUcyTms2WlM?oc=5",
+          "publishedAt": "2026-09-07T08:30:09.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 98,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": -24,
+        "mediaTone": -24,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": -5,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 38,
+          "p24": 54,
+          "p72": 67,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-kvfg08",
+      "headline": "ET WLF 2026: Aditya Birla Group unveils $30 Billion investment plan across key businesses",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This may alter Aditya Birla Group's capital allocation, ownership or strategic growth trajectory.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Corporate",
+      "entityIds": [
+        "abg"
+      ],
+      "publishedAt": "2026-08-22T07:00:00.000Z",
+      "updatedAt": "2026-08-22T07:00:00.000Z",
+      "sources": [
+        {
+          "name": "The Economic Times",
+          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOZ1dyNlRWSnVyel90VGM0MTZVRFFJdHFmM2ZUdWhFNnNoMU9pZkg2eWh0WUs2UlVqY1pWR3pFVjZINW5EZjZPUmpIQUppSjQ2OW1oQzAxNVN2SkxsQnJaazJIMXdBU0kyZ20xN0NMQXNHWU1LbE9JbVRJQjgycEZXRmNZLVBVTUlFLXhYQVBjWjcxT2V2c0tHWE9hMmM0Wml1bjd6UnpDbHFqajlYVGhaQldjdXh4VlA1SHd0enJrNjRwM2VNQzQ4Z3JDYmFyVUpaN1Zpam8yOTNyRmdPRWxOV2lqd0rSAeoBQVVfeXFMTzRnTWlQYk9hcmdlQ0ZUUUMtVlp0YmtHZS1LX1U4elVPUzlmZjdETWI4bGI2M0NMcmNranpUaGtvUEdxLUhzVjBWZlZXeVhoa0lNc19Pc2tWdkRSbkZ5LWxnZkJxSnRBb1U1Vi16aVpNN2hCUW8wSzRSaGRsS3d2SHVhRE5fLTlGN0dWbXRIRzR3dUhRU0lKVmdzdzZzMFFVelZ4dzEtVmVXbk5BYnI2SHp2TXJCRm5nSXoyVkJSaXpsYkdLTXRlYi1HelJIWEdIYzl1UmxRTWRPQTl2N3IxbnR0OVg3a2pvY2dn?oc=5",
+          "publishedAt": "2026-08-22T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 96,
+        "certainty": 68,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 14,
+        "mediaTone": 14,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 16,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 41,
+          "p24": 59,
+          "p72": 70,
+          "drivers": [
+            "high strategic or reputation consequence"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-ws6m92",
       "headline": "Telecom sector needs periodic tariff rationalisation for survival: Kumar Mangalam Birla, Vi Chairman",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1776,9 +1640,9 @@
       "live": true
     },
     {
-      "id": "live-1bwaosu",
-      "headline": "Vodafone Idea को ₹7,000 करोड़ का कर्ज दे सकता है SBI, जल्द जारी होगा मंजूरी पत्र",
-      "summary": "Published coverage across 7 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "id": "live-sr04o1",
+      "headline": "Vodafone Idea के ₹35,000 करोड़ कर्ज का रास्ता साफ, SBI की अगुवाई में बैंक देंगे फंडिंग, शेयर में आई तेज़ी",
+      "summary": "Published coverage across 6 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Vodafone Idea Limited (Vi).",
       "bucket": "must",
       "status": "strong",
@@ -1789,15 +1653,6 @@
       "publishedAt": "2026-08-19T07:00:00.000Z",
       "updatedAt": "2026-09-15T06:09:24.000Z",
       "sources": [
-        {
-          "name": "बिजनेस स्टैंडर्ड",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOTHdlampLMWl1M3lKUUV5SDE4MW8zREJBeDNxb1FmLUc5MmZlc3lqVDRrZXIzU2tKQ2w5UDluS2tqbWsza3ozU2FoQVpaVllub1dCeWd5TkV0TEZBWmZVSVBSZU5PSnJ2OFlud29QeVJEMU1ZZFdkQ2duV01ZbFItY2U3bkdZNndNMWNiQmNOcVY5aGw1QUJxZzUzSjhlZExCb0hWa2xBVURUQUp2d2tJQ21oSkhSdjc40gG8AUFVX3lxTE5uUUEwdDVEV3BlN295NkJGS1JfSmF4OWE3NzNPTXlNc3Nhdi15a0xZM0JpMFhxWjV2aW9jWENzaEhQQU1UTmFRY2F5TkJUdUFhNzk4OG9TWDZkVjZ5Y0lMc2I4Y0swZmVaM2h3VTEtX1RpUjdXYURXeUMyS2F4SEVfQlBBUTVTSjZIZl9rX3dVeWo1RC1XdjVrYkFIVHpXTU1CUWNnV3lhQnVfUUdQTk5tMDFCd3pQQkkxczdt?oc=5",
-          "publishedAt": "2026-09-14T16:11:17.000Z",
-          "tier": 1,
-          "provider": "Google News IN-hi",
-          "channel": "news",
-          "official": false
-        },
         {
           "name": "The Economic Times Hindi",
           "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxNa05wUkxIRWgxODEzU3N3WnRUQ21OcDVRNDVFRTFLQ2lRWEZ6U3daMUliOUJxWTZQbU1VWXFpMm1BYUF1ZV9UUzdwZjJCOFQ1M2NmMENuQkRYMWM1ZGZVcWRIR0ZBR3R2dXVvNndkcVdpdnRhZy1KM0FyWTctdm1kY1hqQm0xRERXeFd0OG5TODlXNzFBQkw0aGZ4NWdwU2RnQXFCTzhCbG1SeS10UVZEUUtXcUhwcDRiZ1FtWGtuRGZ3eHNWQzNJX09rYnV4RjEtcnk0OENtSEJoV2ZTczBGWjRmUjZSOUR5ZzJ2LVBob0tpU2o1T1RMSNIB_gFBVV95cUxQTDJQdzZQRS1PRnlXRW5DdWNwMGdrTC1UTVljZ253SGZvSDhmeldPZHBzR3laamxkN3A0amluMVZLd0FiRW1FbnRfWDVfT3RmRlU5N0txYzhmOU0zSm9QeXI4NkEzRUVDXzIzRWdQcWQxZXRySkRMUUFQb0hfUi1vckpPa3F1eGZadnFWSVZNd2ctVzhCNUViSXNOWVR0NW9BelB4V1pGTnhueVAxMVdubjNYR0JmZFY2UVZvWGcxWFBjN3QxYWpOSUx1LUw3YzRzSVdGQ0NhVDBIRHUtREFhQ2xqbTZ6T21yaFNYUWtod0VkQ0RFMmFqb09FSXlXZw?oc=5",
@@ -1862,11 +1717,11 @@
           "official": false
         }
       ],
-      "sourceCount": 7,
+      "sourceCount": 6,
       "intelligence": {
         "materiality": 88,
         "certainty": 76,
-        "momentum": 48,
+        "momentum": 43,
         "trendChange": -100,
         "sentiment": 0,
         "mediaTone": 0,
@@ -1880,14 +1735,14 @@
         "reputationImpact": 7,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 63,
-          "p24": 83,
-          "p72": 88,
+          "p6": 61,
+          "p24": 80,
+          "p72": 86,
           "drivers": [
             "broad independent-source pickup",
             "high strategic or reputation consequence"
           ],
-          "posture": "ACT NOW"
+          "posture": "PREPARE"
         }
       },
       "flags": [
@@ -1955,6 +1810,101 @@
       "live": true
     },
     {
+      "id": "live-1etjmur",
+      "headline": "Metalshub, Hindalco launch digital bidding process for spot alumina sales",
+      "summary": "Published coverage across 5 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "Coverage is accelerating across independent sources and may become more consequential even if the underlying facts remain unchanged.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "M&A",
+      "entityIds": [
+        "hindalco"
+      ],
+      "publishedAt": "2026-09-15T10:00:00.000Z",
+      "updatedAt": "2026-09-15T21:12:59.000Z",
+      "sources": [
+        {
+          "name": "BusinessLine",
+          "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPNWF0NC1OUWs5THJDT0pJZmdMcTU1NnlxWG5WbGhWQS0zT181UW4ta2xVUmNxME12YTNvQ19XQUJGUG5DVEpCSmxaNFFKQjBqamY3c1h2ZF9XV0ptSXFsZWpSWm1hdVpybElScm0tRzV0OThVaTk4MTdjQ29LWlM1QXJGNkI2RDNHUzdHR2RqcEJkQlNydk1zT29UMkJHSG1RSXFzajFFd0U2VHM1WUdub3BtZWlydlpWRFNIdVF5X2FadU1GZzRqaHowUmUwak9Yc0M2Y1JaSk5uTnFH0gHcAUFVX3lxTE81YXQ0LU5RazlMckNPSklmZ0xxNTU2eXFYblZsaFZBLTNPXzVRbi1rbFVSY3EwTXZhM29DX1dBQkZQbkNUSkJKbFo0UUpCMGpqZjdzWHZkX1dXSm1JcWxlalJabWF1WnJsSVJybS1HNXQ5OFVpOTgxN2NDb0taUzVBckY2QjZEM0dTN0dHZGpwQmRCU3J2TXNPb1QyQkdIbVFJcXNqMUV3RTZUczVZR25vcG1laXJ2WlZEU0h1UXlfYVp1TUZnNGpoejBSZTBqT1hzQzZjUlpKTm5OcUc?oc=5",
+          "publishedAt": "2026-09-15T11:01:27.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Bitget",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFAtOGNmcy1tcHZCa0Mta1dwVkRYNGh2WTdaMjc5VEdQd2JZUnZFVWRfZVhQOUVidnJ6UnhNR3lDNEhPUUVCQWgyLXVVc090N0JWcGd6U2pSX2dKcTNZcjlQZGpFZ9IBY0FVX3lxTFAtOGNmcy1tcHZCa0Mta1dwVkRYNGh2WTdaMjc5VEdQd2JZUnZFVWRfZVhQOUVidnJ6UnhNR3lDNEhPUUVCQWgyLXVVc090N0JWcGd6U2pSX2dKcTNZcjlQZGpFZw?oc=5",
+          "publishedAt": "2026-09-15T21:12:59.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "KITCO",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPMTVpNFJva2pUbHdaQzFvVFFxeEQzSDlYOURlajBOTlJXcmRGdGNXRFg1VVp4RG5lR280UHpreDNBdko3aTlBbGU2bXZsbFZXUXNwVDZpNlVzUGJCSWdBZnYyXzBjYzNyUHRmT3k3LXpSMi0xeURqeXFvVWhWMUEzYXZVUVNmN2ZLazFXT1J3THFyNUNuMHVsbUdoTWc2VllUVmFrN3BYb3NhbUJXVXBFUWpPWThwVzN2RU9r?oc=5",
+          "publishedAt": "2026-09-15T18:28:43.000Z",
+          "tier": 3,
+          "provider": "Google News US-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "AL Circle",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSkJ1T3FMeE4xZ25DLVdFa3c2N0UzTmRwSURWYjluNmtjNEJpWERfYjVYMTBmXzR1Wng2bVdpSXo0ZmJfSGdsYWctNi0zdGJSTWg4RGVzTk80Q2dBTlRPdWs3MFFVUDBRTTFZWERmQkZiVWhrRVNYVWh0Skc1OFd4aWZMWnZQVHRJNjItZWJPa3FlNXA4WnVtMGE5d0lCdzBNTEc5eWhkYlBGelFD?oc=5",
+          "publishedAt": "2026-09-15T17:17:40.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQUGNzT1U1X0RveFRDM2ZMQm83aTJZZkU5NWpkdVZZSkZTSjVsWlVVQi1zZUgwMkl1OWhONWc1ZVZBZDFsamhxN2RxdTdYYk1RSEVtSTA4UVZEQlpjWDh1Z2F4X2pDRUljVlhKMVotMS1zTVpjRFltS3ZEMEJPSnViQ19ZZDdycFNnY1RXV3ktZEIwaS1hZGdWY2hXWkVaZjl2M0ZWT0NyWWpHeDNBNGw3V1M0X2VEN1o1THc4ajBxVW5TNjZLNnJHengxQ0ZoQ3VSMGhXdmwtTDJQQQ?oc=5",
+          "publishedAt": "2026-09-15T10:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 5,
+      "intelligence": {
+        "materiality": 86,
+        "certainty": 76,
+        "momentum": 71,
+        "trendChange": 50,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 10,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 71,
+          "p24": 88,
+          "p72": 91,
+          "drivers": [
+            "rapid media acceleration",
+            "broad independent-source pickup",
+            "high strategic or reputation consequence"
+          ],
+          "posture": "ACT NOW"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-ndq6jb",
       "headline": "Delhi court dismisses UltraTech appeal in cartel probe",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1969,7 +1919,7 @@
       "updatedAt": "2026-09-09T07:01:00.000Z",
       "sources": [
         {
-          "name": "cemnet.com",
+          "name": "CemNet.com",
           "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOVFpYOUR3QUdmaXZqbjJ0X2k1MFozNXRwR0llYXFnZlVmRXpabUVlckh3VGFtUDNVLUJReDd4c0FHZDY1bzhnNzV2V3BlWm9qZUdNNGdVUXNGTG4wV0tPWGw2OVJBX3VsSWRZZDZuV1hBOXYxdUM0UFVTT3pOMVNscXktTXVhMFhaMnNaZ0g2S0tDeG9HNXRzSEdYeEJCOTBiY3c?oc=5",
           "publishedAt": "2026-09-09T07:01:00.000Z",
           "tier": 3,
@@ -2013,24 +1963,24 @@
       "live": true
     },
     {
-      "id": "live-hf90e8",
-      "headline": "Ananya Birla & Aryaman Birla",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "id": "live-e2ts10",
+      "headline": "Aditya Birla Capital - 13 midcap firms deliver over 25% profit growth for two straight quarters; shares surge up to 118%",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This could affect Aditya Birla Group's regulatory, legal or financial position and merits verified senior-level awareness.",
       "bucket": "must",
       "status": "strong",
-      "category": "Corporate",
+      "category": "Regulatory",
       "entityIds": [
-        "ananya-birla",
-        "aryaman-birla"
+        "abg",
+        "abcl"
       ],
-      "publishedAt": "2026-08-21T18:50:57.000Z",
-      "updatedAt": "2026-08-21T18:50:57.000Z",
+      "publishedAt": "2026-08-27T07:00:00.000Z",
+      "updatedAt": "2026-08-27T07:00:00.000Z",
       "sources": [
         {
-          "name": "fortuneindia.com",
-          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9lbm8wQmtMWTVRZy1UU3RkNkIwSXNvaHRkS1JuS0xkR1A1NWx0aFNNUHhLNEZWazRvQjd3Y0ZwUHVCY1RHUU90bjlOaklId2pYbEVwTExFTzNsY0t4N2g0UDFKS3ZEam5jWVRBaHV4QQ?oc=5",
-          "publishedAt": "2026-08-21T18:50:57.000Z",
+          "name": "The Economic Times",
+          "url": "https://news.google.com/rss/articles/CBMilwJBVV95cUxOSVByd2kyX1l6OUQxN01zT3UyTEFPZ1p0OFFtRWF6bHlXRFV0RWZUdkhGX1ZmRFdUZE1KaGRQZXA3Wng3VmZhTWRMZWhYYVJiM0MzOThJOW5LWHlDa1NmOUQxbXF4czB1OFR4bDU0X0lrRjlhUi1lTjUxVEpJa254dW9aQk5jQkgzSmtYeWl6dktfdVh5SUlnaTdnQkh4ZFZoUVVIR0tDZHlwZTdsTVJqUHA4cWliQjZpTGdxcXpiM2xpclBvOXVZaVZYUDFTX3lzQzhKSlh4NTAxR1NKakJkVW9XLU55eTM4VzJ3VDJUaTlZUjdNMzlza0FBenJuUzNpTWJWYjNXekpuX3dxQ1BKdVVGTlFTeDA?oc=5",
+          "publishedAt": "2026-08-27T07:00:00.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -2043,8 +1993,8 @@
         "certainty": 68,
         "momentum": 14,
         "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
+        "sentiment": 21,
+        "mediaTone": 21,
         "publicSentiment": {
           "score": null,
           "sampleSize": 0,
@@ -2052,102 +2002,16 @@
           "confidence": "unavailable",
           "coverage": "No open-public conversation samples in this event."
         },
-        "reputationImpact": 6,
+        "reputationImpact": 18,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 49,
-          "p24": 70,
-          "p72": 78,
+          "p6": 36,
+          "p24": 51,
+          "p72": 65,
           "drivers": [
-            "high strategic or reputation consequence",
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "PREPARE"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1etjmur",
-      "headline": "Metalshub, Hindalco launch digital bidding process for spot alumina sales",
-      "summary": "Published coverage across 4 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Coverage is accelerating across independent sources and may become more consequential even if the underlying facts remain unchanged.",
-      "bucket": "must",
-      "status": "strong",
-      "category": "M&A",
-      "entityIds": [
-        "hindalco"
-      ],
-      "publishedAt": "2026-09-15T10:00:00.000Z",
-      "updatedAt": "2026-09-15T18:28:43.000Z",
-      "sources": [
-        {
-          "name": "BusinessLine",
-          "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPNWF0NC1OUWs5THJDT0pJZmdMcTU1NnlxWG5WbGhWQS0zT181UW4ta2xVUmNxME12YTNvQ19XQUJGUG5DVEpCSmxaNFFKQjBqamY3c1h2ZF9XV0ptSXFsZWpSWm1hdVpybElScm0tRzV0OThVaTk4MTdjQ29LWlM1QXJGNkI2RDNHUzdHR2RqcEJkQlNydk1zT29UMkJHSG1RSXFzajFFd0U2VHM1WUdub3BtZWlydlpWRFNIdVF5X2FadU1GZzRqaHowUmUwak9Yc0M2Y1JaSk5uTnFH0gHcAUFVX3lxTE81YXQ0LU5RazlMckNPSklmZ0xxNTU2eXFYblZsaFZBLTNPXzVRbi1rbFVSY3EwTXZhM29DX1dBQkZQbkNUSkJKbFo0UUpCMGpqZjdzWHZkX1dXSm1JcWxlalJabWF1WnJsSVJybS1HNXQ5OFVpOTgxN2NDb0taUzVBckY2QjZEM0dTN0dHZGpwQmRCU3J2TXNPb1QyQkdIbVFJcXNqMUV3RTZUczVZR25vcG1laXJ2WlZEU0h1UXlfYVp1TUZnNGpoejBSZTBqT1hzQzZjUlpKTm5OcUc?oc=5",
-          "publishedAt": "2026-09-15T11:01:27.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "KITCO",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPMTVpNFJva2pUbHdaQzFvVFFxeEQzSDlYOURlajBOTlJXcmRGdGNXRFg1VVp4RG5lR280UHpreDNBdko3aTlBbGU2bXZsbFZXUXNwVDZpNlVzUGJCSWdBZnYyXzBjYzNyUHRmT3k3LXpSMi0xeURqeXFvVWhWMUEzYXZVUVNmN2ZLazFXT1J3THFyNUNuMHVsbUdoTWc2VllUVmFrN3BYb3NhbUJXVXBFUWpPWThwVzN2RU9r?oc=5",
-          "publishedAt": "2026-09-15T18:28:43.000Z",
-          "tier": 3,
-          "provider": "Google News US-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "AL Circle",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSkJ1T3FMeE4xZ25DLVdFa3c2N0UzTmRwSURWYjluNmtjNEJpWERfYjVYMTBmXzR1Wng2bVdpSXo0ZmJfSGdsYWctNi0zdGJSTWg4RGVzTk80Q2dBTlRPdWs3MFFVUDBRTTFZWERmQkZiVWhrRVNYVWh0Skc1OFd4aWZMWnZQVHRJNjItZWJPa3FlNXA4WnVtMGE5d0lCdzBNTEc5eWhkYlBGelFD?oc=5",
-          "publishedAt": "2026-09-15T17:04:43.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "TradingView",
-          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQUGNzT1U1X0RveFRDM2ZMQm83aTJZZkU5NWpkdVZZSkZTSjVsWlVVQi1zZUgwMkl1OWhONWc1ZVZBZDFsamhxN2RxdTdYYk1RSEVtSTA4UVZEQlpjWDh1Z2F4X2pDRUljVlhKMVotMS1zTVpjRFltS3ZEMEJPSnViQ19ZZDdycFNnY1RXV3ktZEIwaS1hZGdWY2hXWkVaZjl2M0ZWT0NyWWpHeDNBNGw3V1M0X2VEN1o1THc4ajBxVW5TNjZLNnJHengxQ0ZoQ3VSMGhXdmwtTDJQQQ?oc=5",
-          "publishedAt": "2026-09-15T10:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 4,
-      "intelligence": {
-        "materiality": 84,
-        "certainty": 74,
-        "momentum": 72,
-        "trendChange": 100,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 10,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 70,
-          "p24": 87,
-          "p72": 91,
-          "drivers": [
-            "rapid media acceleration",
             "high strategic or reputation consequence"
           ],
-          "posture": "ACT NOW"
+          "posture": "WATCH"
         }
       },
       "flags": [
@@ -2172,7 +2036,7 @@
       "updatedAt": "2026-08-28T07:00:00.000Z",
       "sources": [
         {
-          "name": "fortuneindia.com",
+          "name": "Fortune India",
           "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNT1R6TEQzck5pa05tcWY2SXJzWm1JM3NkcXlCWXFlcjdSemYxbzN0SllCWEliY3BjRlp5ZHVhX2hTZEY5MnpYbFVxRFNDb19WUW50a19tZEdLSEM0Vnp0VkVuUUxXdFdfY1dVUTQ0SUw5UnN4UGQ0cjJaNDFQT1pualY3RENXRkx3N1ZjQzlRYjJFbnpPRzVXUi1zanNwRnAyMWVRa2NBYzNBb2FLTHdRd0tYWFRlQmhZaWtEUWN0aEdDeE5fWWx1Q2M5azEwcnQ0eGowdk9n0gHjAUFVX3lxTE1XSWJQMGx3OTU4ZDJ6ZGZ6RnpIdS1nNTdBSFRrR1BUYVdTMzhFMF9hX3RiR05GUkZMTTFTUUppaXdNMElfNkk2MnVFTENnT1QyY3BKcG1OVThRZUxRR2VqNnM1b1JvS09QaEFPYXRBR3lnODNQVzdPTHlBSk9qWldGWVJrbzMweURVenBiUjBLRG5fZVA5MzVZRjdOTG9EajhCTkluaHJobFBiRnlTbGR5dXJLc1hfRk00WlgtRDFMeEFFektKMHpiV1BQY3lfMXktSjVSbFBJVVhSRUYzTjZpX1U0?oc=5",
           "publishedAt": "2026-08-28T07:00:00.000Z",
           "tier": 1,
@@ -2365,7 +2229,7 @@
       "updatedAt": "2026-08-26T07:00:00.000Z",
       "sources": [
         {
-          "name": "fortuneindia.com",
+          "name": "Fortune India",
           "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxOd0pjTG0tUXB4RGVZcGJNZWM0Rllsd3IzVmNGRWM2QTltME5WN1BJbzVfbmpUVFFkdXRxR1B6UHJ4MkJ6Yms0dUJBQnRkMXk5dllQMkNHZTNBVzFlcmV0NktFZlc0Sl84R2dGNTBGSUVQa1M4c0hKYTVZSktSV09nWE90Sm9hSHFfeElJQlduQlM2aG10U3dUTjVORTJFSW12OUpQcUVRSkMtbUNHV3JWZWZWS0hTMlJsSS0zOHZBVUFONjFNZUctOU0tX01CcmlZaG5Xa18yRlRCZzVyaGJ0LThXTFBTRnVZd3BhR3F3NNIB_AFBVV95cUxOU21ROFZqbjV4aUtncjhYLWVReHJNUHYwcFB4OERodXVaemIzSXZyUDBtQlVxRExaeURCbVh5WEhjSEZEM3gzZnhKb2lBTC1IblpyZUtSRnZZaXZjOHBkdnNNblgzVGxCY2xFZXFsQnJVWHVpdTlZRDhzY1hfUlNzUjk0YkFUb2lFVzhnRXhEbVNvZFVCNDdreGd3LTVYUGJ0NmNfQXQ2UlA1YTFCVzN3dlJwWExHQjFFb1p5QS1POF81Mll3ZC1JWFBRMmZ5RUQ3ZmtEQks0aU85cUJGeDFCVjY0ZzNNYlFISk1obktDUTFhSjZJSXRqQ3dvbnA?oc=5",
           "publishedAt": "2026-08-26T07:00:00.000Z",
           "tier": 1,
@@ -2398,6 +2262,81 @@
           "drivers": [
             "high strategic or reputation consequence",
             "promoter or senior-leadership involvement"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-tl56ka",
+      "headline": "Aditya Birla Group gets Rs 24,000 crore bank commitments for Shell deal, 70% more than planned",
+      "summary": "Published coverage across 3 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Sustainability",
+      "entityIds": [
+        "abg"
+      ],
+      "publishedAt": "2026-09-03T07:00:00.000Z",
+      "updatedAt": "2026-09-03T14:58:30.000Z",
+      "sources": [
+        {
+          "name": "bfsi.economictimes.indiatimes.com",
+          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQVEF4YXk2RVJVb1k4aEMtN0VxYmw5TXpiR2dia01oNFNXcVZFY2ZUQXpQbld6UkRhM2RqV1ZRSG1uR1FEYjZyRTlNTmhkdnJoQUZiVHdiN2N5ZWY1N2tJUENSQ0lhR0xNSEZKV3RZQ1hfSUlUQ0J2SmNReFlTN25BTmVQOGpDS0plbFV6SXJIZy1EanRpMnk4ekxicnRTeE1EVVJNVmh6eU5TTk9kcW5CaE96VV9NMk9aUzRZRXhmTF9Yd0JaZFo0SW9oWGNNWWpuOE5obFBJZ2dzeDJ6ZnJreVhGYjAzS28?oc=5",
+          "publishedAt": "2026-09-03T08:38:03.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TechStory",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQclZ1LVZFdi0zcHhERkkyMFpGVF9qWkxGWFpoR0x5WFM1VWw0V0VmUmlWNzJ1Z2ZNaUUtYzd4MlB6cHpSSXRabXNtSF80TUlDWWhoM2FTSkxMQWZOeGpXaDVmWXduR1FTcjByRGQ0c3F3bm5uQkdObXpBMTFWOUNLbkUxWTVwdm5hNW5mWTVCdmE0ZmQ4bS1oalBCb2l4d2tTU0wzNnhQQU5VSmI0X2c?oc=5",
+          "publishedAt": "2026-09-03T14:58:30.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "outlookbusiness.com",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOaER4Q0NHRE5acklBbDFuZ1lIMG5oUWRyNXVNOWZvWFF4STZsRktnN25jM3dLNzdLVWdJVW1BMlEwS1JfNFA4VzVWd1pudWFHRHRQY2NjaFk5MGMtNGNKTXBZX2lXWU5YQUpGWXJOTTBZbUdacHVYeHFpOXNjaUQtTFluSXZZS2VkSzk5ZGZlUF9TZ2FvOTJUa1FMejlqajBDSUlrbW53d2lXTmFQSzBmT2NZeVJ2cFZDN3huZm5RTjLSAc4BQVVfeXFMTXJIV29UVzJlOUxrdVlVS1ZrUnUyZUU0V2c2UkcxbXFyVHFXcEwzV3daVUM1LXhScHRDSUYwRHlZQkFpWGl3QUxaTkVVczhwT1ZPYkRPYXlIVzNNLUNuM1FteDJEcFpHbVdwSkhvekVPOUNOaWxqcndRb0poVGxNZEJmb0lSZ1hWbmdjSXBZTURTbEhPOGFWWk5zR1dkcERBVnRXeFFfeU54dXFURGV5dElFWDBZUzM2QjVyTFMwTGxMWW84NmdBU3JWRURnY1E?oc=5",
+          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 3,
+      "intelligence": {
+        "materiality": 81,
+        "certainty": 72,
+        "momentum": 26,
+        "trendChange": 0,
+        "sentiment": 9,
+        "mediaTone": 9,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 11,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 44,
+          "p24": 60,
+          "p72": 71,
+          "drivers": [
+            "high strategic or reputation consequence"
           ],
           "posture": "WATCH"
         }
@@ -2597,6 +2536,64 @@
       "live": true
     },
     {
+      "id": "live-1o4ea45",
+      "headline": "Aditya Birla Group Enters Wires and Cables Market With Rs 1,800 Crore Ultravolt Bet",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Corporate",
+      "entityIds": [
+        "abg"
+      ],
+      "publishedAt": "2026-09-05T07:00:00.000Z",
+      "updatedAt": "2026-09-05T07:00:00.000Z",
+      "sources": [
+        {
+          "name": "Dalal Street Investment Journal",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPQThNUW4yWEo4U3k0OE5fNzNKaW5YR2JkdjJCcGJ6ZVBsanRaUVJTZFBqMFlfdENZRmEyZjJ2QTVqWXVzbUlRM3h6S2Y4VC1uNTREVWRCcm9EbHMwOE1LNVZ4bVJMTXhHNzZaSldWU3RlYkd4X0dFVVNnZm8wUG9EelVxMVFZU0w2THlERVBVLW5Ta2g0S2IzLXhyRURjakRKNFljelJWXzR4WUdObU5aRnc4WkxZUk92dGpCd0RWbnU3amhMZktOdGthRQ?oc=5",
+          "publishedAt": "2026-09-05T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 80,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 14,
+        "mediaTone": 14,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 13,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 28,
+          "p24": 39,
+          "p72": 56,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-34224p",
       "headline": "UltraTech to acquire 26 per cent solar SPV stake",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -2772,6 +2769,63 @@
       "live": true
     },
     {
+      "id": "live-n11noq",
+      "headline": "Pilani Investment To Sell UltraTech Stake Worth Rs 19.09 bn",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This may alter UltraTech Cement Limited's capital allocation, ownership or strategic growth trajectory.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "M&A",
+      "entityIds": [
+        "ultratech"
+      ],
+      "publishedAt": "2026-08-18T07:00:00.000Z",
+      "updatedAt": "2026-08-18T07:00:00.000Z",
+      "sources": [
+        {
+          "name": "Construction World",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPaXlVR0Z1a1RiVG5TNkYyUHRBWEJkX0g4blluODRFaS1zeDlTVWJkSEg3TWljeXBaOHpvZkdqd0ZKYnc2SDBZSGgwR1piYmdLUHVHSjY1bDJ5dEdxRnhXR01hOUxhWXNRZGdUd281RkQxeFdlYjdvZkhKWTQycnlWTFF2RmZHTzk1cU1yLUg1b0J4WkhWcXdUNF9WZ1BKYW4tUjVhT0QySi1QRUFWZ09YN1N6Z3Y3WmV6REYwY1g3MHBtNWdwLXFRRHFXOA?oc=5",
+          "publishedAt": "2026-08-18T07:00:00.000Z",
+          "tier": 2,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 75,
+        "certainty": 56,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 14,
+        "mediaTone": 14,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 12,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 28,
+          "p24": 38,
+          "p72": 55,
+          "drivers": [
+            "high strategic or reputation consequence"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-1pmaa6w",
       "headline": "Vodafone Idea Q1FY27 Results: Revenue up 6% to ₹11,689 crore",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -2800,7 +2854,7 @@
         "materiality": 74,
         "certainty": 42,
         "momentum": 17,
-        "trendChange": 100,
+        "trendChange": -100,
         "sentiment": 0,
         "mediaTone": 0,
         "publicSentiment": {
@@ -2993,6 +3047,64 @@
             "promoter or senior-leadership involvement"
           ],
           "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-49eym8",
+      "headline": "Bharti Airtel Vs Jio Vs Vodafone Idea: Who Won India's July Mobile Subscriber Race?",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Vodafone Idea Limited (Vi).",
+      "bucket": "watch",
+      "status": "strong",
+      "category": "Financial",
+      "entityIds": [
+        "vi",
+        "bharti-airtel"
+      ],
+      "publishedAt": "2026-08-28T07:00:00.000Z",
+      "updatedAt": "2026-08-28T07:00:00.000Z",
+      "sources": [
+        {
+          "name": "NDTV Profit",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPZWpqNkk3aERwbnMwN1Q4anlMWW41LU82NFh1M3c1N0FFU0J4MlF1LVl6dnZ0U2tIbktGN3phWEc1VkFBbWg2RGhxQzk5ZjgyYmVSQzRTQURDR2NsT0NsTVhSd2xKaEU4dGtsbG45SzByOTZEeHR1QV9ISUttMjRSbFg1ZWxTZXZOWGNEOW83eWctbndZRVJzc2RfT1Rnb2d5Q1VQb1dMWHZ1OUxFVWZlNFBqdkwyTHdrUlY1TmhTeWpwbWfSAcsBQVVfeXFMUGo4UC0zVjVwOGl2dDJPdFk5TnBTeWlORzE5bFhaWmwxSEU3c3g0aC1MQXdmVGNQSFZDbnRXRU91eWdaeDVrU3piVzlIRHo2NzZKUDZpZXVBNlFQd1pVU2tsYnZSSEFYUXIxTmRfTlZTYjFqd0RadmFqWGtESzFiX3NEX1FYVWlUSFZoS0hWcGFKVTlLalZfQlpXX2o5OVlMVGI3RE9oMXdEZ2tMMTlnY2pEb0huUWdvSDl1YnpiOTFhUk1DSUFjMG1KdXM?oc=5",
+          "publishedAt": "2026-08-28T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 72,
+        "certainty": 68,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 14,
+        "mediaTone": 14,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 12,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 28,
+          "p24": 39,
+          "p72": 56,
+          "drivers": [
+            "incremental relevance with limited momentum"
+          ],
+          "posture": "AMPLIFY"
         }
       },
       "flags": [
@@ -3640,46 +3752,37 @@
       "live": true
     },
     {
-      "id": "live-1idg4l5",
-      "headline": "India's UltraTech Cement enters wires and cables business with $190.5 million investment",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This may alter UltraTech Cement Limited's capital allocation, ownership or strategic growth trajectory.",
+      "id": "live-1xo58k6",
+      "headline": "TRAI levies ₹2 lakh on Vodafone Idea for failing quality of service standards",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
       "bucket": "watch",
       "status": "strong",
-      "category": "Corporate",
+      "category": "Regulatory",
       "entityIds": [
-        "ultratech"
+        "vi"
       ],
-      "publishedAt": "2026-09-03T07:00:00.000Z",
-      "updatedAt": "2026-09-03T13:32:03.000Z",
+      "publishedAt": "2026-09-15T11:38:06.000Z",
+      "updatedAt": "2026-09-15T11:38:06.000Z",
       "sources": [
         {
-          "name": "Reuters",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNV2NDS3pHY3ltNS1GU3BjVVF5a3d2el9QMl9UY0VjU1dyTVVnLTBRRENndHR3djY3cnVhQjU0aHgtWWVuV05pVFVEYlhRT3lyUkNMeHRHMV9PSnBGTzRhd2hKZk1oVEc1dHFLQmNJMW1QWXBnNDgxN1labVZLTlVRSC1kTWprOVRrZ2QzZjQtY09KdjF0Z1hJWEFzZGtMNW1uRXpVMWQ3ZWlaVm15T3ItbGJBVVhFVnpaUlE?oc=5",
-          "publishedAt": "2026-09-03T07:00:00.000Z",
+          "name": "BusinessLine",
+          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQeTd4VUI4Um5kM0EweFdlVGZsTFVwT09YMkcxS2p0bTN5dDJoVWpKUHdUYnJsdEo3Z0F4UDM4WUNpZWZ4OUI0M2VzN3VRQVQ2aFM4SHNlbS0yZUFXbEdZLUVEb0RXV3Uyc2N3Z0hvRXI3WkRGekRxNkZjekV1ZmJUT3NpQlhjZDRJZFJWWjlEczllcjVxMU1RXzdTaTFoU2UwanZldmNDVTBBenV5S3h0S0VfczlRQndDLVJuYVRLQTR5cm9QV0VSUDc5cHljZHE4eTY0ZGNURWxDQ3fSAeIBQVVfeXFMUDF1X1BzTHE3eEZlUU9ua2JxbzBQaHVEQ2M4N2haSnRyN21LYWlNbDVoeWM5eVltVlFvUF9mWUQwWFA2Vnkxb1FZU2YzVHVNaFZvM2U2dXE0bXZJblVpNmVCN3BvNE9MMlJqUnlxV2NtaGtUeEZ2emNtLU1SNkdYYTduTVpqZXpOMXJvQ18yeGsxLUwyOG1vU2Y3OTBKSW02bEpVdXFIZElXUkhtVkRWUU5ic2J1ZlFPSUNFeGF4VWs3aWI5OGxmbmtMc2ZvWmZ0aWE5QnllaTVUZkk2TW4yN3NWZw?oc=5",
+          "publishedAt": "2026-09-15T11:38:06.000Z",
           "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "TradingView",
-          "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQTmJPTmYxTzNxY1hhNGdrQ3VBdjJnQl9VQUlhQ0tyZWtvTHFiRW4zQzIxX1RxbVVoOTdQUWp0MUZDQTZFWThuQ2ZpYjJaSVJBZGQ3cDA4YU9aLWhRM01ROXNid1dXdW90d3VsamQ2YkFQZXRWZnF5d3d1N2RDcTBQYlRoaV9EU29RVEhGT0ttRlBmcFpDdnB2ZVRQUE9vSHFxdFNkSGV6NzFYc2haWWxRRkRhYU9CQnBXRDd1NzMxQkgwdUJLVzA5OGhYQmVxQTczMjROZDBYSUtlNnBDZ1ZNdDBFQjRfcnREQmFmTFVB?oc=5",
-          "publishedAt": "2026-09-03T13:32:03.000Z",
-          "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         }
       ],
-      "sourceCount": 2,
+      "sourceCount": 1,
       "intelligence": {
-        "materiality": 69,
-        "certainty": 70,
-        "momentum": 20,
-        "trendChange": 0,
-        "sentiment": 14,
-        "mediaTone": 14,
+        "materiality": 68,
+        "certainty": 68,
+        "momentum": 17,
+        "trendChange": -100,
+        "sentiment": 0,
+        "mediaTone": 0,
         "publicSentiment": {
           "score": null,
           "sampleSize": 0,
@@ -3687,12 +3790,70 @@
           "confidence": "unavailable",
           "coverage": "No open-public conversation samples in this event."
         },
-        "reputationImpact": 11,
+        "reputationImpact": 3,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 32,
-          "p24": 43,
-          "p72": 59,
+          "p6": 27,
+          "p24": 37,
+          "p72": 55,
+          "drivers": [
+            "incremental relevance with limited momentum"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-1necohi",
+      "headline": "Jio, Airtel vs Vi: What are the alleged MNP malpractices committed by Vodafone Idea under TRAI lens?",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
+      "bucket": "watch",
+      "status": "strong",
+      "category": "Regulatory",
+      "entityIds": [
+        "vi",
+        "bharti-airtel"
+      ],
+      "publishedAt": "2026-09-14T12:24:13.000Z",
+      "updatedAt": "2026-09-14T12:24:13.000Z",
+      "sources": [
+        {
+          "name": "Livemint",
+          "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPZC15Y1lZdXZRampXekNDX1g4OWU1MWlQeHJGeWJoMG96NUVkVFlULWVndGRWZEt6M3ZNbG8tTkYyUHEtWjRBSVJhQ193cDh3aHlHVVZ6bnFxemdaVWFHbk1vX0hWWDlkYVk0cVBrcFJoeU5SN0JMaWh2UkFrdHpySnF1MzA0UUVoaGJPb2stZkZfdDhHWjFJZGk4U3pqVl84Wjk4bVJaWlBHTEZhYVg1bW5iTDZtWi16SHJtd1hObEE2NG0yRkhObUNDT0RtaW9Ob3lORURmbC1BRVhsa2ZKeld1UVBpTUtleE5oVU5n0gHzAUFVX3lxTFBKZE85dHBNQVJ4U09Vb3RGLTNCc1pWTjdFSHVUZTRFaDg0OTVJU0JPaVhPcDlHTlpIQVFsRi02Q1B4bEZ2d3dsT2o0LTlHNzF6QXJKcXZka1F5dGt6Y2NkWjJNV0N4MlRnaEFDTlBkSDkyZDZyRTJvNk12dDFSZHNsSFdQamVNa3FVVlV2dzQta0Ezb0hIcGdZM3RmdUQ3eV9yTXgtbWRoRVRnMDRrVU5lcHVwWndjSHFQMzVYb3VKQ2JIMVJ2b0hnc3F6SFJ2NGFwWU9EcHhEaFA3eUsxZWg1d1g3Z2tjeXVrSG1uWFZmZ1hjTQ?oc=5",
+          "publishedAt": "2026-09-14T12:24:13.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 68,
+        "certainty": 68,
+        "momentum": 6,
+        "trendChange": 0,
+        "sentiment": -8,
+        "mediaTone": -8,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": -1,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 21,
+          "p24": 30,
+          "p72": 50,
           "drivers": [
             "incremental relevance with limited momentum"
           ],
@@ -4170,261 +4331,6 @@
         "headline-derived"
       ],
       "live": true
-    },
-    {
-      "id": "live-1pxhj71",
-      "headline": "Vodafone Idea Fined Rs 2 Lakh By Trai For QoS Breach",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Regulatory",
-      "entityIds": [
-        "vi"
-      ],
-      "publishedAt": "2026-09-15T07:05:19.000Z",
-      "updatedAt": "2026-09-15T15:01:27.000Z",
-      "sources": [
-        {
-          "name": "TradingView",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOSHFqajhLb1Q5VGJHMXhJNGxrMTZjR2o1R01sX2Y0NmtEREZGbTdRcTE2bjBiOFNNb21KMnNpS2d6WjFMYnF0ZEdOaTZoLUpjeGRuZzlic1U4b042WVQ3cUZRS3FfVUpFRFlXNWRzU1ZYaktibUVHSXZ6TDY0TWRrck9iUjIwaEVQWlJtWjd4TnFwdmVBVTVmdkFZdGxfZVFaQnhhR0o2dFppbFVUYkE?oc=5",
-          "publishedAt": "2026-09-15T15:01:27.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "scanx.trade",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPVTdIcjJkVTNjVFFPVHYydGRsOWJhNW9PcUpZUXRTV21MT2hnQlBJRDhQMjhwNHo4UWkxRDJ3aUlKRkJObnlNYmtjVDVhMEZaX25xbEViZ1R1SUo4ZFBzQkliMW01TEdGTlpDcDkyNlhnSHNyTkhaWW4xMl9Sbk9zb1V2MUZHZE00SkRkbE13UV9zZlBZQ3JyMzNKUURISFRq?oc=5",
-          "publishedAt": "2026-09-15T07:05:19.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 2,
-      "intelligence": {
-        "materiality": 65,
-        "certainty": 44,
-        "momentum": 44,
-        "trendChange": 100,
-        "sentiment": -16,
-        "mediaTone": -16,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": -6,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 40,
-          "p24": 49,
-          "p72": 63,
-          "drivers": [
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1m4ih07",
-      "headline": "Bay Minette apartment fire leaves several units damaged",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Bay Minette. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The development may create operational or reputation exposure; facts and response posture should be reviewed quickly.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Operations",
-      "entityIds": [
-        "bay-minette"
-      ],
-      "publishedAt": "2026-08-31T07:00:00.000Z",
-      "updatedAt": "2026-08-31T07:00:00.000Z",
-      "sources": [
-        {
-          "name": "Yahoo",
-          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOckN0T0VrMG91bFNLM0RBNmhxYXV5ZVRyamVmbW12bDNRTTdJSldnWTBEeFUtUTlraDBfa1ZSemt3VmRYUE12b3VBMGpZNFZ0ZWlkWENkOFBxbHk0SFdteXgyY1FGZFZBM1l1VUMzazF0MGEwVkdOVDFLaTJ3UU1GRDdSRWZvdzJCazlGaA?oc=5",
-          "publishedAt": "2026-08-31T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News US-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "AOL.com",
-          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNQmpZSkhVSmcxYkUzdXNDcHBqR3B1U1lfV0hMNEo1NGFxWXA2ZzBNcWVITk9hWU9qZGgwelJiV2twb2hiTHI4VlJvdW9Odmg4eVdUY2I3T0p0c1RhQXY5YkFULUc2eXNlTmZMRHJmNmNYY0NkV2h5Y2RPTWxDLXRSRnhLYw?oc=5",
-          "publishedAt": "2026-08-31T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News US-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 2,
-      "intelligence": {
-        "materiality": 63,
-        "certainty": 44,
-        "momentum": 20,
-        "trendChange": 0,
-        "sentiment": -8,
-        "mediaTone": -8,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": -2,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 24,
-          "p24": 31,
-          "p72": 50,
-          "drivers": [
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-qo12gz",
-      "headline": "Hindalco commissions super specialty alumina manufacturing plant in K'taka",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Operations",
-      "entityIds": [
-        "hindalco"
-      ],
-      "publishedAt": "2026-08-27T07:00:00.000Z",
-      "updatedAt": "2026-08-27T07:00:00.000Z",
-      "sources": [
-        {
-          "name": "Business Standard",
-          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNMlViX3dyTlVUU2wwQXpjVHo1N3QtdkpJdmg3em9qN3VQdkRGbjd0NTE5UzA3RWRyVmZpZ19BY05Pa2lpdkNsYk1wYzAwN01nLWtNMmtzSVY0Q2o4ZzdvX2wwdWt2aE9nbE1CazBWTEVyaVk3cF9HV0NfbFhOOG5abDNuMVhLWG9Zb0lkVlFld0pWRnF1NVdVb0hfSVB6aE1aVzEwVGZodThSYkdram1HV3pha214bFcwQjV5QU1fUVZCX3pUMU44UTNpWUJNYW5qYnZtSXE1TFdyUlHSAeABQVVfeXFMTk9yRXpFSEJSSE1laG9XQ0p4aUpkOXdUSlFCQnlGeFF1MlQ2eGN3cm8xeVNEaWctdHBpbDZEdVJzaGNrM1RwNVZmejVLX2k1RzZsSnBxeUFVR1dSc1NuTEdBbUNOaFlrWUVIYnBfbWppOTJwd1d0SU55NHNmdHNmYThQbnJqd1FKVzNMcW5XS2ZNemNhYm1oU3BxSkdRZnByYU9BNUU4TWkxcTFxVXAyWXlxaHBpMHBKNUtFM0VGTTFvWFFEQUYyZVhJODVoeFhoUjJUdHhrRnFFQUMyM3NCRDE?oc=5",
-          "publishedAt": "2026-08-27T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Aluminium International Today",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNM1I0d0ZpR0x1M25kdWNQdG5welpUYlFMSnloS2E2dHBtOGVzdk03S25Xa2pkQ0JReGRQNzV1OTRTWDI3TTcxbXVFUFJzdm51ZlNleHNNdXBKaHdhWFBuVVNMVjJYcjRsUWVNNWgwajFIaWxpRENyS2w0WmlhV0R3WmF3?oc=5",
-          "publishedAt": "2026-08-27T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 2,
-      "intelligence": {
-        "materiality": 63,
-        "certainty": 70,
-        "momentum": 20,
-        "trendChange": 0,
-        "sentiment": -1,
-        "mediaTone": -1,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 2,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 29,
-          "p24": 38,
-          "p72": 55,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-10802fi",
-      "headline": "Hindalco Q4 FY26: Revenue at 781b Rupees, EBITDA Margin at 12.82%",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Financial",
-      "entityIds": [
-        "hindalco"
-      ],
-      "publishedAt": "2026-09-10T22:28:26.000Z",
-      "updatedAt": "2026-09-10T22:28:26.000Z",
-      "sources": [
-        {
-          "name": "scanx.trade",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQenFqUGF0b3ZXcmVyVkdfU3Y5MnROd01sVHlGX3dwUThNZElyVTZzTGduQnBtdUlmeEliaDdWbV9rWFpCMDloUFhLQXZIWmtBQWdLQVpNYkttYlY4a1M3bEJ4YzFxWXBIcF9JSGwzTzRTUUJnSDNRZDdOUURERUU0TVNlcTZaMWstTWExV251c0pROUlHYk13ZXJhMzhkUQ?oc=5",
-          "publishedAt": "2026-09-10T22:28:26.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 62,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 2,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 19,
-          "p24": 25,
-          "p72": 46,
-          "drivers": [
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
     }
   ],
   "entityUniverse": {
@@ -4444,7 +4350,7 @@
     "stakeholderScope": "Regulators, exchanges, courts, ratings agencies, lenders/JV partners, key sector competitors, industry bodies and material government ministries; stakeholders are matched only with ABG context."
   },
   "meta": {
-    "scannedAt": "2026-09-15T18:59:22.548Z",
+    "scannedAt": "2026-09-16T00:49:40.677Z",
     "deliveryMode": "governed-snapshot",
     "providers": [
       "GDELT",
@@ -4510,7 +4416,7 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-09-15T18:55:40.708Z"
+        "checkedAt": "2026-09-16T00:45:51.934Z"
       },
       {
         "kind": "registry-audit",
@@ -4563,11 +4469,11 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-09-15T18:55:40.740Z"
+        "checkedAt": "2026-09-16T00:45:52.027Z"
       }
     ],
     "registryReconciled": true,
-    "successfulQueries": 33,
+    "successfulQueries": 34,
     "sourceChecks": [
       {
         "name": "group-family:gdelt",
@@ -4583,7 +4489,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 78,
+        "itemCount": 74,
         "registryAudit": null,
         "error": ""
       },
@@ -4599,11 +4505,11 @@
       {
         "name": "group-family:reddit",
         "provider": "Open public conversation",
-        "ok": false,
-        "status": "failed",
-        "itemCount": 0,
+        "ok": true,
+        "status": "healthy",
+        "itemCount": 22,
         "registryAudit": null,
-        "error": "Reddit RSS 403"
+        "error": ""
       },
       {
         "name": "group-leadership:gdelt",
@@ -4970,7 +4876,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 17,
+        "itemCount": 16,
         "registryAudit": null,
         "error": ""
       },
@@ -5078,7 +4984,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-09-15T18:55:40.708Z"
+          "checkedAt": "2026-09-16T00:45:51.934Z"
         },
         "error": ""
       },
@@ -5139,7 +5045,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-09-15T18:55:40.740Z"
+          "checkedAt": "2026-09-16T00:45:52.027Z"
         },
         "error": ""
       },
@@ -5261,19 +5167,21 @@
         "error": ""
       }
     ],
-    "rawArticleCount": 1211,
-    "freshArticleCount": 728,
-    "articleCount": 547,
-    "rejectedArticleCount": 181,
+    "rawArticleCount": 1228,
+    "freshArticleCount": 751,
+    "articleCount": 540,
+    "rejectedArticleCount": 210,
     "rejectionReasons": {
-      "no_abg_entity": 141,
-      "routine_market_advice": 27,
-      "price_movement_without_event": 13
+      "no_abg_entity": 153,
+      "weak_public_context": 10,
+      "public_question": 5,
+      "price_movement_without_event": 14,
+      "routine_market_advice": 28
     },
     "eventCount": 60,
-    "publicConversationItems": 0,
+    "publicConversationItems": 1,
     "publicConversationChecks": 14,
-    "publicConversationChecksSucceeded": 0,
+    "publicConversationChecksSucceeded": 1,
     "sentimentCoverage": {
       "media": "Google News, GDELT and official published-source language",
       "openPublic": "Accessible Reddit public-search RSS where available; samples inform sentiment only and cannot create news events.",
@@ -5284,11 +5192,6 @@
         "provider": "GDELT",
         "query": "group-family:gdelt",
         "error": "Source check exceeded 9000ms"
-      },
-      {
-        "provider": "Open public conversation",
-        "query": "group-family:reddit",
-        "error": "Reddit RSS 403"
       },
       {
         "provider": "GDELT",
@@ -5441,15 +5344,15 @@
         "error": "essel-mining-news: official 403"
       }
     ],
-    "windowStart": "2026-08-16T18:55:38.715Z",
-    "windowEnd": "2026-09-15T18:55:38.715Z",
-    "requestedWindowStart": "2026-08-16T18:55:38.715Z",
+    "windowStart": "2026-08-17T00:45:50.190Z",
+    "windowEnd": "2026-09-16T00:45:50.190Z",
+    "requestedWindowStart": "2026-08-17T00:45:50.190Z",
     "windowCapped": false,
-    "snapshotGeneratedAt": "2026-09-15T18:55:38.715Z",
-    "snapshotExpiresAt": "2026-09-15T20:25:38.715Z",
-    "snapshotSuccessRatio": 0.5077,
+    "snapshotGeneratedAt": "2026-09-16T00:45:50.190Z",
+    "snapshotExpiresAt": "2026-09-16T02:15:50.190Z",
+    "snapshotSuccessRatio": 0.5231,
     "snapshotMinimumSuccessRatio": 0.2,
     "sourceCommit": "6b5b0524737ac3d2344c3954426ca7e1fb51d542",
-    "workflowRunId": "35010488395"
+    "workflowRunId": "35041338197"
   }
 }
