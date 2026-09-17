@@ -1,9 +1,14 @@
 name: Diagnose production read-only
 
 on:
+  workflow_dispatch:
   push:
-    branches: ['fix/persistence-health-hardening-20260908']
-    paths: ['.github/workflows/diagnose-production-readonly.yml']
+    branches: [main, 'fix/production-verification-contract-20260917']
+    paths:
+      - '.github/workflows/diagnose-production-readonly.yml'
+      - '.github/workflows/verify-production.yml'
+      - 'scripts/validate-production-progress.mjs'
+      - 'tests/production-progress-contract.test.mjs'
 
 permissions:
   contents: read
@@ -11,22 +16,47 @@ permissions:
 jobs:
   observe:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 6
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Capture public endpoint responses without credentials or writes
+      - name: Preserve exact reviewed source
+        run: |
+          mkdir -p /tmp/production-diagnostic
+          git rev-parse HEAD > /tmp/production-diagnostic/SOURCE_COMMIT.txt
+          git archive --format=tar.gz -o /tmp/production-diagnostic/source.tar.gz HEAD
+      - name: Run all existing and new regression checks
+        run: |
+          npm test > /tmp/production-diagnostic/tests.log 2>&1
+          npm run check > /tmp/production-diagnostic/syntax.log 2>&1
+      - name: Capture each public endpoint independently without credentials or writes
+        if: always()
         run: |
           mkdir -p /tmp/production-diagnostic
           node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
           import { writeFileSync } from 'node:fs';
           const base = 'https://abg-pulse-intelligence-v4.vercel.app';
-          const report = { observedAt: new Date().toISOString(), writesPerformed: false, endpoints: [] };
-          for (const path of ['/', '/api/health', '/api/persistence-health', '/api/claims?summaryOnly=true']) {
+          const report = {
+            observedAt: new Date().toISOString(), diagnosticSourceCommit: process.env.GITHUB_SHA,
+            writesPerformed: false, credentialsUsed: false, observationOnly: true,
+            note: 'Workflow completion means observations were collected, not that production is operational.',
+            endpoints: []
+          };
+          const bool = value => typeof value === 'boolean' ? value : null;
+          const num = value => Number.isFinite(value) ? value : null;
+          const code = value => typeof value === 'string' && /^[a-zA-Z0-9_-]{1,100}$/.test(value) ? value : null;
+          const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value) ? value : null;
+          const stamp = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(value) && Number.isFinite(Date.parse(value)) ? value : null;
+          for (const path of ['/', '/api/health', '/api/scan', '/api/claims?summaryOnly=true', '/api/persistence-health', '/api/progress']) {
             const url = new URL(path, base);
-            url.searchParams.set('diagnostic', Date.now());
-            const observation = { path };
+            url.searchParams.set('diagnostic', String(Date.now()));
+            const observation = { path, startedAt: new Date().toISOString() };
             try {
               const response = await fetch(url, { method: 'GET', redirect: 'manual',
                 headers: { Accept: 'application/json', 'Cache-Control': 'no-cache' },
@@ -35,35 +65,57 @@ jobs:
               observation.httpStatus = response.status;
               observation.contentType = response.headers.get('content-type');
               observation.cacheControl = response.headers.get('cache-control');
-              observation.location = response.headers.get('location');
-              observation.vercelId = response.headers.get('x-vercel-id');
+              observation.bodyBytes = Buffer.byteLength(text);
+              observation.bodySha256 = createHash('sha256').update(text).digest('hex');
+              observation.deploymentPaused = /DEPLOYMENT_PAUSED/.test(text);
               if (observation.contentType?.includes('application/json')) {
                 const data = JSON.parse(text);
-                observation.status = data.status;
-                observation.error = data.error;
-                observation.operational = data.operational;
-                observation.failedClosed = data.failedClosed;
-                observation.deployment = data.deployment;
-                observation.configured = data.configured;
-                observation.quality = data.quality;
-                observation.freshness = data.freshness;
-                observation.summary = data.summary;
-                observation.filteredSummary = data.filteredSummary;
-                observation.checkedAt = data.checkedAt;
+                observation.status = code(data.status);
+                observation.error = code(data.error);
+                observation.operational = bool(data.operational);
+                observation.failedClosed = bool(data.failedClosed);
+                observation.deployment = { commitSha: sha(data.deployment?.commitSha), environment: code(data.deployment?.environment) };
+                observation.databaseConfigured = bool(data.configured?.database);
+                observation.generatedAt = stamp(data.generatedAt);
+                observation.checkedAt = stamp(data.checkedAt);
+                observation.sourceCommit = sha(data.sourceCommit);
+                observation.eventCount = Array.isArray(data.events) ? data.events.length : null;
+                observation.deliveryMode = code(data.meta?.deliveryMode);
+                observation.successfulChecks = num(data.meta?.successfulQueries);
+                observation.attemptedChecks = num(data.meta?.queryCount);
+                observation.snapshot = {
+                  fresh: bool(data.meta?.snapshot?.fresh), ageMinutes: num(data.meta?.snapshot?.ageMinutes),
+                  sourceCommit: sha(data.meta?.snapshot?.sourceCommit), generatedAt: stamp(data.meta?.snapshot?.generatedAt),
+                  coverageComplete: bool(data.meta?.snapshot?.coverageComplete), coverageThrough: stamp(data.meta?.snapshot?.coverageThrough)
+                };
+                observation.claims = {
+                  claimCount: num(data.summary?.claimCount), evidenceCount: num(data.summary?.evidenceCount),
+                  supported: num(data.summary?.supportedFactClaims), provisional: num(data.summary?.provisionalFactClaims),
+                  publishable: bool(data.quality?.publishable), unsupportedMaterial: num(data.quality?.unsupportedMaterialClaimCount)
+                };
+                observation.progress = {
+                  completion: num(data.completion), verifiedCompletion: num(data.verifiedCompletion),
+                  implementationCompletion: num(data.implementationCompletion), weightTotal: num(data.weightTotal),
+                  milestones: Array.isArray(data.milestones) ? data.milestones.map(m => ({ id: code(m.id), weight: num(m.weight) })) : null
+                };
               } else {
-                observation.textPreview = text.slice(0, 250);
+                observation.containsProductTitle = /ABG Pulse/i.test(text);
               }
             } catch (error) {
-              observation.requestError = error.message;
-              observation.cause = error.cause?.message;
+              observation.requestError = code(error.name) || 'request_failed';
+              observation.causeCode = code(error.cause?.code);
             }
+            observation.completedAt = new Date().toISOString();
             report.endpoints.push(observation);
           }
+          report.completedAt = new Date().toISOString();
           writeFileSync('/tmp/production-diagnostic/observations.json', `${JSON.stringify(report, null, 2)}\n`);
           console.log(JSON.stringify(report, null, 2));
           NODE
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: production-readonly-diagnostic-${{ github.sha }}
-          path: /tmp/production-diagnostic/observations.json
-          retention-days: 14
+          name: production-readonly-diagnostic-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/production-diagnostic/
+          if-no-files-found: error
+          retention-days: 30
