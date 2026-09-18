@@ -46,7 +46,7 @@ test('built progress never falls below verified progress', () => {
 
 test('remaining work is simplified into eight evidence-weighted milestones', () => {
   assert.equal(plan.milestones.length, 8);
-  assert.deepEqual(plan.programme.activeMilestoneIds, ['M1', 'M3']);
+  assert.deepEqual(plan.programme.activeMilestoneIds, ['M1', 'M5']);
   assert.ok(plan.programme.currentSprint?.name);
   assert.ok(Array.isArray(plan.programme.currentSprint?.deliverables));
   assert.ok(plan.programme.currentSprint.deliverables.length >= 3);
