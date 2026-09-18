@@ -1,0 +1,122 @@
+name: Prove T1.3 live safeguards read-only
+on:
+  push:
+    branches: ['proof/t13-live-9010adc-20260918']
+    paths: ['.github/workflows/prove-t13-live-readonly.yml']
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      EXPECTED_DEPLOYMENT_SHA: 9010adc06f361ad55adb3da21f95519b3a98febb
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Confirm the verifier and application match the exact deployed source
+        run: |
+          mkdir -p /tmp/t13-live-proof
+          git diff --exit-code "$EXPECTED_DEPLOYMENT_SHA" HEAD -- api lib scripts app.js index.html tests data service-worker.js
+          git rev-parse HEAD > /tmp/t13-live-proof/VERIFIER_COMMIT.txt
+          printf '%s\n' "$EXPECTED_DEPLOYMENT_SHA" > /tmp/t13-live-proof/EXPECTED_PRODUCTION_COMMIT.txt
+      - name: Verify exact production code and published versus consumed data
+        run: node scripts/verify-live-feed.mjs /tmp/t13-live-proof/live-data.json
+      - name: Install pinned browser dependency
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Observe the real browser without fixtures, interception or writes
+        run: |
+          python - <<'PY'
+          import json, os, re
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright, expect
+          out=Path('/tmp/t13-live-proof')
+          report={'observedAt':datetime.now(timezone.utc).isoformat(),'environment':'production_chromium',
+                  'qaFixturesUsed':False,'networkInterceptionUsed':False,'productionWritesPerformed':False,
+                  'fullProductAcceptance':False,'checks':[]}
+          def passed(name): report['checks'].append({'check':name,'pass':True})
+          try:
+              with sync_playwright() as p:
+                  browser=p.chromium.launch(args=['--no-sandbox'])
+                  page=browser.new_page(viewport={'width':1365,'height':1000})
+                  errors=[]; page.on('pageerror',lambda e:errors.append(str(e)))
+                  health=page.request.get('https://abg-pulse-intelligence-v4.vercel.app/api/health',timeout=30000)
+                  assert health.status==200
+                  assert health.json()['deployment']['commitSha']==os.environ['EXPECTED_DEPLOYMENT_SHA']
+                  report['productionCommit']=health.json()['deployment']['commitSha']
+                  response=page.goto('https://abg-pulse-intelligence-v4.vercel.app/',wait_until='domcontentloaded',timeout=30000)
+                  assert response.status==200
+                  assert page.evaluate('!window.__ABG_PULSE_QA__ && !window.__ABG_PULSE_QA_DATA__')
+                  expect(page.locator('#last-scan-label')).to_contain_text('Checked through',timeout=45000)
+                  passed('Actual production release loads a successful live scan without demonstration data')
+                  with page.expect_response(lambda r:'/api/scan?' in r.url,timeout=45000) as scan_result:
+                      page.locator('#period-select').select_option('30d')
+                  scan=scan_result.value
+                  assert scan.status==200
+                  payload=scan.json()
+                  assert payload['meta']['deliveryMode']=='governed-snapshot'
+                  assert payload['meta']['snapshot']['integrityVerified'] is True
+                  report['snapshot']=payload['meta']['snapshot']
+                  (out/'browser-scan.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2))
+                  expect(page.locator('#last-scan-label')).to_contain_text('Checked through',timeout=15000)
+                  detail=page.locator('#view-today [data-action="detail"]').first
+                  expect(detail).to_be_visible(timeout=15000)
+                  event_id=detail.get_attribute('data-event-id')
+                  assert event_id in {e['id'] for e in payload['events']}
+                  labels=page.locator('#view-today .status-pill').all_text_contents()
+                  assert labels and all('unverified' in label or 'No traceable source' in label for label in labels),labels
+                  report['displayedEventId']=event_id
+                  passed('Displayed live story belongs to the real integrity-checked response and uses conservative support labels')
+                  detail.click(); expect(page.locator('#story-dialog')).to_be_visible()
+                  expect(page.locator('#story-dialog [data-claim-support]')).to_contain_text('statement verification pending')
+                  assert 'Certainty' not in page.locator('#story-dialog .intelligence-grid').inner_text()
+                  links=page.locator('#story-dialog .source-list a')
+                  assert links.count()>0
+                  assert links.evaluate_all("links=>links.every(a=>/^https?:/.test(a.href)&&a.rel.includes('noopener'))")
+                  page.screenshot(path=str(out/'live-evidence-dialog.png'),full_page=True)
+                  passed('Real evidence dialog retains source links and explicitly warns that statement verification is pending')
+                  page.get_by_role('button',name='Close story',exact=True).click()
+                  page.locator('.sidebar [data-view="control"]').click()
+                  expect(page.locator('#active-sprint')).to_contain_text('not a current readiness verdict')
+                  expect(page.locator('#objective-progress-value')).to_have_text('40%')
+                  expect(page.locator('#objective-progress-built-value')).to_have_text('55% built')
+                  page.screenshot(path=str(out/'live-progress-panel.png'),full_page=True)
+                  passed('Deployed progress descriptions preserve the historical-score caveat and unchanged numeric values')
+                  page.locator('.sidebar [data-view="today"]').click()
+                  page.set_viewport_size({'width':390,'height':844})
+                  assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+                  page.screenshot(path=str(out/'live-mobile-briefing.png'),full_page=True)
+                  passed('Real mobile briefing has no horizontal overflow at 390 pixels')
+                  assert not errors,errors
+                  report['uncaughtJavaScriptErrors']=errors
+                  passed('No uncaught JavaScript errors in this limited production journey')
+                  browser.close()
+              report['passed']=True
+          except Exception as error:
+              report['passed']=False; report['error']=str(error)
+              raise
+          finally:
+              report['completedAt']=datetime.now(timezone.utc).isoformat()
+              report['caveat']='Limited release smoke evidence only: no production database write/read, cross-device account acceptance, external factual adjudication, production rollback or sustained reliability is established.'
+              (out/'production-browser.json').write_text(json.dumps(report,indent=2))
+              print(json.dumps(report,indent=2))
+          PY
+      - name: Preserve successes and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: t13-live-proof-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/t13-live-proof/
+          if-no-files-found: error
+          retention-days: 30
