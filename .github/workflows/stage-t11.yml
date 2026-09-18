@@ -1,0 +1,63 @@
+name: Stage exact tested T1.1 freshness repair
+on:
+  push:
+    branches: ['fix/t51-claim-support-20260918']
+    paths: ['.github/workflows/stage-t11.yml']
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply exact source edits and verify the full candidate tree
+        run: |
+          mkdir -p /tmp/t11-proof
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          edits=json.loads(Path('.t11-stage/edits.json').read_text())
+          subprocess.run(['git','diff','--exit-code','bf31c76b03ac3e3b2dff30dfd06937f308fe136a','HEAD','--',*edits],check=True)
+          for name,hunks in edits.items():
+              p=Path(name);lines=p.read_text().splitlines(True)
+              for start,end,value in reversed(hunks): lines[start:end]=value.splitlines(True)
+              p.write_text(''.join(lines))
+          subprocess.run(['git','add','-A'],check=True)
+          subprocess.run(['git','rm','--cached','.t11-stage/edits.json','.github/workflows/stage-t11.yml'],check=True)
+          tree=subprocess.check_output(['git','write-tree'],text=True).strip()
+          assert tree=='447db24c2fa0c90e0a98be6f22c2f9e744da9fbe',f'Candidate differs from exact locally tested tree: {tree}'
+          Path('/tmp/t11-proof/TREE.txt').write_text(tree+'\n')
+          subprocess.run(['git','archive','--format=tar.gz','-o','/tmp/t11-proof/source.tar.gz',tree],check=True)
+          print('Every candidate byte matches the locally tested source tree.')
+          PY
+      - name: Run full regression and syntax gates
+        run: |
+          npm test > /tmp/t11-proof/tests.log 2>&1
+          npm run check > /tmp/t11-proof/syntax.log 2>&1
+          git diff --cached --check
+          git diff --exit-code bf31c76b03ac3e3b2dff30dfd06937f308fe136a -- data/build-milestones.json
+      - name: Commit source only to the existing review branch
+        run: |
+          mkdir -p .t11-stage/workflows
+          cp .github/workflows/refresh-live-snapshot.yml .t11-stage/workflows/refresh-live-snapshot.yml
+          cp .github/workflows/refresh-claim-evidence.yml .t11-stage/workflows/refresh-claim-evidence.yml
+          git reset HEAD -- .github/workflows
+          git add .t11-stage/workflows
+          git config user.name 'ABG Pulse Verification'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'Stage exact tested T1.1 source and fixtures; workflow activation remains in review'
+          git rev-parse HEAD > /tmp/t11-proof/SOURCE_COMMIT.txt
+          git push origin HEAD:fix/t51-claim-support-20260918
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: t11-staging-${{ github.run_id }}
+          path: /tmp/t11-proof/
+          retention-days: 30
+          if-no-files-found: error
