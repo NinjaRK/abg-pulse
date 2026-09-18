@@ -1,0 +1,47 @@
+name: Stage exact tested T5.1 repair on review branch
+on:
+  push:
+    branches: ['fix/t51-claim-support-20260918']
+    paths: ['.github/workflows/stage-t51.yml']
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply only byte-matched tested files
+        run: python .ci/apply-t51.py
+      - name: Test exact candidate and preserve scores
+        run: |
+          mkdir -p /tmp/t51-proof
+          npm test > /tmp/t51-proof/tests.log 2>&1
+          npm run check > /tmp/t51-proof/syntax.log 2>&1
+          node --check lib/claim-support.mjs
+          node --check lib/claim-evidence.mjs
+          node --check api/claims.js
+          git diff --check
+          git diff --exit-code HEAD -- data/build-milestones.json
+      - name: Commit product files to review branch only
+        run: |
+          git config user.name 'ABG Pulse Verification'
+          git config user.email 'actions@users.noreply.github.com'
+          git add api/claims.js api/events.js api/scan.js app.js index.html lib/claim-evidence.mjs scripts/build-claim-evidence-snapshot.mjs service-worker.js tests/browser-acceptance.py tests/claim-evidence.test.mjs
+          git rm .ci/apply-t51.py
+          git commit -m 'Apply exact tested T5.1 source and legacy-delivery safeguards'
+          git rev-parse HEAD > /tmp/t51-proof/SOURCE_COMMIT.txt
+          git archive --format=tar.gz -o /tmp/t51-proof/source.tar.gz HEAD
+          git push origin HEAD:fix/t51-claim-support-20260918
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: t51-staging-${{ github.run_id }}
+          path: /tmp/t51-proof/
+          retention-days: 14
+          if-no-files-found: warn
