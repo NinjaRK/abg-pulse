@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
     paths:
+      - 'scripts/record-isolated-build.mjs'
+      - 'tests/release-verification-readonly.test.mjs'
       - '.github/workflows/verify-editorial-corrections-build.yml'
       - 'db/migrations/002_claim_evidence_audit.sql'
       - 'db/migrations/003_editorial_corrections.sql'
@@ -12,13 +14,16 @@ on:
       - 'tests/fixtures/claim-evidence-graph.json'
   pull_request:
     paths:
+      - '.github/workflows/verify-editorial-corrections-build.yml'
+      - 'scripts/record-isolated-build.mjs'
+      - 'tests/release-verification-readonly.test.mjs'
       - 'db/migrations/003_editorial_corrections.sql'
       - 'api/corrections.js'
       - 'tests/corrections-api.test.mjs'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: verify-editorial-corrections-${{ github.ref }}
@@ -52,6 +57,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -177,47 +183,13 @@ jobs:
           npm test
           node tests/validate-data.mjs
 
-      - name: Record tested implementation without claiming live editorial operation
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Record isolated test evidence without modifying source or scores
         shell: bash
         run: |
           set -euo pipefail
-          node --input-type=module <<'NODE'
-          import { readFileSync, writeFileSync } from 'node:fs';
-          const path = 'data/build-milestones.json';
-          const plan = JSON.parse(readFileSync(path, 'utf8'));
-          const milestone = plan.milestones.find((item) => item.id === 'M4');
-          if (!milestone) throw new Error('M4 persistence milestone is missing.');
-          const line = 'Append-only correction and claim-history RPCs passed PostgreSQL 16 tests: accountable actor, evidence validation, idempotent replay, immutable original text and audit logging. Production editorial access remains unconnected.';
-          milestone.implementationCompletion = Math.max(Number(milestone.implementationCompletion || 0), 78);
-          milestone.evidence = Array.isArray(milestone.evidence) ? milestone.evidence : [];
-          if (!milestone.evidence.includes(line)) milestone.evidence.push(line);
-          milestone.nextAction = 'Connect production database and identity, ingest the live claim graph, restrict correction rights by role, and prove end-to-end correction propagation and backup restore.';
-          plan.updatedAt = new Date().toISOString();
-          plan.programme = plan.programme || {};
-          plan.programme.lastBuildVerification = {
-            ...(plan.programme.lastBuildVerification || {}),
-            editorialCorrections: {
-              verifiedAt: plan.updatedAt,
-              postgresVersion: 16,
-              migration: 'db/migrations/003_editorial_corrections.sql',
-              correctionRpc: 'pulse_apply_correction',
-              historyRpc: 'pulse_get_claim_history',
-              liveEditorialAccessConnected: false
-            }
-          };
-          writeFileSync(path, `${JSON.stringify(plan, null, 2)}\n`);
-          NODE
-          node --test tests/progress-meter.test.mjs tests/progress.test.mjs
-          git config user.name 'ABG Pulse Build Verification Bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add data/build-milestones.json
-          if git diff --cached --quiet; then
-            echo 'Correction implementation progress is already recorded.'
-          else
-            git commit -m 'Record tested append-only correction implementation'
-            git push origin HEAD:main
-          fi
+          node --test tests/progress-meter.test.mjs tests/progress.test.mjs tests/progress-descriptions.test.mjs
+          git diff --exit-code HEAD -- data/build-milestones.json
+          node scripts/record-isolated-build.mjs editorial-corrections /tmp/editorial-corrections-build-verification.json
 
       - name: Upload correction audit proof
         if: always()
@@ -225,6 +197,7 @@ jobs:
         with:
           name: editorial-correction-proof-${{ github.run_id }}-${{ github.sha }}
           path: |
+            /tmp/editorial-corrections-build-verification.json
             /tmp/seed-result.json
             /tmp/correction-first.json
             /tmp/correction-replay.json
