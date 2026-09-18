@@ -1,3 +1,4 @@
+import { verifySnapshotConsumer, verifyClaimConsumer } from './verify-data-generation.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { writeFileSync, mkdirSync } from 'node:fs';
@@ -38,6 +39,9 @@ export async function verifyLiveFeed({ expectedCommit, fetchImpl = fetch, now = 
     assert.equal(scan.body.meta?.deliveryMode, 'governed-snapshot');
     assert.equal(scan.body.meta?.snapshot?.fresh, true);
     assert.ok(Array.isArray(scan.body.events));
+    const rawSnapshot = await read(`${RAW}/live-snapshot.json`);
+    assert.equal(rawSnapshot.status, 200);
+    report.snapshotGenerationProof = verifySnapshotConsumer(rawSnapshot.body, scan.body, now);
     const snapshot = scan.body.meta.snapshot;
     const ageMinutes = (now.getTime() - Date.parse(snapshot.generatedAt)) / 60_000;
     assert.ok(Number.isFinite(ageMinutes) && ageMinutes >= -1 && ageMinutes <= 90);
@@ -66,6 +70,7 @@ export async function verifyLiveFeed({ expectedCommit, fetchImpl = fetch, now = 
     assert.equal(claims.body.generatedAt, graph.body.generatedAt);
     const inputAge = (now.getTime() - Date.parse(graph.body.input?.governedSnapshotGeneratedAt)) / 60_000;
     assert.ok(Number.isFinite(inputAge) && inputAge >= -1 && inputAge <= 180, 'Upstream claim evidence must remain fresh.');
+    report.claims.generationProof = verifyClaimConsumer(graph.body, claims.body, now);
     report.claims.manifestVerified = true;
     report.claims.inputAgeMinutes = inputAge;
     report.feedVerified = true;

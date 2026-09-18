@@ -1,3 +1,6 @@
+import { sealPayload, snapshotIdentity, positiveLimit, uncachedUrl } from '../lib/data-integrity.mjs';
+import { filterLiveSnapshot } from '../lib/live-snapshot.mjs';
+import { validateClaimEvidenceGraph } from '../api/claims.js';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -18,10 +21,11 @@ async function loadInput() {
   const timeoutMs = boundedNumber(process.env.CLAIM_EVIDENCE_FETCH_TIMEOUT_MS, 20_000, 3_000, 60_000);
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(url, {
+    const response = await fetch(uncachedUrl(url), {
+      cache: 'no-store',
       redirect: 'follow',
       signal: controller.signal,
-      headers: { Accept: 'application/json', 'User-Agent': 'ABG-Pulse/1.0 claim-evidence builder' }
+      headers: { Accept: 'application/json', 'Cache-Control': 'no-cache', 'User-Agent': 'ABG-Pulse/1.0 claim-evidence builder' }
     });
     if (!response.ok) throw new Error(`Governed snapshot returned HTTP ${response.status}.`);
     return await response.json();
@@ -45,19 +49,13 @@ function eventMateriality(event = {}) {
 }
 
 function validateInput(snapshot, now, staleAfterMinutes) {
-  if (!snapshot || typeof snapshot !== 'object') throw new Error('Governed snapshot is not an object.');
-  if (!Array.isArray(snapshot.events)) throw new Error('Governed snapshot has no events array.');
-  const generatedAt = new Date(snapshot.generatedAt || snapshot?.meta?.snapshotGeneratedAt || snapshot?.meta?.scannedAt);
-  if (Number.isNaN(generatedAt.getTime())) throw new Error('Governed snapshot generation time is invalid.');
-  const ageMinutes = Math.max(0, (now.getTime() - generatedAt.getTime()) / 60_000);
-  if (ageMinutes > staleAfterMinutes) throw new Error(`Governed snapshot is stale at ${Math.round(ageMinutes)} minutes; limit is ${staleAfterMinutes}.`);
+  const result = filterLiveSnapshot(snapshot, { start: snapshot?.windowStart, end: snapshot?.windowEnd }, { now, staleAfterMinutes });
   if (snapshot?.meta?.registryReconciled === false) throw new Error('Governed entity registry is not reconciled.');
-  if (!snapshot?.source?.commitSha && !snapshot?.meta?.sourceCommit) throw new Error('Governed snapshot source commit is missing.');
-  return { generatedAt: generatedAt.toISOString(), ageMinutes: Number(ageMinutes.toFixed(1)) };
+  return { generatedAt: snapshot.generatedAt, ageMinutes: result.meta.snapshot.ageMinutes, identity: snapshotIdentity(snapshot) };
 }
 
 const now = new Date();
-const staleAfterMinutes = boundedNumber(process.env.CLAIM_EVIDENCE_INPUT_STALE_MINUTES, 180, 30, 24 * 60);
+const staleAfterMinutes = positiveLimit(process.env.CLAIM_EVIDENCE_INPUT_STALE_MINUTES, 180, 'claim_graph_freshness_config_invalid', 24 * 60);
 const materialityFloor = boundedNumber(process.env.UNSUPPORTED_MATERIALITY_FLOOR, 65, 1, 100);
 const outputPath = resolve(process.env.CLAIM_EVIDENCE_OUTPUT || 'out/claim-evidence.json');
 const manifestPath = resolve(process.env.CLAIM_EVIDENCE_MANIFEST_OUTPUT || 'out/claim-evidence.manifest.json');
@@ -82,13 +80,15 @@ const unsupportedMaterialClaims = graph.claims
   .filter((claim) => claim.materiality >= materialityFloor);
 
 const contradictions = findPotentialContradictions(graph.claims);
-const payload = {
+const payload = sealPayload({
   ...graph,
   input: {
     governedSnapshotGeneratedAt: input.generatedAt,
     governedSnapshotAgeMinutes: input.ageMinutes,
     governedSnapshotSourceCommit: sourceCommit,
     governedSnapshotWorkflowRunId: snapshot?.source?.workflowRunId || snapshot?.meta?.workflowRunId || null,
+    governedSnapshotWorkflowRunAttempt: snapshot.source.workflowRunAttempt || null,
+    governedSnapshotIdentity: input.identity,
     governedSnapshotEventCount: snapshot.events.length
   },
   quality: {
@@ -96,11 +96,13 @@ const payload = {
     unsupportedMaterialClaimCount: unsupportedMaterialClaims.length,
     potentialContradictionCount: contradictions.length,
     publishable: unsupportedMaterialClaims.length === 0,
-    rule: 'No unsupported factual claim at or above the materiality floor may be published as a dependable claim graph.'
+    factualAccuracyVerified: false,
+    supportPolicy: graph.supportPolicy,
+    rule: 'Material claims without traceable sources block publication. Source attachment does not establish factual accuracy.'
   },
   unsupportedMaterialClaims,
   contradictions
-};
+});
 
 if (!payload.summary.eventCount) throw new Error('Claim-evidence graph contains no events; no operational proof can be created.');
 if (!payload.summary.factClaimCount) throw new Error('Claim-evidence graph contains no factual claims.');
@@ -110,6 +112,7 @@ if (!payload.quality.publishable) {
   throw new Error(`Unsupported material claims block publication: ${preview}`);
 }
 
+validateClaimEvidenceGraph(payload, { now, inputStaleAfterMinutes: staleAfterMinutes });
 const serialized = `${JSON.stringify(payload, null, 2)}\n`;
 const digest = createHash('sha256').update(serialized).digest('hex');
 const manifest = {

@@ -1,3 +1,4 @@
+import { sealedGraph } from './helpers/governed-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -7,7 +8,7 @@ import {
   validateClaimEvidenceGraph
 } from '../api/claims.js';
 
-const payload = {
+const payload = sealedGraph({
   schemaVersion: '1.0.0',
   generatedAt: '2026-09-08T10:00:00.000Z',
   sourceCommit: 'abc123',
@@ -55,7 +56,7 @@ const payload = {
   ],
   corrections: [{ id: 'correction-1', claimId: 'claim-1', correctionText: 'Updated filing detail.' }],
   contradictions: [{ id: 'contradiction-1', claimIds: ['claim-1', 'claim-3'], status: 'potential' }]
-};
+});
 
 test('valid claim graph passes freshness and orphan-reference checks', () => {
   const result = validateClaimEvidenceGraph(payload, {

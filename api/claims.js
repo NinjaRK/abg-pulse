@@ -1,10 +1,16 @@
+import { positiveLimit, freshness, verifyPayloadHash, validateGraphInput, graphIdentity, uncachedUrl } from '../lib/data-integrity.mjs';
+import { CLAIM_SUPPORT_POLICY, applyClaimSupportPolicy } from '../lib/claim-support.mjs';
+
 const DEFAULT_GRAPH_URL = 'https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/claim-evidence.json';
 const DEFAULT_STALE_MINUTES = 240;
 
 function send(res, status, payload) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.setHeader('Cache-Control', status === 200 ? 'public, max-age=60, stale-while-revalidate=180' : 'no-store');
+  // Do not replay legacy overconfident support labels from an API cache.
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('CDN-Cache-Control', 'no-store');
+  res.setHeader('Vercel-CDN-Cache-Control', 'no-store');
   res.end(JSON.stringify(payload));
 }
 
@@ -15,33 +21,21 @@ function queryValue(req, key) {
   try { return new URL(req.url, 'https://abg-pulse.local').searchParams.get(key); } catch { return null; }
 }
 
-function boundedNumber(value, fallback, minimum, maximum) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) return fallback;
-  return Math.max(minimum, Math.min(maximum, number));
-}
-
 const normalize = (value = '') => String(value ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
 
-export function validateClaimEvidenceGraph(payload, { now = new Date(), staleAfterMinutes = DEFAULT_STALE_MINUTES } = {}) {
+export function validateClaimEvidenceGraph(payload, { now = new Date(), staleAfterMinutes = DEFAULT_STALE_MINUTES, inputStaleAfterMinutes = 180 } = {}) {
   if (!payload || typeof payload !== 'object') throw Object.assign(new Error('Claim-evidence graph is not an object.'), { code: 'claim_graph_invalid' });
   if (!Array.isArray(payload.claims)) throw Object.assign(new Error('Claim-evidence graph has no claims array.'), { code: 'claim_graph_invalid' });
   if (!Array.isArray(payload.evidence)) throw Object.assign(new Error('Claim-evidence graph has no evidence array.'), { code: 'claim_graph_invalid' });
   if (!Array.isArray(payload.eventSummaries)) throw Object.assign(new Error('Claim-evidence graph has no event summaries.'), { code: 'claim_graph_invalid' });
   if (!payload.summary || typeof payload.summary !== 'object') throw Object.assign(new Error('Claim-evidence graph summary is missing.'), { code: 'claim_graph_invalid' });
   if (payload?.quality?.publishable !== true) throw Object.assign(new Error('Claim-evidence graph did not pass its publication gate.'), { code: 'claim_graph_unpublishable' });
-  if (Number(payload?.quality?.unsupportedMaterialClaimCount || 0) !== 0) {
+  if (payload?.quality?.unsupportedMaterialClaimCount !== 0) {
     throw Object.assign(new Error('Claim-evidence graph contains unsupported material claims.'), { code: 'unsupported_material_claims' });
   }
-  const generatedAt = new Date(payload.generatedAt);
-  if (Number.isNaN(generatedAt.getTime())) throw Object.assign(new Error('Claim-evidence graph generation time is invalid.'), { code: 'claim_graph_invalid' });
-  const ageMinutes = Math.max(0, (now.getTime() - generatedAt.getTime()) / 60_000);
-  if (ageMinutes > staleAfterMinutes) {
-    throw Object.assign(new Error(`Claim-evidence graph is ${Math.round(ageMinutes)} minutes old; limit is ${staleAfterMinutes}.`), {
-      code: 'claim_graph_stale',
-      detail: { ageMinutes: Number(ageMinutes.toFixed(1)), staleAfterMinutes }
-    });
-  }
+  staleAfterMinutes = positiveLimit(staleAfterMinutes, DEFAULT_STALE_MINUTES, 'claim_graph_freshness_config_invalid');
+  inputStaleAfterMinutes = positiveLimit(inputStaleAfterMinutes, 180, 'claim_graph_freshness_config_invalid');
+  const ageMinutes = freshness(payload.generatedAt, now, staleAfterMinutes, 'claim_graph');
   const evidenceIds = new Set(payload.evidence.map((item) => item.id));
   const orphanReferences = payload.claims.flatMap((claim) => (claim.evidenceIds || [])
     .filter((id) => !evidenceIds.has(id))
@@ -52,7 +46,15 @@ export function validateClaimEvidenceGraph(payload, { now = new Date(), staleAft
       detail: { orphanReferences: orphanReferences.slice(0, 20) }
     });
   }
-  return { ageMinutes: Number(ageMinutes.toFixed(1)), staleAfterMinutes, orphanReferenceCount: 0 };
+  const inputFreshness = validateGraphInput(payload, now, inputStaleAfterMinutes);
+  const originalGraphPayloadHash = verifyPayloadHash(payload, 'claim_graph');
+  for (const [key, actual] of [['eventCount', payload.eventSummaries.length], ['claimCount', payload.claims.length], ['evidenceCount', payload.evidence.length]]) {
+    if (payload.summary[key] !== actual) throw Object.assign(new Error(`Graph ${key} does not reconcile.`), { code: 'claim_graph_counts_invalid' });
+  }
+  return { ageMinutes, staleAfterMinutes, ...inputFreshness, orphanReferenceCount: 0,
+    integrityVerified: true, originalGraphPayloadHash, graphGenerationId: graphIdentity(payload).generationId,
+    hashScope: 'Original upstream graph before support-policy projection, filtering or summary-only output.' };
+
 }
 
 export function filterClaims(claims = [], {
@@ -76,6 +78,7 @@ export function filterClaims(claims = [], {
 }
 
 export function projectClaimGraph(payload, filters = {}, { summaryOnly = false, includeEvidence = true } = {}) {
+  payload = applyClaimSupportPolicy(payload);
   const claims = filterClaims(payload.claims, filters);
   const claimIds = new Set(claims.map((claim) => claim.id));
   const eventIds = new Set(claims.map((claim) => claim.eventId));
@@ -115,10 +118,11 @@ export async function loadClaimEvidenceGraph({
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetchImpl(url, {
+    const response = await fetchImpl(uncachedUrl(url), {
+      cache: 'no-store',
       redirect: 'follow',
       signal: controller.signal,
-      headers: { Accept: 'application/json', 'User-Agent': 'ABG-Pulse/1.0 claim-evidence reader' }
+      headers: { Accept: 'application/json', 'Cache-Control': 'no-cache', 'User-Agent': 'ABG-Pulse/1.0 claim-evidence reader' }
     });
     if (!response.ok) throw Object.assign(new Error(`Claim-evidence snapshot returned HTTP ${response.status}.`), {
       code: 'claim_graph_http_error',
@@ -136,9 +140,11 @@ export async function loadClaimEvidenceGraph({
 export default async function handler(req, res) {
   if (req.method !== 'GET') return send(res, 405, { error: 'method_not_allowed' });
   try {
-    const staleAfterMinutes = boundedNumber(process.env.CLAIM_EVIDENCE_STALE_MINUTES, DEFAULT_STALE_MINUTES, 30, 24 * 60);
-    const payload = await loadClaimEvidenceGraph();
-    const freshness = validateClaimEvidenceGraph(payload, { staleAfterMinutes });
+    const staleAfterMinutes = positiveLimit(process.env.CLAIM_EVIDENCE_STALE_MINUTES, DEFAULT_STALE_MINUTES, 'claim_graph_freshness_config_invalid', 24 * 60);
+    const inputStaleAfterMinutes = positiveLimit(process.env.CLAIM_EVIDENCE_INPUT_STALE_MINUTES, 180, 'claim_graph_freshness_config_invalid', 24 * 60);
+    const original = await loadClaimEvidenceGraph();
+    const freshness = validateClaimEvidenceGraph(original, { staleAfterMinutes, inputStaleAfterMinutes });
+    const payload = applyClaimSupportPolicy(original);
     const summaryOnly = ['1', 'true', 'yes'].includes(String(queryValue(req, 'summaryOnly') || '').toLowerCase());
     const includeEvidence = !['0', 'false', 'no'].includes(String(queryValue(req, 'includeEvidence') || 'true').toLowerCase());
     const filters = {
@@ -152,6 +158,8 @@ export default async function handler(req, res) {
     const projection = projectClaimGraph(payload, filters, { summaryOnly, includeEvidence });
     return send(res, 200, {
       schemaVersion: payload.schemaVersion,
+      supportPolicy: CLAIM_SUPPORT_POLICY,
+      statementVerification: 'not_performed',
       generatedAt: payload.generatedAt,
       sourceCommit: payload.sourceCommit,
       input: payload.input,
@@ -160,10 +168,10 @@ export default async function handler(req, res) {
       filters,
       freshness,
       methodology: {
-        fact: 'A factual statement is stored separately from interpretation and linked to the evidence that supports it.',
-        supported: 'Supported by a direct official source, or by sufficient independent high-quality corroboration.',
-        provisional: 'Relevant evidence exists but does not yet meet the strongest support threshold.',
-        unsupported: 'No traceable evidence is attached. Material unsupported claims block graph publication.',
+        fact: 'A factual assertion is stored separately from interpretation and linked to source metadata. Its truth is not established by that link.',
+        supported: 'Reserved for statement-to-source verification. This metadata-only policy does not emit supported factual claims.',
+        provisional: 'Source metadata is attached; statement verification has not been performed. Several domains may repeat the same original report.',
+        unsupported: 'No traceable source is attached. Untraceable facts are not delivered by this policy.',
         contradiction: 'Potential contradictions are surfaced for human review; the system does not silently choose a winner.',
         correction: 'Corrections append a new version and retain the original text, evidence and actor.'
       },

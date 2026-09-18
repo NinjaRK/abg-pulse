@@ -1,3 +1,4 @@
+import { sealedGraph } from './helpers/governed-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -7,7 +8,7 @@ import {
   suppliedIngestToken
 } from '../api/persist-claims.js';
 
-const graph = {
+const graph = sealedGraph({
   schemaVersion: '1.0.0',
   generatedAt: '2026-09-08T10:00:00.000Z',
   sourceCommit: 'abc123def456',
@@ -16,7 +17,7 @@ const graph = {
   eventSummaries: [{ eventId: 'event-1', claimIds: ['claim-1'], evidenceIds: ['evidence-1'] }],
   claims: [{ id: 'claim-1', eventId: 'event-1', kind: 'fact', text: 'A fact', supportStatus: 'supported', evidenceIds: ['evidence-1'] }],
   evidence: [{ id: 'evidence-1', eventId: 'event-1', url: 'https://official.example/evidence' }]
-};
+});
 
 function fetchSequence(texts, statuses = []) {
   let index = 0;

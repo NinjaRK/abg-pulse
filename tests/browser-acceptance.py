@@ -24,7 +24,15 @@ try:
         expect(page.locator('#sidebar-build-progress')).to_have_text('40%')
         page.locator('#period-select').select_option('30d')
         detail = page.locator('#view-today [data-action="detail"]').first
-        expect(detail).to_be_visible();detail.click();expect(page.locator('#story-dialog')).to_be_visible()
+        expect(detail).to_be_visible()
+        labels = page.locator('#view-today .status-pill').all_text_contents()
+        assert labels and all('unverified' in value or 'No traceable source' in value for value in labels), labels
+        assert page.locator('#view-today [data-claim-support]').count() > 0
+        passed('Legacy confirmed fixture events display unverified source-linked labels and no truth percentage')
+        detail.click();expect(page.locator('#story-dialog')).to_be_visible()
+        expect(page.locator('#story-dialog [data-claim-support]')).to_contain_text('statement verification pending')
+        assert 'Certainty' not in page.locator('#story-dialog .intelligence-grid').inner_text()
+        passed('Evidence dialog explicitly marks statement verification pending')
         page.get_by_role('button',name='Close story',exact=True).click()
         passed('Home loads, 30-day filter works and evidence dialog opens/closes')
         watch = page.locator('#view-today [data-action="watch"]').first
@@ -37,6 +45,16 @@ try:
         page.locator('.sidebar [data-view="search"]').click();page.locator('#search-input').fill('Novelis')
         expect(page.locator('#view-search')).to_be_visible();passed('Search navigation and query input work')
         page.locator('.sidebar [data-view="control"]').click();expect(page.locator('#control-heading')).to_be_visible()
+        expect(page.locator('#active-sprint')).to_contain_text('Claim-support, freshness and integrity safeguard release')
+        expect(page.locator('#active-sprint')).to_contain_text('not a current readiness verdict')
+        assert page.locator('#milestone-list .milestone-card.active .milestone-id').all_text_contents() == ['M1', 'M5']
+        expect(page.locator('#resources-required')).to_contain_text('Existing Vercel Git deployment route')
+        expect(page.locator('#resources-required')).to_contain_text('Personal / ABG Pulse Production')
+        assert 'Resume the ABG Pulse Vercel project' not in page.locator('#resources-required').inner_text()
+        expect(page.locator('#objective-progress-value')).to_have_text('40%')
+        expect(page.locator('#objective-progress-built-value')).to_have_text('55% built')
+        page.screenshot(path=str(OUT/'progress-descriptions.png'),full_page=True)
+        passed('Dated progress descriptions match the safeguard queue without changing historical scores')
         page.goto('http://127.0.0.1:4173/registry',wait_until='domcontentloaded');expect(page.locator('#records article')).to_have_count(21)
         passed('Control room renders and the research register loads at /registry')
         page.locator('#kind').select_option('ownership');expect(page.locator('#records article')).to_have_count(9)

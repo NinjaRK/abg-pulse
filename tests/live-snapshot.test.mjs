@@ -1,3 +1,5 @@
+import { sealPayload } from '../lib/data-integrity.mjs';
+import { fixtureSource, sourceChecks } from './helpers/governed-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import scanHandler from '../api/scan.js';
@@ -28,25 +30,25 @@ function event(id, publishedAt) {
 }
 
 function snapshot(overrides = {}) {
-  return {
+  return sealPayload({
     schemaVersion: 1,
     serviceVersion: '6.0.0',
     generatedAt: '2026-09-04T10:00:00.000Z',
     windowStart: '2026-08-05T10:00:00.000Z',
     windowEnd: '2026-09-04T10:00:00.000Z',
-    source: { repository: 'NinjaRK/abg-pulse', commitSha: 'abc123', workflowRunId: '42' },
+    source: fixtureSource,
     integrity: { algorithm: 'sha256', payloadHash: 'hash' },
     events: [event('recent', '2026-09-04T09:00:00.000Z'), event('older', '2026-09-01T09:00:00.000Z')],
     entityUniverse: { officialCompanyEntries: 42, officialLeadershipEntries: 40 },
     meta: {
       queryCount: 65,
       successfulQueries: 40,
-      sourceChecks: [{ name: 'official', provider: 'Official source', ok: true, status: 'healthy', itemCount: 1 }],
+      sourceChecks: sourceChecks(65,40),
       registryReconciled: true,
       eventCount: 2
     },
     ...overrides
-  };
+  });
 }
 
 function mockResponse() {
@@ -86,7 +88,7 @@ test('production defaults to governed snapshot delivery while local tests defaul
 
 test('snapshot validation fails closed when source success is too low', () => {
   assert.throws(
-    () => validateLiveSnapshot(snapshot({ meta: { queryCount: 65, successfulQueries: 2, sourceChecks: [] } })),
+    () => validateLiveSnapshot(snapshot({ meta: { queryCount: 65, successfulQueries: 2, sourceChecks: sourceChecks(65,2) } })),
     (error) => error instanceof SnapshotError && error.code === 'snapshot_source_coverage_too_low'
   );
 });
@@ -98,7 +100,7 @@ test('snapshot filters events to the requested period and exposes provenance', (
   }, { now: new Date('2026-09-04T10:20:00.000Z') });
   assert.deepEqual(result.events.map((item) => item.id), ['recent']);
   assert.equal(result.meta.deliveryMode, 'governed-snapshot');
-  assert.equal(result.meta.snapshot.sourceCommit, 'abc123');
+  assert.equal(result.meta.snapshot.sourceCommit, fixtureSource.commitSha);
   assert.equal(result.meta.snapshot.fresh, true);
   assert.equal(result.meta.snapshot.ageMinutes, 20);
 });
@@ -145,7 +147,8 @@ test('production scan route serves one governed snapshot request', async () => {
   let calls = 0;
   global.fetch = async (url) => {
     calls += 1;
-    assert.equal(String(url), 'https://example.com/live-snapshot.json');
+    assert.equal(new URL(url).origin + new URL(url).pathname, 'https://example.com/live-snapshot.json');
+    assert.ok(new URL(url).searchParams.has('abg_read'));
     return { ok: true, status: 200, json: async () => snapshot() };
   };
   try {
@@ -173,7 +176,7 @@ test('production scan route returns 503 when the snapshot is stale', async () =>
   delete process.env.ABG_SCAN_MODE;
   process.env.LIVE_SNAPSHOT_URL = 'https://example.com/live-snapshot.json';
   process.env.LIVE_SNAPSHOT_STALE_MINUTES = '90';
-  global.fetch = async () => ({ ok: true, status: 200, json: async () => snapshot({ generatedAt: '2026-09-04T06:00:00.000Z' }) });
+  global.fetch = async () => ({ ok: true, status: 200, json: async () => snapshot({ generatedAt: '2026-09-04T06:00:00.000Z', windowEnd: '2026-09-04T06:00:00.000Z' }) });
   try {
     const res = mockResponse();
     await scanHandler(request(), res);
@@ -187,10 +190,11 @@ test('production scan route returns 503 when the snapshot is stale', async () =>
 test('snapshot generator rejects a weak scan and records provenance for a healthy scan', async () => {
   const good = await generateLiveSnapshot({
     now: new Date('2026-09-04T10:00:00.000Z'),
+    source: fixtureSource,
     scan: async ({ window }) => ({
       events: [event('generated', '2026-09-04T09:00:00.000Z')],
       entityUniverse: { officialCompanyEntries: 42 },
-      meta: { queryCount: 10, successfulQueries: 8, sourceChecks: [], windowStart: window.start, windowEnd: window.end }
+      meta: { queryCount: 10, successfulQueries: 8, sourceChecks: sourceChecks(10,8), windowStart: window.start, windowEnd: window.end }
     })
   });
   assert.equal(good.schemaVersion, 1);
@@ -200,7 +204,7 @@ test('snapshot generator rejects a weak scan and records provenance for a health
   await assert.rejects(
     () => generateLiveSnapshot({
       now: new Date('2026-09-04T10:00:00.000Z'),
-      scan: async () => ({ events: [], entityUniverse: {}, meta: { queryCount: 10, successfulQueries: 1, sourceChecks: [] } })
+      scan: async () => ({ events: [], entityUniverse: {}, meta: { queryCount: 10, successfulQueries: 1, sourceChecks: sourceChecks(10,1) } })
     }),
     /Snapshot rejected/
   );

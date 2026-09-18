@@ -40,11 +40,11 @@ test('facts and interpretation remain explicitly separate', () => {
   assert.equal(result.claims.find((claim) => claim.kind === 'interpretation').supportStatus, 'interpretation');
 });
 
-test('direct official evidence marks factual claims supported', () => {
+test('official source metadata alone leaves factual claims provisional', () => {
   const result = deriveClaimEvidenceForEvent(event);
   const facts = result.claims.filter((claim) => claim.kind === 'fact');
-  assert.ok(facts.every((claim) => claim.supportStatus === 'supported'));
-  assert.ok(facts.every((claim) => claim.supportConfidence >= 0.94));
+  assert.ok(facts.every((claim) => claim.supportStatus === 'provisional'));
+  assert.ok(facts.every((claim) => claim.supportConfidence === null));
   assert.equal(result.evidence.length, 1);
   assert.equal(result.evidence[0].tier, 0);
   assert.equal(result.evidence[0].official, true);
@@ -61,7 +61,7 @@ test('events without traceable sources create unsupported facts rather than inve
   assert.equal(result.evidence.length, 0);
   assert.equal(result.claims.length, 1);
   assert.equal(result.claims[0].supportStatus, 'unsupported');
-  assert.equal(result.claims[0].supportConfidence, 0);
+  assert.equal(result.claims[0].supportConfidence, null);
 });
 
 test('duplicate source URLs collapse into one evidence record', () => {
@@ -88,8 +88,8 @@ test('graph summary reconciles events, claims and evidence', () => {
   assert.equal(graph.summary.factClaimCount, 3);
   assert.equal(graph.summary.interpretationCount, 1);
   assert.equal(graph.summary.evidenceCount, 2);
-  assert.equal(graph.summary.supportedFactClaims, 2);
-  assert.equal(graph.summary.provisionalFactClaims, 1);
+  assert.equal(graph.summary.supportedFactClaims, 0);
+  assert.equal(graph.summary.provisionalFactClaims, 3);
   assert.equal(graph.summary.unsupportedFactClaims, 0);
   assert.equal(graph.sourceCommit, 'abc123');
 });

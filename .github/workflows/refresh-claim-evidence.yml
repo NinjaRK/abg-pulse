@@ -14,6 +14,8 @@ on:
       - 'api/claims.js'
       - 'tests/claims-api.test.mjs'
       - 'lib/live-snapshot.mjs'
+      - 'lib/data-integrity.mjs'
+      - 'scripts/verify-data-generation.mjs'
       - 'tests/live-feed-integration.test.mjs'
 
 permissions:
@@ -127,32 +129,45 @@ jobs:
         run: |
           set -euo pipefail
           url='https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/claim-evidence.json'
+          manifest_url='https://raw.githubusercontent.com/NinjaRK/abg-pulse/live-data/data/claim-evidence.manifest.json'
+          published=false
           for attempt in $(seq 1 12); do
-            code=$(curl -L -sS --max-time 30 -o /tmp/published-claim-evidence.json -w '%{http_code}' "$url" || true)
-            if [ "$code" = '200' ]; then
-              node --input-type=module <<'NODE'
-          import { readFileSync } from 'node:fs';
-          const graph = JSON.parse(readFileSync('/tmp/published-claim-evidence.json', 'utf8'));
-          if (graph.quality?.publishable !== true) throw new Error('Published graph is not marked publishable.');
-          if (Number(graph.quality?.unsupportedMaterialClaimCount) !== 0) throw new Error('Published graph contains unsupported material claims.');
-          if (!graph.sourceCommit) throw new Error('Published graph source commit is missing.');
-          console.log(`Published ${graph.summary.claimCount} claims linked to ${graph.summary.evidenceCount} evidence records from ${graph.sourceCommit}.`);
-          NODE
-              exit 0
+            code=$(curl -L -sS --max-time 30 -H 'Cache-Control: no-cache' -o /tmp/published-claim-evidence.json -w '%{http_code}' "$url?run=$GITHUB_RUN_ID&attempt=$GITHUB_RUN_ATTEMPT&probe=$attempt" || true)
+            manifest_code=$(curl -L -sS --max-time 30 -H 'Cache-Control: no-cache' -o /tmp/published-claim-manifest.json -w '%{http_code}' "$manifest_url?run=$GITHUB_RUN_ID&attempt=$GITHUB_RUN_ATTEMPT&probe=$attempt" || true)
+            if [ "$code" = '200' ] && [ "$manifest_code" = '200' ] && node scripts/verify-data-generation.mjs claims-publication out/claim-evidence.json /tmp/published-claim-evidence.json > /tmp/claims-publication-proof.json \
+              && node scripts/verify-data-generation.mjs claims-manifest out/claim-evidence.manifest.json /tmp/published-claim-manifest.json /tmp/published-claim-evidence.json > /tmp/claims-manifest-proof.json; then
+              published=true
+              break
             fi
-            echo "Attempt $attempt returned HTTP $code; retrying in 10 seconds."
             sleep 10
           done
-          echo 'Published claim-evidence graph could not be retrieved.'
+          if [ "$published" != 'true' ]; then
+            echo 'The exact claim graph generation/hash was not retrieved.'
+            exit 1
+          fi
+          for attempt in $(seq 1 12); do
+            code=$(curl -L -sS --max-time 30 -H 'Cache-Control: no-cache' -o /tmp/production-claims.json -w '%{http_code}' "https://abg-pulse-intelligence-v4.vercel.app/api/claims?summaryOnly=true&run=$GITHUB_RUN_ID&attempt=$GITHUB_RUN_ATTEMPT&probe=$attempt" || true)
+            if [ "$code" = '200' ] && node scripts/verify-data-generation.mjs claims-consumer out/claim-evidence.json /tmp/production-claims.json > /tmp/claims-consumer-proof.json; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'Production did not demonstrate consumption of the exact claim graph generation.'
           exit 1
 
       - name: Upload immutable claim-evidence proof
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: claim-evidence-${{ github.run_id }}-${{ github.sha }}
+          name: claim-evidence-${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
           path: |
             out/claim-evidence.json
             out/claim-evidence.manifest.json
+            /tmp/published-claim-evidence.json
+            /tmp/published-claim-manifest.json
+            /tmp/claims-manifest-proof.json
+            /tmp/production-claims.json
+            /tmp/claims-publication-proof.json
+            /tmp/claims-consumer-proof.json
           if-no-files-found: error
           retention-days: 90

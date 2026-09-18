@@ -1,7 +1,7 @@
 {
   "objective": "Build ABG Pulse into a dependable, comprehensive and auditable ABG intelligence platform that lets a senior user understand in under 60 seconds what materially changed across the Aditya Birla Group ecosystem, why it matters, what may become important next and whether to act, watch or ignore—with every factual claim traceable to evidence and every coverage gap visible.",
   "version": "6.0.0",
-  "updatedAt": "2026-09-04T08:00:00.000Z",
+  "updatedAt": "2026-09-18T08:40:00.000Z",
   "measurement": {
     "method": "Dual evidence-weighted progress",
     "verifiedFormula": "Verified completion = sum(milestone weight × verified completion) / 100.",
@@ -12,22 +12,24 @@
       "The gap between built and verified is shown explicitly; it is never counted as delivered.",
       "Blocked work remains visible and keeps its remaining weight.",
       "The 30-day dependability milestone requires 30 actual operating days."
-    ]
+    ],
+    "recordedScoresAsOf": "2026-09-04T08:00:00.000Z",
+    "scoreCaveat": "The inherited percentages are retained unchanged. They are not a current production-health or independent-readiness certification."
   },
   "programme": {
     "status": "building",
     "activeMilestoneIds": [
       "M1",
-      "M3"
+      "M5"
     ],
     "currentSprint": {
-      "name": "Stable ingestion and authoritative-source foundation",
-      "objective": "Move from a technically working beta to a controlled, lower-noise and directly sourced operating system.",
+      "name": "Claim-support, freshness and integrity safeguard release",
+      "objective": "Complete the existing T5.1 -> T1.1 -> T1.2 -> T1.3 repair sequence. Recorded 4 September scores are retained, not a current readiness verdict.",
       "deliverables": [
-        "Governed scheduled snapshot instead of 65-source fan-out on every refresh",
-        "Exact-commit production verification and visible deployment health",
-        "Direct SEC, NSE, BSE and core regulator source wave",
-        "Updated Job Meter showing verified, built-awaiting-proof and unbuilt work"
+        "T5.1: source-linked assertions remain provisional; safeguard code is CI-tested, with production verification pending",
+        "T1.1: strict input/output freshness, reconciled source checks and exact data generation/hash; CI-tested, with live proof pending",
+        "T1.2: reconcile dated descriptive status without changing milestone IDs, weights or numerical scores",
+        "T1.3: coordinate compatible data publication and deployment, verify the exact release and data, then continue T2.1 production database inspection"
       ]
     },
     "qualityGates": {
@@ -36,6 +38,21 @@
       "highMaterialityWeightedRecallPct": 98,
       "unsupportedMaterialClaims": 0,
       "silentTier0Outages": 0
+    },
+    "evidenceCheckpoint": {
+      "descriptionUpdatedAt": "2026-09-18T08:40:00.000Z",
+      "latestRetainedProductionObservationAt": "2026-09-17T08:48:54.000Z",
+      "observedProductionCommit": "17d669f3e66806922e51b05d29f13f9c35fe95cd",
+      "observedProductionState": "basic_delivery_verified_database_unconfigured",
+      "safeguardEvidenceCommit": "9ec41dede51307d92406d87b4aea8c2a1ab53d39",
+      "safeguardEvidenceState": "implemented_ci_tested_production_verification_pending",
+      "nextTask": "T1.3",
+      "afterSafeguardRelease": "T2.1",
+      "productionReadiness": "not_established",
+      "caveat": "This is retained, dated evidence, not a new live probe. CI, deployment, current data delivery and independent acceptance are different states.",
+      "trackerUrl": "https://github.com/NinjaRK/abg-pulse/issues/19",
+      "productionEvidenceUrl": "https://github.com/NinjaRK/abg-pulse/pull/21",
+      "safeguardEvidenceUrl": "https://github.com/NinjaRK/abg-pulse/pull/22"
     }
   },
   "resources": {
@@ -57,28 +74,29 @@
       },
       {
         "name": "Existing Vercel production project",
-        "status": "partially_available",
-        "detail": "The last known-good public deployment remains available, but new releases are currently blocked before build and must be resumed before the latest code can be proven live."
+        "status": "available",
+        "detail": "The existing GitHub-to-Vercel route deployed 17d669f, independently observed on 17 September 2026 at 08:48 UTC. This dated proof is separate from management-connector visibility and from the pending safeguard release."
       }
     ],
     "externalDependencies": [
       {
-        "name": "Vercel release block",
-        "requiredFor": "Deploying and proving the latest source, ingestion and progress-meter changes",
-        "currentState": "blocked",
-        "ownerAction": "Resume the ABG Pulse Vercel project only when the build reaches the release gate; no action is required while source work continues."
+        "name": "Existing Vercel Git deployment route",
+        "requiredFor": "Deploying reviewed source to the same existing production project",
+        "currentState": "resolved",
+        "ownerAction": "None for the completed reconnection and service-resumption actions. Reuse the Git route; require new evidence before requesting another owner-only setting change."
       },
       {
-        "name": "Production Postgres/Supabase",
+        "name": "Existing ABG Pulse Production database",
         "requiredFor": "Shared history, claims, evidence, corrections, watchlists, audit logs and multi-device continuity",
         "currentState": "not_connected",
-        "ownerAction": "Authorise a database project when Milestone M4 reaches its connection gate."
+        "ownerAction": "At T2.1 inspect access to Personal / ABG Pulse Production (kzqymboxilxvdgacwypy); ask for authorisation only if that inspection demonstrates it is missing. Preserve existing schema/data; do not use BuiltNotBorn or create a duplicate.",
+        "evidenceAsOf": "2026-09-17T08:48:54.000Z"
       },
       {
-        "name": "Running workflow orchestrator",
-        "requiredFor": "Scheduled retries, queues and alerts beyond the GitHub Actions bootstrap",
-        "currentState": "not_connected",
-        "ownerAction": "Authorise n8n only after the governed snapshot proves the required operating pattern."
+        "name": "Unattended collection, alerts and response ownership",
+        "requiredFor": "Proven repeated refresh, missed-run detection, retries and accountable incident response",
+        "currentState": "unverified",
+        "ownerAction": "Nominate a maintainer and escalation recipient. Prove the existing automation before selecting or purchasing another orchestrator."
       },
       {
         "name": "Licensed social listening",
@@ -90,13 +108,13 @@
         "name": "Identity and editorial governance",
         "requiredFor": "SSO, roles, critical-alert approval, retention and correction authority",
         "currentState": "decision_required",
-        "ownerAction": "Define the authorised audience and approval owner at Milestone M7."
+        "ownerAction": "In the acceptance sheet confirm audience, identity and editorial authority, and name the technical reviewer, editorial reviewer and maintainer. Apply minimum controls before private data or user state, not only at the final T7 review."
       },
       {
         "name": "Elapsed validation time",
         "requiredFor": "The 30-day dependability proof",
         "currentState": "time_required",
-        "ownerAction": "None; evidence must accumulate over 30 real operating days."
+        "ownerAction": "Start the qualifying window only after integrated acceptance; independent reviewers and a maintainer must retain 30 actual complete live days with meaningful samples."
       }
     ]
   },
@@ -112,13 +130,13 @@
       "outcome": "ABG Pulse runs from one controlled source-of-truth pipeline, serves reusable snapshots, exposes freshness and failures, and can be safely deployed or rolled back.",
       "acceptanceGate": "The exact Git commit is live; scheduled snapshots run reliably; a user refresh never launches the full 65-source fan-out; snapshot age and source health are visible; rollback is proven.",
       "evidence": [
-        "GitHub is connected to the existing Vercel project",
-        "Last known-good production homepage and core endpoints were independently verified",
-        "Governed snapshot architecture passed 52 automated tests on its build branch",
-        "Deployment failure diagnostics now capture pre-build Vercel blocks"
+        "17 September 2026, 08:48 UTC: production 17d669f served the homepage, scan and claims endpoints; this was point-in-time basic delivery, not sustained reliability",
+        "PR #21 repaired the canonical eight-milestone release verifier; the recorded production verification passed",
+        "PR #22 candidate 9ec41de: freshness, source-count and exact-generation integrity guards passed CI; live verification of the candidate remains pending",
+        "Recorded 17 September refresh publication and consumed generations differed; this unresolved acceptance case motivated T1.1"
       ],
-      "nextAction": "Rebase the governed snapshot architecture onto current main, publish the first live-data snapshot and pass exact-commit production verification after Vercel resumes.",
-      "dependency": "Vercel must accept new deployments at the release gate; GitHub Actions is available now."
+      "nextAction": "T1.3: release the combined safeguards with compatible fresh data and verify exact code plus expected/published/consumed generation/hash. Retain rollback material; repeated unattended operation and controlled production rollback remain open.",
+      "dependency": "Existing Git deployment route and accessible permitted sources; no repeat reconnection or resumption is required without contrary evidence."
     },
     {
       "id": "M2",
@@ -131,13 +149,13 @@
       "outcome": "Every material company, subsidiary, brand, promoter-family member, board, CEO, CFO, senior leader and stakeholder can be recognised with aliases, relationships and effective dates.",
       "acceptanceGate": "The 42 official company entries are reconciled with statutory subsidiaries, material brands, company boards and current leadership; ownership, jurisdiction, role history and effective dates are complete and change-monitored.",
       "evidence": [
-        "42/42 official company entries",
-        "40/40 official Group leadership entries",
-        "192 governed starter entities",
-        "Bidirectional company and leadership registry-drift detection"
+        "Historical starter reconciliation: 42 official company entries and 40 Group leadership entries; this does not establish current complete ABG coverage",
+        "192 starter entities in the retained baseline; the earlier audit identified 100 records without sourceUrl",
+        "PR #20 added 21 sourced ownership/leadership observations from eight pages; this remains an initial research batch",
+        "Registry-drift detection exists; required alias, ownership, jurisdiction and dated-role coverage is still incomplete"
       ],
-      "nextAction": "Add statutory subsidiaries, JV ownership, boards, subsidiary CEOs/CFOs, international leaders, role history and effective dates.",
-      "dependency": "Public filings, annual reports and official company disclosures."
+      "nextAction": "T3.1: approve the finite required entity/language/jurisdiction inventory. Then complete T3.2/T3.3 sourced batches and change detection, keeping unresolved required records visible.",
+      "dependency": "Approved required inventory, primary disclosures and editorial review; the initial batch is not full coverage."
     },
     {
       "id": "M3",
@@ -146,17 +164,17 @@
       "completion": 30,
       "implementationCompletion": 45,
       "status": "in_progress",
-      "active": true,
+      "active": false,
       "outcome": "Material developments are discovered directly from official companies, exchanges, regulators, courts, rating agencies and overseas filings instead of depending on media pickup.",
       "acceptanceGate": "Every priority entity has a direct Tier-0 source map; SEC, NSE, BSE and core regulator adapters operate with pagination, PDF/attachment extraction, rights metadata, source baselines and visible failures.",
       "evidence": [
-        "84 governed source domains",
-        "16 direct official-company watches",
-        "Source-health and silent-failure evaluator",
-        "Authoritative-source wave-one implementation branch opened"
+        "Retained configuration has 84 source records; a configured record is not proof of working coverage",
+        "17 September combined live observation consumed a snapshot with 34 of 65 successful checks; coverage was partial",
+        "Source-health and registry checks are implemented; required-source mapping and independent miss evaluation remain open",
+        "Governed collection and source-adapter code exist; complete pagination, attachment, rights and outage acceptance is not established"
       ],
-      "nextAction": "Complete SEC, NSE, BSE, SEBI, RBI, CCI, IRDAI, PFRDA and TRAI source wave one; then add ratings, courts and remaining company endpoints.",
-      "dependency": "Stable public endpoints and permitted use of filings and metadata."
+      "nextAction": "T4.1: approve required source-to-entity coverage and permitted use. Complete adapters and independent missed-event evaluation in T4.2/T4.3; do not substitute request success ratios for required coverage.",
+      "dependency": "Approved coverage inventory, source-use permissions and working endpoints; required inaccessible sources stay recorded gaps."
     },
     {
       "id": "M4",
@@ -169,13 +187,13 @@
       "outcome": "Every event, claim, evidence item, score, correction and editorial decision has a shared, immutable and reconstructable record.",
       "acceptanceGate": "Production Postgres stores raw source records, claim-level evidence, source lineage, contradictions, corrections, lifecycle history and user state; backup and restore are tested.",
       "evidence": [
-        "Production-grade schema and generated seed exist",
-        "Coverage and dependability APIs expose gaps honestly",
-        "Ingestion route writes schema-complete event rows",
-        "Daily tamper-evident evidence-capture workflow exists"
+        "17 September 2026, 08:48 UTC: production persistence returned database_not_configured and operational=false",
+        "PR #22 isolated PostgreSQL CI passed schema, transactional ingestion and access checks; it did not connect the production database",
+        "Persistence schema, ingestion and correction code exist; production compatibility and recovery remain unverified",
+        "Existing intended target is Personal / ABG Pulse Production; no unrelated database was repurposed"
       ],
-      "nextAction": "Connect the production database, run migrations, populate article/claim/evidence tables and implement correction propagation.",
-      "dependency": "Authorised Postgres/Supabase project."
+      "nextAction": "T2.1: inspect the existing intended database and migration history. Apply minimum access controls, configure encrypted server credentials, preserve permitted history before display limits and prove real read/write, corrections and isolated restoration.",
+      "dependency": "Authorised access to existing project kzqymboxilxvdgacwypy, compatible migrations and early T7 security/rights controls."
     },
     {
       "id": "M5",
@@ -184,17 +202,17 @@
       "completion": 45,
       "implementationCompletion": 65,
       "status": "in_progress",
-      "active": false,
+      "active": true,
       "outcome": "The feed is low-noise and the materiality, certainty, momentum, media tone, observed public sentiment, narrative drift and forecast outputs are transparent and calibrated.",
       "acceptanceGate": "Blind benchmarks demonstrate high precision and recall; routine stock tips, public questions and weak entity mentions are excluded; scores are entity-specific, multilingual where needed and calibrated against real outcomes.",
       "evidence": [
-        "65 automated tests pass on current main",
-        "Routine stock advice and Reddit-only questions are excluded from news",
-        "Low certainty alone cannot promote a weak item to Watch",
-        "Dependability evaluator and source-health baselines are implemented"
+        "Pressure probes reproduced metadata-only truth promotion and false domain-based corroboration on the recorded baseline",
+        "PR #22 candidate 9ec41de keeps metadata-only claims provisional and confidence null, including legacy-reader projections; this is a safeguard, not statement verification",
+        "Candidate 9ec41de passed 412 software tests and 13 fixture-browser checks across the combined safeguards; these counts do not certify factual accuracy",
+        "Passage-level support, reporting lineage, held-out quality evaluation and calibrated decision outputs remain incomplete"
       ],
-      "nextAction": "Build a labelled reference corpus, add semantic event matching, human-code sentiment and grade predictions and narrative-drift alerts.",
-      "dependency": "Representative historical/live corpus; licensed social data only if proven necessary."
+      "nextAction": "Complete the T1.3 release verification of T5.1 safeguards. Then establish the independent T5.2 reference protocol, implement T5.3 statement-to-passage checks and evaluate T5.4 against held-out cases.",
+      "dependency": "Real permitted source passages, approved inventory and independent editorial assessment; social access is optional unless separately approved."
     },
     {
       "id": "M6",
@@ -207,13 +225,13 @@
       "outcome": "A senior user understands the material picture in under 60 seconds on mobile, can see what changed since the last visit and receives only genuinely important alerts.",
       "acceptanceGate": "Median briefing completion is 60 seconds or less; cards are glanceable; role-specific briefs, cross-device Watching, actionable alerts, export/share and accessibility pass target-user tests.",
       "evidence": [
-        "Muted mobile-first PWA",
-        "Must Know / Watch / Other hierarchy",
-        "Flexible period and exact IST window",
-        "Clickable explanations, source coverage and Job Meter"
+        "Mobile-first briefing, Must Know / Watch / Other, period filtering and evidence dialogs are implemented",
+        "PR #22 candidate 9ec41de passed 13 QA browser checks, including support labels and same-device watch persistence; these used fixtures",
+        "Dual progress display already exists; historical scores are not current production readiness",
+        "Full real-data browser acceptance, authenticated cross-device continuity and 60-second comprehension testing remain open"
       ],
-      "nextAction": "Add the dual progress meter, reduce card density, build role-specific briefs and test the complete daily habit loop with senior users.",
-      "dependency": "Persistent user state and target-user testing."
+      "nextAction": "T6.1: prove the real source-to-storage-to-briefing path. Complete T6.2 authenticated cross-device features and T6.3 target-user comprehension; do not replace production acceptance with fixture checks.",
+      "dependency": "Persistent user state, access controls, real data and representative target-user review."
     },
     {
       "id": "M7",
@@ -226,11 +244,12 @@
       "outcome": "Sensitive intelligence is accessible only to authorised users and every critical alert, correction, source right and retention decision has an accountable owner.",
       "acceptanceGate": "SSO/RBAC, rate limits, secret rotation, editorial permissions, critical-alert approval, privacy, source-rights enforcement and retention controls are operational and security-tested.",
       "evidence": [
-        "Source-rights fields and fail-closed behaviours exist",
-        "Critical dependability gates are documented"
+        "Source-rights fields and fail-closed behaviours exist; independent enforcement review remains open",
+        "Reviewers, maintainer, audience and escalation ownership have not been assigned by this roadmap",
+        "Private-data/user-state controls are required before the persistent pilot; final operating acceptance remains separate"
       ],
-      "nextAction": "Select identity provider and authorised audience; implement RBAC, rate limiting, editorial roles, rights enforcement and security tests.",
-      "dependency": "Identity provider and organisational governance decisions."
+      "nextAction": "T7.1: confirm audience, cost ceiling and named reviewers/maintainer. Implement minimum access, secret, rights and retention controls before private data; later verify rate limits, alerts, recovery and independent sign-off.",
+      "dependency": "Owner decisions, authorised identity/configuration tools and independent technical/editorial review."
     },
     {
       "id": "M8",
@@ -240,13 +259,14 @@
       "implementationCompletion": 5,
       "status": "not_started",
       "active": false,
-      "outcome": "ABG Pulse earns 9–10/10 trust through measured real-world performance rather than a product claim.",
+      "outcome": "Demonstrate dependable operation against an independent reference with retained failures, meaningful sample sizes and explicit limitations.",
       "acceptanceGate": "Thirty consecutive live days achieve 100% critical-event recall, at least 98% high-materiality weighted recall, zero unsupported material claims, zero silent Tier-0 outages and trusted daily use.",
       "evidence": [
-        "Dependability ledger, evaluator and daily evidence-capture mechanism are built but the live proof period has not started"
+        "Dependability ledger/evaluator and evidence-capture code exist; no qualifying 30-day proof is established",
+        "Synthetic regression tests and isolated CI do not substitute for actual complete live days or independent event samples"
       ],
-      "nextAction": "Begin the shadow benchmark only after M1, M3 and M4 are operational; record every miss as a regression test.",
-      "dependency": "Operational production system, independent reference set and 30 elapsed days."
+      "nextAction": "Start T8.1 only after T7.5 accepts the integrated release and independent protocol. Retain all failures and complete T8.2 adjudication without deleting bad days or changing denominators.",
+      "dependency": "Operational production system with accepted integrated T1-T7 evidence, frozen independent reference/deadlines, named operators/reviewers and 30 complete elapsed operating days."
     }
   ]
 }

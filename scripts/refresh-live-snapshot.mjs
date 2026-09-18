@@ -1,17 +1,13 @@
 import { mkdir, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { createHash } from 'node:crypto';
+import { sealPayload, validateSourceCounts, positiveLimit, utcTime } from '../lib/data-integrity.mjs';
+import { validateLiveSnapshot } from '../lib/live-snapshot.mjs';
 import { performLiveScan } from '../api/scan.js';
 
 function validDate(value, fallback = new Date()) {
-  const date = value ? new Date(value) : fallback;
+  const date = value === undefined ? fallback : value instanceof Date ? new Date(value.getTime()) : new Date(utcTime(value));
   if (Number.isNaN(date.getTime())) throw new TypeError(`Invalid snapshot date: ${value}`);
   return date;
-}
-
-function boundedRatio(value, fallback) {
-  const number = Number(value);
-  return Number.isFinite(number) ? Math.max(0, Math.min(1, number)) : fallback;
 }
 
 export function writeCliResultAndExit(stream, payload, exitCode, exit = process.exit) {
@@ -22,7 +18,14 @@ export function writeCliResultAndExit(stream, payload, exitCode, exit = process.
 export async function generateLiveSnapshot({
   now = validDate(process.env.SNAPSHOT_NOW),
   spanDays = Number(process.env.SNAPSHOT_SPAN_DAYS || 30),
-  minimumSuccessRatio = boundedRatio(process.env.SNAPSHOT_MIN_SUCCESS_RATIO, 0.3),
+  minimumSuccessRatio = positiveLimit(process.env.SNAPSHOT_MIN_SUCCESS_RATIO, 0.3, 'snapshot_coverage_config_invalid', 1),
+  source = {
+      repository: process.env.GITHUB_REPOSITORY || 'NinjaRK/abg-pulse',
+      commitSha: process.env.GITHUB_SHA || null,
+      workflowRunId: process.env.GITHUB_RUN_ID || null,
+      workflowRunAttempt: process.env.GITHUB_RUN_ATTEMPT || null,
+      trigger: process.env.GITHUB_EVENT_NAME || 'manual'
+  },
   scan = performLiveScan
 } = {}) {
   const end = validDate(now);
@@ -39,9 +42,10 @@ export async function generateLiveSnapshot({
   if (!payload || !Array.isArray(payload.events) || !payload.meta) {
     throw new Error('Live scan did not return a structurally valid payload.');
   }
-  const queryCount = Number(payload.meta.queryCount || 0);
+  minimumSuccessRatio = positiveLimit(minimumSuccessRatio, 0.3, 'snapshot_coverage_config_invalid', 1);
+  const queryCount = payload.meta.queryCount;
   const successfulQueries = Number(payload.meta.successfulQueries || 0);
-  const successRatio = queryCount > 0 ? successfulQueries / queryCount : 0;
+  const successRatio = validateSourceCounts(payload.meta, payload.events.length);
   if (queryCount < 1) throw new Error('Live scan attempted no source checks.');
   if (successRatio < minimumSuccessRatio) {
     throw new Error(`Snapshot rejected: only ${successfulQueries}/${queryCount} source checks succeeded (${Math.round(successRatio * 100)}%).`);
@@ -55,13 +59,7 @@ export async function generateLiveSnapshot({
     generatedAt,
     windowStart: start.toISOString(),
     windowEnd: end.toISOString(),
-    source: {
-      repository: process.env.GITHUB_REPOSITORY || 'NinjaRK/abg-pulse',
-      commitSha: process.env.GITHUB_SHA || null,
-      workflowRunId: process.env.GITHUB_RUN_ID || null,
-      workflowRunAttempt: process.env.GITHUB_RUN_ATTEMPT || null,
-      trigger: process.env.GITHUB_EVENT_NAME || 'manual'
-    },
+    source,
     integrity: {
       algorithm: 'sha256',
       payloadHash: null
@@ -76,9 +74,9 @@ export async function generateLiveSnapshot({
     }
   };
 
-  const unhashed = JSON.stringify(snapshot);
-  snapshot.integrity.payloadHash = createHash('sha256').update(unhashed).digest('hex');
-  return snapshot;
+  const sealed = sealPayload(snapshot);
+  validateLiveSnapshot(sealed, { minimumSuccessRatio });
+  return sealed;
 }
 
 export async function writeLiveSnapshot(outputPath, options = {}) {
