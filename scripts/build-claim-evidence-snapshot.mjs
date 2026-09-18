@@ -96,7 +96,9 @@ const payload = {
     unsupportedMaterialClaimCount: unsupportedMaterialClaims.length,
     potentialContradictionCount: contradictions.length,
     publishable: unsupportedMaterialClaims.length === 0,
-    rule: 'No unsupported factual claim at or above the materiality floor may be published as a dependable claim graph.'
+    factualAccuracyVerified: false,
+    supportPolicy: graph.supportPolicy,
+    rule: 'Material claims without traceable sources block publication. Source attachment does not establish factual accuracy.'
   },
   unsupportedMaterialClaims,
   contradictions

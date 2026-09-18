@@ -1,3 +1,4 @@
+import { applyEventSupportPolicy, CLAIM_SUPPORT_POLICY } from '../lib/claim-support.mjs';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
@@ -39,7 +40,10 @@ function send(res, status, body, cache = false) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Cache-Control', cache ? 'public, s-maxage=300, stale-while-revalidate=600' : 'no-store');
-  res.end(JSON.stringify(body));
+  const delivery = Array.isArray(body.events)
+    ? { ...body, supportPolicy: CLAIM_SUPPORT_POLICY, events: body.events.map(applyEventSupportPolicy) }
+    : body;
+  res.end(JSON.stringify(delivery));
 }
 
 function decodeXml(value = '') {

@@ -24,7 +24,15 @@ try:
         expect(page.locator('#sidebar-build-progress')).to_have_text('40%')
         page.locator('#period-select').select_option('30d')
         detail = page.locator('#view-today [data-action="detail"]').first
-        expect(detail).to_be_visible();detail.click();expect(page.locator('#story-dialog')).to_be_visible()
+        expect(detail).to_be_visible()
+        labels = page.locator('#view-today .status-pill').all_text_contents()
+        assert labels and all('unverified' in value or 'No traceable source' in value for value in labels), labels
+        assert page.locator('#view-today [data-claim-support]').count() > 0
+        passed('Legacy confirmed fixture events display unverified source-linked labels and no truth percentage')
+        detail.click();expect(page.locator('#story-dialog')).to_be_visible()
+        expect(page.locator('#story-dialog [data-claim-support]')).to_contain_text('statement verification pending')
+        assert 'Certainty' not in page.locator('#story-dialog .intelligence-grid').inner_text()
+        passed('Evidence dialog explicitly marks statement verification pending')
         page.get_by_role('button',name='Close story',exact=True).click()
         passed('Home loads, 30-day filter works and evidence dialog opens/closes')
         watch = page.locator('#view-today [data-action="watch"]').first

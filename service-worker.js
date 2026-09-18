@@ -1,6 +1,6 @@
-const CACHE_NAME = 'abg-pulse-shell-v6';
+const CACHE_NAME = 'abg-pulse-shell-t51-v1';
 const SHELL = [
-  '/', '/index.html', '/styles.css', '/app.js', '/core.mjs',
+  '/', '/index.html', '/styles.css', '/app.js', '/core.mjs', '/lib/claim-support.mjs',
   '/manifest.webmanifest', '/assets/icon.svg', '/assets/icon-192.png', '/assets/icon-512.png',
   '/data/entities.json', '/data/source-registry.json', '/data/entity-universe-summary.json', '/data/build-milestones.json'
 ];

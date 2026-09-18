@@ -1,3 +1,4 @@
+import { eventSupportPresentation } from './lib/claim-support.mjs';
 import {
   dedupeEvents,
   sortEvents,
@@ -269,12 +270,12 @@ function scoreColor(score, type = 'standard') {
 
 
 const METHODOLOGY = {
-  must: { title: 'Must Know', lead: 'Materially changes today’s senior-management picture and is supported strongly enough to brief now.', formula: 'Must Know when materiality ≥76 and certainty ≥58; or an immediate high-impact event reaches materiality 64; or materiality ≥68 with momentum ≥72 and certainty ≥50.', note: 'Article volume alone cannot make a story Must Know.' },
+  must: { title: 'Must Know', lead: 'A heuristic attention priority, not a factual verification label. Check the sources before acting.', formula: 'Must Know when materiality ≥76 and certainty ≥58; or an immediate high-impact event reaches materiality 64; or materiality ≥68 with momentum ≥72 and certainty ≥50.', note: 'Article volume alone cannot make a story Must Know.' },
   watch: { title: 'Watch', lead: 'May change tomorrow’s picture, is accelerating, or needs stronger confirmation.', formula: 'Watch when 24-hour importance ≥52%, materiality ≥58, momentum ≥62, or a relevant signal has certainty below 48.', note: 'Watch means prepare and verify—not automatically respond.' },
   other: { title: 'Other Developments', lead: 'Relevant to the ABG record, but does not change what a senior leader needs to know now.', formula: 'A relevant event that does not cross Must Know or Watch thresholds.', note: 'Most developments can correctly sit here. That is signal discipline.' },
   materiality: { title: 'Materiality', lead: 'Potential consequence for ABG—not the loudness of coverage.', formula: 'Weighted event type + entity seniority + source quality + source breadth, capped at 100.', note: 'This is decision support, not a SEBI materiality determination.' },
-  certainty: { title: 'Certainty', lead: 'Strength of evidence supporting the factual core.', formula: 'Base by source tier + limited corroboration + confirmation terms − speculative language.', note: 'Several domains can still repeat one wire story, so count is not proof.' },
-  momentum: { title: 'Momentum / Trending', lead: 'How quickly media attention is building in the selected period.', formula: 'Recent item volume + independent-source diversity + acceleration; capped at 100.', note: 'Momentum is attention, not importance or approval.' },
+  certainty: { title: 'Statement verification', lead: 'Statement-level source verification has not yet been performed.', formula: 'Source tier, headline language and domain counts do not verify the statement. The legacy ranking signal is not a probability of truth.', note: 'Source-linked claims remain provisional; syndicated copies are not independent confirmation.' },
+  momentum: { title: 'Momentum / Trending', lead: 'How quickly media attention is building in the selected period.', formula: 'Recent item volume + source-domain breadth (not verified independence) + acceleration; capped at 100.', note: 'Momentum is attention, not importance or approval.' },
   sentiment: { title: 'Media Tone Score', lead: 'Positive or negative language used toward the relevant ABG entity in published coverage.', formula: 'Favourable and adverse language is normalised from −100 to +100. Radar uses materiality-weighted entity averages.', note: 'It is media language—not public opinion, reputation value or business impact.' },
   'public-sentiment': { title: 'Observed Public Sentiment', lead: 'Direction of accessible public-conversation language around an ABG event.', formula: 'Open-public posts are scored from −100 to +100 and weighted modestly by accessible engagement. Sample size, channel count and confidence are always shown.', note: 'This is not “full public sentiment”. X, LinkedIn, Instagram, YouTube comments and other closed-platform data require authorised or licensed access.' },
   narrative: { title: 'Narrative Drift', lead: 'Where emerging shorthand moves away from verified institutional facts.', formula: 'Headline/frame divergence + personality displacement + ownership simplification + source spread.', note: 'A drift signal asks for human review; it does not prescribe a response.' },
@@ -283,7 +284,7 @@ const METHODOLOGY = {
   universe: { title: 'ABG Entity Universe', lead: 'The governed list of companies, people, brands, initiatives and material stakeholders that Pulse is designed to recognise.', formula: 'The company and leadership registers are reconciled to ABG’s official public pages; aliases, relationships and verification dates are stored with each entity.', note: 'Organisations and roles change. The verification date is therefore as important as the count.' },
   gaps: { title: 'What We May Have Missed', lead: 'Shows source failures, thin corroboration and visible coverage gaps.', formula: 'Post-scan checks inspect provider errors, entity-universe reconciliation, public-conversation availability and evidence quality.', note: 'No warning means no configured anomaly—not guaranteed completeness.' },
   audit: { title: 'Auditability', lead: 'Makes the path from event to score, label and source traceable.', formula: 'Entity → event → claim/evidence → intelligence score → classification.', note: 'Explainability cannot improve the quality of a weak source.' },
-  scores: { title: 'How the Scores Work', lead: 'Each score answers a different question so consequence, truth, public response and attention are never confused.', formula: 'Materiality = consequence · Certainty = evidence · Momentum = attention · Media tone = published language · Observed public sentiment = accessible public conversation · Forecast = future importance · Drift = framing risk.', note: 'The platform exposes its rules rather than hiding heuristics behind “AI”.' },
+  scores: { title: 'How the Scores Work', lead: 'Each score answers a different question so consequence, truth, public response and attention are never confused.', formula: 'Materiality = consequence · Statement verification = pending · Momentum = attention · Media tone = published language · Observed public sentiment = accessible public conversation · Forecast = future importance · Drift = framing risk.', note: 'The platform exposes its rules rather than hiding heuristics behind “AI”.' },
   progress: { title: 'Job Meter', lead: 'Two numbers prevent activity from being confused with achievement: verified completion and implementation completed.', formula: 'Verified = weighted work with acceptance evidence. Built = weighted code or operating capability already implemented. The amber gap is built work still awaiting live or independent proof.', note: 'The verified number is the product truth. The built number shows momentum without pretending that unproven work is delivered.' }
 };
 
@@ -343,8 +344,8 @@ function bucketLabel(bucket) {
   return bucket === 'must' ? 'Must know' : bucket === 'watch' ? 'Watch' : 'Other';
 }
 
-function statusLabel(status) {
-  return status === 'confirmed' ? 'Confirmed' : status === 'strong' ? 'Strong reporting' : 'Developing';
+function statusLabel(event) {
+  return eventSupportPresentation(event).label;
 }
 
 function watchStateLabel(value) {
@@ -379,7 +380,7 @@ function storyCard(event, { compact = false } = {}) {
       <div class="score-stack">
         ${scoreItem('Materiality', intelligence.materiality ?? 0, 'materiality')}
         ${scoreItem('Momentum', intelligence.momentum ?? 0, 'momentum')}
-        ${scoreItem('Certainty', intelligence.certainty ?? 0, 'certainty')}
+        <p class="method-note" data-claim-support="source-metadata-only-v1">Statement check: pending</p>
         ${sentimentScoreItem(intelligence.mediaTone ?? intelligence.sentiment ?? 0)}
       </div>
       ${state.preferences.showForecasts ? `<div class="forecast-mini">24-hour importance<strong>${escapeHtml(prediction.p24 ?? 0)}%</strong></div>` : ''}
@@ -389,7 +390,7 @@ function storyCard(event, { compact = false } = {}) {
     <article class="story-card bucket-${escapeHtml(event.bucket || 'other')} ${event.live ? 'is-live' : ''}" data-event-id="${escapeHtml(event.id)}">
       <div class="story-main">
         <div class="story-meta">
-          <span class="status-pill ${escapeHtml(event.status || 'developing')}">${escapeHtml(statusLabel(event.status))}</span>
+          <span class="status-pill developing">${escapeHtml(statusLabel(event))}</span>
           <span class="category-pill">${escapeHtml(event.category || 'Corporate')}</span>
           <span class="tone-pill ${toneClass(intelligence.mediaTone ?? intelligence.sentiment)}">Tone ${signed(intelligence.mediaTone ?? intelligence.sentiment)} · ${toneLabel(intelligence.mediaTone ?? intelligence.sentiment)}</span>
           ${publicPill}
@@ -664,7 +665,7 @@ function renderRadar() {
       <div class="narrative-layout">
         <div>
           <div class="narrative-frames">
-            <div class="frame-card"><span>Verified frame</span><p>${escapeHtml(narrative.officialFrame)}</p></div>
+            <div class="frame-card"><span>Reference frame · not independently verified</span><p>${escapeHtml(narrative.officialFrame)}</p></div>
             <div class="frame-arrow" aria-hidden="true">→</div>
             <div class="frame-card emerging"><span>Emerging shorthand</span><p>${escapeHtml(narrative.emergingFrame)}</p></div>
           </div>
@@ -676,7 +677,7 @@ function renderRadar() {
   } else {
     $('#narrative-risk-badge').textContent = 'No active drift';
     $('#narrative-risk-badge').className = 'risk-badge low';
-    $('#narrative-card').innerHTML = '<div class="empty-state"><h2>No narrative divergence detected</h2><p>The verified and emerging frames currently remain aligned.</p></div>';
+    $('#narrative-card').innerHTML = '<div class="empty-state"><h2>No narrative divergence detected</h2><p>No divergence was detected between the reference and emerging frames; neither is independently verified.</p></div>';
   }
 
   const forecastEvents = [...events]
@@ -716,7 +717,7 @@ function renderSearch() {
     });
   }
   $('#search-results-meta').textContent = `${events.length} development${events.length === 1 ? '' : 's'} found in ${periodPresetLabel().toLowerCase()}${query ? ` for “${state.searchQuery}”` : ''} · ${exactPeriodLabel()}.`;
-  $('#search-results').innerHTML = events.map((event) => storyCard(event, { compact: true })).join('') || emptyCard('No matching evidence', 'Try a company, person, brand or topic already present in the verified record.');
+  $('#search-results').innerHTML = events.map((event) => storyCard(event, { compact: true })).join('') || emptyCard('No matching evidence', 'Try a company, person, brand or topic already present in the saved record.');
   bindStoryActions($('#view-search'));
 }
 
@@ -748,7 +749,7 @@ function answerQuestion(question) {
       const entityScore = (event.entityIds || []).filter((id) => entityIds.has(id)).length * 4;
       return { event, score: tokenScore + entityScore };
     }).filter((item) => item.score > 0).sort((a, b) => b.score - a.score || (b.event.intelligence?.materiality || 0) - (a.event.intelligence?.materiality || 0)).slice(0, 5).map((item) => item.event);
-    if (matchedEntities.length) intro = `The current record contains the following verified or clearly labelled developments involving ${matchedEntities.map((entity) => entity.name).join(', ')}.`;
+    if (matchedEntities.length) intro = `The current record contains the following source-linked, unverified developments involving ${matchedEntities.map((entity) => entity.name).join(', ')}.`;
   }
 
   return { intro, matches };
@@ -1006,7 +1007,7 @@ function updateLastScanLabel() {
     label.textContent = `Checked through ${formatDate(snapshot.coverageThrough || snapshot.windowEnd, true)}${snapshot.coverageComplete ? '' : ' · newer period not yet checked'}`;
   }
   else if (state.liveStatus === 'success' && state.lastScanAt) label.textContent = `Live scan ${relativeTime(state.lastScanAt)}`;
-  else if (state.liveStatus === 'error') label.textContent = 'Verified brief active · live discovery degraded';
+  else if (state.liveStatus === 'error') label.textContent = 'Saved brief active · live discovery degraded';
   else label.textContent = 'Forward monitoring active';
 }
 
@@ -1069,16 +1070,16 @@ function openStory(event) {
   const narrative = event.narrative;
   const sources = event.sources || [];
   $('#dialog-content').innerHTML = `
-    <div class="story-meta"><span class="status-pill ${escapeHtml(event.status)}">${escapeHtml(statusLabel(event.status))}</span><span class="category-pill">${escapeHtml(event.category)}</span><span>${escapeHtml(bucketLabel(event.bucket))}</span></div>
+    <div class="story-meta"><span class="status-pill developing">${escapeHtml(statusLabel(event))}</span><span class="category-pill">${escapeHtml(event.category)}</span><span>${escapeHtml(bucketLabel(event.bucket))}</span></div>
     <h2 class="dialog-headline" id="dialog-headline">${escapeHtml(event.headline)}</h2>
     <p class="dialog-summary">${escapeHtml(event.summary)}</p>
     <section class="dialog-section"><h3>Why it matters · interpretation</h3><p>${escapeHtml(event.whyItMatters)}</p></section>
     <section class="dialog-section"><h3>Entities</h3><p>${escapeHtml(entities.map((entity) => entity.name).join(' · ') || 'Aditya Birla Group')}</p></section>
-    ${narrative ? `<section class="dialog-section"><h3>Narrative radar</h3><div class="narrative-frames"><div class="frame-card"><span>Verified frame</span><p>${escapeHtml(narrative.officialFrame)}</p></div><div class="frame-arrow">→</div><div class="frame-card emerging"><span>Emerging shorthand</span><p>${escapeHtml(narrative.emergingFrame)}</p></div></div><p class="narrative-takeaway"><strong>Recommendation:</strong> ${escapeHtml(narrative.recommendation)}</p></section>` : ''}
+    ${narrative ? `<section class="dialog-section"><h3>Narrative radar</h3><div class="narrative-frames"><div class="frame-card"><span>Reference frame · not independently verified</span><p>${escapeHtml(narrative.officialFrame)}</p></div><div class="frame-arrow">→</div><div class="frame-card emerging"><span>Emerging shorthand</span><p>${escapeHtml(narrative.emergingFrame)}</p></div></div><p class="narrative-takeaway"><strong>Recommendation:</strong> ${escapeHtml(narrative.recommendation)}</p></section>` : ''}
     <section class="dialog-section"><h3>Intelligence scores</h3><div class="intelligence-grid">
-      ${intelligenceTile('Materiality', intelligence.materiality)}${intelligenceTile('Certainty', intelligence.certainty)}${intelligenceTile('Momentum', intelligence.momentum)}${intelligenceTile('Media tone', signed(intelligence.mediaTone ?? intelligence.sentiment))}${intelligenceTile('Observed public sentiment', Number.isFinite(Number(intelligence.publicSentiment?.score)) ? `${signed(intelligence.publicSentiment.score)} · n=${intelligence.publicSentiment.sampleSize || 0}` : 'Unavailable')}${intelligenceTile('Narrative alignment', intelligence.narrativeAlignment)}${intelligenceTile('24h importance', prediction.p24 !== undefined ? `${prediction.p24}%` : '—')}
+      ${intelligenceTile('Materiality', intelligence.materiality)}${intelligenceTile('Statement check', 'Pending')}${intelligenceTile('Momentum', intelligence.momentum)}${intelligenceTile('Media tone', signed(intelligence.mediaTone ?? intelligence.sentiment))}${intelligenceTile('Observed public sentiment', Number.isFinite(Number(intelligence.publicSentiment?.score)) ? `${signed(intelligence.publicSentiment.score)} · n=${intelligence.publicSentiment.sampleSize || 0}` : 'Unavailable')}${intelligenceTile('Narrative alignment', intelligence.narrativeAlignment)}${intelligenceTile('24h importance', prediction.p24 !== undefined ? `${prediction.p24}%` : '—')}
     </div>${prediction.drivers?.length ? `<p class="method-note">Forecast drivers: ${escapeHtml(prediction.drivers.join(' · '))}. Posture: ${escapeHtml(prediction.posture || 'WATCH')}.</p>` : ''}</section>
-    <section class="dialog-section"><h3>Evidence and sources</h3>${sources.length ? `<ul class="source-list">${sources.map((source) => `<li><a href="${escapeHtml(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(source.name || domainFromUrl(source.url))}</span><small>Tier ${source.tier ?? '—'} ↗</small></a></li>`).join('')}</ul>` : '<p>No external source link is available. The item must not be treated as operationally verified.</p>'}<p class="method-note">Published ${escapeHtml(formatDate(event.publishedAt, true))}. Updated ${escapeHtml(formatDate(event.updatedAt || event.publishedAt, true))}. Facts above are derived from the linked evidence; “Why it matters” and forecasts are labelled interpretation.</p></section>
+    <section class="dialog-section"><h3>Evidence and sources</h3><p class="method-note" data-claim-support="source-metadata-only-v1">${escapeHtml(eventSupportPresentation(event).notice)}</p>${sources.length ? `<ul class="source-list">${sources.map((source) => `<li><a href="${escapeHtml(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(source.name || domainFromUrl(source.url))}</span><small>Tier ${source.tier ?? '—'} ↗</small></a></li>`).join('')}</ul>` : '<p>No external source link is available. The item must not be treated as operationally verified.</p>'}<p class="method-note">Published ${escapeHtml(formatDate(event.publishedAt, true))}. Updated ${escapeHtml(formatDate(event.updatedAt || event.publishedAt, true))}. Statements above have not been verified against source passages; “Why it matters” and forecasts are labelled interpretation.</p></section>
     <section class="dialog-section"><h3>Improve the system</h3><div class="feedback-row">${['Useful','Not important','Wrong entity','Duplicate','Missing context','Wrong summary'].map((label) => `<button data-feedback="${escapeHtml(label)}" data-event-id="${escapeHtml(event.id)}">${escapeHtml(label)}</button>`).join('')}</div></section>`;
   $$('[data-feedback]', dialog).forEach((button) => button.addEventListener('click', () => recordFeedback(button.dataset.eventId, button.dataset.feedback)));
   if (typeof dialog.showModal === 'function') dialog.showModal();
@@ -1279,7 +1280,7 @@ async function scanLiveSources({ manual = false, periodChange = false } = {}) {
     updateLastScanLabel();
     renderControlRoom();
     renderScopeToolbar();
-    if (manual || periodChange) showToast('Live discovery is temporarily unavailable. The verified period record remains available.');
+    if (manual || periodChange) showToast('Live discovery is temporarily unavailable. The saved period record remains available; verify sources before acting.');
     console.warn('Live scan unavailable:', error);
   } finally {
     $('#refresh-button').classList.remove('is-loading');
