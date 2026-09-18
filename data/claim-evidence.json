@@ -1,15 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-09-18T01:19:26.226Z",
+  "supportPolicy": "source-metadata-only-v1",
+  "statementVerification": "not_performed",
+  "generatedAt": "2026-09-18T09:10:43.837Z",
   "sourceCommit": "17d669f3e66806922e51b05d29f13f9c35fe95cd",
   "summary": {
     "eventCount": 60,
     "claimCount": 60,
     "factClaimCount": 60,
     "interpretationCount": 0,
-    "evidenceCount": 167,
-    "supportedFactClaims": 3,
-    "provisionalFactClaims": 57,
+    "evidenceCount": 161,
+    "supportedFactClaims": 0,
+    "provisionalFactClaims": 60,
     "unsupportedFactClaims": 0
   },
   "eventSummaries": [
@@ -26,18 +28,18 @@
         "87926c14a03da54efcea15ce",
         "cc88fab22fb6ffd29f6a9f83",
         "687e9dd82de513c96edb464f",
-        "55036f3ce8417864391265f2",
         "16edc5b2388688ba8665c57c",
         "4ab6f2f54b43997d76fc8119",
         "3ca30f78d4ae985938402b34",
         "db21dc7c54ebe2cb2fa874be",
         "b90a9e56c97bec7c7c6df350",
         "4250e230b6ec002028301964",
-        "0bbd28e8e841fbac37c89dda",
+        "a1d899dd23c03c23ec699deb",
         "038b624cf44838d5490a3c12",
         "6724017f63f2547d2022428f",
         "f96f0473cd10614088678e76",
-        "01fe7c8c5481d2e283d71a27"
+        "01fe7c8c5481d2e283d71a27",
+        "d4beafebf52cf114ed29df55"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -50,7 +52,7 @@
         "reliance-jio"
       ],
       "claimIds": [
-        "aae42cefcb99cc777785c01f"
+        "6127395309913f8045014409"
       ],
       "evidenceIds": [
         "22f97798fe809403f64c63f3",
@@ -59,9 +61,8 @@
         "2d7565a85a84760c2fbd6876",
         "499d11f69579725d897d4d13",
         "312dd19c999154352b2389ce",
-        "867fb419fd47e7df48211729",
         "e5f8dfaf2c3e6b166e2711ba",
-        "1cdb9bcc2477ebb0d0dd3499"
+        "e774e20820860475a499592f"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -78,10 +79,9 @@
         "ab16692c71d282318fcc7901",
         "ad34338d81061332ffe1ace9",
         "121e1b72fcdd70ff99734158",
-        "fc398518167f557080644f9b",
         "a00b827412c9e7e16e899619",
         "75d2332e3aa37e0b3b86b6d2",
-        "cb848f1ad235590327be0735"
+        "afc3fd1ead052497e2a2b72e"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -90,31 +90,32 @@
       "eventId": "live-12ki3f8",
       "entityIds": [
         "abg",
-        "ultratech"
+        "ultratech",
+        "kmb"
       ],
       "claimIds": [
         "7e5a6b54732d76e9354a769d"
       ],
       "evidenceIds": [
         "bcd07660751957fb53a2aef2",
+        "be89948daf53de14ef593e43",
         "851d2faef9b2b165149c6e48",
-        "5b58ee6ff69bfd3273b98ce8",
         "488836cbf24290d247cc9ce6",
         "0d55d34195967a9610c5fea9",
+        "5b58ee6ff69bfd3273b98ce8",
         "10304a16c46da216a3e66848",
         "4b2120f12f581bf74b00e54c",
-        "7a59dcae5fd71c0af214c916",
+        "8278194631380e1c7f8d7b51",
         "5c1230df965f5e859c647bd8",
         "7a13869aef6b3bf94e77af77",
-        "b798cd86c586b2fa85c48c98",
+        "c2e59a97d56f8a84ddc8a005",
         "935f582b4b07d37dbe24a058",
         "4e1a0a3b095acf26aca8866f",
         "75a62579729b0404c7ca0ec9",
-        "156e19d99c4b995a5a0bb992",
-        "3b22bcdb34041c9054a1400d"
+        "156e19d99c4b995a5a0bb992"
       ],
       "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 0
+      "provisionalFactClaims": 1
     },
     {
       "eventId": "live-521qun",
@@ -166,22 +167,6 @@
       "provisionalFactClaims": 1
     },
     {
-      "eventId": "live-yhw9li",
-      "entityIds": [
-        "vi",
-        "supreme-court-india"
-      ],
-      "claimIds": [
-        "a2dd7bd480c7a6ea9d11568b"
-      ],
-      "evidenceIds": [
-        "7ba42b9de9acd7a168740932",
-        "eb17f06e704d5d742763a7c3"
-      ],
-      "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 1
-    },
-    {
       "eventId": "live-1n06j5",
       "entityIds": [
         "kmb"
@@ -210,19 +195,19 @@
         "9def8e2541301923defdb62c",
         "3a304ba3f8c05e74286efb96",
         "0f4ac93203fd7de519c43d00",
+        "b5998c0617c02a3812cd290c",
         "fe8de6b0c0fc5ae4071510ff",
-        "5c6478065464507f32a7bff3",
         "171b9e3aee930c58607f1c0c",
-        "3d56d2141d020bf6ae3d45a3",
+        "762a001c9fd46df87f04a2e9",
         "4b07f4bfbf0107da658e0c64",
         "84827d5324d1b61c39fd68d2",
         "53f21af5a7dee7aa341a069c",
-        "c506d17474501447e0edc3d5",
+        "9d75ab962bca9884b3545bd2",
         "5dc5b2ccd7a4799518253fa8",
         "d9f7666ad4ba92d72678031e"
       ],
       "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 0
+      "provisionalFactClaims": 1
     },
     {
       "eventId": "live-1bfku9",
@@ -250,7 +235,7 @@
         "85d83abf944a00f864d45894"
       ],
       "evidenceIds": [
-        "cae085c1098fea55b12a921e",
+        "c2f1fe4653dbd04d431196e2",
         "05280657679143d0b8887ee2"
       ],
       "unsupportedFactClaims": 0,
@@ -283,6 +268,21 @@
       "provisionalFactClaims": 1
     },
     {
+      "eventId": "live-yhw9li",
+      "entityIds": [
+        "vi",
+        "supreme-court-india"
+      ],
+      "claimIds": [
+        "ae4a6d0dc816b7c73772185d"
+      ],
+      "evidenceIds": [
+        "7ba42b9de9acd7a168740932"
+      ],
+      "unsupportedFactClaims": 0,
+      "provisionalFactClaims": 1
+    },
+    {
       "eventId": "live-1bih5dy",
       "entityIds": [
         "abg"
@@ -292,7 +292,7 @@
       ],
       "evidenceIds": [
         "f062ea8cbeaa5d5918691882",
-        "0d1e56fd5a129421bf57b3ec"
+        "46b4bc551a3c0f2533dc9fe3"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -378,11 +378,12 @@
         "hindalco"
       ],
       "claimIds": [
-        "b8b88e4e1822a9cc90a8700c"
+        "561bb861929171d151acd3d5"
       ],
       "evidenceIds": [
-        "79b00a0d777b7dd78f9d3487",
+        "d9a4a04d5334ca89cae70430",
         "b7bc582f9cc7359b3252ae1e",
+        "777de732d3c9710a94bec462",
         "934ec30ceae8bfa6c5d38b69",
         "a8626193b5f23bfcefed7d37",
         "2647f6e799d095fa3aa4c4af",
@@ -409,25 +410,6 @@
       "provisionalFactClaims": 1
     },
     {
-      "eventId": "live-1bwaosu",
-      "entityIds": [
-        "vi"
-      ],
-      "claimIds": [
-        "09c3a0e93828e5582c1b4613"
-      ],
-      "evidenceIds": [
-        "6747fc8d5c4261393dd4d000",
-        "fd2d9ad302985409b07f57b4",
-        "11af8f242fc66aff87740c0e",
-        "760650c7f0c981c329601ef3",
-        "4d2fa3636f1083ba72003c09",
-        "cddeee3800e9d8c1856b2788"
-      ],
-      "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 1
-    },
-    {
       "eventId": "live-ndq6jb",
       "entityIds": [
         "ultratech"
@@ -442,6 +424,23 @@
       "provisionalFactClaims": 1
     },
     {
+      "eventId": "live-sr04o1",
+      "entityIds": [
+        "vi"
+      ],
+      "claimIds": [
+        "ef8195bfacac9824d84e6774"
+      ],
+      "evidenceIds": [
+        "c091d54e55e369f2d5973f5c",
+        "233cb250e59fdcfea10ea671",
+        "e882188c17c1abd239cefb0f",
+        "10a31b7905caa08558ec190e"
+      ],
+      "unsupportedFactClaims": 0,
+      "provisionalFactClaims": 1
+    },
+    {
       "eventId": "live-1anz6kn",
       "entityIds": [
         "vi"
@@ -450,7 +449,7 @@
         "02259553b097a95aec11be6e"
       ],
       "evidenceIds": [
-        "4f2594b4ec929fdfe4e1abc1"
+        "74a456c3ce76c83f43498382"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -548,20 +547,6 @@
       "provisionalFactClaims": 1
     },
     {
-      "eventId": "live-1o4ea45",
-      "entityIds": [
-        "abg"
-      ],
-      "claimIds": [
-        "935515cb86da284f13833cf3"
-      ],
-      "evidenceIds": [
-        "25a472dd1fd47eb2ea99e68e"
-      ],
-      "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 1
-    },
-    {
       "eventId": "live-34224p",
       "entityIds": [
         "ultratech"
@@ -605,23 +590,6 @@
       "provisionalFactClaims": 1
     },
     {
-      "eventId": "live-yt9h1p",
-      "entityIds": [
-        "sabyasachi"
-      ],
-      "claimIds": [
-        "896f86fe938cc1702bb18afd"
-      ],
-      "evidenceIds": [
-        "9e093c1892150bdc9e95085d",
-        "00fe9d14b38ebe61e2acb8f4",
-        "0f63b08c209d330782966a53",
-        "fac6751a3038b54aff3dfbe4"
-      ],
-      "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 1
-    },
-    {
       "eventId": "live-1g570rj",
       "entityIds": [
         "vi",
@@ -631,7 +599,7 @@
         "b2352dd2b2edb260ef60a288"
       ],
       "evidenceIds": [
-        "ac9c87b6ec84bf838160379e"
+        "50e33f898accb67fe64509c4"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -733,7 +701,23 @@
         "8d282c59119de0894ddece3a"
       ],
       "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 0
+      "provisionalFactClaims": 1
+    },
+    {
+      "eventId": "live-1jx75f5",
+      "entityIds": [
+        "vi"
+      ],
+      "claimIds": [
+        "bb4217f3e5b6b9f054788145"
+      ],
+      "evidenceIds": [
+        "0ea079edf1ced73ea93a72e4",
+        "839740ac81ff5e67eee4a518",
+        "51dce1c008fb93e9ac884b58"
+      ],
+      "unsupportedFactClaims": 0,
+      "provisionalFactClaims": 1
     },
     {
       "eventId": "live-5gumpq",
@@ -777,20 +761,6 @@
       ],
       "evidenceIds": [
         "9781160a9954c97fa1ec23fe"
-      ],
-      "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 1
-    },
-    {
-      "eventId": "live-aw3ava",
-      "entityIds": [
-        "ultratech"
-      ],
-      "claimIds": [
-        "d384faa3fd2a34e40bd900aa"
-      ],
-      "evidenceIds": [
-        "76b68b18f2f4e20f9857be73"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -884,21 +854,6 @@
       "provisionalFactClaims": 1
     },
     {
-      "eventId": "live-uybsqm",
-      "entityIds": [
-        "vi"
-      ],
-      "claimIds": [
-        "2f7b5e2d329c1e7e72161a58"
-      ],
-      "evidenceIds": [
-        "eb6dc0ffcf3d96a400d2e038",
-        "5213ab679d7f1eb2b4daaffc"
-      ],
-      "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 1
-    },
-    {
       "eventId": "live-1142pdn",
       "entityIds": [
         "ultratech"
@@ -907,7 +862,7 @@
         "2f8fb9b6acc992bb9da56ec9"
       ],
       "evidenceIds": [
-        "754689887ad2f47337da30ee"
+        "d0853ab54f39791c1362b0eb"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -983,6 +938,48 @@
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
+    },
+    {
+      "eventId": "live-sbfrrw",
+      "entityIds": [
+        "novelis"
+      ],
+      "claimIds": [
+        "5d0c3d7ca5e9d7a66830a26b"
+      ],
+      "evidenceIds": [
+        "e3ca7a9b8a82d6692d208666"
+      ],
+      "unsupportedFactClaims": 0,
+      "provisionalFactClaims": 1
+    },
+    {
+      "eventId": "live-1edubnq",
+      "entityIds": [
+        "sabyasachi"
+      ],
+      "claimIds": [
+        "fd056e0164c2342ad87d887d"
+      ],
+      "evidenceIds": [
+        "d9c8045e0dbbfc690b79d4fc"
+      ],
+      "unsupportedFactClaims": 0,
+      "provisionalFactClaims": 1
+    },
+    {
+      "eventId": "live-1s11ay1",
+      "entityIds": [
+        "abg"
+      ],
+      "claimIds": [
+        "035761971e629623d885186e"
+      ],
+      "evidenceIds": [
+        "4a28109ee6474b47a0185473"
+      ],
+      "unsupportedFactClaims": 0,
+      "provisionalFactClaims": 1
     }
   ],
   "claims": [
@@ -997,24 +994,28 @@
         "87926c14a03da54efcea15ce",
         "cc88fab22fb6ffd29f6a9f83",
         "687e9dd82de513c96edb464f",
-        "55036f3ce8417864391265f2",
         "16edc5b2388688ba8665c57c",
         "4ab6f2f54b43997d76fc8119",
         "3ca30f78d4ae985938402b34",
         "db21dc7c54ebe2cb2fa874be",
         "b90a9e56c97bec7c7c6df350",
         "4250e230b6ec002028301964",
-        "0bbd28e8e841fbac37c89dda",
+        "a1d899dd23c03c23ec699deb",
         "038b624cf44838d5490a3c12",
         "6724017f63f2547d2022428f",
         "f96f0473cd10614088678e76",
-        "01fe7c8c5481d2e283d71a27"
+        "01fe7c8c5481d2e283d71a27",
+        "d4beafebf52cf114ed29df55"
       ],
       "evidenceCount": 16,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-24T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1024,7 +1025,7 @@
       "sequence": 1
     },
     {
-      "id": "aae42cefcb99cc777785c01f",
+      "id": "6127395309913f8045014409",
       "eventId": "live-31rywv",
       "entityIds": [
         "vi",
@@ -1038,21 +1039,24 @@
         "2d7565a85a84760c2fbd6876",
         "499d11f69579725d897d4d13",
         "312dd19c999154352b2389ce",
-        "867fb419fd47e7df48211729",
         "e5f8dfaf2c3e6b166e2711ba",
-        "1cdb9bcc2477ebb0d0dd3499"
+        "e774e20820860475a499592f"
       ],
-      "evidenceCount": 9,
-      "independentEvidenceCount": 1,
+      "evidenceCount": 8,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-07T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
       "kind": "fact",
-      "text": "Published coverage across 9 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 9 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "text": "Published coverage across 8 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 8 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -1065,16 +1069,19 @@
         "ab16692c71d282318fcc7901",
         "ad34338d81061332ffe1ace9",
         "121e1b72fcdd70ff99734158",
-        "fc398518167f557080644f9b",
         "a00b827412c9e7e16e899619",
         "75d2332e3aa37e0b3b86b6d2",
-        "cb848f1ad235590327be0735"
+        "afc3fd1ead052497e2a2b72e"
       ],
-      "evidenceCount": 7,
-      "independentEvidenceCount": 1,
+      "evidenceCount": 6,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-10T18:03:28.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1088,31 +1095,36 @@
       "eventId": "live-12ki3f8",
       "entityIds": [
         "abg",
-        "ultratech"
+        "ultratech",
+        "kmb"
       ],
       "evidenceIds": [
         "bcd07660751957fb53a2aef2",
+        "be89948daf53de14ef593e43",
         "851d2faef9b2b165149c6e48",
-        "5b58ee6ff69bfd3273b98ce8",
         "488836cbf24290d247cc9ce6",
         "0d55d34195967a9610c5fea9",
+        "5b58ee6ff69bfd3273b98ce8",
         "10304a16c46da216a3e66848",
         "4b2120f12f581bf74b00e54c",
-        "7a59dcae5fd71c0af214c916",
+        "8278194631380e1c7f8d7b51",
         "5c1230df965f5e859c647bd8",
         "7a13869aef6b3bf94e77af77",
-        "b798cd86c586b2fa85c48c98",
+        "c2e59a97d56f8a84ddc8a005",
         "935f582b4b07d37dbe24a058",
         "4e1a0a3b095acf26aca8866f",
         "75a62579729b0404c7ca0ec9",
-        "156e19d99c4b995a5a0bb992",
-        "3b22bcdb34041c9054a1400d"
+        "156e19d99c4b995a5a0bb992"
       ],
       "evidenceCount": 16,
-      "independentEvidenceCount": 1,
-      "supportStatus": "supported",
-      "supportReason": "At least one direct official or authoritative source supports the statement.",
-      "supportConfidence": 0.94,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-29T07:00:00.000Z",
       "lifecycle": "confirmed",
       "sourceEventVersion": 1,
@@ -1132,10 +1144,14 @@
         "95c5716e1d9cd8c1be7818c8"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-08T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1154,10 +1170,14 @@
         "1eb2a040e37fe87555658da2"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-08T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1182,40 +1202,20 @@
         "bb994a5b8751ddd173813ce1"
       ],
       "evidenceCount": 6,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-07T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
       "kind": "fact",
       "text": "Published coverage across 6 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "normalizedText": "published coverage across 6 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
-      "sequence": 1
-    },
-    {
-      "id": "a2dd7bd480c7a6ea9d11568b",
-      "eventId": "live-yhw9li",
-      "entityIds": [
-        "vi",
-        "supreme-court-india"
-      ],
-      "evidenceIds": [
-        "7ba42b9de9acd7a168740932",
-        "eb17f06e704d5d742763a7c3"
-      ],
-      "evidenceCount": 2,
-      "independentEvidenceCount": 1,
-      "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
-      "observedAt": "2026-09-07T07:13:09.000Z",
-      "lifecycle": "developing",
-      "sourceEventVersion": 1,
-      "kind": "fact",
-      "text": "Published coverage across 2 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 2 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -1228,10 +1228,14 @@
         "4b929a638c2701bb51e1c895"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-03T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1253,22 +1257,26 @@
         "9def8e2541301923defdb62c",
         "3a304ba3f8c05e74286efb96",
         "0f4ac93203fd7de519c43d00",
+        "b5998c0617c02a3812cd290c",
         "fe8de6b0c0fc5ae4071510ff",
-        "5c6478065464507f32a7bff3",
         "171b9e3aee930c58607f1c0c",
-        "3d56d2141d020bf6ae3d45a3",
+        "762a001c9fd46df87f04a2e9",
         "4b07f4bfbf0107da658e0c64",
         "84827d5324d1b61c39fd68d2",
         "53f21af5a7dee7aa341a069c",
-        "c506d17474501447e0edc3d5",
+        "9d75ab962bca9884b3545bd2",
         "5dc5b2ccd7a4799518253fa8",
         "d9f7666ad4ba92d72678031e"
       ],
       "evidenceCount": 16,
-      "independentEvidenceCount": 2,
-      "supportStatus": "supported",
-      "supportReason": "At least one direct official or authoritative source supports the statement.",
-      "supportConfidence": 0.98,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 2,
       "observedAt": "2026-08-27T00:00:00.000Z",
       "lifecycle": "confirmed",
       "sourceEventVersion": 1,
@@ -1289,10 +1297,14 @@
         "dcc4d49e3eb0a255cf7d261c"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-27T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1309,14 +1321,18 @@
         "kmb"
       ],
       "evidenceIds": [
-        "cae085c1098fea55b12a921e",
+        "c2f1fe4653dbd04d431196e2",
         "05280657679143d0b8887ee2"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-23T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1347,16 +1363,47 @@
         "6c4d191a3053c3e1807f3fcf"
       ],
       "evidenceCount": 12,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-19T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
       "kind": "fact",
       "text": "Published coverage across 12 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "normalizedText": "published coverage across 12 distinct source domains identifies this development concerning aditya birla group abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "sequence": 1
+    },
+    {
+      "id": "ae4a6d0dc816b7c73772185d",
+      "eventId": "live-yhw9li",
+      "entityIds": [
+        "vi",
+        "supreme-court-india"
+      ],
+      "evidenceIds": [
+        "7ba42b9de9acd7a168740932"
+      ],
+      "evidenceCount": 1,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
+      "observedAt": "2026-09-07T08:30:09.000Z",
+      "lifecycle": "developing",
+      "sourceEventVersion": 1,
+      "kind": "fact",
+      "text": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -1367,13 +1414,17 @@
       ],
       "evidenceIds": [
         "f062ea8cbeaa5d5918691882",
-        "0d1e56fd5a129421bf57b3ec"
+        "46b4bc551a3c0f2533dc9fe3"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-03T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1394,10 +1445,14 @@
         "dd070b6fe64f610425b76e8e"
       ],
       "evidenceCount": 3,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-16T12:30:15.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1416,10 +1471,14 @@
         "c8bb1a0318f87ed783c24cab"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-22T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1439,10 +1498,14 @@
         "257683fdae6e81704fbff8f0"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-27T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1462,10 +1525,14 @@
         "ee4cf2bda6c7fc65c3ec5d7a"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-16T04:48:06.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1485,10 +1552,14 @@
         "6818266688599c31cb6f1868"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-27T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1498,14 +1569,15 @@
       "sequence": 1
     },
     {
-      "id": "b8b88e4e1822a9cc90a8700c",
+      "id": "561bb861929171d151acd3d5",
       "eventId": "live-1gwilwi",
       "entityIds": [
         "hindalco"
       ],
       "evidenceIds": [
-        "79b00a0d777b7dd78f9d3487",
+        "d9a4a04d5334ca89cae70430",
         "b7bc582f9cc7359b3252ae1e",
+        "777de732d3c9710a94bec462",
         "934ec30ceae8bfa6c5d38b69",
         "a8626193b5f23bfcefed7d37",
         "2647f6e799d095fa3aa4c4af",
@@ -1513,17 +1585,21 @@
         "1a7464f64d4b93ec8c86189f",
         "fadfa02532c7fa62843f8f44"
       ],
-      "evidenceCount": 8,
-      "independentEvidenceCount": 1,
+      "evidenceCount": 9,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-15T10:03:49.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
       "kind": "fact",
-      "text": "Published coverage across 7 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 7 distinct source domains identifies this development concerning hindalco industries limited abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "text": "Published coverage across 8 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 8 distinct source domains identifies this development concerning hindalco industries limited abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -1537,43 +1613,20 @@
         "4ee8c59825d75b0084f84f0f"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-20T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
       "kind": "fact",
       "text": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning aditya birla group abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
-      "sequence": 1
-    },
-    {
-      "id": "09c3a0e93828e5582c1b4613",
-      "eventId": "live-1bwaosu",
-      "entityIds": [
-        "vi"
-      ],
-      "evidenceIds": [
-        "6747fc8d5c4261393dd4d000",
-        "fd2d9ad302985409b07f57b4",
-        "11af8f242fc66aff87740c0e",
-        "760650c7f0c981c329601ef3",
-        "4d2fa3636f1083ba72003c09",
-        "cddeee3800e9d8c1856b2788"
-      ],
-      "evidenceCount": 6,
-      "independentEvidenceCount": 1,
-      "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
-      "observedAt": "2026-08-19T07:00:00.000Z",
-      "lifecycle": "strong",
-      "sourceEventVersion": 1,
-      "kind": "fact",
-      "text": "Published coverage across 5 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 5 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -1586,10 +1639,14 @@
         "89f8ed4a869ed44a081b3237"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-09T07:01:00.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -1599,19 +1656,52 @@
       "sequence": 1
     },
     {
+      "id": "ef8195bfacac9824d84e6774",
+      "eventId": "live-sr04o1",
+      "entityIds": [
+        "vi"
+      ],
+      "evidenceIds": [
+        "c091d54e55e369f2d5973f5c",
+        "233cb250e59fdcfea10ea671",
+        "e882188c17c1abd239cefb0f",
+        "10a31b7905caa08558ec190e"
+      ],
+      "evidenceCount": 4,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
+      "observedAt": "2026-09-10T16:29:41.000Z",
+      "lifecycle": "strong",
+      "sourceEventVersion": 1,
+      "kind": "fact",
+      "text": "Published coverage across 4 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 4 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "sequence": 1
+    },
+    {
       "id": "02259553b097a95aec11be6e",
       "eventId": "live-1anz6kn",
       "entityIds": [
         "vi"
       ],
       "evidenceIds": [
-        "4f2594b4ec929fdfe4e1abc1"
+        "74a456c3ce76c83f43498382"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-25T07:00:00.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -1630,10 +1720,14 @@
         "6f5a9a111f4708fb5ebe04fd"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-03T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1654,10 +1748,14 @@
         "c1a4969b2ddafa18f3971f18"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-26T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1678,10 +1776,14 @@
         "f03646a3db7193a7856ccfb7"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-27T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1701,10 +1803,14 @@
         "bedfa5e07cd4b41d111b7d7d"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-03T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1725,10 +1831,14 @@
         "cbde5cc206241dda4c50b191"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-10T02:39:08.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -1748,38 +1858,20 @@
         "de8727bb4688e446cfbba1d5"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-10T16:32:33.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
       "kind": "fact",
       "text": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
-      "sequence": 1
-    },
-    {
-      "id": "935515cb86da284f13833cf3",
-      "eventId": "live-1o4ea45",
-      "entityIds": [
-        "abg"
-      ],
-      "evidenceIds": [
-        "25a472dd1fd47eb2ea99e68e"
-      ],
-      "evidenceCount": 1,
-      "independentEvidenceCount": 1,
-      "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
-      "observedAt": "2026-09-05T07:00:00.000Z",
-      "lifecycle": "developing",
-      "sourceEventVersion": 1,
-      "kind": "fact",
-      "text": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning aditya birla group abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -1792,10 +1884,14 @@
         "db5199d96bb9f471e6f5fc83"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-01T07:00:00.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -1814,10 +1910,14 @@
         "819c194793e3bcbbe4a34642"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-31T07:00:00.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -1837,41 +1937,20 @@
         "d7d6d5a1dbf8886cddde5ce8"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-23T07:00:00.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
       "kind": "fact",
       "text": "Published coverage across 1 distinct source domain identifies this development concerning Grasim Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning grasim industries limited abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
-      "sequence": 1
-    },
-    {
-      "id": "896f86fe938cc1702bb18afd",
-      "eventId": "live-yt9h1p",
-      "entityIds": [
-        "sabyasachi"
-      ],
-      "evidenceIds": [
-        "9e093c1892150bdc9e95085d",
-        "00fe9d14b38ebe61e2acb8f4",
-        "0f63b08c209d330782966a53",
-        "fac6751a3038b54aff3dfbe4"
-      ],
-      "evidenceCount": 4,
-      "independentEvidenceCount": 1,
-      "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
-      "observedAt": "2026-09-16T08:07:38.000Z",
-      "lifecycle": "strong",
-      "sourceEventVersion": 1,
-      "kind": "fact",
-      "text": "Published coverage across 4 distinct source domains identifies this development concerning Sabyasachi. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 4 distinct source domains identifies this development concerning sabyasachi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -1882,13 +1961,17 @@
         "bharti-airtel"
       ],
       "evidenceIds": [
-        "ac9c87b6ec84bf838160379e"
+        "50e33f898accb67fe64509c4"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-16T01:31:53.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -1908,10 +1991,14 @@
         "baf53c20fc389a55407d3dc3"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-13T13:41:48.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -1930,10 +2017,14 @@
         "f15dcfbb53409aad19477909"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-04T02:03:53.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1952,10 +2043,14 @@
         "4e9c977317388ac2eef14135"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-25T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1974,10 +2069,14 @@
         "1929c33ff0cfc79d69ce02f9"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-24T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -1996,10 +2095,14 @@
         "e84383eef85007adb97b39e7"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-21T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2018,10 +2121,14 @@
         "8da46142864be9f11acb8050"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-21T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2040,16 +2147,48 @@
         "8d282c59119de0894ddece3a"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
-      "supportStatus": "supported",
-      "supportReason": "At least one direct official or authoritative source supports the statement.",
-      "supportConfidence": 0.94,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-21T00:00:00.000Z",
       "lifecycle": "confirmed",
       "sourceEventVersion": 1,
       "kind": "fact",
       "text": "An official source has published this development concerning Grasim Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "normalizedText": "an official source has published this development concerning grasim industries limited abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "sequence": 1
+    },
+    {
+      "id": "bb4217f3e5b6b9f054788145",
+      "eventId": "live-1jx75f5",
+      "entityIds": [
+        "vi"
+      ],
+      "evidenceIds": [
+        "0ea079edf1ced73ea93a72e4",
+        "839740ac81ff5e67eee4a518",
+        "51dce1c008fb93e9ac884b58"
+      ],
+      "evidenceCount": 3,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
+      "observedAt": "2026-09-09T07:00:00.000Z",
+      "lifecycle": "strong",
+      "sourceEventVersion": 1,
+      "kind": "fact",
+      "text": "Published coverage across 3 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 3 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -2066,10 +2205,14 @@
         "8a368388e7e64b9ce0892ef2"
       ],
       "evidenceCount": 5,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-15T15:35:41.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2088,10 +2231,14 @@
         "3086eb022c76d8aa28b5995a"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-13T18:48:30.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -2110,38 +2257,20 @@
         "9781160a9954c97fa1ec23fe"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-10T11:51:38.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
       "kind": "fact",
       "text": "Published coverage across 1 distinct source domain identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning hindalco industries limited abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
-      "sequence": 1
-    },
-    {
-      "id": "d384faa3fd2a34e40bd900aa",
-      "eventId": "live-aw3ava",
-      "entityIds": [
-        "ultratech"
-      ],
-      "evidenceIds": [
-        "76b68b18f2f4e20f9857be73"
-      ],
-      "evidenceCount": 1,
-      "independentEvidenceCount": 1,
-      "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
-      "observedAt": "2026-09-02T07:30:51.000Z",
-      "lifecycle": "developing",
-      "sourceEventVersion": 1,
-      "kind": "fact",
-      "text": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning ultratech cement limited abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     },
     {
@@ -2154,10 +2283,14 @@
         "24b9508f9dfd7a3778b56bc9"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-24T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2176,10 +2309,14 @@
         "b2ad9a8aa397a910778b95be"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-16T09:41:27.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -2200,10 +2337,14 @@
         "1dec9b67899de06c223da398"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-15T20:25:41.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -2222,10 +2363,14 @@
         "5fa28d52aea798aeff82b047"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-15T11:38:06.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2246,10 +2391,14 @@
         "072c12c58a42e77e25614a6e"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-04T07:00:00.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -2268,10 +2417,14 @@
         "fcf18835c0f842349ac8d8f0"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-28T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2281,42 +2434,23 @@
       "sequence": 1
     },
     {
-      "id": "2f7b5e2d329c1e7e72161a58",
-      "eventId": "live-uybsqm",
-      "entityIds": [
-        "vi"
-      ],
-      "evidenceIds": [
-        "eb6dc0ffcf3d96a400d2e038",
-        "5213ab679d7f1eb2b4daaffc"
-      ],
-      "evidenceCount": 2,
-      "independentEvidenceCount": 1,
-      "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
-      "observedAt": "2026-09-09T12:05:21.000Z",
-      "lifecycle": "strong",
-      "sourceEventVersion": 1,
-      "kind": "fact",
-      "text": "Published coverage across 2 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 2 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
-      "sequence": 1
-    },
-    {
       "id": "2f8fb9b6acc992bb9da56ec9",
       "eventId": "live-1142pdn",
       "entityIds": [
         "ultratech"
       ],
       "evidenceIds": [
-        "754689887ad2f47337da30ee"
+        "d0853ab54f39791c1362b0eb"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-04T07:06:18.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2335,10 +2469,14 @@
         "42f569cc8d163dfa82bbba5c"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-21T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2357,10 +2495,14 @@
         "8c0354ce308d6e9f7caf77dc"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-15T13:15:00.000Z",
       "lifecycle": "developing",
       "sourceEventVersion": 1,
@@ -2380,10 +2522,14 @@
         "703d31c48c7f36877170dafd"
       ],
       "evidenceCount": 2,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-08-27T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2402,10 +2548,14 @@
         "5a996c38d4aa5828376e317e"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Strong source quality, but independent corroboration is still limited.",
-      "supportConfidence": 0.75,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-03T07:00:00.000Z",
       "lifecycle": "strong",
       "sourceEventVersion": 1,
@@ -2425,12 +2575,94 @@
         "0f3289d835a93841ba94ef3f"
       ],
       "evidenceCount": 1,
-      "independentEvidenceCount": 1,
       "supportStatus": "provisional",
-      "supportReason": "Only one lower-tier evidence source is attached.",
-      "supportConfidence": 0.45,
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
       "observedAt": "2026-09-03T07:00:00.000Z",
       "lifecycle": "developing",
+      "sourceEventVersion": 1,
+      "kind": "fact",
+      "text": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning aditya birla group abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "sequence": 1
+    },
+    {
+      "id": "5d0c3d7ca5e9d7a66830a26b",
+      "eventId": "live-sbfrrw",
+      "entityIds": [
+        "novelis"
+      ],
+      "evidenceIds": [
+        "e3ca7a9b8a82d6692d208666"
+      ],
+      "evidenceCount": 1,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
+      "observedAt": "2026-09-02T07:00:00.000Z",
+      "lifecycle": "developing",
+      "sourceEventVersion": 1,
+      "kind": "fact",
+      "text": "Published coverage across 1 distinct source domain identifies this development concerning Novelis Inc. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning novelis inc abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "sequence": 1
+    },
+    {
+      "id": "fd056e0164c2342ad87d887d",
+      "eventId": "live-1edubnq",
+      "entityIds": [
+        "sabyasachi"
+      ],
+      "evidenceIds": [
+        "d9c8045e0dbbfc690b79d4fc"
+      ],
+      "evidenceCount": 1,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
+      "observedAt": "2026-09-08T07:00:00.000Z",
+      "lifecycle": "strong",
+      "sourceEventVersion": 1,
+      "kind": "fact",
+      "text": "Published coverage across 1 distinct source domain identifies this development concerning Sabyasachi. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning sabyasachi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "sequence": 1
+    },
+    {
+      "id": "035761971e629623d885186e",
+      "eventId": "live-1s11ay1",
+      "entityIds": [
+        "abg"
+      ],
+      "evidenceIds": [
+        "4a28109ee6474b47a0185473"
+      ],
+      "evidenceCount": 1,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
+      "observedAt": "2026-09-18T05:26:24.000Z",
+      "lifecycle": "strong",
       "sourceEventVersion": 1,
       "kind": "fact",
       "text": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -2452,7 +2684,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "87926c14a03da54efcea15ce",
@@ -2467,7 +2701,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "cc88fab22fb6ffd29f6a9f83",
@@ -2482,7 +2718,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "687e9dd82de513c96edb464f",
@@ -2497,22 +2735,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "55036f3ce8417864391265f2",
-      "eventId": "live-1gutgmt",
-      "authority": "Livemint",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNOTl0Tk1WTDVjQVdZRjAwQUxWbGpnT3R2MDlRM2g3T3N0c0ZNQlJ5VGxDajN3T1dBdmhSOE1ZQXJMdnVRS21aYi0yRV9VMU9pWEFOMlJkYlhPXzZjdHpGS3JkU2dVSHFGWU01UzhMZjdYblkxV2ZwSVRZczFiWlA2bndQSV9Ea1VfLXBvVnN1bm40S1UwYVNQYXNsWjBFTUdISVhITmdBYnN2bUViSndGQXgxZXRKTlE5UUFqWWphR0pXek1tek5yd1pDZW1qZ2FvY0IwalYzcnR1VGV0bE9DSFFn0gHnAUFVX3lxTFB6bUhhY2d6ZWNkekxkZGtNZldiR0duanh5RlhDNnMyMWEydFlXVjlGZUFpUWJkUUxNVXVpVzhJWlRvOUVEM21xZDc1YzVwTFhLNnRKNzEwWWpMY3FGM3lfOE1RNzFWeURCcHJ4VERiWUNCd0VEeC1rWVBhZURqTUh4andvUlVjSFJBMEtsMHJuUmFkOFhNd2FNSE5pc3JUa0NBUlNKWWphMnVWZVpBN3JuLTNON0JIdlRWcm8xZ2dMR09iTTBuX2VqYklUTUdzZ0hlUk41N2dIcmVqWmtQNjRDdmZNcjJVYw?oc=5",
-      "publishedAt": "2026-09-07T07:00:00.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-hi",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "16edc5b2388688ba8665c57c",
@@ -2527,7 +2752,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4ab6f2f54b43997d76fc8119",
@@ -2542,7 +2769,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "3ca30f78d4ae985938402b34",
@@ -2557,7 +2786,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "db21dc7c54ebe2cb2fa874be",
@@ -2572,7 +2803,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "b90a9e56c97bec7c7c6df350",
@@ -2587,7 +2820,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4250e230b6ec002028301964",
@@ -2602,22 +2837,26 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "0bbd28e8e841fbac37c89dda",
+      "id": "a1d899dd23c03c23ec699deb",
       "eventId": "live-1gutgmt",
       "authority": "Upstox",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFAzUE9pQVFIYk45akpCQmx3aDJYbDBrZmsxUkVVTVBWWExzNzhDTnBkT1J3Z0JUdUNibjVXc09EZndodTVjQ1JDUnhBMGZRVlNFMXZxbndlWkJ1ZFVXLXEzNmJsSHdjanQ3WVhpTw?oc=5",
-      "publishedAt": "2026-09-16T06:49:56.000Z",
+      "publishedAt": "2026-09-16T23:38:43.000Z",
       "tier": 3,
       "official": false,
       "provider": "Google News IN-en",
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "038b624cf44838d5490a3c12",
@@ -2632,7 +2871,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "6724017f63f2547d2022428f",
@@ -2647,7 +2888,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "f96f0473cd10614088678e76",
@@ -2662,7 +2905,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "01fe7c8c5481d2e283d71a27",
@@ -2677,7 +2922,26 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "d4beafebf52cf114ed29df55",
+      "eventId": "live-1gutgmt",
+      "authority": "Univest",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQLURDWWo5VnNpQkltMlhVY2hXSXdyWXN3VnFUSzdtS0xBR0J4WGMtVlF2c0JiNURyRE0yVkhra0puMXQ5WW0yaUZIUEdTcG4tY1g0OTNqRXZOdUY4ZFc4SldzRzBHbTVDS3pfWUhZQVFLWGFRX2x2SDNlOS1WNHhhT2dR?oc=5",
+      "publishedAt": "2026-08-28T07:00:00.000Z",
+      "tier": 3,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "22f97798fe809403f64c63f3",
@@ -2692,7 +2956,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "bc866e965e3c995c7c0f56d6",
@@ -2707,7 +2973,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "27e77f320277c8c09bdb8c56",
@@ -2722,7 +2990,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "2d7565a85a84760c2fbd6876",
@@ -2737,7 +3007,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "499d11f69579725d897d4d13",
@@ -2752,7 +3024,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "312dd19c999154352b2389ce",
@@ -2767,22 +3041,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "867fb419fd47e7df48211729",
-      "eventId": "live-31rywv",
-      "authority": "TradingView",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOQkJMczI0aTZaSDJEZm9xM2VwQUpYWGIybm5YMXBvZ0EwdzNHNUZ6NklmeTR2cEc1MzBZTUIwVTVYb3ZXOUtFSDROUGtPNk9XRGgyQXQzc3U4dTJ5UXRWSUpDTVJQUHh1YW5wV1dtY0tpdldmWGNlVDd6VHJBa0FkZWV6Q0NaWXBQM3ZNQllHVjFCUG8tTUx5THpFdmNYYS1uUUpRTXEtMDFkeFNYV2NKOXhic0JTUVM2V2c?oc=5",
-      "publishedAt": "2026-09-14T11:21:39.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "e5f8dfaf2c3e6b166e2711ba",
@@ -2797,12 +3058,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "1cdb9bcc2477ebb0d0dd3499",
+      "id": "e774e20820860475a499592f",
       "eventId": "live-31rywv",
-      "authority": "Communications Today",
+      "authority": "communicationstoday.co.in",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQaDNGdTBvMTVPV1ZzbVJmbUtQbWRFSlg1MUtkV1JOQ3FvYWwwYlNNcGNYZzlGbzdVUEREaDVocFhDM29FUVV3MnNuZDhzTWFER2FMa2laY0Q4M2Mzb2tpenBtRUhnbkdJd0ZvUUQwNDRCU1QybC1IdmpRRHRuMDc1amhSdWYwdXpRSUFmSTNCODRqR256cnVHcll5QjN1NmI5QkZ6R2h5aDF4QQ?oc=5",
       "publishedAt": "2026-09-07T07:00:00.000Z",
@@ -2812,7 +3075,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "ab16692c71d282318fcc7901",
@@ -2827,7 +3092,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "ad34338d81061332ffe1ace9",
@@ -2842,7 +3109,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "121e1b72fcdd70ff99734158",
@@ -2857,22 +3126,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "fc398518167f557080644f9b",
-      "eventId": "live-15zgd47",
-      "authority": "Business Today",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPSEI5OXV4WWVpYzhMSEY5RTFCRUo2ZU11VjMwRk1pRjBoSnJHVXFhM2pJeHpwRy1uZF9idmktZFZCZnlXZkdJeWt0ZWdyZUk2WkY2OW5zenlXZ0RFTmJKQ1V5WUJ4OE5YaEF1VWNyRzRsd0F4dUpjWXB0emI1aVJSWDByY2kxQnEwWC11cnJnRVBLZ1M2ZWN3Ql90djA4czhhS0diQUp2RUtwT3FBUTQxRDc1Q1VZQ2hMdXN2WDN2S2ZMaW9ZVmw1eXc3N3R6UndHR1BjdnQwM0VFanJ2UE5nS0o5MlczNlVfZ2IwSUZZbzFhUmJlcWY00gH8AUFVX3lxTE43cFhTd09FTllXenhTRFdmTjFEd0dsUklfYTluZWpwMkl6OVZBQzFITXA4WS1taE1yMnpLRjVCNHo0ZERiUm1ub0JYam1Jc1JKNVBzMVJRSmRTdW5WNXlMdHczOVlWYksxbUs1TVdrN1czMm51R0pORGRGWF9QVy14VmFaU19RTWZSSWpWSGJaMzNfUmE2WFc2bjhOTmtaSlRrZERpV2dZR0J6VXhHUXhsUkphTkFyRTFnM3JZbERKb19FU0ctZmg0cjBLSFZJREhscUhxZWpQM3NEYUtrNVhYd215X0NDR2RNWnluT0JWMENELVB0ZE9XY2czZA?oc=5",
-      "publishedAt": "2026-09-11T02:04:10.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "a00b827412c9e7e16e899619",
@@ -2887,7 +3143,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "75d2332e3aa37e0b3b86b6d2",
@@ -2902,12 +3160,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "cb848f1ad235590327be0735",
+      "id": "afc3fd1ead052497e2a2b72e",
       "eventId": "live-15zgd47",
-      "authority": "ET Now",
+      "authority": "etnownews.com",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNME5GZEgxNDQxdkgwTUg1c0pDTjJCckpQZnBINjJ5bjJNV2QyeXRfVjQ2Um1GU2Ixc0xzQVlZbm9wcnVHbF9JbmZwZEFrdW96S1VEN2dRY1hMMURyVXBiVFBUZUFkNmlaa0FraWtBcWZEekF1clVuMllQU3JrTWtsQVI4SkR0c1RVVWdaYkdVZGlJZzAzNkhKWlB4VkZ1MVdzR2tGVE9CWHE3OEQzUE13dk1qTjA2MlhkdjZxeXd4YUNwaldHNGVCdWFWSdIB0AFBVV95cUxNYzdVRC1JWmdkdWUtRDJ2ZTlvR21Dbk5PblkzZDlkTEVkcDdzUzVOZGg4LXlnV09UTWFVN1Bvb1dza2hxVzdtdl9EQUxyNjBIQUV2ZU1mbldNRXFKay1nczZsRXNLNmMxWWV0c2xXMHMzTS1XX2dMb1VDbE8zU3VXeS1ZUDNNSTl3ZVM2d2Z2ZkJVb0VLNXlxdmVjZXo1VUJhalhSUVhrd3pVR0U1ZGdqc0w3amJJdkRRQ0E0dkdENmwzNWVoLVB2SmJfOU1ETHZ3?oc=5",
       "publishedAt": "2026-09-10T18:03:28.000Z",
@@ -2917,7 +3177,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "bcd07660751957fb53a2aef2",
@@ -2932,7 +3194,26 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "be89948daf53de14ef593e43",
+      "eventId": "live-12ki3f8",
+      "authority": "Business Today",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQemU0MS1OTGVkckpkMTN6R0RaYWVhQURXaElZaDBmR1BHMHZxaUthRE9zaE9tdTRaNHhlTi1ncDF3RllyVFlrRmFHWjNIMXpydE5fSHdOUk1YcTNzSWVVY2Fad3o1SUZvN3RMRFJwOE9vZDZ6N0h3TjdUeDMtUGtqNHFHNUp3UnJkWTNZUGc5UW04ajhxRm53VzRNWU1PdENOV2N1MElhODBFdU1LUWpzQ1ZYRU9hcXVVSDVQRE5VNnN4dy1UVkY4U0VtdUFURllkeFhPZzVkN3R0Z09FWXB3?oc=5",
+      "publishedAt": "2026-09-07T07:00:00.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "851d2faef9b2b165149c6e48",
@@ -2947,22 +3228,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "5b58ee6ff69bfd3273b98ce8",
-      "eventId": "live-12ki3f8",
-      "authority": "Business Today",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxOTy00WWt2YkY5eGptQzFkczlpOVpPOTlRSjM2VHNvS1RscWx4cEpJUHcxa0lBUHM4aWtST3NxbDJJNkFueURULTFTNmx6LVhYWGpPdXphamtjVVlkZ25XbjY3QllGaFl2cHV3Wjd3UE0zd1poNTdJQ0k2STRIbE03VVIzYW1VUkFyUTA4eHc5bC1Uem5BalloZFptcnlpR2Y2bTJvQ185azhWejRCb0V4RU9RRGFBemhUV0lLM2lLZDV6amdDLWVRaGozMUJYeklsVHpsV2pOemVwTmhjLUg1c1RFeHFrNGFiekk5QUFsWlc1NmtYY3JZZ0xscXJDR0NjWmt1ZFFaOU9PUdIBjwJBVV95cUxPSURtcm05aFduTTVNS0Zva3pOYllUZ29MbDk1NnpGRXl6blA5TnlrUTVWa3VMeDVCcUFick0zSklNUnJFWVhGMlh6YXl2SmFiUk1yWkY5U3R6Y3RoLUZLS0hKZjAtem1wdHhWbjZ6b19jQ3ZPQVlUNHgxNERHMEhkTXN6M3FjMmhCYS1JNlZ6MzRhdmc2bXZGN21XY19lcG51LWJmM0UtM1puUU52U2otd2xDcDU2clJidlZMOFIyQjJxNmJaSElDdlk2RFdoZGNicDNFc2c0bVZ2UkllRUs4OW81VE5HTGkxaDBzZTBWRWIyYVBPWHp1c1c5dTVPLWMxS3ZxbkRzMDJKUGt5bVFR?oc=5",
-      "publishedAt": "2026-09-03T07:00:00.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "488836cbf24290d247cc9ce6",
@@ -2977,7 +3245,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "0d55d34195967a9610c5fea9",
@@ -2992,7 +3262,26 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "5b58ee6ff69bfd3273b98ce8",
+      "eventId": "live-12ki3f8",
+      "authority": "Business Today",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxOTy00WWt2YkY5eGptQzFkczlpOVpPOTlRSjM2VHNvS1RscWx4cEpJUHcxa0lBUHM4aWtST3NxbDJJNkFueURULTFTNmx6LVhYWGpPdXphamtjVVlkZ25XbjY3QllGaFl2cHV3Wjd3UE0zd1poNTdJQ0k2STRIbE03VVIzYW1VUkFyUTA4eHc5bC1Uem5BalloZFptcnlpR2Y2bTJvQ185azhWejRCb0V4RU9RRGFBemhUV0lLM2lLZDV6amdDLWVRaGozMUJYeklsVHpsV2pOemVwTmhjLUg1c1RFeHFrNGFiekk5QUFsWlc1NmtYY3JZZ0xscXJDR0NjWmt1ZFFaOU9PUdIBjwJBVV95cUxPSURtcm05aFduTTVNS0Zva3pOYllUZ29MbDk1NnpGRXl6blA5TnlrUTVWa3VMeDVCcUFick0zSklNUnJFWVhGMlh6YXl2SmFiUk1yWkY5U3R6Y3RoLUZLS0hKZjAtem1wdHhWbjZ6b19jQ3ZPQVlUNHgxNERHMEhkTXN6M3FjMmhCYS1JNlZ6MzRhdmc2bXZGN21XY19lcG51LWJmM0UtM1puUU52U2otd2xDcDU2clJidlZMOFIyQjJxNmJaSElDdlk2RFdoZGNicDNFc2c0bVZ2UkllRUs4OW81VE5HTGkxaDBzZTBWRWIyYVBPWHp1c1c5dTVPLWMxS3ZxbkRzMDJKUGt5bVFR?oc=5",
+      "publishedAt": "2026-09-03T07:00:00.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "10304a16c46da216a3e66848",
@@ -3007,7 +3296,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4b2120f12f581bf74b00e54c",
@@ -3022,22 +3313,26 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "7a59dcae5fd71c0af214c916",
+      "id": "8278194631380e1c7f8d7b51",
       "eventId": "live-12ki3f8",
       "authority": "Construction World",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQNzBQOGlxOWZPV2RQejRrd2dqTHR4TV9BdERSeG95bTh4UEY4amF0b3BHT2ljRG1vSC1kR0tjQ0Z1Tk80Ull3N0dWQXhfSUFkTmpPRkQ0Y3NJY283cXlCdnpWdXZHS2ZaOEw2N1N5RzI2dXVtb05ONzAtdkI4YV9xUkY0VnJlN2lHRW4zZS0xUVBmOHRJZmhDaUVzNmtWbkFqdzhRMmdTRDdZZlhGdmJGaERCai0?oc=5",
-      "publishedAt": "2026-09-09T07:00:00.000Z",
+      "publishedAt": "2026-09-10T05:47:05.000Z",
       "tier": 2,
       "official": false,
       "provider": "Google News IN-en",
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "5c1230df965f5e859c647bd8",
@@ -3052,7 +3347,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "7a13869aef6b3bf94e77af77",
@@ -3067,12 +3364,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "b798cd86c586b2fa85c48c98",
+      "id": "c2e59a97d56f8a84ddc8a005",
       "eventId": "live-12ki3f8",
-      "authority": "tndindia.com",
+      "authority": "T&D India",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQX0p1S2MyX3MyTmRCVmhEd0NackZkUGVqamNVZHVGSUlkV0lMUmZSLUtZQ01QOGplMkdjRkI0V1U4U2RuRGIzNmVEb0xIZTZSVjRYVFkwSnNQbFVJdk5CN2hxaFVjOFNqNEEwWENjamo1aFBPa25wd2VIRE45UWVKYnFGeHJDbnMzbmU2QUJJV2hfTkHSAZgBQVVfeXFMTThNaVR5NVpucmRzWlRrYU5zblBGUUc0d1lyT2FmSE4ybGNuR1lKSHNzMTRNWDlEbHFQejhPOVQ4bW5NUnhOcG9neDZJbEhMM214NzNoV2p4Q05teFVWZ1I0SVgwdFVKZEktcEx5aUlXTGJPYkFuYmxxVDJCa2Z0QktTSm04aDVoR2hMbUQ2OFhJTzlON2EyU2g?oc=5",
       "publishedAt": "2026-09-04T07:00:00.000Z",
@@ -3082,7 +3381,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "935f582b4b07d37dbe24a058",
@@ -3097,7 +3398,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4e1a0a3b095acf26aca8866f",
@@ -3112,7 +3415,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "75a62579729b0404c7ca0ec9",
@@ -3127,7 +3432,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "156e19d99c4b995a5a0bb992",
@@ -3142,22 +3449,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "3b22bcdb34041c9054a1400d",
-      "eventId": "live-12ki3f8",
-      "authority": "marketscreener.com",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOV0xLYkRWblBxdWdKaF9aMHVxMUJTaGkxSmg1TW90Tkl6d3dYY21CQmtlYTlQUDA0ZkNMcy03UjBmVG1yS1N6OGF1bTItb1R5aDNBVHJkNENNWjF6ZTVacm9FQV9aT25EUWJHcDV3WFF0Qldfc1hlSm5BeHhOb2d6NFpJR1lXVzBobFZ2SXE3RllQeWdmSmRQQlQxWE94WDNOZ2EyR0RoczNjbVhtcWdNZ1I1OUtiX0ktQ2ZRWlN1bnE0WjhOUjlzZ3doNlVLbXJ1dHQxSnZ6MA?oc=5",
-      "publishedAt": "2026-09-03T07:00:00.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "431bcbd3a9bd3036a75756d1",
@@ -3172,7 +3466,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "95c5716e1d9cd8c1be7818c8",
@@ -3187,7 +3483,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "1eb2a040e37fe87555658da2",
@@ -3202,7 +3500,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "d4ada8d404a88df81e000b2b",
@@ -3217,7 +3517,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4e0e5ab69aa7d9ac40c557b2",
@@ -3232,7 +3534,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "dcd9172738267968486f39e0",
@@ -3247,7 +3551,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4b8884cf96f856ed1736b249",
@@ -3262,7 +3568,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "a04a1e9954878cb8d7747125",
@@ -3277,7 +3585,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "bb994a5b8751ddd173813ce1",
@@ -3292,37 +3602,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "7ba42b9de9acd7a168740932",
-      "eventId": "live-yhw9li",
-      "authority": "LinkedIn",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNVUU4SEMzWXR1eTBLZTNFVXdBMk9nR3lIRDVoVWxwZUlfNm56VlhaUkV3Tkl5OTZYanBKZEwxUk03bzBkUjZBSmNjaUUzelh0Y3FGWXVMblFNWGJtSVpiY25jNW5GbjYxVzY0TC1fVTdUVlY3TkdEZWpfNU4xLVcwU3lCVjJpZm9RWTY5SlB0b0NOWndaN3BIYjdaVmNPbFpQdVpGaTZ6ZUJ4MDhtMUcyTms2WlM?oc=5",
-      "publishedAt": "2026-09-07T08:30:09.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "eb17f06e704d5d742763a7c3",
-      "eventId": "live-yhw9li",
-      "authority": "ET Now",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOeWNpMzFzb1U1SGNhQWs4ZUJEWDFyU2luTVI5SDBhbmlmRmFud3F3aTBQbEw3VEhkUlVKN0oxRnNPZGRPX2tKQ3locW9yMFVTTTdLNi1NTFMtM0JVSkJnVi1XOV9yLU9jdDhIRS1PQmNoWGdYLWNRa2g3cW5EOFdIcDF4QmNEa3FPUGlzMzNVZHpDS2dJbllLc0gzN3pqYjBadlFjZjhqVHdpeFNjMTRJeWtwbzBCa3hmWnQ4cEp1X281cTBwU01j0gHMAUFVX3lxTE8tOFBfcGpZeXVCc3JHUmxIbmZ2RG1TekowZzBvQkt1NFNkRHlEaHY5czhzNWYzRFFMcTh0VnYzaUVCa1gteU5aSGQ0WmRianpmOUtYbjZDRURRRFBMUkRNUE1iZmN5NjNDSGZiNDMzMWJvc1NvWlZFQWNUZk83em5HS0MxbTNjbzVGbVhiTGFTM183LU9zbE9jeFJQNExPY2lQMHlwc21xS2NUdmF6YW5oeVo0dnV6UUNGelF4VGdzVjl4TjRqQXBHU1BJdw?oc=5",
-      "publishedAt": "2026-09-07T07:13:09.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-hi",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4b929a638c2701bb51e1c895",
@@ -3337,7 +3619,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "5a01e580af8709bc400dbc19",
@@ -3352,7 +3636,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "c8f09669b3934a640ff413d4",
@@ -3367,7 +3653,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "e32f5273ff35571ef7d39b07",
@@ -3382,7 +3670,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "9def8e2541301923defdb62c",
@@ -3397,7 +3687,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "3a304ba3f8c05e74286efb96",
@@ -3412,7 +3704,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "0f4ac93203fd7de519c43d00",
@@ -3427,7 +3721,26 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "b5998c0617c02a3812cd290c",
+      "eventId": "live-peag68",
+      "authority": "manufacturing.economictimes.indiatimes.com",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPQnliczhvZE0xcGpNdTlSM2RtbnJoX3lBSVF5TFk0WHdHcXBNbkVkUGV2TkJOaWd1RzgzeVF6NEM5S09fR3ozU1o5VlgydExkQkRTZVU4LWxKcUUtLXZjODRjcHo2Tm1uR01GLUc2aU14UXc3V2RTNVpGUWdFTlcwRVBLaDZiWW9hLVdrbFZ1cFNDVngya1k0V21OSnJIQXNra3Y5V1RtandCZDdaYzRZdGU5QmVMNGJRRWh1Z3I1TUU2S2N3OW5Oc05YTER3MnJrLXRfcTlCcDBxNWUxVjNrbGFFMTQ3MmRrR3VoUdIB8gFBVV95cUxQMFlWLWJkdk5qdHVqRmNUSE1PWkREcE16X0xmbTl2SkVXVjFid0VPRktTWG1LeFJUVHlTaHJzaTdLekliNWdrNGlVX0JlN255Y0JDOWh2ZG44NGxwSHZVTGhYQWo5TnBxaXBkTW1BZS1DTTV6Z1pqRFVDUk5GeWxSQkpoSUJQVHhhZ3JLQnk0bVZUZmcwdmd5RE5xVzRSc3dwYzgtc2ZrdUg1OU1BSnp2M0tLNUpIZHRjMXhCdHBzcDZxLUVzckthdEs3RGNfeU1GQkIxdWQ0aFoxMzlkN2JvSFpzQ3hKLURDWjVkQ3owOFRkQQ?oc=5",
+      "publishedAt": "2026-08-27T07:00:00.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "fe8de6b0c0fc5ae4071510ff",
@@ -3442,22 +3755,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "5c6478065464507f32a7bff3",
-      "eventId": "live-peag68",
-      "authority": "ET Manufacturing",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPQnliczhvZE0xcGpNdTlSM2RtbnJoX3lBSVF5TFk0WHdHcXBNbkVkUGV2TkJOaWd1RzgzeVF6NEM5S09fR3ozU1o5VlgydExkQkRTZVU4LWxKcUUtLXZjODRjcHo2Tm1uR01GLUc2aU14UXc3V2RTNVpGUWdFTlcwRVBLaDZiWW9hLVdrbFZ1cFNDVngya1k0V21OSnJIQXNra3Y5V1RtandCZDdaYzRZdGU5QmVMNGJRRWh1Z3I1TUU2S2N3OW5Oc05YTER3MnJrLXRfcTlCcDBxNWUxVjNrbGFFMTQ3MmRrR3VoUdIB8gFBVV95cUxQMFlWLWJkdk5qdHVqRmNUSE1PWkREcE16X0xmbTl2SkVXVjFid0VPRktTWG1LeFJUVHlTaHJzaTdLekliNWdrNGlVX0JlN255Y0JDOWh2ZG44NGxwSHZVTGhYQWo5TnBxaXBkTW1BZS1DTTV6Z1pqRFVDUk5GeWxSQkpoSUJQVHhhZ3JLQnk0bVZUZmcwdmd5RE5xVzRSc3dwYzgtc2ZrdUg1OU1BSnp2M0tLNUpIZHRjMXhCdHBzcDZxLUVzckthdEs3RGNfeU1GQkIxdWQ0aFoxMzlkN2JvSFpzQ3hKLURDWjVkQ3owOFRkQQ?oc=5",
-      "publishedAt": "2026-08-27T07:00:00.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "171b9e3aee930c58607f1c0c",
@@ -3472,12 +3772,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "3d56d2141d020bf6ae3d45a3",
+      "id": "762a001c9fd46df87f04a2e9",
       "eventId": "live-peag68",
-      "authority": "wirecable.in",
+      "authority": "Wire & Cable India",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB5T1pfOWxJUnhVbTJ1MWswRGlmRFl6WVhVRW5jeGQ4SlF6TUJBcHRkTVFUM2NPbTFudllvd2lRbm4xOWJxWnFnZXJlOHhkUl9ReWRTVlgtTGRKQQ?oc=5",
       "publishedAt": "2026-08-27T07:00:00.000Z",
@@ -3487,7 +3789,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4b07f4bfbf0107da658e0c64",
@@ -3502,7 +3806,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "84827d5324d1b61c39fd68d2",
@@ -3517,7 +3823,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "53f21af5a7dee7aa341a069c",
@@ -3532,12 +3840,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "c506d17474501447e0edc3d5",
+      "id": "9d75ab962bca9884b3545bd2",
       "eventId": "live-peag68",
-      "authority": "Kalkine India",
+      "authority": "kalkine.co.in",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPMmYydlVSS0tKcEVUWElLQ3l4OFZtNWlqaEZCTWJtUjJZUEZJelZzSUU1QkItbWpGeEZHTV9KSllRd2hkV0Z6aFBVZVNaT3hTNE4yTTRVcTAzU0RwX01RcUtFaVlobXlveWtqU3hzOHdNUkltcWxINTBheEc2YXc3VmtyR3hoQTJSYkF1WnpiSXA4U1ZwV2hEalE5U1JaZDhGTVFhaEgtdkJLWWNLX1NyWk1lOHVxRFFDZW15N1lR?oc=5",
       "publishedAt": "2026-08-27T07:00:00.000Z",
@@ -3547,7 +3857,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "5dc5b2ccd7a4799518253fa8",
@@ -3562,7 +3874,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "d9f7666ad4ba92d72678031e",
@@ -3577,7 +3891,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "dd022377e55ae8c2b019d139",
@@ -3592,7 +3908,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "dcc4d49e3eb0a255cf7d261c",
@@ -3607,12 +3925,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "cae085c1098fea55b12a921e",
+      "id": "c2f1fe4653dbd04d431196e2",
       "eventId": "live-wl4l17",
-      "authority": "ET Retail",
+      "authority": "retail.economictimes.indiatimes.com",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxOdzNRS3ZpXy1TZzlVMlVXdS1NMVQ4MXNmMmtmbnJqbjZEYTlVZ1pMeXE2YjR0RTFEVmp6MmpCUDYxaVY0ZzlYS05Da3NEMUdkNlYycHNhYS1HZGIxMU5BN1Q1Qno5SWZmaHFId05ZTzRaaXpiMTFDODVWUFR1OEVOWFh0YWtBc1k5NmpVeVZCR3ZndzBacFlqdjdFeFYyQzhieUtPYTFSOHE5RWxKN3JoR1dmX1hNWFg5UldHVTgydE1TS2xyQVQtYlBiaHd6WmxWOWRrM2RpU19mdE1lMWpfWWNlOA?oc=5",
       "publishedAt": "2026-08-24T07:00:00.000Z",
@@ -3622,7 +3942,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "05280657679143d0b8887ee2",
@@ -3637,7 +3959,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "53f42fc2fdc36a2d98229ceb",
@@ -3652,7 +3976,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "0e62ddaa1f59434a521d0594",
@@ -3667,7 +3993,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "9e8b762b85caf7bc43c442d5",
@@ -3682,7 +4010,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "232e5f0712ca67f216991da0",
@@ -3697,7 +4027,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4d4c0b4bd0ee68f1b2323f79",
@@ -3712,7 +4044,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "796c8d24d0cd6c25012da279",
@@ -3727,7 +4061,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "747f19f08fc3b597ca557dc8",
@@ -3742,7 +4078,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "2e9c41661727a2e3e3a77922",
@@ -3757,7 +4095,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "638f76a0e050c1bbc77a1bd2",
@@ -3772,7 +4112,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4c60dd6d8943309cc4698d35",
@@ -3787,7 +4129,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "9adb7b075a88f95f9a95f9fe",
@@ -3802,7 +4146,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "6c4d191a3053c3e1807f3fcf",
@@ -3817,7 +4163,26 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "7ba42b9de9acd7a168740932",
+      "eventId": "live-yhw9li",
+      "authority": "LinkedIn",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNVUU4SEMzWXR1eTBLZTNFVXdBMk9nR3lIRDVoVWxwZUlfNm56VlhaUkV3Tkl5OTZYanBKZEwxUk03bzBkUjZBSmNjaUUzelh0Y3FGWXVMblFNWGJtSVpiY25jNW5GbjYxVzY0TC1fVTdUVlY3TkdEZWpfNU4xLVcwU3lCVjJpZm9RWTY5SlB0b0NOWndaN3BIYjdaVmNPbFpQdVpGaTZ6ZUJ4MDhtMUcyTms2WlM?oc=5",
+      "publishedAt": "2026-09-07T08:30:09.000Z",
+      "tier": 3,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "f062ea8cbeaa5d5918691882",
@@ -3832,12 +4197,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "0d1e56fd5a129421bf57b3ec",
+      "id": "46b4bc551a3c0f2533dc9fe3",
       "eventId": "live-1bih5dy",
-      "authority": "Outlook Money",
+      "authority": "outlookmoney.com",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQOUZORlE1NUREbkFIT2phSG93cnloUkkzUER3SGR3NVJBSGxlMktsdG1rUHFkRk4ycXFDNHBXLXlJeFFnTzRBbm5ld1ZxNk50QlJsNFBad2ZaZU12em5EdUJXRzNjMEpfYlY3VGxqa3BIVzdINDZKOVBET3A0NW0xczVxWlhyeXpXbVdWMjJOeWRycXJva0R0OExCZHhpamtSWHlFSUJn0gGzAUFVX3lxTE1tRHN1U2pRckgxWEFoa1Y5bG50aElFdkhpVkxYUjRHTnNoR09VZmtscmdDY0hfSHhTOUlZdm1KV0ZyLXJvS1VtZEUtSGd2bWk4NmtnLU9ZQmdMald3YTZFS0oyV0JreGd6LVFFMEo4Q3VjRnowLTJZQnJ0UjZhTFZIVXpWeUlJUllrS28xdzYyNTJsOVRTZmZvWE1kcjM4VllDU2xmX0RvWFVobDE1MklKb3lJ?oc=5",
       "publishedAt": "2026-09-04T07:00:00.000Z",
@@ -3847,7 +4214,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "07ee2417f0e0a8b2fb480fb0",
@@ -3862,7 +4231,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "c77a9bb212ed6161a950e247",
@@ -3877,7 +4248,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "dd070b6fe64f610425b76e8e",
@@ -3892,7 +4265,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "c8bb1a0318f87ed783c24cab",
@@ -3907,7 +4282,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "257683fdae6e81704fbff8f0",
@@ -3922,7 +4299,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "74cd2a0141bdda9e2a511b90",
@@ -3937,7 +4316,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "ee4cf2bda6c7fc65c3ec5d7a",
@@ -3952,7 +4333,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "6818266688599c31cb6f1868",
@@ -3967,12 +4350,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "79b00a0d777b7dd78f9d3487",
+      "id": "d9a4a04d5334ca89cae70430",
       "eventId": "live-1gwilwi",
-      "authority": "ET Manufacturing",
+      "authority": "manufacturing.economictimes.indiatimes.com",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPdWpyV21VODEwaXVZUDhHMVkwNzdEUWIyTkQ5bk9NRVVMYUdkNklVUjFncU9WQWN6M0dZUkFJUFJaV25KSjV0cmd1b05MNmpEMThzdldMQTNXOW9vaGMtRkQxZzZVRnROMEhEUG95eGxqMWdVTjN2VlM3RC1zWWZtTUZaLUpiSThYMWpQOHFlbU5tX21PV0p5amZLNE1NQ2luTW9uTTQxc3JlZFFnRUlPekJHWU4xZmNHSktfSWRUTFBFOFRiNFd3SDhhTmRmc0HSAc8BQVVfeXFMT3VqcldtVTgxMGl1WVA4RzFZMDc3RFFiMk5EOW5PTUVVTGFHZDZJVVIxZ3FPVkFjejNHWVJBSVBSWlduSko1dHJndW9OTDZqRDE4c3ZXTEEzVzlvb2hjLUZEMWc2VUZ0TjBIRFBveXhsajFnVU4zdlZTN0Qtc1lmbU1GWi1KYkk4WDFqUDhxZW1ObV9tT1dKeWpmSzRNTUNpbk1vbk00MXNyZWRRZ0VJT3pCR1lOMWZjR0pLX0lkVExQRThUYjRXd0g4YU5kZnNB?oc=5",
       "publishedAt": "2026-09-17T12:20:55.000Z",
@@ -3982,7 +4367,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "b7bc582f9cc7359b3252ae1e",
@@ -3997,7 +4384,26 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "777de732d3c9710a94bec462",
+      "eventId": "live-1gwilwi",
+      "authority": "BusinessLine",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOdURUNEJvVkxBc1RKNS02VUNobGpzcktSZDNJelRGNlhUWU5YWXRHMmJMaTBuUXVNcVFWRXhNUkpWWnhDRE9WRllzUGp4c3Vpb0JUMDNQUnZjOU8wYU1lN3VLaDg0SzZ2VHdKM1A4Mk1UUDJQYzN0Wko0Z1ZOZ0VaTC1YSlVFQzY3SDBKNFJDS1VPNGoxcDBDdEJOamZ2WHRuY09HVWdfNV9SUWFHVjRJRkJxeGFSQmtqRktMU1h0MlNOWEhYemFidzJWZ3Y0MTk4bzRoZnFR0gHcAUFVX3lxTE81YXQ0LU5RazlMckNPSklmZ0xxNTU2eXFYblZsaFZBLTNPXzVRbi1rbFVSY3EwTXZhM29DX1dBQkZQbkNUSkJKbFo0UUpCMGpqZjdzWHZkX1dXSm1JcWxlalJabWF1WnJsSVJybS1HNXQ5OFVpOTgxN2NDb0taUzVBckY2QjZEM0dTN0dHZGpwQmRCU3J2TXNPb1QyQkdIbVFJcXNqMUV3RTZUczVZR25vcG1laXJ2WlZEU0h1UXlfYVp1TUZnNGpoejBSZTBqT1hzQzZjUlpKTm5OcUc?oc=5",
+      "publishedAt": "2026-09-15T11:01:27.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "934ec30ceae8bfa6c5d38b69",
@@ -4012,7 +4418,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "a8626193b5f23bfcefed7d37",
@@ -4027,7 +4435,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "2647f6e799d095fa3aa4c4af",
@@ -4042,7 +4452,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "da8a637bc48ed211a04ba533",
@@ -4053,11 +4465,13 @@
       "publishedAt": "2026-09-15T18:28:43.000Z",
       "tier": 3,
       "official": false,
-      "provider": "Google News IN-en",
+      "provider": "Google News US-en",
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "1a7464f64d4b93ec8c86189f",
@@ -4072,7 +4486,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "fadfa02532c7fa62843f8f44",
@@ -4087,7 +4503,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4ee8c59825d75b0084f84f0f",
@@ -4102,97 +4520,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "6747fc8d5c4261393dd4d000",
-      "eventId": "live-1bwaosu",
-      "authority": "बिजनेस स्टैंडर्ड",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQMFYtcWhjTHhIZ2tKNXFtcE5XSzBYNGFVYnJiTTFwWE1YNEVsMmUyYUhwXzZ2QnhzaE1zamp4VEZyTHRwVzhuaE1icUoxY1RSYVZvSlN2U2x3QzB5UzRaSzF4bXlOV2tsaG1pTk5Kb3JEejZFR2JBWmhoMFVKdGE5ZUZ3RnE0S19ua1BYSEo1WXI2cmZ5WS1YTnFOSC1ReTEtWFlpS3o4eTBFVXo2bENZeGlOWlVSZ3PSAbwBQVVfeXFMTm5RQTB0NURXcGU3b3k2QkZLUl9KYXg5YTc3M09NeU1zc2F2LXlrTFkzQmkwWHFaNXZpb2NYQ3NoSFBBTVROYVFjYXlOQlR1QWE3OTg4b1NYNmRWNnljSUxzYjhjSzBmZVozaHdVMS1fVGlSN1dhRFd5QzJLYXhIRV9CUEFRNVNKNkhmX2tfd1V5ajVELVd2NWtiQUhUeldNTUJRY2dXeWFCdV9RR1BOTm0wMUJ3elBCSTFzN20?oc=5",
-      "publishedAt": "2026-09-14T16:11:17.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-hi",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "fd2d9ad302985409b07f57b4",
-      "eventId": "live-1bwaosu",
-      "authority": "The Economic Times Hindi",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxNa05wUkxIRWgxODEzU3N3WnRUQ21OcDVRNDVFRTFLQ2lRWEZ6U3daMUliOUJxWTZQbU1VWXFpMm1BYUF1ZV9UUzdwZjJCOFQ1M2NmMENuQkRYMWM1ZGZVcWRIR0ZBR3R2dXVvNndkcVdpdnRhZy1KM0FyWTctdm1kY1hqQm0xRERXeFd0OG5TODlXNzFBQkw0aGZ4NWdwU2RnQXFCTzhCbG1SeS10UVZEUUtXcUhwcDRiZ1FtWGtuRGZ3eHNWQzNJX09rYnV4RjEtcnk0OENtSEJoV2ZTczBGWjRmUjZSOUR5ZzJ2LVBob0tpU2o1T1RMSNIB_gFBVV95cUxQTDJQdzZQRS1PRnlXRW5DdWNwMGdrTC1UTVljZ253SGZvSDhmeldPZHBzR3laamxkN3A0amluMVZLd0FiRW1FbnRfWDVfT3RmRlU5N0txYzhmOU0zSm9QeXI4NkEzRUVDXzIzRWdQcWQxZXRySkRMUUFQb0hfUi1vckpPa3F1eGZadnFWSVZNd2ctVzhCNUViSXNOWVR0NW9BelB4V1pGTnhueVAxMVdubjNYR0JmZFY2UVZvWGcxWFBjN3QxYWpOSUx1LUw3YzRzSVdGQ0NhVDBIRHUtREFhQ2xqbTZ6T21yaFNYUWtod0VkQ0RFMmFqb09FSXlXZw?oc=5",
-      "publishedAt": "2026-09-11T06:05:45.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-hi",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "11af8f242fc66aff87740c0e",
-      "eventId": "live-1bwaosu",
-      "authority": "CNBC TV18",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNMktvODJoVVZUV3huRk1vNHNmY0dyZGlTRFFDbFdvMXVPUVQwdnJSbFI3WkhfQkxOeXdSVlAwZUJvMHZfcjFmYVNnVTllUTdLN0tuVmdtZGd5RmZBb3JhM3Q4VG0walR0RjJDOEZfbGFOVEJmbG84eHJWSEZGNno0ZVI1NmpBWUY4clUyUzJNX2xvbFlwX2VQbjc3VzFQVjVTd2FWNUVESEF6eGpiQllMTGtURU9IWkV5S3p5VG5vaTNua2lKZW0xZNIBzgFBVV95cUxNQW5pdjZXZlF3TnNZaDREQ0tvVmJNQWNrMWZHdUFpeWF2LWtzUUV2aTQ0ZHdmS2xyVU50RUlWOU1WUUhmc2VrbkFfWndrQlczR0R4cURLTHI0ZEZwZ3hwblJSTHB1d1U1TnhmYUVjalFIcTVzVGFYU1pGZUZoV21HMjFSaGJuNHNrLVdwMzdvdC12azYzQnVuNjV5LUtFZzFoeFpJeTRIaGJHVXIwQjhTQmVyZWdyXzJZWlRDUHJoTFhpOEN2Uk05Z3IxbnVMZw?oc=5",
-      "publishedAt": "2026-09-10T16:48:22.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "760650c7f0c981c329601ef3",
-      "eventId": "live-1bwaosu",
-      "authority": "CNBC TV18",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxQVTJYczh6akh0ZkloWE0yOWZrcXdCelVNVTNRUFpDbDBZR0RDMFFjX0tQZF9aQXdzaGpRX0hLRFlNck5OcHpCQ0NnU0lUeE5xUGx1aWZRUENObzNES3RkVmhOMG5EMDkzREEzN0R2NXNMd2ZwYzd6c3JWUkZzLXJKMEYzMWw0Mk9LdG13b1FVNlRUQ1pfZE9IODdfbDF5Z0lWV0tYMkF5ajZSbmdKX3ZRbjFuZXBJRy0yTzBoT2IxQVlxSDFPazhpeklGVF9PZlNlbUxqWl9TTlRrb0lJZ0VfSFJrUFViMFhCenM2OG1NdVFVTjFQVjcyNnlTd2vSAYICQVVfeXFMUHVvWE41cGozTWFRQktmZlU4QUFqdkVHdE1YZzJ3TWVBTkRmR2VqUXhDZDhZbnBnSDlGajlpUzZyV2E0a1pXTHdsZnVvSERtU2lYM0FQTEZtUGFETlg5bkdmcXVCcVljdjZKU0ZpbG5ybnFkUUpLNUxyc0N0bG1CMDNMdFRBZGEzLVEwTTJ5dXR6Qm4tQ19oa25yWm16TVNLclM4VDlTdENyeGdBUV9pLWFrWkNKTDJxN015RG5yTHNHZmNYa2JJN1g3SXlITV84bHZJODlXejZZbjFQUVE4NElOWTZZOWFycEpQTXZ3UlYtbk5qNnlnSU40Z3lOdlVZTkhR?oc=5",
-      "publishedAt": "2026-09-10T16:29:41.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-hi",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "4d2fa3636f1083ba72003c09",
-      "eventId": "live-1bwaosu",
-      "authority": "CNBC TV18",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPcS1tbWZXWXdYLXpzRU1FSTBDYnNMb1VBamF0SHpTSGdkQXlRWlkwVzJ6QnBJWDUzVzZnb2NvNDNDR1dMTWh6dmx4VExGTGk0T2NWbXh3dVVKTGpnaklZV1pyYzFYZWxQbHpBVGpXOVcyWTFuX0txS2hkdFNTcDF4RmN4S19ESFUxSnNWUHY2VkVCQmpkMHk2OGFiVWdfanJ2U215RTlLYTZEYU1sOEIxUVhyQWNvaVNrYlZ0Rm1TMDRJZ03SAcgBQVVfeXFMUFVzMExqM2U1TjN1QmloT0JKVjQwQUhnNTFjV1NPYVZRRmRuZ2ZCTjhWYS1nRGlOV3pyNFZDSmF3MkRHdFJaSjdzQTZ3RkZpZGJVWHpuTzFJbTF4UHZ0VHBvUElCcEswd19QSjh3MzNaSlY3bFUwYmNNdXhFMlMtZGxXTnFRemtnTVMzd0FNNGw4WGIzc19OSkZMN1FpSE1VTEJTbHRRWm9oUDdCQWtRaDFkT0pzNU0wcXhJdDE0UFYtU0d6dmZtQjg?oc=5",
-      "publishedAt": "2026-08-19T07:00:00.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-hi",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "cddeee3800e9d8c1856b2788",
-      "eventId": "live-1bwaosu",
-      "authority": "Goodreturns",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPTVl4bDNQVWEtQTZWaW5HZzd1a04zMVpna3JnMlpDbEdWbUd5Yzl5Ql81ZkYyZnY4N2M0OVNlNUptTHYtQzlTNFZlUEdUaGF6eEFGU0QtakV1OUtGbTlTanQxeUw1eC1SUlBzU2k5VEtFRWVFUVZlNTI5UjQzSkpGSTBxSkhIVmswc0lfb2lvbkwxcEp4NXZUWXRCeFY4Z01kbG42c1BVbUhid0VOQUNUcHZpM3dwcmdyakROZXhzOE8xNDJPekFpajBoQjJmRHVDenBwaTZWM0psTDZx?oc=5",
-      "publishedAt": "2026-09-14T01:27:00.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-hi",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "89f8ed4a869ed44a081b3237",
@@ -4207,12 +4537,82 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "4f2594b4ec929fdfe4e1abc1",
+      "id": "c091d54e55e369f2d5973f5c",
+      "eventId": "live-sr04o1",
+      "authority": "The Economic Times Hindi",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxNa05wUkxIRWgxODEzU3N3WnRUQ21OcDVRNDVFRTFLQ2lRWEZ6U3daMUliOUJxWTZQbU1VWXFpMm1BYUF1ZV9UUzdwZjJCOFQ1M2NmMENuQkRYMWM1ZGZVcWRIR0ZBR3R2dXVvNndkcVdpdnRhZy1KM0FyWTctdm1kY1hqQm0xRERXeFd0OG5TODlXNzFBQkw0aGZ4NWdwU2RnQXFCTzhCbG1SeS10UVZEUUtXcUhwcDRiZ1FtWGtuRGZ3eHNWQzNJX09rYnV4RjEtcnk0OENtSEJoV2ZTczBGWjRmUjZSOUR5ZzJ2LVBob0tpU2o1T1RMSNIB_gFBVV95cUxQTDJQdzZQRS1PRnlXRW5DdWNwMGdrTC1UTVljZ253SGZvSDhmeldPZHBzR3laamxkN3A0amluMVZLd0FiRW1FbnRfWDVfT3RmRlU5N0txYzhmOU0zSm9QeXI4NkEzRUVDXzIzRWdQcWQxZXRySkRMUUFQb0hfUi1vckpPa3F1eGZadnFWSVZNd2ctVzhCNUViSXNOWVR0NW9BelB4V1pGTnhueVAxMVdubjNYR0JmZFY2UVZvWGcxWFBjN3QxYWpOSUx1LUw3YzRzSVdGQ0NhVDBIRHUtREFhQ2xqbTZ6T21yaFNYUWtod0VkQ0RFMmFqb09FSXlXZw?oc=5",
+      "publishedAt": "2026-09-11T06:05:45.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-hi",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "233cb250e59fdcfea10ea671",
+      "eventId": "live-sr04o1",
+      "authority": "CNBC TV18",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNMktvODJoVVZUV3huRk1vNHNmY0dyZGlTRFFDbFdvMXVPUVQwdnJSbFI3WkhfQkxOeXdSVlAwZUJvMHZfcjFmYVNnVTllUTdLN0tuVmdtZGd5RmZBb3JhM3Q4VG0walR0RjJDOEZfbGFOVEJmbG84eHJWSEZGNno0ZVI1NmpBWUY4clUyUzJNX2xvbFlwX2VQbjc3VzFQVjVTd2FWNUVESEF6eGpiQllMTGtURU9IWkV5S3p5VG5vaTNua2lKZW0xZNIBzgFBVV95cUxNQW5pdjZXZlF3TnNZaDREQ0tvVmJNQWNrMWZHdUFpeWF2LWtzUUV2aTQ0ZHdmS2xyVU50RUlWOU1WUUhmc2VrbkFfWndrQlczR0R4cURLTHI0ZEZwZ3hwblJSTHB1d1U1TnhmYUVjalFIcTVzVGFYU1pGZUZoV21HMjFSaGJuNHNrLVdwMzdvdC12azYzQnVuNjV5LUtFZzFoeFpJeTRIaGJHVXIwQjhTQmVyZWdyXzJZWlRDUHJoTFhpOEN2Uk05Z3IxbnVMZw?oc=5",
+      "publishedAt": "2026-09-10T16:48:22.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "e882188c17c1abd239cefb0f",
+      "eventId": "live-sr04o1",
+      "authority": "CNBC TV18",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxQVTJYczh6akh0ZkloWE0yOWZrcXdCelVNVTNRUFpDbDBZR0RDMFFjX0tQZF9aQXdzaGpRX0hLRFlNck5OcHpCQ0NnU0lUeE5xUGx1aWZRUENObzNES3RkVmhOMG5EMDkzREEzN0R2NXNMd2ZwYzd6c3JWUkZzLXJKMEYzMWw0Mk9LdG13b1FVNlRUQ1pfZE9IODdfbDF5Z0lWV0tYMkF5ajZSbmdKX3ZRbjFuZXBJRy0yTzBoT2IxQVlxSDFPazhpeklGVF9PZlNlbUxqWl9TTlRrb0lJZ0VfSFJrUFViMFhCenM2OG1NdVFVTjFQVjcyNnlTd2vSAYICQVVfeXFMUHVvWE41cGozTWFRQktmZlU4QUFqdkVHdE1YZzJ3TWVBTkRmR2VqUXhDZDhZbnBnSDlGajlpUzZyV2E0a1pXTHdsZnVvSERtU2lYM0FQTEZtUGFETlg5bkdmcXVCcVljdjZKU0ZpbG5ybnFkUUpLNUxyc0N0bG1CMDNMdFRBZGEzLVEwTTJ5dXR6Qm4tQ19oa25yWm16TVNLclM4VDlTdENyeGdBUV9pLWFrWkNKTDJxN015RG5yTHNHZmNYa2JJN1g3SXlITV84bHZJODlXejZZbjFQUVE4NElOWTZZOWFycEpQTXZ3UlYtbk5qNnlnSU40Z3lOdlVZTkhR?oc=5",
+      "publishedAt": "2026-09-10T16:29:41.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-hi",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "10a31b7905caa08558ec190e",
+      "eventId": "live-sr04o1",
+      "authority": "Goodreturns",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPTVl4bDNQVWEtQTZWaW5HZzd1a04zMVpna3JnMlpDbEdWbUd5Yzl5Ql81ZkYyZnY4N2M0OVNlNUptTHYtQzlTNFZlUEdUaGF6eEFGU0QtakV1OUtGbTlTanQxeUw1eC1SUlBzU2k5VEtFRWVFUVZlNTI5UjQzSkpGSTBxSkhIVmswc0lfb2lvbkwxcEp4NXZUWXRCeFY4Z01kbG42c1BVbUhid0VOQUNUcHZpM3dwcmdyakROZXhzOE8xNDJPekFpajBoQjJmRHVDenBwaTZWM0psTDZx?oc=5",
+      "publishedAt": "2026-09-14T01:27:00.000Z",
+      "tier": 3,
+      "official": false,
+      "provider": "Google News IN-hi",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "74a456c3ce76c83f43498382",
       "eventId": "live-1anz6kn",
-      "authority": "verdictum.in",
+      "authority": "Verdictum",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxPUG15ZUZTVUphdHlfVWN1Zl9UZmpuYTIyNFhRdUVmQWV0OXNtWGxfWUpJcFJxTzI2LWRDa1MtUmM2dzBicVVnTWhjaWVjdVh5SDF5MC1ySUJ3Zm5BYndya3NGZVNnNTJXRHFxVEtxRFhXWm82bTdIakVFZXhlNnpKejZtQ1Q3a0VCZk5mNEoxRUNXY044a3NhNEszOVVNTmlpeU1feWRVRkJzcVZpWnY4V2cyVlZlR2Vrai1FSUxhT0NwOFlvN2w2WW4wWnNXdjJ0V3hmQkRtZVFEaW13cTh3a2NYbkctNy1yM2U3bWtfZHVFS1h1UjdYNmp4dnRES2vSAYQCQVVfeXFMUF9mVzhKMEcxZ1M0bXQwMDZPLTRmelBneVdNaktEQ3hIbUdpZEpUN2tBWG1FMHN1aUtrU0tiUlZLSjVPUWVteDlLRkhBZXQ5QW9LSUtxQm02WlQxd0YzUXh3cS1zWTRpMmdWcENtRTAtc0Z5SlU4aEVHc3V6Y2NQLTdUbHFndGgzVnZHR3Zra0hERl9XYTdVbHo5OUhoNWhwelpKTHctMzkzMkNKdDUtdHRaT1BPMGxGWWdjWTVobnB2cUhfLUlpRXpSeFNkOFBFOHZFZDJybWF6U2ZNdG8zLXNDZ2RFOWVHWnVmT3NSdmhyb3FjcnZDRDJDT0NEZ3VjaGU1TVA?oc=5",
       "publishedAt": "2026-08-25T07:00:00.000Z",
@@ -4222,7 +4622,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "6f5a9a111f4708fb5ebe04fd",
@@ -4237,7 +4639,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "c1a4969b2ddafa18f3971f18",
@@ -4252,7 +4656,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "d5109c8f738d54c12c2ec0d6",
@@ -4267,7 +4673,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "f03646a3db7193a7856ccfb7",
@@ -4282,7 +4690,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "91eea35d19113a2332eb0893",
@@ -4297,7 +4707,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "bedfa5e07cd4b41d111b7d7d",
@@ -4312,7 +4724,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "7999826a7bf7504f480e136b",
@@ -4327,7 +4741,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "cbde5cc206241dda4c50b191",
@@ -4342,7 +4758,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "de8727bb4688e446cfbba1d5",
@@ -4357,22 +4775,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "25a472dd1fd47eb2ea99e68e",
-      "eventId": "live-1o4ea45",
-      "authority": "Dalal Street Investment Journal",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPQThNUW4yWEo4U3k0OE5fNzNKaW5YR2JkdjJCcGJ6ZVBsanRaUVJTZFBqMFlfdENZRmEyZjJ2QTVqWXVzbUlRM3h6S2Y4VC1uNTREVWRCcm9EbHMwOE1LNVZ4bVJMTXhHNzZaSldWU3RlYkd4X0dFVVNnZm8wUG9EelVxMVFZU0w2THlERVBVLW5Ta2g0S2IzLXhyRURjakRKNFljelJWXzR4WUdObU5aRnc4WkxZUk92dGpCd0RWbnU3amhMZktOdGthRQ?oc=5",
-      "publishedAt": "2026-09-05T07:00:00.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "db5199d96bb9f471e6f5fc83",
@@ -4387,7 +4792,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "819c194793e3bcbbe4a34642",
@@ -4402,7 +4809,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "d7d6d5a1dbf8886cddde5ce8",
@@ -4417,72 +4826,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "9e093c1892150bdc9e95085d",
-      "eventId": "live-yt9h1p",
-      "authority": "NDTV",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQWVBCM0RRNVdOajZXX19Ebm1Eb2RRbVlPRVdrcWxhYmdTNlgwWmdkQUY3UW1lVkZDYTNnaUZTcy1nbEJ1WTNDRUdGa3ljZzd2d2FQOFRCc1ZPZTgyMVZWVXFYblNZVEowNzBrdlloNnFpc2tjYVBXdk9fclpteHFCa0NUbElCVUs4dlJRUXd4ek0zZ2U4Q3JrT0JTSlpLX0R6Nl9YOE9CVFZxbzV6eG9raXlsRFRtODR4Y1FwMDdaRXF5Qm4yQ0HSAc4BQVVfeXFMTkpqSDNXSTV5RVVvalY0V04xZXJlQmxHc2pSNjBGVUJSWGxjVm1hSVhWZlR4MnpWNEY2T3puOFZsczA5U0xlNTdrVlBzMGdvODNNLWM4aHloN2xjdHpKRGoyakZMQzBmNU1zamh1SHViQ0d3cEgwVUUtbVhmSFlMQ3gzRHc0WjBOcXpXSDRsa0JfUEV1TUJFd2I2cGctdXNsVTBzTEFLYjhaZlF3RENuRXFwRENQd0VWQ0doUXNFeFY1YUs5X1R1QUpna3lEcWc?oc=5",
-      "publishedAt": "2026-09-16T09:53:41.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "00fe9d14b38ebe61e2acb8f4",
-      "eventId": "live-yt9h1p",
-      "authority": "The Times of India",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi3gJBVV95cUxQUWpDVnhLUFRMUEtDSTZ1ZEZRNnZONFo3QmFjZzZvejB1US1hM1pZaVB2OUV2Sl9Kd1dFRXREZUc3eTNzTmk2Y3RLWXZ4eTBXVGFwNGpmWS1ZYnI4aGVrdHd6N3N0c0VmclFmNGxCaS13OWU1cm5yT1hqQ0RXTVAtd3FKd0lENnBiSi0tTkRCcThDSDlVX1NFTlNVWjhuRVJWcFZaWmNSUEI3QnpBRHZfVUNEVmpDTm5HZVJsMHB1S3NLOFl6RWhUT3RGSEd1OVF3U2t1YVg0UThBRk9uV1E1LWpjam0zNHlGOUZqTkZ4Q0tfRDgzTGtDT0pUWkgxUXlydHQzclpBSU1IM1Z6TnQtRkhyeXQ3M2hOYnpOU0F5MXpCd243Z2xpZ2pTVzZ4UHRETm55SmlORkRHQ1RUYWhLaHBYb1hyeU5UbFY1dkY1Z0Z5NWpEb3g4R2Q4SGg1QQ?oc=5",
-      "publishedAt": "2026-09-16T09:44:00.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "0f63b08c209d330782966a53",
-      "eventId": "live-yt9h1p",
-      "authority": "Moneycontrol.com",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi4wJBVV95cUxPN2p3S2Y3RmEyLWVfOTlsRjdEZG9vUjgzaS01RnRrTExiaXl2T002eWtBUFZocVVfNVhMcXZreThSLWhHVW9KNlNNM3NKSGRTRkpESG5Gdl92MGpxTG5EbmVCamtBQ0V3REhHUFByY2g1bklfd3Y4Q1Zmbk9OVkRvZzZrNUtUVFlMVXdHeFBIakJfSHhybnhSSjNXYm1ZNGpfYkFFVmdxZmpVN2VZSTdmaVhkMWtyVUtMSmJad3NraDNVT1V0Y2JPbTMxMHNUNWdTTGFfaXp3TTVqdXVfQ2VUaHcyZHlhbnNaaldpd25ja25rdVpGQjZZcTlBZjdWbGVXbXJ1UEotMmxoZl9KTkZlYUhDZ3doTjhvUFdMREMxWWlWcjFQYXdrZWFmWV9Zbi1CeGFtSWNDNnZBUTNucFhZVHd6b1VVa0g4cUxCY0d4eWlQV0FuNC1wdXVjeHp5ck1IN1RB0gHoAkFVX3lxTFBnRHNsaVUzS0R0NGFHQzc5Sm1yU3B0VkVKWnNOOVhwcmpvNkhiMWRRRUg5QWhzd1g4NE9wWWVvRk1paXJCc21laGhCb3BFRGcyV2lscm5IY1ZPTmpzSE1xYXlBMkFub0hZdE1kZENha0oxc2xJRVk2Tkw4S0dxdGNEdFd6enlncVJ5WkVpYlFMREdqV0VIN3drQXJ4LXA4ZjlYYVFJRGczZXB4MGFEcVBkQUNYS1RyZHVZalVoakE3dXhCckFWbXBOTUE1RGxyYXZTcGpnMGlDU1dqc19EbktoTjdWNlQ2dE9EclA1bXczUUxhdmp2Y281OGpobEszNVAwd3pJNk00NTZsanlSQU1rRjJuRmp5cjUwTloyOVZJSHZENmw1TzFkM25VOC1FTVc4QUlNSFp6RWpMX2lCUXAteklkdHVHYXZiMldYcmFtR3d1WXF5SjBGMFJTZHh0SHFMSEtOSTQzMQ?oc=5",
-      "publishedAt": "2026-09-16T08:07:38.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "fac6751a3038b54aff3dfbe4",
-      "eventId": "live-yt9h1p",
-      "authority": "News18",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxQajlfZTlobE1VVGVZalNMSWYwamJSSmRQeGpwaUZ6UUVfeS1Nei1WekdGcUJUXzNvVXkxeUZ1QS1nMmQwQ0szeFVfMWZPYW40bW1YX2lncHBEc3I0bkxMUGlwNkZWNmZZZUhWRmsxMW1qRGpVck5Ba2t3OGhLc3RRVWpGaFpURnNVMFhRclVwTEhPd20wMGprQ0lUZ2IwWlF3QmM3T2FtakRZMlBiUWdfdmc4S1RyaG1VUlhUQ2toeGs1ZlJTcmpUSG5FdF9lMnZtN09XUi1IbXpYb0dlbEswYnNsY0ltMXFtQVJ2LUcydDDSAfYBQVVfeXFMTUFBOG1XeWZnSGV3c3FPTVJFM3JRMVlMUzVKczBkWFJQMWlWejdZdllYNkFOeVdkSUdzT3FWUVc5NGRvS2pldnlWemw1SU82cjNrN1JIQ29RcVc3SGhteVk5TElCZldESFVESDBQdDlpUklFN2tRblhEb3lKbHVxYzR3WklzNHJLTlFSNmhLek9TMnVwMXM3Z1ZhSjRYZnQ0TUpaY0ZaZUpZY3lZanAwNzNod09SVFR0aWlaZ2ZzaEVIVHAxemtFWnQ5UlQzYTl0TmhYSmxYbXlLdlpxRzhwVDJfODJ3b0V2bXJEaHprTGtwbFMxWEVn?oc=5",
-      "publishedAt": "2026-09-17T07:12:29.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "ac9c87b6ec84bf838160379e",
+      "id": "50e33f898accb67fe64509c4",
       "eventId": "live-1g570rj",
-      "authority": "navbharattimes.indiatimes.com",
+      "authority": "Navbharat Times",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxQQ3dOaG5QZDNiVXBnaWN3djdUVHY4ZzM4WV90UkhhX1NwaDZhTURobFh1M3BySUVEdHNtNzNKbGlYZFhrLUVQWjE5NHF0R0RNY01WcWF4dFlqdEYybTZWMUNRdDVYd0Y0enNEY19DZVlMMHBLS05OUjhTTGU1RFpZVU5FTS1CemxoMkJGbUNrcXdQd1Z4MHJDVUJUNzdkY2o5alNSMElNUVdkWHJjTlJiVHBxaWFVRmlEOWNXX1J5T09ZSlFtZ0hTZmljMmo3NWJpNVM4UjF6Y1R3MXZSRkZTV2dCbFJXWHJ4bV8xRUlaTFNVSGxUU3ZpZG5jcVnSAfwBQVVfeXFMUEN3TmhuUGQzYlVwZ2ljd3Y3VFR2OGczOFlfdFJIYV9TcGg2YU1EaGxYdTNwcklFRHRzbTczSmxpWGRYay1FUFoxOTRxdEdETWNNVnFheHRZanRGMm02VjFDUXQ1WHdGNHpzRGNfQ2VZTDBwS0tOTlI4U0xlNURaWVVORU0tQnpsaDJCRm1Da3F3UHdWeDByQ1VCVDc3ZGNqOWpTUjBJTVFXZFhyY05SYlRwcWlhVUZpRDljV19SeU9PWUpRbWdIU2ZpYzJqNzViaTVTOFIxemNUdzF2UkZGU1dnQmxSV1hyeG1fMUVJWkxTVUhsVFN2aWRuY3FZ?oc=5",
       "publishedAt": "2026-09-16T01:31:53.000Z",
@@ -4492,7 +4843,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "baf53c20fc389a55407d3dc3",
@@ -4507,7 +4860,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "f15dcfbb53409aad19477909",
@@ -4522,7 +4877,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "4e9c977317388ac2eef14135",
@@ -4537,7 +4894,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "1929c33ff0cfc79d69ce02f9",
@@ -4552,7 +4911,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "e84383eef85007adb97b39e7",
@@ -4567,7 +4928,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "8da46142864be9f11acb8050",
@@ -4582,7 +4945,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "8d282c59119de0894ddece3a",
@@ -4597,7 +4962,60 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "0ea079edf1ced73ea93a72e4",
+      "eventId": "live-1jx75f5",
+      "authority": "Business Standard",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQUnp1VlZWWGZvV2NzcmZsTzdnVTRxR3ktYWpoZ29iQ2F2T2VLaWl4OUFGSmhXQXFodkRDVDBBY0JzUlVacHJMNjFOSmxNajZCcXBiX1R3SDVrcHc3YVhldnRDNzZFV0FieUZhUE43Q2VDdlVzZXA2TTFtSFFTLWdnR0JfVXNsV25LUFRSSVh6SUdhSGFwbTlRZGdhZjJDREl3aTVZQkMtN0tnbEVvcHFPLVZ0MjVhTmZvbzJxX2JETUx4VWoxRW1uckk1Q3R3dmtpel94UmNMMNIB3AFBVV95cUxPM3FEVU4wWEpsOGxFWF80cmlDcDBEVmpPMVRSV1NWTnU0RVdreW9zRU4wdEp1MEJmVGVxNGx2Zzhld0E5U1E5aXZNWU03MnNMQWRBbjZhUnAyaEotZUVzZFh5d1hPYUVkeWR2V2Z1Sms2S1RwLWc4enpBTldPdDhNVUFrQ1UyTVJhSHRLWGNNOUVnd3JoY1ktb1YtWWhoMHpVQmdfYkd5WDNhSlpmZk1kNkZPQjV6SFh4dkZEd05xaTVKY3JRRFhOeHpySUNhaFFhSjRhM3RPb0RrUkcy?oc=5",
+      "publishedAt": "2026-09-10T04:05:25.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "839740ac81ff5e67eee4a518",
+      "eventId": "live-1jx75f5",
+      "authority": "NDTV Profit",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQV01wNy1aWHQ5NTEyUTNEWnBjZVpoMTZEcVoyaWxibjZubGZtdy0wZ3J4c2xVaUFuVG5kemwzN0hMLVF4TXJ5QjNrSk5jMy1OT3lzM2JMZXVXRUNpczM1TVMwQnNIdzJNaXhCN3h6M2xaazMzcUJFZFAzWkRlZmFVekItaVY1eE5XLTFBQUptNVpoYkdqMG9XZFhfTU5FYWdpMlZlSTRlNXBHU2xDZUtHRzRUSWtDeVBDalhhSnFiZWdvTzjSAcsBQVVfeXFMUFAyWkgwT1d4aDdNVkpBS1QyMldILVlUUF9KbXdqT2RocW5jVDFVQmwtbFVSWTJEMEJUcmp4cFpZMG5mYXB2T2NHMmVGcUg0Mm10aHVqbUVPaGNFNVdXak9kODQ0dDE4Nmg3cEpEM2ZNbnVnT3QzaFk0aktjNk1mVDJuc2x6RzlKQ2t1U293alNVejdoVndhNkdQNGNValNsTld6bWZrTFdFMVRmbXZ4dWFMOVdTT3RxOTdENzFwWXFGQkYwSTM2SXE5ZkU?oc=5",
+      "publishedAt": "2026-09-09T07:00:00.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "51dce1c008fb93e9ac884b58",
+      "eventId": "live-1jx75f5",
+      "authority": "TradingView",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPd2kyc1NXWU9yWkFsU3VXZ192NmJpVE96cnd0X1lzMEQ3MEUtVFFEZ3l1eXFuUlJONkNyNTZDb3BTc3BxTi00c0xVNVcxVGNHd0dkaUNhMnNDNTNQZWZvU2xLWmxsbTNqQ2pSM05MQVRFMlJVMVJGNXY5djBBZ0JpaC12VEFORzQ1cmR1aGNtV052LUY0TlJfUkVHMWtGZlladlBxZTdGR0g1UHlkLVN3QTFYdUk1d3RXSjcydG5IY3NWMmJyeU9iZVhQOVA3MHJYNzRDbGc3dndSWE9VclB4eTRTcw?oc=5",
+      "publishedAt": "2026-09-09T07:00:00.000Z",
+      "tier": 3,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "da12d36d25a6324a1c196bf6",
@@ -4612,7 +5030,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "261cca59ca72abd4cba19237",
@@ -4627,7 +5047,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "73e0213c891f2dd1a410448f",
@@ -4642,7 +5064,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "448fdb8dc9332f254f2bf4df",
@@ -4657,7 +5081,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "8a368388e7e64b9ce0892ef2",
@@ -4672,7 +5098,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "3086eb022c76d8aa28b5995a",
@@ -4687,7 +5115,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "9781160a9954c97fa1ec23fe",
@@ -4702,22 +5132,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "76b68b18f2f4e20f9857be73",
-      "eventId": "live-aw3ava",
-      "authority": "Investment Guru India",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxPTWZKOWR4c2g3d3huakZReW9KWGcwQWFCVVdTRXE0TEtTUUE2b3JTa1YzdmIydEh3cFJVXzF3RzlVMlpQSXN4QlhWd2NWVmN2dmp2UG9BR21WbVhLUi1WS0xibGlVQnRHbDBvQkNZRTJsT1JLbUlxZGozc0pPdEVxSlRBU0VpWm51V05FS0ozS3NVSEJVTHQzRkZHX1hFM2JHa3lITnJpYm9leFlkNkxaaXc1dkI4V3pXTjBYSzBKbERuWW9OWkdsTXBFZkhLUW1xaFkwMG1saXk0dVEyc3FJRzF1bEJRMzRKaXdpVzd5T2E1dw?oc=5",
-      "publishedAt": "2026-09-02T07:30:51.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "24b9508f9dfd7a3778b56bc9",
@@ -4732,7 +5149,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "b2ad9a8aa397a910778b95be",
@@ -4747,7 +5166,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "1dec9b67899de06c223da398",
@@ -4762,7 +5183,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "5fa28d52aea798aeff82b047",
@@ -4777,7 +5200,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "072c12c58a42e77e25614a6e",
@@ -4792,7 +5217,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "fcf18835c0f842349ac8d8f0",
@@ -4807,42 +5234,14 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
-      "id": "eb6dc0ffcf3d96a400d2e038",
-      "eventId": "live-uybsqm",
-      "authority": "The Economic Times Hindi",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOZUw5TUxjQURVY2xQVVZVRTRJajB0di1FeVlCVk16SWNVczAyVkFWcFZJU09PM0FmZ2Nnd3Y2S096ZzBVclZiM0ptRnBWOG12OG9aeTRrWGhWTzdfUkUxbzFZNnRJQURPVnNFaC1rRXZDb1hLeHFleGlzYkt0em1qd1Rmb19vNlYtbVI2TGxlZVRhY3M2R2htZ1FHTGF6MXptUW13cnJtSEpCWlRMeE5fclBHMzBKWHotMTQ5S0VuTlFyaFJDdlc2elpkMzJjeHhEWG9fSk1RSHM4cVZKOXg4d0w3bmRhek9ZWDJGT0hXa2lvUms5Q09TLVpCNXBwa3pyMHUzZzVZTdIBjAJBVV95cUxPUTBkTWZXTnMyUlN2dUdZSWo3bVFrVll5ODY5azRJbXIzNDVRb3M1LTRjc2lBMDFsOEtrZlVueEJvajg4RVdVTjE1YjE3bmRjamR2UjZGel8wSjNSQk9yRDI5eGxJbm9ZUkJ1UlZMUE9OWk13empfR3IwTkhfczQ0MjJRYk42VVRWb1pfamg3Wk5YQjZ4ektBQlRkMV9qMlZYUUNreUc5N0xXZ0FFenNQeDF0V2tBd2VOTmViemVYck1TMUd6d3h1ZlNzMFlTUGxSbVUyNDdsRDVkZG1mY3pvQjNMcGZVeHFzN1FKOUhOLTJoaHhWdE50QUhBX1c1QjFzN2liRjlNOFBMSEVP?oc=5",
-      "publishedAt": "2026-09-09T13:50:07.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-hi",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "5213ab679d7f1eb2b4daaffc",
-      "eventId": "live-uybsqm",
-      "authority": "NDTV Profit",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQV01wNy1aWHQ5NTEyUTNEWnBjZVpoMTZEcVoyaWxibjZubGZtdy0wZ3J4c2xVaUFuVG5kemwzN0hMLVF4TXJ5QjNrSk5jMy1OT3lzM2JMZXVXRUNpczM1TVMwQnNIdzJNaXhCN3h6M2xaazMzcUJFZFAzWkRlZmFVekItaVY1eE5XLTFBQUptNVpoYkdqMG9XZFhfTU5FYWdpMlZlSTRlNXBHU2xDZUtHRzRUSWtDeVBDalhhSnFiZWdvTzjSAcsBQVVfeXFMUFAyWkgwT1d4aDdNVkpBS1QyMldILVlUUF9KbXdqT2RocW5jVDFVQmwtbFVSWTJEMEJUcmp4cFpZMG5mYXB2T2NHMmVGcUg0Mm10aHVqbUVPaGNFNVdXak9kODQ0dDE4Nmg3cEpEM2ZNbnVnT3QzaFk0aktjNk1mVDJuc2x6RzlKQ2t1U293alNVejdoVndhNkdQNGNValNsTld6bWZrTFdFMVRmbXZ4dWFMOVdTT3RxOTdENzFwWXFGQkYwSTM2SXE5ZkU?oc=5",
-      "publishedAt": "2026-09-09T12:05:21.000Z",
-      "tier": 1,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null
-    },
-    {
-      "id": "754689887ad2f47337da30ee",
+      "id": "d0853ab54f39791c1362b0eb",
       "eventId": "live-1142pdn",
-      "authority": "ET Manufacturing",
+      "authority": "manufacturing.economictimes.indiatimes.com",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxQUFlvMmJwN0JXMlNIWmdSNFdDc3ZuN2F4RGt2WDlER2NzQXpiMkFybE5Cb08zQVIxeVdnYXFZdzBXX0J3TUxwWDZhcGp3ZlNiVDNVUmtWX0JoQ09uU0QwYjFYMlBYQ2IwMHhRT3ltZzdraVFSS2w4bHVUdUktVEF2UVdLZTg2clA4U0lMdTBSSFJGQmc4TFdUU2xxQk8xUmhaT1BTeWhpZEpiVzZ5ekhDbG9TMWZhS0o3a05CV2YzY08xbGFJTzFZbHlEOHlxUDZ3TkVoQVZ6UzhkNVpyWEZpZFRsbG9qa2FWR2VkTlkxNXF4SEhCNlh2Y01weUtiMmlsNUlqdUU3MNIBjAJBVV95cUxOUUx2OXBEVExPY0xCcWo3Vmt2SnJHZzdyZFlpM0psMTlhWlFEZVZsdTR2eXNNdTlrT3g2NTBlNG1TMDFINU5ESlZmeTBGeDdydnlKbi1ydDNNRHVJZi1qYzBBTmFLaTJFYU1WbEFweE1TcGhEWXBWV2JPRVAta1lMMjNXNkF1NWFxTUg2dUhMQ0RkdWUybDgySTEwVlBNVWx2SWVVVll3bkp4Q2pMOWt2d0o5Nmx2cjNtcTc1c1EzLUEyTWpMcWxSWkt4UjB1cTFPZWlNMmpJd2RIM3VYZlJwQTVoVmxVMXM3TXI2dTR1T2hjcE4tZm9xYUhoTWsyQUNxQTdVUHpKMWtHTmpj?oc=5",
       "publishedAt": "2026-09-04T07:06:18.000Z",
@@ -4852,7 +5251,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "42f569cc8d163dfa82bbba5c",
@@ -4867,7 +5268,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "8c0354ce308d6e9f7caf77dc",
@@ -4882,7 +5285,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "504948a6796dc37a318a2bd2",
@@ -4897,7 +5302,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "703d31c48c7f36877170dafd",
@@ -4912,7 +5319,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "5a996c38d4aa5828376e317e",
@@ -4927,7 +5336,9 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     },
     {
       "id": "0f3289d835a93841ba94ef3f",
@@ -4942,14 +5353,79 @@
       "sourceId": null,
       "attachmentUrl": null,
       "rights": null,
-      "snapshotSourceCommit": null
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "e3ca7a9b8a82d6692d208666",
+      "eventId": "live-sbfrrw",
+      "authority": "UA.NEWS",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQX05RLWVSZDJYclJoOGd5bXBHR3RPbFBKMWhlaUxYM0hxa0dtU01kM3BVODRSS3ZJdWRFQ2dNcVYxREhFdWoxTDJwZmo3X3U3OUdjYUMxamlhcFBtWnJOeV9OQkNrc0ZCRVlEUXlBQndlVmRSVDYtcVFGTXlOb2d0d2VqVTJLN0xsUWpVd2tOZGRVR3ItWGF0eExIRG8xSnFl?oc=5",
+      "publishedAt": "2026-09-02T07:00:00.000Z",
+      "tier": 3,
+      "official": false,
+      "provider": "Google News US-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "d9c8045e0dbbfc690b79d4fc",
+      "eventId": "live-1edubnq",
+      "authority": "NDTV",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPd0xrM2pubDVCN094Y3FHcnVuVlFabkdRSFVZM1FBeTk5dDJ3UjdfT3I1RmVzbW10cTR1S1ZWand0UTNNZjBiS0l3U01GS3c5aEhKSW5GQlo3eVNxYkEySHBvbjhDNDhPZkhjZVl4UC1QMGU0clg1Q1lVTXRvYTJXenZBQWJuSHIyTGxHbnBET0hQb0pSNU9leVd3ZmktMEI4YXJ1RnZUUmZxSFRRRWFrMkZtS1REVWxZdDdhRFR6NjM2U21YOGw1RG5GLWxmWFHSAdcBQVVfeXFMTWUwN1gxeVdwOVNpZTh4aVNVOXAzSnhqTXg4QnNnVnNVdHFJMlpnbGRxUVNJeTFuRVU3a2VFd0VWT3YyN0pMTjQ4RnNkLU9Gd2ZXYk5TWU5pMldCbGx6UWhVNHcxYXJ0X3BBNjRwSS1pVUlzdFlnWFdCZWNUc2x6ZHhRTkVuczZleFNIaEdsRy13X3N5NExmSE00dVk3MjMyQ1A2UDBwd1lhcEhuWlFfWUZQX2ZxcmFBeU8zbmR0a0prS3d4c2JRZkdoWHM2RGlPamVfUzRMaTQ?oc=5",
+      "publishedAt": "2026-09-08T07:00:00.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
+    },
+    {
+      "id": "4a28109ee6474b47a0185473",
+      "eventId": "live-1s11ay1",
+      "authority": "Business Today",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQQnZpdzBpM002UTNFaWtiTW1najAybjhpakxRcml6TGk3Zm43RVdoZ2pUaDFYZzh2dmJ6UUhDbzlPS0g0MHJLOHRFSGpFNjI2d3Vqb2dyUE4xdkRTSG1zX3lGS05TS0FjRFNyaDY2RjItRUNzNG5Ka05IUjlzb1o1TzlISmp6eElyR2tiN3NMbHlPT0tVTHpXMkNRMUI1ODd6ZWZlcWQ4OGxQeTdTdXlPXzZMT25IZFRlNXJ6UmhNaDRacDJwTFJNcThuNWJOUnJJc1lyY2pJU1ZIT21RVmpfatIB5gFBVV95cUxPVHQzd2RJUFZqc2FTYXBDTHEteTlxR0xHd0hNZjUyUFVhbEFfQTI5eFNJYmE1cTFFdGZFblVRSnJHNFZaNlRJZHlyWHJoSzRLTG9fNEVzTXFMVHowTWZTWDdtUUx5VVlyQTcwdkt2MWlNSnpCcE0wYTN1QW9LcW1Icl81dnJoMm5reWEwNXctUlpKVVQ5Y1d5NTlQaG9JYjVrRGFkbmYxVFM5VXB4YXIzZVlzdzJqTkZsYWY3X1prRDhfSi1QNWVnWUotc1lhNDRVckRrbnAzbk9MZllUWDR3SnJvNW02QQ?oc=5",
+      "publishedAt": "2026-09-18T05:26:24.000Z",
+      "tier": 1,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     }
   ],
   "input": {
-    "governedSnapshotGeneratedAt": "2026-09-18T01:12:47.626Z",
-    "governedSnapshotAgeMinutes": 6.6,
+    "governedSnapshotGeneratedAt": "2026-09-18T06:31:53.738Z",
+    "governedSnapshotAgeMinutes": 158.8,
     "governedSnapshotSourceCommit": "17d669f3e66806922e51b05d29f13f9c35fe95cd",
-    "governedSnapshotWorkflowRunId": "35294384444",
+    "governedSnapshotWorkflowRunId": "35315268690",
+    "governedSnapshotWorkflowRunAttempt": "1",
+    "governedSnapshotIdentity": {
+      "generatedAt": "2026-09-18T06:31:53.738Z",
+      "windowStart": "2026-08-19T06:31:53.738Z",
+      "windowEnd": "2026-09-18T06:31:53.738Z",
+      "sourceCommit": "17d669f3e66806922e51b05d29f13f9c35fe95cd",
+      "sourceRepository": "NinjaRK/abg-pulse",
+      "sourceWorkflowRun": "35315268690",
+      "sourceWorkflowRunAttempt": "1",
+      "payloadHash": "cd6e4aff7d82a437075e37cec04c467aa304e4d1399a90a52826316b147e7d2b",
+      "generationId": "1f748c5e99a72618356b763c2c5211edd18da0c2fb34f021697e1bc8103f8a35"
+    },
     "governedSnapshotEventCount": 60
   },
   "quality": {
@@ -4957,8 +5433,14 @@
     "unsupportedMaterialClaimCount": 0,
     "potentialContradictionCount": 0,
     "publishable": true,
-    "rule": "No unsupported factual claim at or above the materiality floor may be published as a dependable claim graph."
+    "factualAccuracyVerified": false,
+    "supportPolicy": "source-metadata-only-v1",
+    "rule": "Material claims without traceable sources block publication. Source attachment does not establish factual accuracy."
   },
   "unsupportedMaterialClaims": [],
-  "contradictions": []
+  "contradictions": [],
+  "integrity": {
+    "algorithm": "sha256",
+    "payloadHash": "6c84bd140deaed8378af3d0a003f08620c1741e75a87fd7c5460cd540c5cbb4c"
+  }
 }

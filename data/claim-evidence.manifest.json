@@ -1,14 +1,26 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-09-18T01:19:26.226Z",
-  "sha256": "b47f46e5fd40471bd61c05f05f7591889a9b6ca6f59448fd9d066217bda7f551",
-  "bytes": 261676,
+  "generatedAt": "2026-09-18T09:10:43.837Z",
+  "sha256": "8974160cd6006bf74e26f799814a08c3d79381fc474367dfa94d2a67cb3b4426",
+  "bytes": 281462,
   "sourceCommit": "17d669f3e66806922e51b05d29f13f9c35fe95cd",
   "input": {
-    "governedSnapshotGeneratedAt": "2026-09-18T01:12:47.626Z",
-    "governedSnapshotAgeMinutes": 6.6,
+    "governedSnapshotGeneratedAt": "2026-09-18T06:31:53.738Z",
+    "governedSnapshotAgeMinutes": 158.8,
     "governedSnapshotSourceCommit": "17d669f3e66806922e51b05d29f13f9c35fe95cd",
-    "governedSnapshotWorkflowRunId": "35294384444",
+    "governedSnapshotWorkflowRunId": "35315268690",
+    "governedSnapshotWorkflowRunAttempt": "1",
+    "governedSnapshotIdentity": {
+      "generatedAt": "2026-09-18T06:31:53.738Z",
+      "windowStart": "2026-08-19T06:31:53.738Z",
+      "windowEnd": "2026-09-18T06:31:53.738Z",
+      "sourceCommit": "17d669f3e66806922e51b05d29f13f9c35fe95cd",
+      "sourceRepository": "NinjaRK/abg-pulse",
+      "sourceWorkflowRun": "35315268690",
+      "sourceWorkflowRunAttempt": "1",
+      "payloadHash": "cd6e4aff7d82a437075e37cec04c467aa304e4d1399a90a52826316b147e7d2b",
+      "generationId": "1f748c5e99a72618356b763c2c5211edd18da0c2fb34f021697e1bc8103f8a35"
+    },
     "governedSnapshotEventCount": 60
   },
   "summary": {
@@ -16,9 +28,9 @@
     "claimCount": 60,
     "factClaimCount": 60,
     "interpretationCount": 0,
-    "evidenceCount": 167,
-    "supportedFactClaims": 3,
-    "provisionalFactClaims": 57,
+    "evidenceCount": 161,
+    "supportedFactClaims": 0,
+    "provisionalFactClaims": 60,
     "unsupportedFactClaims": 0
   },
   "quality": {
@@ -26,11 +38,13 @@
     "unsupportedMaterialClaimCount": 0,
     "potentialContradictionCount": 0,
     "publishable": true,
-    "rule": "No unsupported factual claim at or above the materiality floor may be published as a dependable claim graph."
+    "factualAccuracyVerified": false,
+    "supportPolicy": "source-metadata-only-v1",
+    "rule": "Material claims without traceable sources block publication. Source attachment does not establish factual accuracy."
   },
   "workflow": {
     "repository": "NinjaRK/abg-pulse",
-    "runId": "35294839560",
+    "runId": "35328159805",
     "runAttempt": "1",
     "workflow": "Refresh claim-level evidence graph"
   }
