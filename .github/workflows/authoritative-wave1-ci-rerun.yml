@@ -1,0 +1,47 @@
+name: Verify direct authoritative source wave one
+
+on:
+  push:
+    branches:
+      - sol/authoritative-source-wave1-v2
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run complete regression suite
+        run: npm test
+      - name: Check source adapter syntax
+        run: |
+          node --check lib/authoritative-sources.mjs
+          node --check scripts/refresh-authoritative-wave1.mjs
+      - name: Run SEC EDGAR live canary
+        env:
+          AUTHORITATIVE_SOURCE_IDS: sec-novelis
+          AUTHORITATIVE_LOOKBACK_HOURS: '720'
+          AUTHORITATIVE_MIN_SUCCESS_RATIO: '1.0'
+          AUTHORITATIVE_TIMEOUT_MS: '20000'
+          AUTHORITATIVE_OUTPUT: out/authoritative-wave1.json
+          AUTHORITATIVE_MANIFEST_OUTPUT: out/authoritative-wave1.manifest.json
+          AUTHORITATIVE_SOURCE_USER_AGENT: 'ABG-Pulse/1.0 (public-source monitor; abg-pulse@users.noreply.github.com)'
+        run: node scripts/refresh-authoritative-wave1.mjs
+      - name: Verify live canary evidence
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const payload = JSON.parse(readFileSync('out/authoritative-wave1.json', 'utf8'));
+          const manifest = JSON.parse(readFileSync('out/authoritative-wave1.manifest.json', 'utf8'));
+          if (payload.sourceCount !== 1 || payload.successfulSourceCount !== 1) throw new Error('SEC canary did not pass.');
+          if (payload.sourceChecks?.[0]?.sourceId !== 'sec-novelis') throw new Error('SEC source lineage is missing.');
+          if (!manifest.sha256 || manifest.sha256.length !== 64) throw new Error('Evidence digest is invalid.');
+          console.log(JSON.stringify({ records: payload.recordCount, digest: manifest.sha256 }, null, 2));
+          NODE
