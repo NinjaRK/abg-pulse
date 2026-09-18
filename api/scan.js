@@ -39,7 +39,9 @@ function send(res, status, body, cache = false) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('Cache-Control', cache ? 'public, s-maxage=300, stale-while-revalidate=600' : 'no-store');
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('CDN-Cache-Control', 'no-store');
+  res.setHeader('Vercel-CDN-Cache-Control', 'no-store');
   const delivery = Array.isArray(body.events)
     ? { ...body, supportPolicy: CLAIM_SUPPORT_POLICY, events: body.events.map(applyEventSupportPolicy) }
     : body;
@@ -360,14 +362,14 @@ export default async function handler(req, res) {
         window,
         now: startedAt,
         allowTrailingLag: true,
-        staleAfterMinutes: Number(process.env.LIVE_SNAPSHOT_STALE_MINUTES || 90),
-        minimumSuccessRatio: Number(process.env.LIVE_SNAPSHOT_MIN_SUCCESS_RATIO || 0.2)
+        staleAfterMinutes: process.env.LIVE_SNAPSHOT_STALE_MINUTES === undefined ? 90 : process.env.LIVE_SNAPSHOT_STALE_MINUTES,
+        minimumSuccessRatio: process.env.LIVE_SNAPSHOT_MIN_SUCCESS_RATIO === undefined ? 0.2 : process.env.LIVE_SNAPSHOT_MIN_SUCCESS_RATIO
       });
       return send(res, 200, payload, true);
     } catch (error) {
       const snapshotError = error instanceof SnapshotError
         ? error
-        : new SnapshotError('snapshot_read_failed', String(error?.message || error), 503);
+        : new SnapshotError(error?.code || 'snapshot_read_failed', String(error?.message || error), 503, error?.detail || {});
       return send(res, snapshotError.status, {
         error: snapshotError.code,
         message: snapshotError.message,

@@ -1,3 +1,5 @@
+import { sealPayload } from '../lib/data-integrity.mjs';
+import { sealedGraph } from './helpers/governed-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -104,7 +106,7 @@ test('interpretation remains interpretation with no probability of truth', () =>
 });
 
 test('public claims handler corrects legacy summaries and metadata, including summary-only mode', async () => {
-  const previous = globalThis.fetch; const raw = legacy();
+  const previous = globalThis.fetch; const raw = sealedGraph(legacy());
   globalThis.fetch = async () => ({ ok: true, json: async () => raw });
   try {
     for (const url of ['/api/claims', '/api/claims?summaryOnly=true', '/api/claims?supportStatus=supported']) {
@@ -121,7 +123,7 @@ test('public claims handler corrects legacy summaries and metadata, including su
 test('live scan strips cached event confirmation and certainty without altering upstream payload', async () => {
   const previous = globalThis.fetch, oldMode = process.env.ABG_SCAN_MODE;
   const now = Date.now(); const item = { ...event, status: 'confirmed', intelligence: { certainty: 99, materiality: 80 }, publishedAt: new Date(now - 60_000).toISOString() };
-  const snapshot = { schemaVersion: 1, generatedAt: new Date(now).toISOString(), windowStart: new Date(now - 3 * 86400_000).toISOString(), windowEnd: new Date(now).toISOString(), source: { commitSha: 'a'.repeat(40) }, events: [item], meta: { queryCount: 1, successfulQueries: 1, sourceChecks: [{ ok: true }] } };
+  const snapshot = sealPayload({ schemaVersion: 1, generatedAt: new Date(now).toISOString(), windowStart: new Date(now - 3 * 86400_000).toISOString(), windowEnd: new Date(now).toISOString(), source: { commitSha: 'a'.repeat(40) }, events: [item], meta: { queryCount: 1, successfulQueries: 1, sourceChecks: [{ name: 'test-source', ok: true }] } });
   process.env.ABG_SCAN_MODE = 'snapshot'; globalThis.fetch = async () => ({ ok: true, json: async () => snapshot });
   try {
     const res = response(); await scanHandler({ method: 'GET', url: '/api/scan', headers: {} }, res);

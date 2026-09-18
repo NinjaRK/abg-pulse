@@ -1,3 +1,5 @@
+import { sealPayload } from '../lib/data-integrity.mjs';
+import { sourceChecks } from './helpers/governed-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -41,13 +43,13 @@ for (const path of ['.github/workflows/refresh-live-snapshot.yml', '.github/work
 }
 const now = new Date('2026-09-08T10:00:00.000Z');
 function snapshot() {
-  return {
+  return sealPayload({
     schemaVersion: 1, generatedAt: '2026-09-08T09:50:00.000Z',
     windowStart: '2026-08-09T09:50:00.000Z', windowEnd: '2026-09-08T09:50:00.000Z',
     source: { commitSha: 'a'.repeat(40), workflowRunId: 'test' },
     events: [{ id: 'event-live', publishedAt: '2026-09-08T09:45:00.000Z', updatedAt: '2026-09-08T09:45:00.000Z' }],
-    meta: { queryCount: 10, successfulQueries: 8, sourceChecks: [], registryReconciled: true }
-  };
+    meta: { queryCount: 10, successfulQueries: 8, sourceChecks: sourceChecks(10,8), registryReconciled: true }
+  });
 }
 const window = { start: '2026-09-07T10:00:00.000Z', end: now.toISOString() };
 
@@ -71,7 +73,7 @@ test('trailing lag cannot excuse missing history or no overlap', () => {
 test('trailing lag cannot excuse stale coverage, future requests, or future snapshots', () => {
   assert.throws(() => filterLiveSnapshot(snapshot(), window, { now: new Date('2026-09-08T12:00:00.000Z'), allowTrailingLag: true }), { code: 'snapshot_stale' });
   assert.throws(() => filterLiveSnapshot(snapshot(), { ...window, end: '2026-09-08T11:00:00.000Z' }, { now, allowTrailingLag: true }), { code: 'snapshot_window_incomplete' });
-  assert.throws(() => filterLiveSnapshot({ ...snapshot(), generatedAt: '2026-09-08T11:00:00.000Z' }, window, { now, allowTrailingLag: true }), { code: 'snapshot_timestamp_future' });
+  assert.throws(() => filterLiveSnapshot(sealPayload({ ...snapshot(), generatedAt: '2026-09-08T11:00:00.000Z' }), window, { now, allowTrailingLag: true }), { code: 'snapshot_timestamp_future' });
 });
 test('invalid freshness settings cannot bypass live snapshot checks', () => {
   for (const staleAfterMinutes of [NaN, Infinity, -1, 0]) {
@@ -86,7 +88,7 @@ test('production rolling refresh uses one fetch and returns visible snapshot lag
   globalThis.fetch = async () => {
     count++;
     const generatedAt = new Date(Date.now() - 600_000).toISOString();
-    return { ok: true, json: async () => ({ ...snapshot(), generatedAt, windowEnd: generatedAt,
+    return { ok: true, json: async () => sealPayload({ ...snapshot(), generatedAt, windowEnd: generatedAt,
       windowStart: new Date(Date.now() - 29 * 86400_000).toISOString() }) };
   };
   const res = { setHeader() {}, end(text) { this.body = JSON.parse(text); } };
