@@ -100,3 +100,13 @@ ABG relevance. Independent caught-versus-missed news evaluation is still open.
 
 A pinned current dependency is not a claim of zero vulnerabilities. No optional
 crypto/image/ML/OCR packages or new paid services were introduced.
+
+## Body-presence check from the first real document run
+
+The Coolbrook UltraTech page exposed only two heading blocks in the selected
+container. That is not established article-body extraction. HTML results now
+report bodyPassageCount/bodyCharacters separately from headings and mark a
+headings-only result html_body_not_established, with incomplete traversal.
+This is a structural check, not proof of relevance or semantic completeness.
+The source-specific layout needs further work; do not silently count it as a
+fully read article because two headings were parsed.

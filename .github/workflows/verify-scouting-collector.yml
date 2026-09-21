@@ -83,6 +83,7 @@ jobs:
                       continue
                   rows.append({'sourceId':source['sourceId'],'url':item['url'],'status':content['status'],
                      'passages':len(content['passages']),'characters':content.get('characters',0),
+                     'bodyPassages':content.get('bodyPassageCount',0),
                      'attachmentCount':len(content['attachments']),
                      'traversalComplete':content['textTraversalComplete'],
                      'rawDigestMatches':content.get('documentHash')==item.get('sha256'),
@@ -90,7 +91,7 @@ jobs:
           proof={'observedAt':report['observedAt'],'codeCommit':report['codeCommit'],
              'scope':'Bounded real paragraph/attachment extraction metadata; not complete news coverage',
              'rows':rows,'pass':bool(rows) and all(r['rawDigestMatches'] and not r['textRetained'] for r in rows)
-               and any(r['sourceId']=='S005' and r['passages']>1 for r in rows)
+               and any(r['sourceId']=='S005' and r['bodyPassages']>0 for r in rows)
                and any(r['sourceId']=='S017' and r['attachmentCount']>0 for r in rows)}
           Path('/tmp/scouting-proof/live/document-metadata-proof.json').write_text(json.dumps(proof,indent=2)+'\n')
           print(json.dumps(proof,indent=2))

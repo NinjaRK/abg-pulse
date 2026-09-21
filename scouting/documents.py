@@ -164,6 +164,16 @@ def extract_document(data: bytes, url: str, source: dict, *, content_type: str,
         result = _run_worker(data, {"source": {"id": source["id"], "allowedHosts": source["allowedHosts"]},
             "url": url, "kind": kind, "contentType": content_type, "mode": policy["mode"],
             "documentHash": digest}, limits)
+        if kind == "html":
+            body_tags = {"p", "li", "blockquote", "tr", "pre", "dt", "dd"}
+            body_passages = [p for p in result["passages"] if p.get("reference", {}).get("tag") in body_tags]
+            result["bodyPassageCount"] = len(body_passages)
+            result["bodyCharacters"] = sum(p["characters"] for p in body_passages)
+            # A headline and subheading are not proof that the article was read.
+            if not body_passages and result.get("status") in {"html_text_extracted", "html_text_partial"}:
+                result["status"] = "html_body_not_established"
+                result["textTraversalComplete"] = False
+                result["pendingReasons"] = list(dict.fromkeys(result.get("pendingReasons", []) + ["article_body_not_established"]))
         result.update(sourceId=source["id"], url=url, documentHash=digest, bytes=len(data),
                       parserVersion=PARSER_VERSION, contentPolicy=policy,
                       sourcePublicationNotInferred=True, sourcePublication=None,
