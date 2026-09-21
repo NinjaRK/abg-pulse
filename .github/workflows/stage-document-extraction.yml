@@ -56,7 +56,8 @@ jobs:
           subprocess.run(['git','add','--',*expected],check=True)
           PY
       - name: Install only the exact hash-pinned PDF dependency
-        run: python -m pip install --only-binary=:all: --no-deps --require-hashes -r scouting/requirements-documents.txt
+        run: |
+          python -m pip install --only-binary=:all: --no-deps --require-hashes -r scouting/requirements-documents.txt
       - name: Run original product and full collector regression suites
         run: |
           set -euo pipefail
