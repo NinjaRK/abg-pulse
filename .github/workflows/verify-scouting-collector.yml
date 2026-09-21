@@ -37,6 +37,33 @@ jobs:
       - name: Bounded public metadata probe; not a publication or licence grant
         if: github.event_name != 'pull_request'
         run: python -m scouting.run_probe --output /tmp/scouting-proof/live
+      - name: Verify publication-date evidence from the two repaired live adapters
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          python - <<'PYCODE'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('/tmp/scouting-proof/live/collector-report.json').read_text())
+          findings=[]
+          for source in report['sources']:
+              if source['sourceId'] not in {'S003','S017'}:
+                  continue
+              details=[r for r in source['candidates'] if r['retrievalStatus']=='html_metadata_retrieved']
+              valid=[r for r in details if r['publication']['state']=='source_reported'
+                     and r['publication']['precision']=='day'
+                     and any(e.get('basis')=='source_release_header' and e.get('locator') for e in r['publication'].get('evidence',[]))
+                     and r['statementVerification']=='not_performed' and r['publishable'] is False]
+              findings.append({'sourceId':source['sourceId'],'openedDetails':len(details),'datedWithHeaderEvidence':len(valid),
+                               'pass':len(details)>0 and len(valid)==len(details)})
+          result={'observedAt':report['observedAt'],'codeCommit':report['codeCommit'],
+                  'scope':'Bounded source-reported publication-day check; not relevance, factual accuracy or complete coverage',
+                  'sources':findings,'pass':len(findings)==2 and all(f['pass'] for f in findings)}
+          Path('/tmp/scouting-proof/live/publication-date-proof.json').write_text(json.dumps(result,indent=2)+'\n')
+          print(json.dumps(result,indent=2))
+          if not result['pass']:
+              raise SystemExit('Source date evidence did not pass; see per-source observations.')
+          PYCODE
       - name: Retain failures as well as successful observations
         if: always()
         uses: actions/upload-artifact@v4
