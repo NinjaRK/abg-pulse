@@ -1,0 +1,61 @@
+name: Prepare document extraction tests
+on:
+  push:
+    branches: ['build/scouting-collector-20260921']
+    paths: ['.github/workflows/prepare-document-tests.yml']
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Download the reviewed hash-pinned parser without optional dependencies
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/document-preflight/wheels
+          printf '%s\n' 'pypdf==6.19.0 --hash=sha256:7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14' > /tmp/document-preflight/requirements.txt
+          python -m pip download --only-binary=:all: --no-deps --require-hashes -r /tmp/document-preflight/requirements.txt -d /tmp/document-preflight/wheels
+      - name: Read article structure only from the existing bounded metadata sources
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,hashlib,os
+          from pathlib import Path
+          from datetime import datetime,timezone
+          from scouting.collector import Document,PublicTransport
+          sources={s['id']:s for s in json.loads(Path('scouting/sources.json').read_text())['sources']}
+          targets=[('S003','https://investors.novelis.com/news-events/press-releases/detail/1426/novelis-expands-aluminum-solutions-for-growing-battery-and-energy-storage-markets'),('S005','https://www.ultratechcement.com/corporate/media/press-releases/financial-results-q1fy24'),('S017','https://www.sebi.gov.in/enforcement/orders/sep-2026/interim-order-in-the-matter-of-kore-digital-limited_104570.html')]
+          report={'observedAt':datetime.now(timezone.utc).isoformat(),'commit':os.environ.get('GITHUB_SHA'),'fullTextRetained':False,'productionWrites':False,'sources':[]}
+          for sid,url in targets:
+              s=sources[sid]; t=PublicTransport(s['allowedHosts']);row={'sourceId':sid,'url':url}
+              try:
+                  assert s['probeMode']=='public_metadata_only'
+                  final,headers,body=t.get(url)
+                  nodes=list(Document(body.decode('utf-8','replace')).root.descendants())
+                  def identity(n):return {'tag':n.tag,'attrs':{k:v[:180] for k,v in n.attrs.items() if k in ['id','class','itemprop','role']}}
+                  chosen=[]
+                  for n in nodes:
+                      if n.tag=='h1' or (n.tag=='p' and len(n.text())>120):
+                          parents=[];p=n.parent
+                          while p and p.tag!='document' and len(parents)<8:parents.append(identity(p));p=p.parent
+                          chosen.append({'node':identity(n),'characterCount':len(n.text()),'parents':parents})
+                  row.update(status='structure_observed',resolvedUrl=final,sha256=hashlib.sha256(body).hexdigest(),scopes=chosen[:10],embedded=[{'tag':n.tag,'attrs':{k:v[:600] for k,v in n.attrs.items() if k in ['src','data','type']}} for n in nodes if n.tag in ['iframe','object','embed']][:12])
+              except Exception as exc:row.update(status='unavailable',error=getattr(exc,'code',type(exc).__name__))
+              row['httpObservations']=t.records;report['sources'].append(row)
+          Path('/tmp/document-preflight/structure.json').write_text(json.dumps(report,indent=2)+'\n')
+          print(json.dumps(report,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: document-preflight-${{ github.run_id }}-${{ github.sha }}
+          path: /tmp/document-preflight/
+          if-no-files-found: error
+          retention-days: 14
