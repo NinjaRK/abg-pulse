@@ -1,0 +1,1863 @@
+{
+  "schemaVersion": 1,
+  "createdOn": "2026-09-21",
+  "sourceRegisterInput": {
+    "filename": "ABG-Pulse-Checked-Sources-2026-09-21.csv",
+    "sha256": "22ceeebfd496f6a6b08ebff011c6f6fc649cc7d8bf2d424ecb9fe0a0841ba9ab"
+  },
+  "mode": "bounded_candidate_probe",
+  "scopeComplete": false,
+  "sources": [
+    {
+      "id": "S001",
+      "name": "Aditya Birla Group: press releases",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.adityabirla.com/en/media/press-releases/"
+      ],
+      "allowedHosts": [
+        "www.adityabirla.com"
+      ],
+      "adapter": "html",
+      "coverage": "Group and business announcements",
+      "market": "India / global; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.adityabirla.com/en/media/press-releases/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation. One bounded metadata observation only. No source text stored or republished. Production remains disabled pending rights review.",
+      "probeMode": "public_metadata_only",
+      "productionEnabled": false,
+      "candidatePatterns": [
+        "/en/media/press-releases/.+"
+      ],
+      "listingPatterns": [
+        "/en/media/press-releases/"
+      ],
+      "entityIds": [
+        "abg"
+      ]
+    },
+    {
+      "id": "S002",
+      "name": "Hindalco: press releases",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.hindalco.com/media/press-releases"
+      ],
+      "allowedHosts": [
+        "www.hindalco.com"
+      ],
+      "adapter": "html",
+      "coverage": "Metals, corporate disclosures and results",
+      "market": "India / global; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.hindalco.com/media/press-releases",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation. One bounded metadata observation only. No source text stored or republished. Production remains disabled pending rights review.",
+      "probeMode": "public_metadata_only",
+      "productionEnabled": false,
+      "candidatePatterns": [
+        "/media/press-releases/.+",
+        "\\.pdf(?:$|\\?)"
+      ],
+      "listingPatterns": [
+        "/media/press-releases"
+      ],
+      "entityIds": [
+        "hindalco"
+      ]
+    },
+    {
+      "id": "S003",
+      "name": "Novelis: investor-relations newsroom",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://investors.novelis.com/news-events/press-releases"
+      ],
+      "allowedHosts": [
+        "investors.novelis.com"
+      ],
+      "adapter": "html",
+      "coverage": "Aluminium, investments, operations and financial disclosures",
+      "market": "Global; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://investors.novelis.com/news-events/press-releases",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation. One bounded metadata observation only. No source text stored or republished. Production remains disabled pending rights review.",
+      "probeMode": "public_metadata_only",
+      "productionEnabled": false,
+      "candidatePatterns": [
+        "/news-events/press-releases/detail/"
+      ],
+      "listingPatterns": [
+        "/news-events/press-releases"
+      ],
+      "entityIds": [
+        "novelis"
+      ]
+    },
+    {
+      "id": "S004",
+      "name": "Grasim: press releases",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.grasim.com/media/press-releases"
+      ],
+      "allowedHosts": [
+        "www.grasim.com"
+      ],
+      "adapter": "html",
+      "coverage": "Corporate, paints, fibres and chemicals developments",
+      "market": "India / global; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.grasim.com/media/press-releases",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation. One bounded metadata observation only. No source text stored or republished. Production remains disabled pending rights review.",
+      "probeMode": "public_metadata_only",
+      "productionEnabled": false,
+      "candidatePatterns": [
+        "/media/press-releases/.+",
+        "\\.pdf(?:$|\\?)"
+      ],
+      "listingPatterns": [
+        "/media/press-releases"
+      ],
+      "entityIds": [
+        "grasim"
+      ]
+    },
+    {
+      "id": "S005",
+      "name": "UltraTech: press releases",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.ultratechcement.com/corporate/media/press-releases"
+      ],
+      "allowedHosts": [
+        "www.ultratechcement.com"
+      ],
+      "adapter": "html",
+      "coverage": "Cement, capacity, operations and corporate announcements",
+      "market": "India / global; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.ultratechcement.com/corporate/media/press-releases",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation. One bounded metadata observation only. No source text stored or republished. Production remains disabled pending rights review.",
+      "probeMode": "public_metadata_only",
+      "productionEnabled": false,
+      "candidatePatterns": [
+        "/corporate/media/press-releases/.+",
+        "\\.pdf(?:$|\\?)"
+      ],
+      "listingPatterns": [
+        "/corporate/media/press-releases"
+      ],
+      "entityIds": [
+        "ultratech"
+      ]
+    },
+    {
+      "id": "S006",
+      "name": "ABFRL: press releases",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.abfrl.com/press-releases/"
+      ],
+      "allowedHosts": [
+        "www.abfrl.com"
+      ],
+      "adapter": "html",
+      "coverage": "Fashion, brands, launches and company announcements",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.abfrl.com/press-releases/",
+      "rightsStatus": "written_permission_required",
+      "rightsNote": "Public terms require written permission for use. Automated probe disabled; no corporate consent is inferred from Rishi's role.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [
+        "/press-release/",
+        "\\.pdf(?:$|\\?)"
+      ],
+      "listingPatterns": [
+        "/press-releases"
+      ],
+      "entityIds": [
+        "abfrl"
+      ],
+      "rightsEvidenceUrl": "https://www.abfrl.com/terms-of-use/"
+    },
+    {
+      "id": "S007",
+      "name": "ABLBL: investors",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.ablbl.in/investors/"
+      ],
+      "allowedHosts": [
+        "www.ablbl.in"
+      ],
+      "adapter": "html",
+      "coverage": "Announcements, results, transcripts, presentations and personnel notices",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.ablbl.in/investors/",
+      "rightsStatus": "written_permission_required",
+      "rightsNote": "Public terms require written permission for use. Automated probe disabled; no corporate consent is inferred from Rishi's role.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [
+        "\\.pdf(?:$|\\?)"
+      ],
+      "listingPatterns": [
+        "/investors/"
+      ],
+      "entityIds": [
+        "ablbl"
+      ],
+      "rightsEvidenceUrl": "https://www.ablbl.in/terms-of-use/"
+    },
+    {
+      "id": "S008",
+      "name": "Vodafone Idea: business press releases",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.myvi.in/business/why-vi/news-and-insights/press-releases-list"
+      ],
+      "allowedHosts": [
+        "www.myvi.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Vi Business products, partnerships and enterprise announcements",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.myvi.in/business/why-vi/news-and-insights/press-releases-list",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": [
+        "vi"
+      ]
+    },
+    {
+      "id": "S009",
+      "name": "Birla Carbon: press releases",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.birlacarbon.com/press-releases"
+      ],
+      "allowedHosts": [
+        "www.birlacarbon.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Carbon materials, facilities, sustainability and partnerships",
+      "market": "Global; English",
+      "researchOutcome": "Article inspected; listing pending",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.birlacarbon.com/birla-carbon-to-showcase-advanced-carbon-black-and-nanotube-solutions-at-paintindia-2026/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": [
+        "birla-carbon"
+      ]
+    },
+    {
+      "id": "S010",
+      "name": "Aditya Birla Real Estate",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.adityabirlarealestate.com/"
+      ],
+      "allowedHosts": [
+        "www.adityabirlarealestate.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Real-estate corporate, project and investor disclosures",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.adityabirlarealestate.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": [
+        "ab-real-estate"
+      ]
+    },
+    {
+      "id": "S011",
+      "name": "TMRW",
+      "priority": "P2",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.tmrw.in/"
+      ],
+      "allowedHosts": [
+        "www.tmrw.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Brand portfolio and corporate announcements",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.tmrw.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": [
+        "tmrw"
+      ]
+    },
+    {
+      "id": "S012",
+      "name": "Aditya Birla Capital: press releases",
+      "priority": "P1",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.adityabirlacapital.com/en/press-and-media/press-releases"
+      ],
+      "allowedHosts": [
+        "www.adityabirlacapital.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Financial-services company disclosures",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.adityabirlacapital.com/en/press-and-media/press-releases",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": [
+        "abcl"
+      ]
+    },
+    {
+      "id": "S013",
+      "name": "Birla Cellulose: newsroom",
+      "priority": "P2",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.birlacellulose.com/newsroom/"
+      ],
+      "allowedHosts": [
+        "www.birlacellulose.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Fibres, textile supply chains and sustainability",
+      "market": "Global; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.birlacellulose.com/newsroom/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": [
+        "birla-cellulose"
+      ]
+    },
+    {
+      "id": "S014",
+      "name": "Essel Mining",
+      "priority": "P2",
+      "family": "Company / brand",
+      "seedUrls": [
+        "https://www.esselmining.com/"
+      ],
+      "allowedHosts": [
+        "www.esselmining.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Mining, projects and official disclosures",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.esselmining.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": [
+        "essel-mining"
+      ]
+    },
+    {
+      "id": "S015",
+      "name": "NSE: corporate-information RSS directory",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://nsearchives.nseindia.com/content/RSS/Online_announcements.xml"
+      ],
+      "allowedHosts": [
+        "nsearchives.nseindia.com",
+        "nseindia.com",
+        "www.nseindia.com"
+      ],
+      "adapter": "feed",
+      "coverage": "Corporate announcements, reports, results and shareholding disclosures",
+      "market": "India; English",
+      "researchOutcome": "Feed/API documented",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.nseindia.com/static/rss-feed",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation. One bounded metadata observation only. No source text stored or republished. Production remains disabled pending rights review.",
+      "probeMode": "public_metadata_only",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S016",
+      "name": "BSE: corporate announcements",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://www.bseindia.com/corporates/ann.html"
+      ],
+      "allowedHosts": [
+        "www.bseindia.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Exchange disclosures and linked company documents",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.bseindia.com/corporates/ann.html",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S017",
+      "name": "SEBI: RSS",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://www.sebi.gov.in/sebirss.xml"
+      ],
+      "allowedHosts": [
+        "www.sebi.gov.in",
+        "sebi.gov.in"
+      ],
+      "adapter": "feed",
+      "coverage": "Press releases, circulars, orders and rulings",
+      "market": "India; English",
+      "researchOutcome": "Feed/API documented",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.sebi.gov.in/rss.html",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation. One bounded metadata observation only. No source text stored or republished. Production remains disabled pending rights review.",
+      "probeMode": "public_metadata_only",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S018",
+      "name": "RBI: press releases",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx"
+      ],
+      "allowedHosts": [
+        "www.rbi.org.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Financial regulation, monetary and relevant corporate notices",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S019",
+      "name": "CCI: official portal",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://www.cci.gov.in/"
+      ],
+      "allowedHosts": [
+        "www.cci.gov.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Competition orders and merger/combination decisions",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.cci.gov.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S020",
+      "name": "TRAI: official updates",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://www.trai.gov.in/"
+      ],
+      "allowedHosts": [
+        "www.trai.gov.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Telecom regulations, consultations and releases",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.trai.gov.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S021",
+      "name": "IRDAI: press releases",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://irdai.gov.in/press-release"
+      ],
+      "allowedHosts": [
+        "irdai.gov.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Insurance regulation and official notices",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://irdai.gov.in/press-release",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S022",
+      "name": "PFRDA: official portal",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://www.pfrda.org.in/"
+      ],
+      "allowedHosts": [
+        "www.pfrda.org.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Pension regulation and announcements",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.pfrda.org.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S023",
+      "name": "US SEC: public EDGAR data APIs",
+      "priority": "P1",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://data.sec.gov/submissions/CIK0001304280.json"
+      ],
+      "allowedHosts": [
+        "data.sec.gov",
+        "www.sec.gov"
+      ],
+      "adapter": "sec_submissions",
+      "coverage": "Company submissions and linked filings/exhibits",
+      "market": "United States; English",
+      "researchOutcome": "Feed/API documented",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "rightsStatus": "review_required",
+      "rightsNote": "Follow SEC fair-access requirements and verify document reuse conditions. One bounded metadata observation only. No source text stored or republished. Production remains disabled pending rights review.",
+      "probeMode": "public_metadata_only",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": [
+        "novelis"
+      ],
+      "cik": "0001304280",
+      "issuer": "Novelis Inc."
+    },
+    {
+      "id": "S024",
+      "name": "Supreme Court of India: judgments search",
+      "priority": "P2",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://www.sci.gov.in/judgements-case-no/"
+      ],
+      "allowedHosts": [
+        "www.sci.gov.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Judgments linked to companies, subsidiaries or material issues",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.sci.gov.in/judgements-case-no/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S025",
+      "name": "NCLT: official portal",
+      "priority": "P2",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://nclt.gov.in/"
+      ],
+      "allowedHosts": [
+        "nclt.gov.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Company-law and insolvency orders",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://nclt.gov.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S026",
+      "name": "National Green Tribunal",
+      "priority": "P2",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://greentribunal.gov.in/"
+      ],
+      "allowedHosts": [
+        "greentribunal.gov.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Environmental orders relevant to plants and projects",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://greentribunal.gov.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S027",
+      "name": "PARIVESH",
+      "priority": "P2",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://parivesh.nic.in/"
+      ],
+      "allowedHosts": [
+        "parivesh.nic.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Environmental and project-clearance documents",
+      "market": "India; English",
+      "researchOutcome": "Portal shell only",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://parivesh.nic.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S028",
+      "name": "Press Information Bureau: releases",
+      "priority": "P2",
+      "family": "Exchange / public authority",
+      "seedUrls": [
+        "https://www.pib.gov.in/allRel.aspx?reg=48&lang=2"
+      ],
+      "allowedHosts": [
+        "www.pib.gov.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Government policy and material industry announcements",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.pib.gov.in/allRel.aspx?reg=48&lang=2",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S029",
+      "name": "CRISIL Ratings: issuer factsheet seed",
+      "priority": "P1",
+      "family": "Credit ratings",
+      "seedUrls": [
+        "https://www.crisilratings.com/en/home/our-business/ratings/company-factsheet.HINDALC.html"
+      ],
+      "allowedHosts": [
+        "www.crisilratings.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Hindalco rating changes; extend via verified issuer identifiers",
+      "market": "India; English",
+      "researchOutcome": "Primary result located",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.crisilratings.com/en/home/our-business/ratings/company-factsheet.HINDALC.html",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S030",
+      "name": "India Ratings: issuer press-release seed",
+      "priority": "P1",
+      "family": "Credit ratings",
+      "seedUrls": [
+        "https://www.indiaratings.co.in/pressrelease/79790"
+      ],
+      "allowedHosts": [
+        "www.indiaratings.co.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "ABFRL rating rationale; extend by issuer mapping",
+      "market": "India; English",
+      "researchOutcome": "Primary result located",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.indiaratings.co.in/pressrelease/79790",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S031",
+      "name": "CARE Ratings: release candidate",
+      "priority": "P1",
+      "family": "Credit ratings",
+      "seedUrls": [
+        "https://www.careratings.com/ratings-releases"
+      ],
+      "allowedHosts": [
+        "www.careratings.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Issuer rating actions and rationale",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.careratings.com/ratings-releases",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S032",
+      "name": "ICRA: rationale candidate",
+      "priority": "P1",
+      "family": "Credit ratings",
+      "seedUrls": [
+        "https://www.icra.in/Rationale"
+      ],
+      "allowedHosts": [
+        "www.icra.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Issuer rating actions and rationale",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.icra.in/Rationale",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S033",
+      "name": "The Economic Times: RSS directory",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://economictimes.indiatimes.com/rss.cms"
+      ],
+      "allowedHosts": [
+        "economictimes.indiatimes.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Company and industry reporting",
+      "market": "India; English",
+      "researchOutcome": "Feed/API documented",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://economictimes.indiatimes.com/rss.cms",
+      "rightsStatus": "permission_or_licence_required",
+      "rightsNote": "Explicit consent/licence required for proposed corporate aggregation; do not activate the personal RSS terms as corporate permission.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S034",
+      "name": "Mint: RSS directory",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.livemint.com/rss"
+      ],
+      "allowedHosts": [
+        "www.livemint.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Company and industry news",
+      "market": "India; English",
+      "researchOutcome": "Feed/API documented",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.livemint.com/rss",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S035",
+      "name": "Business Standard: companies",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.business-standard.com/companies"
+      ],
+      "allowedHosts": [
+        "www.business-standard.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Company reporting and material business developments",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.business-standard.com/companies",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S036",
+      "name": "Moneycontrol: business",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.moneycontrol.com/news/business/"
+      ],
+      "allowedHosts": [
+        "www.moneycontrol.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Company developments and financial/business reporting",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.moneycontrol.com/news/business/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S037",
+      "name": "Financial Express: industry",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.financialexpress.com/business/industry/"
+      ],
+      "allowedHosts": [
+        "www.financialexpress.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Industry and company reporting",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.financialexpress.com/business/industry/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S038",
+      "name": "CNBC-TV18: business",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.cnbctv18.com/business/"
+      ],
+      "allowedHosts": [
+        "www.cnbctv18.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Business reporting and interviews",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.cnbctv18.com/business/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S039",
+      "name": "NDTV Profit: business",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.ndtvprofit.com/business"
+      ],
+      "allowedHosts": [
+        "www.ndtvprofit.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Business reporting and company interviews",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.ndtvprofit.com/business",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S040",
+      "name": "The New Indian Express: business",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.newindianexpress.com/business"
+      ],
+      "allowedHosts": [
+        "www.newindianexpress.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Business news and regional leads",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.newindianexpress.com/business",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S041",
+      "name": "Reuters Connect",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.reutersconnect.com/"
+      ],
+      "allowedHosts": [
+        "www.reutersconnect.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Original wire reporting and multimedia",
+      "market": "Global; English and licensed languages",
+      "researchOutcome": "Licensed route identified",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.reutersconnect.com/",
+      "rightsStatus": "permission_or_licence_required",
+      "rightsNote": "Licence, automated-use entitlement and budget approval required; none purchased.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S042",
+      "name": "PTI",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.ptinews.com/"
+      ],
+      "allowedHosts": [
+        "www.ptinews.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Indian original agency reporting",
+      "market": "India; English / Hindi to confirm",
+      "researchOutcome": "Portal shell only",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.ptinews.com/",
+      "rightsStatus": "permission_or_licence_required",
+      "rightsNote": "Confirm agency licence and automated-use rights before integration.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S043",
+      "name": "BusinessLine: companies",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.thehindubusinessline.com/companies/"
+      ],
+      "allowedHosts": [
+        "www.thehindubusinessline.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Company and sector reporting",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.thehindubusinessline.com/companies/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S044",
+      "name": "The Hindu: business",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://www.thehindu.com/business/"
+      ],
+      "allowedHosts": [
+        "www.thehindu.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Business and regional reporting",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.thehindu.com/business/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S045",
+      "name": "The Indian Express: business",
+      "priority": "P1",
+      "family": "Business / national media",
+      "seedUrls": [
+        "https://indianexpress.com/section/business/"
+      ],
+      "allowedHosts": [
+        "indianexpress.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Business reporting, investigations and policy",
+      "market": "India; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://indianexpress.com/section/business/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S046",
+      "name": "AL Circle: news",
+      "priority": "P2",
+      "family": "Sector / brand / environment",
+      "seedUrls": [
+        "https://www.alcircle.com/news"
+      ],
+      "allowedHosts": [
+        "www.alcircle.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Aluminium-sector reporting and company developments",
+      "market": "Global; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.alcircle.com/news",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S047",
+      "name": "Fibre2Fashion: news",
+      "priority": "P2",
+      "family": "Sector / brand / environment",
+      "seedUrls": [
+        "https://www.fibre2fashion.com/news/"
+      ],
+      "allowedHosts": [
+        "www.fibre2fashion.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Textiles, fibres, apparel and retail",
+      "market": "Global; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.fibre2fashion.com/news/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S048",
+      "name": "ETTelecom",
+      "priority": "P2",
+      "family": "Sector / brand / environment",
+      "seedUrls": [
+        "https://telecom.economictimes.indiatimes.com/"
+      ],
+      "allowedHosts": [
+        "telecom.economictimes.indiatimes.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Telecom industry, regulation and Vi-related reporting",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://telecom.economictimes.indiatimes.com/",
+      "rightsStatus": "permission_or_licence_required",
+      "rightsNote": "Review Times Internet/sub-site rights and any required commercial consent.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S049",
+      "name": "ETRetail",
+      "priority": "P2",
+      "family": "Sector / brand / environment",
+      "seedUrls": [
+        "https://retail.economictimes.indiatimes.com/"
+      ],
+      "allowedHosts": [
+        "retail.economictimes.indiatimes.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Retail, brands and consumer businesses",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://retail.economictimes.indiatimes.com/",
+      "rightsStatus": "permission_or_licence_required",
+      "rightsNote": "Review Times Internet/sub-site rights and any required commercial consent.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S050",
+      "name": "exchange4media",
+      "priority": "P2",
+      "family": "Sector / brand / environment",
+      "seedUrls": [
+        "https://www.exchange4media.com/"
+      ],
+      "allowedHosts": [
+        "www.exchange4media.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Brand campaigns, media, agencies and marketing leadership",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.exchange4media.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S051",
+      "name": "afaqs!",
+      "priority": "P2",
+      "family": "Sector / brand / environment",
+      "seedUrls": [
+        "https://www.afaqs.com/"
+      ],
+      "allowedHosts": [
+        "www.afaqs.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Advertising, brands, campaigns and marketing leadership",
+      "market": "India; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.afaqs.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S052",
+      "name": "Down To Earth",
+      "priority": "P2",
+      "family": "Sector / brand / environment",
+      "seedUrls": [
+        "https://www.downtoearth.org.in/"
+      ],
+      "allowedHosts": [
+        "www.downtoearth.org.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Environment, communities, industrial impacts and policy",
+      "market": "India / global; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.downtoearth.org.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S053",
+      "name": "Global Cement: news",
+      "priority": "P2",
+      "family": "Sector / brand / environment",
+      "seedUrls": [
+        "https://www.globalcement.com/news"
+      ],
+      "allowedHosts": [
+        "www.globalcement.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Cement-sector reporting",
+      "market": "Global; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.globalcement.com/news",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S054",
+      "name": "Loksatta",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.loksatta.com/"
+      ],
+      "allowedHosts": [
+        "www.loksatta.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Maharashtra local and business reporting",
+      "market": "India; Marathi",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.loksatta.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S055",
+      "name": "Sambad",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://sambad.in/"
+      ],
+      "allowedHosts": [
+        "sambad.in"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Odisha local, industry and community developments",
+      "market": "India; Odia",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://sambad.in/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S056",
+      "name": "Dharitri",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.dharitri.com/"
+      ],
+      "allowedHosts": [
+        "www.dharitri.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Odisha local, industry and community developments",
+      "market": "India; Odia",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.dharitri.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S057",
+      "name": "Anandabazar Patrika",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.anandabazar.com/"
+      ],
+      "allowedHosts": [
+        "www.anandabazar.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "West Bengal local and business reporting",
+      "market": "India; Bengali",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.anandabazar.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S058",
+      "name": "Manorama Online",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.manoramaonline.com/"
+      ],
+      "allowedHosts": [
+        "www.manoramaonline.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Kerala local and business reporting",
+      "market": "India; Malayalam",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.manoramaonline.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S059",
+      "name": "Dinamalar",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.dinamalar.com/"
+      ],
+      "allowedHosts": [
+        "www.dinamalar.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Tamil Nadu local and business reporting",
+      "market": "India; Tamil",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.dinamalar.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S060",
+      "name": "Lokmat",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.lokmat.com/"
+      ],
+      "allowedHosts": [
+        "www.lokmat.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Maharashtra local and business reporting",
+      "market": "India; Marathi",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.lokmat.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S061",
+      "name": "Dainik Bhaskar",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.bhaskar.com/"
+      ],
+      "allowedHosts": [
+        "www.bhaskar.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Hindi regional reporting across relevant operating locations",
+      "market": "India; Hindi",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.bhaskar.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S062",
+      "name": "Dainik Jagran",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.jagran.com/"
+      ],
+      "allowedHosts": [
+        "www.jagran.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Hindi regional and business reporting",
+      "market": "India; Hindi",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.jagran.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S063",
+      "name": "Eenadu",
+      "priority": "P2",
+      "family": "Regional / local-language",
+      "seedUrls": [
+        "https://www.eenadu.net/"
+      ],
+      "allowedHosts": [
+        "www.eenadu.net"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Andhra Pradesh/Telangana local reporting",
+      "market": "India; Telugu",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.eenadu.net/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S064",
+      "name": "Oswego County Today",
+      "priority": "P2",
+      "family": "Overseas / local media",
+      "seedUrls": [
+        "https://oswegocountytoday.com/"
+      ],
+      "allowedHosts": [
+        "oswegocountytoday.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Local New York industrial/community developments; validate facility links",
+      "market": "United States; English",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://oswegocountytoday.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S065",
+      "name": "Handelsblatt: companies",
+      "priority": "P2",
+      "family": "Overseas / local media",
+      "seedUrls": [
+        "https://www.handelsblatt.com/unternehmen/"
+      ],
+      "allowedHosts": [
+        "www.handelsblatt.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "German company and industrial reporting",
+      "market": "Germany; German",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.handelsblatt.com/unternehmen/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S066",
+      "name": "Valor Econômico: companies",
+      "priority": "P2",
+      "family": "Overseas / local media",
+      "seedUrls": [
+        "https://valor.globo.com/empresas/"
+      ],
+      "allowedHosts": [
+        "valor.globo.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Brazilian company and industrial reporting",
+      "market": "Brazil; Portuguese",
+      "researchOutcome": "Page inspected",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://valor.globo.com/empresas/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S067",
+      "name": "AL.com: business",
+      "priority": "P2",
+      "family": "Overseas / local media",
+      "seedUrls": [
+        "https://www.al.com/business/"
+      ],
+      "allowedHosts": [
+        "www.al.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Alabama industrial and community reporting",
+      "market": "United States; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.al.com/business/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S068",
+      "name": "Bangkok Post: business",
+      "priority": "P2",
+      "family": "Overseas / local media",
+      "seedUrls": [
+        "https://www.bangkokpost.com/business"
+      ],
+      "allowedHosts": [
+        "www.bangkokpost.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Thailand business and industrial reporting",
+      "market": "Thailand; English",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.bangkokpost.com/business",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S069",
+      "name": "Bisnis",
+      "priority": "P2",
+      "family": "Overseas / local media",
+      "seedUrls": [
+        "https://www.bisnis.com/"
+      ],
+      "allowedHosts": [
+        "www.bisnis.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Indonesian business and industrial reporting",
+      "market": "Indonesia; Indonesian",
+      "researchOutcome": "Fetch unresolved",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://www.bisnis.com/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review access, storage and reuse terms before activation.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S070",
+      "name": "GDELT DOC API documentation",
+      "priority": "P1",
+      "family": "Discovery service",
+      "seedUrls": [
+        "https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/"
+      ],
+      "allowedHosts": [
+        "blog.gdeltproject.org"
+      ],
+      "adapter": "not_configured",
+      "coverage": "Find publisher URLs beyond the direct-source list",
+      "market": "Global; multilingual index",
+      "researchOutcome": "Feed/API documented",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/",
+      "rightsStatus": "review_required",
+      "rightsNote": "Review API terms; publisher rights remain separate.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    },
+    {
+      "id": "S071",
+      "name": "Brave Search API",
+      "priority": "P1",
+      "family": "Discovery service",
+      "seedUrls": [
+        "https://brave.com/search/api/"
+      ],
+      "allowedHosts": [
+        "brave.com"
+      ],
+      "adapter": "not_configured",
+      "coverage": "General-web discovery beyond known publishers and news indexes",
+      "market": "Global; supported language/market filters",
+      "researchOutcome": "Feed/API documented",
+      "researchCheckedOn": "2026-09-21",
+      "evidenceUrl": "https://brave.com/search/api/",
+      "rightsStatus": "permission_or_licence_required",
+      "rightsNote": "API entitlement, storage/reuse terms and budget approval required; publisher rights remain separate.",
+      "probeMode": "disabled",
+      "productionEnabled": false,
+      "candidatePatterns": [],
+      "listingPatterns": [],
+      "entityIds": []
+    }
+  ],
+  "knownLimits": [
+    "Not connected to production scan, database or schedule.",
+    "Permission review remains necessary before commercial ingestion.",
+    "Native-language, independent-news and general-web source integrations are not operational.",
+    "Metadata collection does not establish fact accuracy."
+  ]
+}

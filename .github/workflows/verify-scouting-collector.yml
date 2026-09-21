@@ -1,0 +1,110 @@
+name: Verify candidate-preserving source collector
+on:
+  pull_request:
+    branches: [main]
+    paths: ['scouting/**', 'tests/scouting/**', '.github/workflows/verify-scouting-collector.yml']
+  push:
+    branches: ['build/scouting-collector-20260921']
+    paths: ['scouting/**', 'tests/scouting/**', '.github/workflows/verify-scouting-collector.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install the reviewed optional PDF parser
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: --no-deps -r scouting/requirements-documents.txt
+      - name: Preserve source and run product plus collector regressions
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/scouting-proof
+          git rev-parse HEAD > /tmp/scouting-proof/SOURCE_COMMIT.txt
+          git rev-parse HEAD^{tree} > /tmp/scouting-proof/SOURCE_TREE.txt
+          git archive --format=tar.gz HEAD > /tmp/scouting-proof/source.tar.gz
+          npm test > /tmp/scouting-proof/product-tests.log 2>&1
+          npm run check > /tmp/scouting-proof/product-check.log 2>&1
+          python -m unittest discover -s tests/scouting -v > /tmp/scouting-proof/collector-tests.log 2>&1
+          python -m scouting.regression_report > /tmp/scouting-proof/before-after.json
+      - name: Bounded public metadata probe; not a publication or licence grant
+        if: github.event_name != 'pull_request'
+        run: python -m scouting.run_probe --document-metadata --output /tmp/scouting-proof/live
+      - name: Verify publication-date evidence from the two repaired live adapters
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          python - <<'PYCODE'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('/tmp/scouting-proof/live/collector-report.json').read_text())
+          findings=[]
+          for source in report['sources']:
+              if source['sourceId'] not in {'S003','S017'}:
+                  continue
+              details=[r for r in source['candidates'] if r['retrievalStatus']=='html_metadata_retrieved']
+              valid=[r for r in details if r['publication']['state']=='source_reported'
+                     and r['publication']['precision']=='day'
+                     and any(e.get('basis')=='source_release_header' and e.get('locator') for e in r['publication'].get('evidence',[]))
+                     and r['statementVerification']=='not_performed' and r['publishable'] is False]
+              findings.append({'sourceId':source['sourceId'],'openedDetails':len(details),'datedWithHeaderEvidence':len(valid),
+                               'pass':len(details)>0 and len(valid)==len(details)})
+          result={'observedAt':report['observedAt'],'codeCommit':report['codeCommit'],
+                  'scope':'Bounded source-reported publication-day check; not relevance, factual accuracy or complete coverage',
+                  'sources':findings,'pass':len(findings)==2 and all(f['pass'] for f in findings)}
+          Path('/tmp/scouting-proof/live/publication-date-proof.json').write_text(json.dumps(result,indent=2)+'\n')
+          print(json.dumps(result,indent=2))
+          if not result['pass']:
+              raise SystemExit('Source date evidence did not pass; see per-source observations.')
+          PYCODE
+      - name: Check real paragraph references and embedded document discovery
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          python - <<'PYCODE'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('/tmp/scouting-proof/live/collector-report.json').read_text())
+          rows=[]
+          for source in report['sources']:
+              for item in source['candidates']:
+                  content=item.get('contentInspection')
+                  if not content:
+                      continue
+                  rows.append({'sourceId':source['sourceId'],'url':item['url'],'status':content['status'],
+                     'passages':len(content['passages']),'characters':content.get('characters',0),
+                     'bodyPassages':content.get('bodyPassageCount',0),
+                     'attachmentCount':len(content['attachments']),
+                     'traversalComplete':content['textTraversalComplete'],
+                     'rawDigestMatches':content.get('documentHash')==item.get('sha256'),
+                     'textRetained':content.get('textRetained',False)})
+          proof={'observedAt':report['observedAt'],'codeCommit':report['codeCommit'],
+             'scope':'Bounded real paragraph/attachment extraction metadata; not complete news coverage',
+             'rows':rows,'pass':bool(rows) and all(r['rawDigestMatches'] and not r['textRetained'] for r in rows)
+               and any(r['sourceId']=='S005' and r['bodyPassages']>0 for r in rows)
+               and any(r['sourceId']=='S017' and r['attachmentCount']>0 for r in rows)}
+          Path('/tmp/scouting-proof/live/document-metadata-proof.json').write_text(json.dumps(proof,indent=2)+'\n')
+          print(json.dumps(proof,indent=2))
+          if not proof['pass']:raise SystemExit('Document metadata acceptance not demonstrated; retain failures.')
+          PYCODE
+      - name: Exercise public PDF parser control, not an ABG source
+        if: github.event_name != 'pull_request'
+        run: python -m scouting.document_fixture_probe --output /tmp/scouting-proof/live
+      - name: Retain failures as well as successful observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-scouting-${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
+          path: /tmp/scouting-proof/
+          if-no-files-found: error
+          retention-days: 30
