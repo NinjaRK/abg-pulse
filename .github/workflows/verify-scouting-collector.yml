@@ -1,0 +1,47 @@
+name: Verify candidate-preserving source collector
+on:
+  pull_request:
+    branches: [main]
+    paths: ['scouting/**', 'tests/scouting/**', '.github/workflows/verify-scouting-collector.yml']
+  push:
+    branches: ['build/scouting-collector-20260921']
+    paths: ['scouting/**', 'tests/scouting/**', '.github/workflows/verify-scouting-collector.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Preserve source and run product plus collector regressions
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/scouting-proof
+          git rev-parse HEAD > /tmp/scouting-proof/SOURCE_COMMIT.txt
+          git rev-parse HEAD^{tree} > /tmp/scouting-proof/SOURCE_TREE.txt
+          git archive --format=tar.gz HEAD > /tmp/scouting-proof/source.tar.gz
+          npm test > /tmp/scouting-proof/product-tests.log 2>&1
+          npm run check > /tmp/scouting-proof/product-check.log 2>&1
+          python -m unittest discover -s tests/scouting -v > /tmp/scouting-proof/collector-tests.log 2>&1
+          python -m scouting.regression_report > /tmp/scouting-proof/before-after.json
+      - name: Bounded public metadata probe; not a publication or licence grant
+        if: github.event_name != 'pull_request'
+        run: python -m scouting.run_probe --output /tmp/scouting-proof/live
+      - name: Retain failures as well as successful observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-scouting-${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
+          path: /tmp/scouting-proof/
+          if-no-files-found: error
+          retention-days: 30
