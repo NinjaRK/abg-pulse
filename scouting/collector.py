@@ -414,9 +414,11 @@ class PublicTransport:
         finally:
             conn.close()
 
-    def get(self, url):
+    def get(self, url, *, destination_guard=None):
         current = allowed_url(url, self.hosts)
         for _ in range(6):
+            if destination_guard is not None:
+                destination_guard(current)
             u = urlsplit(current)
             origin = f"https://{u.netloc}"
             if origin not in self.robot_cache:
@@ -438,7 +440,7 @@ class PublicTransport:
         raise CollectorError("redirect_limit")
 
 
-def collect_source(source: dict, fetcher: Callable, max_pages=2, max_details=2) -> dict:
+def collect_source(source: dict, fetcher: Callable, max_pages=2, max_details=2, *, document_metadata=False) -> dict:
     """Bounded traversal: a budget leaves explicit pending URLs, never completeness."""
     if not isinstance(max_pages, int) or not 1 <= max_pages <= 10 or not isinstance(max_details, int) or not 0 <= max_details <= 20:
         raise CollectorError("invalid_budget")
@@ -487,6 +489,17 @@ def collect_source(source: dict, fetcher: Callable, max_pages=2, max_details=2) 
                 # Compare feed/detail publication evidence; preserve disagreement.
                 detail["publication"] = reconcile_publications(item["publication"], detail["publication"])
                 attachments = detail.pop("attachments")
+                if document_metadata:
+                    # Reuse the already fetched bytes; existing rights allow only
+                    # transient HTML inspection and hashes/locators, not retained text.
+                    from .documents import extract_document
+                    content = extract_document(data, url, source, content_type=headers.get("content-type", ""))
+                    item["contentInspection"] = content
+                    for ref in content.get("attachments", []):
+                        linked = candidate(source["id"], ref["url"], "Document awaiting inspection", url, "attachment")
+                        linked["discoveryReference"] = ref["reference"]
+                        linked["parentDocumentHash"] = content.get("documentHash")
+                        attachments.append(linked)
                 item.update(detail)
                 for attachment in attachments:
                     attachment["retrievalStatus"] = "attachment_pending_permission_and_extraction"

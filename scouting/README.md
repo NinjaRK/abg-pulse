@@ -6,7 +6,9 @@ write a production database. Full milestone acceptance remains open.
 
 ## Run
 
-Python 3.11+ standard library only. No packages, API keys or credentials.
+The basic metadata collector uses Python 3.11+ standard library. The optional
+document worker runs on Linux and pins pypdf; see DOCUMENT_EXTRACTION.md.
+No API keys or credentials are required for the isolated tests.
 
 ```
 python -m unittest discover -s tests/scouting -v
@@ -48,7 +50,9 @@ discarded. Results retain titles, URLs, dates, hashes, character counts and
 outcome codes, not full article text or original PDFs. Production reuse still
 needs a recorded rights decision.
 
-PDF candidates are retained but PDF text extraction is pending. JavaScript-only
+A separately permission-gated PDF text worker and paragraph-reference inspector
+are now implemented; see DOCUMENT_EXTRACTION.md. Actual publisher PDF retrieval
+and retained-text permissions remain pending. JavaScript-only
 interfaces are flagged, not rendered. The production 60-event cap, database
 connection, independent-news and regional collectors, complete native-language
 inventory, open-web search execution, persistent cursor resume, scheduled

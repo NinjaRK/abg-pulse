@@ -32,6 +32,7 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--sources',default='S001,S002,S003,S004,S005,S006,S007,S015,S017,S023,S033,S054,S055')
     ap.add_argument('--output',required=True)
+    ap.add_argument('--document-metadata',action='store_true',help='Retain paragraph hashes/locators only; no article text or PDF fetch')
     args=ap.parse_args()
     reg=validate_register(json.loads((ROOT/'scouting/sources.json').read_text()))
     selected=args.sources.split(','); mapping={s['id']:s for s in reg['sources']}
@@ -40,14 +41,14 @@ def main():
     for id_ in selected:
         s=mapping[id_]
         transport=PublicTransport(s['allowedHosts'])
-        result=collect_source(s,transport.get,max_pages=2,max_details=2)
+        result=collect_source(s,transport.get,max_pages=2,max_details=2,document_metadata=args.document_metadata)
         result['httpObservations']=transport.records
         results.append(result)
         print(json.dumps({'sourceId':id_,'status':result['status'],'candidates':result.get('candidateCount',0),'retrievedDetails':result.get('retrievedDetails',0),'errors':result['errors']},ensure_ascii=False),flush=True)
     out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
     report={'schemaVersion':1,'observedAt':datetime.now(timezone.utc).isoformat(),
        'codeCommit':os.environ.get('GITHUB_SHA'),'workflowRun':os.environ.get('GITHUB_RUN_ID'),
-       'writesToProduction':False,'fullTextRetained':False,'independentRecallBenchmark':False,'productionReady':False,
+       'documentMetadataEnabled':args.document_metadata,'writesToProduction':False,'fullTextRetained':False,'independentRecallBenchmark':False,'productionReady':False,
        'scope':'At most 2 listing/feed/filing-index requests and 2 detail requests per permitted source; robots checks additional.',
        'sources':results,
        'summary':{'selectedSources':len(results),'sourcesWithPages':sum(bool(r['pages']) for r in results),
