@@ -10,9 +10,15 @@ The basic metadata collector uses Python 3.11+ standard library. The optional
 document worker runs on Linux and pins pypdf; see DOCUMENT_EXTRACTION.md.
 No API keys or credentials are required for the isolated tests.
 
-```
-python -m unittest discover -s tests/scouting -v
-python -m scouting.run_probe --output /tmp/abg-scouting-proof
+On Linux, install the pinned optional dependency before running the complete
+collector suite (which includes PDF tests). The basic metadata-only probe still
+works without the optional parser.
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install --require-hashes --only-binary=:all: --no-deps -r scouting/requirements-documents.txt
+.venv/bin/python -m unittest discover -s tests/scouting -v
+.venv/bin/python -m scouting.run_probe --document-metadata --output /tmp/abg-scouting-proof
 ```
 
 The probe allows at most two listing/feed/index fetches and two article-detail
