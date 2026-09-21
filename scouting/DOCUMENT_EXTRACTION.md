@@ -101,12 +101,22 @@ ABG relevance. Independent caught-versus-missed news evaluation is still open.
 A pinned current dependency is not a claim of zero vulnerabilities. No optional
 crypto/image/ML/OCR packages or new paid services were introduced.
 
-## Body-presence check from the first real document run
+## Body-presence check and selected-scope limitation
 
-The Coolbrook UltraTech page exposed only two heading blocks in the selected
-container. That is not established article-body extraction. HTML results now
-report bodyPassageCount/bodyCharacters separately from headings and mark a
-headings-only result html_body_not_established, with incomplete traversal.
-This is a structural check, not proof of relevance or semantic completeness.
-The source-specific layout needs further work; do not silently count it as a
-fully read article because two headings were parsed.
+The first Coolbrook UltraTech result contained two blocks. Inspection of the
+retained DOM references established that these are one h1 (94 characters) and
+one p (102 characters), not two heading elements. A preliminary commit message
+and documentation described both as headings; that description was incorrect.
+
+The new bodyPassageCount/bodyCharacters fields distinguish paragraph-like blocks
+from heading tags. Synthetic headings-only inputs now return
+html_body_not_established and incomplete traversal. The live Coolbrook page has
+one paragraph, so this structural check does not reject it. A short paragraph
+could still be a subtitle; this is not a semantic or whole-article acceptance test.
+
+textTraversalComplete refers only to the explicitly identified selected container,
+not every content component on the publisher page. In the live probe, the
+Coolbrook container is shallow and the Novelis pages have unsegmented content;
+complete-body recovery remains an open source-adapter task. All results keep
+semanticCompletenessVerified=false and publishable=false. Do not present parser
+success or a paragraph count as full-article or independent news acceptance.
