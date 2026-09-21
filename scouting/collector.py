@@ -22,6 +22,7 @@ from html.parser import HTMLParser
 from typing import Callable
 from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 from xml.etree import ElementTree as ET
+from .publication import observed_feed_day, source_publication, reconcile_publications
 
 UTC = timezone.utc
 BOT = "ABGPulseScout"
@@ -71,6 +72,9 @@ def allowed_url(value: str, hosts: list[str]) -> str:
 
 def date_observation(value: str | None, now: datetime | None = None) -> dict:
     """Return source precision, never substitute fetch time for missing dates."""
+    extra = observed_feed_day(value, now)
+    if extra is not None:
+        return extra
     result = {"raw": value, "value": None, "precision": None, "state": "unknown"}
     if not value:
         return result
@@ -318,7 +322,7 @@ def inspect_html(html: str, url: str, source: dict) -> dict:
     title = compact(str(title))
     blocked = bool(re.search(r"^(?:access denied|just a moment|robot verification|sign in|login|attention required)", title, re.I))
     attachments = discover_html(html, url, {**source, "candidatePatterns": [r"\.pdf(?:$|\?)"]})["candidates"]
-    return {"title": title[:400] or None, "publication": date_observation(publication), "modified": date_observation(modified),
+    return {"title": title[:400] or None, "publication": reconcile_publications(date_observation(publication), source_publication(nodes, url, source, date_observation)), "modified": date_observation(modified),
             "unassignedTimeHints": time_hints[:20], "bodyCharacterCount": len(body),
             "retrievalStatus": "blocked_page" if blocked else ("html_metadata_retrieved" if title else "empty_or_unrecognised"),
             "attachments": attachments, "statementVerification": "not_performed", "publishable": False}
@@ -480,9 +484,8 @@ def collect_source(source: dict, fetcher: Callable, max_pages=2, max_details=2) 
                 item["retrievalStatus"] = "pdf_detected_extraction_pending"
             else:
                 detail = inspect_html(data.decode("utf-8-sig", "replace"), url, source)
-                # Do not lose a valid feed publication time when a detail page lacks it.
-                if detail["publication"]["state"] == "unknown" and item["publication"]["state"] != "unknown":
-                    detail["publication"] = item["publication"]
+                # Compare feed/detail publication evidence; preserve disagreement.
+                detail["publication"] = reconcile_publications(item["publication"], detail["publication"])
                 attachments = detail.pop("attachments")
                 item.update(detail)
                 for attachment in attachments:
