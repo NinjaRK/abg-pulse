@@ -22,13 +22,14 @@ test('live scan adds GNews only when configured, never exposes the key, and repo
     const value = String(url);
     if (value.startsWith('https://gnews.io/api/v4/search')) {
       gnewsCalls += 1;
+      const callNumber = gnewsCalls;
       gnewsUrls.push(value);
       gnewsHeaders.push(options.headers || {});
       return {
         ok: true,
         status: 200,
         json: async () => ({
-          totalArticles: gnewsCalls === 1 ? 26 : 0,
+          totalArticles: callNumber === 1 ? 26 : 0,
           articles: []
         })
       };
