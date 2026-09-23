@@ -11,7 +11,6 @@ import {
   validateGNewsQueryPlan
 } from '../lib/gnews.mjs';
 import { assessArticleSignal, formatLiveArticle } from '../core.mjs';
-import { readFileSync as readJsonFile } from 'node:fs';
 
 const plan = JSON.parse(readFileSync(new URL('../config/gnews-query-plan.json', import.meta.url), 'utf8'));
 const window = { start: '2026-09-22T00:00:00.000Z', end: '2026-09-23T00:00:00.000Z' };
@@ -111,8 +110,8 @@ test('GNews Essential pilot refuses accidental over-page-size requests', () => {
 });
 
 test('GNews full text survives provider mapping for bounded internal analysis', () => {
-  const entities = JSON.parse(readJsonFile(new URL('../data/entities.json', import.meta.url), 'utf8'));
-  const sources = JSON.parse(readJsonFile(new URL('../data/source-registry.json', import.meta.url), 'utf8'));
+  const entities = JSON.parse(readFileSync(new URL('../data/entities.json', import.meta.url), 'utf8'));
+  const sources = JSON.parse(readFileSync(new URL('../data/source-registry.json', import.meta.url), 'utf8'));
   const mapped = mapGNewsArticle({
     title: 'UltraTech Cement update',
     description: null,
@@ -124,4 +123,13 @@ test('GNews full text survives provider mapping for bounded internal analysis', 
   const formatted = formatLiveArticle(mapped);
   assert.match(formatted.content, /capacity investment/i);
   assert.equal(assessArticleSignal(formatted, entities, sources).includeAsNews, true);
+});
+
+test('scheduled GNews participation stays inside the Essential base-call budget', () => {
+  const workflow = readFileSync(new URL('../.github/workflows/refresh-live-snapshot.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /cron: '7 \* \* \* \*'/);
+  assert.match(workflow, /cron: '37 \* \* \* \*'/);
+  assert.match(workflow, /GNEWS_API_KEY:.*secrets\.GNEWS_API_KEY/);
+  assert.match(workflow, /github\.event\.schedule == '7 \* \* \* \*'/);
+  assert.ok(plan.queries.length * 24 < 1000);
 });
