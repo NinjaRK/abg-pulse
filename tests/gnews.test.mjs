@@ -10,6 +10,8 @@ import {
   mapGNewsArticle,
   validateGNewsQueryPlan
 } from '../lib/gnews.mjs';
+import { assessArticleSignal, formatLiveArticle } from '../core.mjs';
+import { readFileSync as readJsonFile } from 'node:fs';
 
 const plan = JSON.parse(readFileSync(new URL('../config/gnews-query-plan.json', import.meta.url), 'utf8'));
 const window = { start: '2026-09-22T00:00:00.000Z', end: '2026-09-23T00:00:00.000Z' };
@@ -106,4 +108,20 @@ test('GNews distinguishes quota/auth style failures without leaking the key', as
 
 test('GNews Essential pilot refuses accidental over-page-size requests', () => {
   assert.throws(() => buildGNewsUrl(plan.queries[0], window, { max: 26 }), /Essential pilot/);
+});
+
+test('GNews full text survives provider mapping for bounded internal analysis', () => {
+  const entities = JSON.parse(readJsonFile(new URL('../data/entities.json', import.meta.url), 'utf8'));
+  const sources = JSON.parse(readJsonFile(new URL('../data/source-registry.json', import.meta.url), 'utf8'));
+  const mapped = mapGNewsArticle({
+    title: 'UltraTech Cement update',
+    description: null,
+    content: 'UltraTech Cement announced a major capacity investment and commissioned a new plant.',
+    url: 'https://publisher.example/ultratech-update',
+    publishedAt: '2026-09-22T10:00:00Z',
+    source: { name: 'Example Business News', url: 'https://publisher.example', country: 'in' }
+  }, { id: 'cement-building', group: 'cement-building' });
+  const formatted = formatLiveArticle(mapped);
+  assert.match(formatted.content, /capacity investment/i);
+  assert.equal(assessArticleSignal(formatted, entities, sources).includeAsNews, true);
 });
