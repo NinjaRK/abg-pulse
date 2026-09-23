@@ -16,7 +16,8 @@ on:
       - 'data/entities.json'
       - 'data/source-registry.json'
   schedule:
-    - cron: '7,37 * * * *'
+    - cron: '7 * * * *'
+    - cron: '37 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -54,6 +55,11 @@ jobs:
         env:
           SNAPSHOT_SPAN_DAYS: '30'
           SNAPSHOT_MIN_SUCCESS_RATIO: '0.30'
+          # Essential allows 1,000 requests/day. The governed snapshot still
+          # refreshes twice hourly, but GNews participates only in the :07
+          # schedule (or an explicit manual run), keeping the 21-query base
+          # plan at 504 scheduled requests/day before any future pagination.
+          GNEWS_API_KEY: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '7 * * * *') && secrets.GNEWS_API_KEY || '' }}
         run: node scripts/refresh-live-snapshot.mjs /tmp/live-snapshot.json
 
       - name: Validate publication payload
