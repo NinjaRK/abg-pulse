@@ -133,3 +133,12 @@ test('scheduled GNews participation stays inside the Essential base-call budget'
   assert.match(workflow, /github\.event\.schedule == '7 \* \* \* \*'/);
   assert.ok(plan.queries.length * 24 < 1000);
 });
+
+test('manual GNews verification workflow is read-only and uses a repository secret', () => {
+  const workflow = readFileSync(new URL('../.github/workflows/verify-gnews-pilot.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /workflow_dispatch:/);
+  assert.match(workflow, /contents: read/);
+  assert.match(workflow, /GNEWS_API_KEY:.*secrets\.GNEWS_API_KEY/);
+  assert.doesNotMatch(workflow, /contents: write/);
+  assert.doesNotMatch(workflow, /git push|supabase|vercel deploy/i);
+});
