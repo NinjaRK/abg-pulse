@@ -20,6 +20,7 @@ import {
   loadLiveSnapshot,
   shouldUseGovernedSnapshot
 } from '../lib/live-snapshot.mjs';
+import { fetchGNewsQuery, validateGNewsQueryPlan } from '../lib/gnews.mjs';
 
 // Literal asset paths ensure Vercel includes every governed JSON file in the
 // serverless function bundle.
@@ -27,6 +28,7 @@ const entities = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entities
 const sources = JSON.parse(readFileSync(fileURLToPath(new URL('../data/source-registry.json', import.meta.url)), 'utf8'));
 const queryGroups = JSON.parse(readFileSync(fileURLToPath(new URL('../config/queries.json', import.meta.url)), 'utf8'));
 const officialSources = JSON.parse(readFileSync(fileURLToPath(new URL('../config/official-sources.json', import.meta.url)), 'utf8'));
+const gnewsQueryPlan = validateGNewsQueryPlan(JSON.parse(readFileSync(fileURLToPath(new URL('../config/gnews-query-plan.json', import.meta.url)), 'utf8')));
 const entityUniverse = JSON.parse(readFileSync(fileURLToPath(new URL('../data/entity-universe-summary.json', import.meta.url)), 'utf8'));
 
 const GOOGLE_EDITIONS = {
@@ -218,8 +220,39 @@ async function fetchReddit(group, signal) {
   return parseRedditAtom(await response.text(), group);
 }
 
+function gnewsConfigured(env = process.env) {
+  return Boolean(String(env.GNEWS_API_KEY || '').trim());
+}
+
+async function fetchGNews(spec, signal, window) {
+  const result = await fetchGNewsQuery(spec, {
+    apiKey: process.env.GNEWS_API_KEY,
+    window,
+    signal
+  });
+  // Keep provider accounting with the returned array so the existing scan
+  // pipeline can ingest articles unchanged while still exposing saturation.
+  Object.defineProperty(result.items, 'providerMeta', {
+    value: {
+      totalArticles: result.totalArticles,
+      page: result.page,
+      max: result.max,
+      saturated: result.saturated,
+      queryId: result.queryId,
+      group: result.group
+    },
+    enumerable: false
+  });
+  return result.items;
+}
+
 function buildJobs(window) {
   const jobs = [];
+  if (gnewsConfigured()) {
+    for (const spec of gnewsQueryPlan.queries) {
+      jobs.push({ provider: 'GNews', id: `gnews:${spec.id}`, run: (signal) => fetchGNews(spec, signal, window) });
+    }
+  }
   for (const group of queryGroups) {
     jobs.push({ provider: 'GDELT', id: `${group.id}:gdelt`, run: (signal) => fetchGdelt(group, signal, window) });
     jobs.push({ provider: 'Google News', id: `${group.id}:IN-en`, run: (signal) => fetchGoogleNews(group, GOOGLE_EDITIONS.indiaEnglish, signal, window) });
@@ -241,13 +274,17 @@ export async function performLiveScan({ window, startedAt = new Date() } = {}) {
     const sourceChecks = settled.map((result, index) => {
       const value = result.status === 'fulfilled' ? result.value : null;
       const registryAudit = value && !Array.isArray(value) && value.kind === 'registry-audit' ? value : null;
+      const providerMeta = Array.isArray(value) ? (value.providerMeta || null) : null;
       return {
         name: jobs[index].id,
         provider: jobs[index].provider,
         ok: result.status === 'fulfilled',
-        status: result.status !== 'fulfilled' ? 'failed' : (registryAudit && !registryAudit.reconciled ? 'degraded' : 'healthy'),
+        status: result.status !== 'fulfilled'
+          ? 'failed'
+          : ((registryAudit && !registryAudit.reconciled) || providerMeta?.saturated ? 'degraded' : 'healthy'),
         itemCount: Array.isArray(value) ? value.length : (registryAudit?.matchedCount || 0),
         registryAudit,
+        providerMeta,
         error: result.status === 'rejected' ? String(result.reason?.message || result.reason) : ''
       };
     });
@@ -290,6 +327,8 @@ export async function performLiveScan({ window, startedAt = new Date() } = {}) {
     const publicConversationChecks = sourceChecks.filter((check) => check.provider === 'Open public conversation');
     const providerSummary = [...new Set(jobs.map((job) => job.provider))];
     const registryAudits = sourceChecks.map((check) => check.registryAudit).filter(Boolean);
+    const gnewsChecks = sourceChecks.filter((check) => check.provider === 'GNews');
+    const saturatedGNewsQueries = gnewsChecks.filter((check) => check.providerMeta?.saturated).map((check) => check.name);
 
     return {
       events,
@@ -314,8 +353,20 @@ export async function performLiveScan({ window, startedAt = new Date() } = {}) {
         publicConversationItems,
         publicConversationChecks: publicConversationChecks.length,
         publicConversationChecksSucceeded: publicConversationChecks.filter((check) => check.ok).length,
+        gnews: {
+          enabled: gnewsConfigured(),
+          planQueryCount: gnewsQueryPlan.queries.length,
+          checksRun: gnewsChecks.length,
+          checksSucceeded: gnewsChecks.filter((check) => check.ok).length,
+          saturatedQueries: saturatedGNewsQueries,
+          coverageNotice: !gnewsConfigured()
+            ? 'GNews is not configured; no GNews requests were made.'
+            : (saturatedGNewsQueries.length
+              ? 'One or more GNews queries returned more matching articles than the single-page Essential pilot scan retrieved; coverage is explicitly partial for those queries.'
+              : 'GNews pilot checks completed without page-one saturation in this scan.')
+        },
         sentimentCoverage: {
-          media: 'Google News, GDELT and official published-source language',
+          media: 'GNews when configured, Google News, GDELT and official published-source language',
           openPublic: 'Accessible Reddit public-search RSS where available; samples inform sentiment only and cannot create news events.',
           closedSocial: 'X, LinkedIn, Instagram and platform-level comments require authorised or licensed data access and are not represented unless connected.'
         },

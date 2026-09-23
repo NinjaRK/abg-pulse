@@ -205,7 +205,8 @@ export function matchEntities(text = '', entities = []) {
 export function assessArticleSignal(article = {}, entities = [], sources = []) {
   const title = normalizeText(article.title || '');
   const description = normalizeText(article.description || '');
-  const combined = `${title} ${description}`.trim();
+  const content = normalizeText(article.content || '');
+  const combined = `${title} ${description} ${content}`.trim();
   const titleEntities = matchEntities(article.title || '', entities).filter((entity) => entity.type !== 'stakeholder');
   const textEntities = matchEntities(`${article.title || ''} ${article.description || ''}`, entities).filter((entity) => entity.type !== 'stakeholder');
   const hintedEntities = (article.entityHints || [])
@@ -439,6 +440,7 @@ export function formatLiveArticle(raw = {}) {
     id: raw.url || `${domain}-${raw.seendate || raw.publishedAt || 'undated'}-${raw.title}`,
     title: raw.title || 'Untitled source item',
     description: raw.description || raw.summary || raw.snippet || '',
+    content: String(raw.content || '').slice(0, 12000),
     url: raw.url || '#',
     domain,
     publishedAt: Number.isNaN(parsedDate.getTime()) ? '' : parsedDate.toISOString(),
@@ -495,7 +497,7 @@ export function observedPublicSentiment(articles = []) {
 }
 
 function safeLiveSummary({ lead, domains, official, entityName }) {
-  const snippet = truncateWords(lead.description || '', 38);
+  const snippet = truncateWords(lead.description || lead.content || '', 38);
   const opening = official
     ? `An official source has published this development concerning ${entityName}.`
     : `Published coverage across ${domains.length} distinct source domain${domains.length === 1 ? '' : 's'} identifies this development concerning ${entityName}.`;
@@ -515,7 +517,7 @@ export function deriveLiveEvent(cluster = [], { entities = [], sources = [], now
   if (!mediaArticles.length) return null;
   const publicArticles = ranked.filter((article) => article.channel === 'public-conversation');
   const lead = mediaArticles[0];
-  const allText = mediaArticles.map((article) => `${article.title || ''} ${article.description || ''}`).join(' ');
+  const allText = mediaArticles.map((article) => `${article.title || ''} ${article.description || ''} ${article.content || ''}`).join(' ');
   const textEntityMatches = matchEntities(allText, entities);
   const hintedEntityMatches = mediaArticles
     .flatMap((article) => article.entityHints || [])

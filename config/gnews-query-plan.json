@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "provider": "GNews",
+  "plan": "Essential pilot",
+  "notes": [
+    "Each query stays below GNews's documented 200-character q limit.",
+    "Language and country are intentionally not constrained in the first pilot so international coverage is not excluded.",
+    "One page per query is the default live scan. Saturated queries must be visible and can be selectively paginated within quota."
+  ],
+  "queries": [
+    {
+      "id": "group-family",
+      "group": "group-family",
+      "query": "\"Aditya Birla Group\" OR \"Kumar Mangalam Birla\" OR \"Rajashree Birla\" OR \"Ananya Birla\" OR \"Aryaman Vikram Birla\" OR ABMCPL"
+    },
+    {
+      "id": "group-leadership-1",
+      "group": "group-leadership",
+      "query": "(\"Ashok Ramchandran\" OR \"Ashish Dikshit\" OR \"Himanshu Kapania\" OR \"Satish Pai\" OR \"Sushil Agarwal\") AND \"Aditya Birla\""
+    },
+    {
+      "id": "group-leadership-2",
+      "group": "group-leadership",
+      "query": "(\"Vishakha Mulye\" OR \"Sunil Bajaj\" OR \"Sandeep Gurumurthi\" OR \"Ila Patnaik\" OR \"Deeksha Vats\") AND \"Aditya Birla\""
+    },
+    {
+      "id": "cement-building",
+      "group": "cement-building",
+      "query": "\"UltraTech Cement\" OR UltraTech OR \"Birla White\" OR \"Birla Opus\" OR \"Birla Pivot\" OR \"K C Jhanwar\" OR \"Jayant Dua\" OR \"Atul Daga\" OR \"Vivek Agrawal\""
+    },
+    {
+      "id": "metals-aluminium",
+      "group": "metals-aluminium",
+      "query": "Hindalco OR Novelis OR \"Utkal Alumina\" OR \"Hindalco-Almex\" OR \"Dahej Harbour\" OR \"Bay Minette\" OR \"Satish Pai\" OR \"Steven Fisher\""
+    },
+    {
+      "id": "financial-1",
+      "group": "financial-services",
+      "query": "\"Aditya Birla Capital\" OR \"Aditya Birla Finance\" OR \"Aditya Birla Health Insurance\" OR \"Aditya Birla Sun Life AMC\" OR \"Aditya Birla Sun Life Insurance\""
+    },
+    {
+      "id": "financial-2",
+      "group": "financial-services",
+      "query": "\"Aditya Birla Sun Life Pension Management\" OR ABSLPML OR \"Aditya Birla Housing Finance\" OR \"Aditya Birla Wellness\" OR \"Vishakha Mulye\""
+    },
+    {
+      "id": "telecom",
+      "group": "telecom",
+      "query": "\"Vodafone Idea\" OR \"Vi telecom\" OR \"Vodafone Idea Limited\" OR \"Abhijit Kishore\" OR \"Tejas Mehta\""
+    },
+    {
+      "id": "fashion",
+      "group": "fashion-lifestyle",
+      "query": "ABFRL OR ABLBL OR \"Aditya Birla Fashion\" OR TMRW OR TCNS OR Pantaloons OR \"Louis Philippe\" OR \"Van Heusen\" OR \"Allen Solly\" OR \"Peter England\" OR Sabyasachi OR Jaypore OR Tasva"
+    },
+    {
+      "id": "fibres-1",
+      "group": "fibres-textiles",
+      "query": "\"Birla Cellulose\" OR \"Aditya Birla Yarns\" OR \"Century Enka\" OR \"Thai Acrylic Fibre\" OR \"Thai Rayon\" OR \"Domsjo Fabriker\" OR \"Domsjö Fabriker\""
+    },
+    {
+      "id": "fibres-2",
+      "group": "fibres-textiles",
+      "query": "\"Birla Jingwei Fibres\" OR BJFCL OR \"Indo Thai Synthetics\" OR \"PT Elegant Textile\" OR \"Indo Bharat Rayon\" OR \"Indo Liberty Textiles\" OR \"Sunrise Bumi Textiles\""
+    },
+    {
+      "id": "chemicals",
+      "group": "chemicals-carbon-mining",
+      "query": "\"Aditya Birla Chemicals\" OR \"Aditya Birla Chemicals Thailand\" OR ABCTL OR \"Birla Carbon\" OR \"Essel Mining\" OR \"Indo Raya Kimia\" OR \"Aditya Birla Global Trading\""
+    },
+    {
+      "id": "new-growth-1",
+      "group": "new-growth",
+      "query": "\"Aditya Birla Renewables\" OR \"Sprng Energy\" OR \"Aditya Birla Real Estate\" OR \"Birla Estates\" OR \"Aditya Birla New Age Hospitality\" OR Indriya"
+    },
+    {
+      "id": "new-growth-2",
+      "group": "new-growth",
+      "query": "\"Aditya Birla Ventures\" OR \"Aditya Birla Science and Technology\""
+    },
+    {
+      "id": "sports",
+      "group": "sports-rcb",
+      "query": "(RCB OR \"Royal Challengers Bengaluru\" OR \"Royal Challengers Bangalore\") AND (\"Aditya Birla\" OR Aryaman OR Ananya)"
+    },
+    {
+      "id": "risk-1",
+      "group": "regulatory-reputation",
+      "query": "(\"Aditya Birla\" OR Grasim OR Hindalco OR UltraTech OR Novelis) AND (SEBI OR CCI OR RBI OR TRAI OR NCLT OR court OR regulator OR probe OR fraud OR accident OR fire)"
+    },
+    {
+      "id": "risk-2",
+      "group": "regulatory-reputation",
+      "query": "(\"Vodafone Idea\" OR ABFRL OR ABLBL OR \"Aditya Birla Capital\") AND (SEBI OR CCI OR RBI OR TRAI OR NCLT OR court OR regulator OR probe OR fraud OR accident OR fire)"
+    },
+    {
+      "id": "governance-1",
+      "group": "leadership-governance-advisors",
+      "query": "(\"K. K. Maheshwari\" OR \"Askaran Agarwala\" OR \"Shailendra Jain\" OR \"Sushil Kumar Saboo\" OR \"Umesh Adhikary\") AND (\"Aditya Birla\" OR ABG OR Grasim OR UltraTech)"
+    },
+    {
+      "id": "governance-2",
+      "group": "leadership-governance-advisors",
+      "query": "(\"Sitalakshmanan Ganesh\" OR \"Deepak Acharya\" OR \"Kapil Agrawal\" OR \"Vadiraj Kulkarni\" OR \"Vishak Kumar\") AND (\"Aditya Birla\" OR ABG OR Grasim OR UltraTech)"
+    },
+    {
+      "id": "corp-functions-1",
+      "group": "leadership-corporate-functions",
+      "query": "(\"Sunita Bangard\" OR \"Subrat Sarkar\" OR \"Pragnya Ram\" OR \"Sandeep Agrawal\" OR \"Duli Kabra\") AND (\"Aditya Birla\" OR ABG OR UltraTech)"
+    },
+    {
+      "id": "corp-functions-2",
+      "group": "leadership-corporate-functions",
+      "query": "(\"Sudhir Dalvi\" OR \"Pankaj Rai\" OR \"Manish Gupta\" OR \"Pooja Kapur\" OR \"E.R. Raj Narayanan\") AND (\"Aditya Birla\" OR ABG OR UltraTech)"
+    }
+  ]
+}
