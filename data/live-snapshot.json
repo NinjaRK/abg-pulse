@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-17T23:59:05.491Z",
-  "expiresAt": "2026-10-18T01:29:05.491Z",
+  "generatedAt": "2026-10-18T04:21:24.375Z",
+  "expiresAt": "2026-10-18T05:51:24.375Z",
   "source": {
     "repository": "NinjaRK/abg-pulse",
     "commitSha": "9010adc06f361ad55adb3da21f95519b3a98febb",
     "workflow": "Refresh governed ABG Pulse snapshot",
-    "workflowRunId": "39081054431",
+    "workflowRunId": "39096792610",
     "workflowRunAttempt": "1"
   },
   "window": {
-    "start": "2026-09-17T23:59:05.491Z",
-    "end": "2026-10-17T23:59:05.491Z",
+    "start": "2026-09-18T04:21:24.375Z",
+    "end": "2026-10-18T04:21:24.375Z",
     "lookbackDays": 30
   },
   "events": [
@@ -530,7 +530,7 @@
     {
       "id": "live-b9jvw1",
       "headline": "Hindalco calls off AluChem acquisition amid prolonged closing delays",
-      "summary": "Published coverage across 5 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "summary": "Published coverage across 4 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "This may alter Hindalco Industries Limited's capital allocation, ownership or strategic growth trajectory.",
       "bucket": "must",
       "status": "strong",
@@ -538,7 +538,7 @@
       "entityIds": [
         "hindalco"
       ],
-      "publishedAt": "2026-10-01T17:46:37.000Z",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
       "updatedAt": "2026-10-02T07:00:00.000Z",
       "sources": [
         {
@@ -576,22 +576,13 @@
           "provider": "Google News US-en",
           "channel": "news",
           "official": false
-        },
-        {
-          "name": "scanx.trade",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPTGdEM2wycnZEWjZDWEY5QmZSSklIbjF3WWdVVkJlT2tEa3lZbDM2TTdOYkMzbmtxQkFMVFpoYTlLRGdURF9MTmVwMTJjd01vQ1gtSXJFT3B2OTBhbzNiWTNNOEJrajROSVRlLWpTZ3R2N3RaRFZFVVdGLWF5ajhLUF9iNUt2QVN1cmRJS2gyQVZkc2wxTlRsXzBPajN1ZktyWmVsSHp2XzREdjAxNjhzOV9fRFlFdGdWcHc?oc=5",
-          "publishedAt": "2026-10-01T17:46:37.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
         }
       ],
-      "sourceCount": 5,
+      "sourceCount": 4,
       "intelligence": {
-        "materiality": 86,
-        "certainty": 76,
-        "momentum": 38,
+        "materiality": 84,
+        "certainty": 74,
+        "momentum": 32,
         "trendChange": 0,
         "sentiment": -1,
         "mediaTone": -1,
@@ -605,11 +596,10 @@
         "reputationImpact": 6,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 56,
-          "p24": 75,
-          "p72": 82,
+          "p6": 51,
+          "p24": 68,
+          "p72": 77,
           "drivers": [
-            "broad independent-source pickup",
             "high strategic or reputation consequence"
           ],
           "posture": "PREPARE"
@@ -1225,6 +1215,73 @@
       "live": true
     },
     {
+      "id": "live-2p9pck",
+      "headline": "Manoj Murali Appointed Chief Operating Officer at Vodafone Idea Limited",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "Senior-leadership developments can change governance, accountability and external narrative around Vodafone Idea Limited (Vi).",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Leadership",
+      "entityIds": [
+        "vi"
+      ],
+      "publishedAt": "2026-10-16T15:31:10.000Z",
+      "updatedAt": "2026-10-17T17:21:25.000Z",
+      "sources": [
+        {
+          "name": "https://hrtoday.in/",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQRG1aOGYyWlRfWnV6LXNwT3BwZU1OM2hkQllhemNrODlZLTZDSUZiQWhGVXhCa19kVVVEWmY3ZTQwWmpjbWJ5Z1pHV3l6M2F1ZE9OblRzNmMzb1BYWkpiM3h6aHBUNElEQllqZzl6T3RWdng4a19kbGYxN3dIcHNfOG85WU1GZHBMRzB0RmUxNEFjVWhRZnc?oc=5",
+          "publishedAt": "2026-10-17T17:21:25.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNXzdZajlSYmJiRjhYbG5jcnVCeG5qeW96bGR2TmtHUUxQWkpTNmI1RDdkdmx6UVlNRnNGV1dMejh2b2ZNcWRsS090SUtTSDllQ3QtNF9CMXFteGFuZ095STRfRWtIQ3hIUktrT3BFelY5NW5XVzBnajhRa0lUb05GUHRsRk5EaWFPWkdvTlFieV9Ja2R2RXpKdkxrMXR1VGlQdmJqckdtWmFZRGZ1UlhGanQ2SFF0YUcxSkZGeDNHNFdVamhiQzhDaC1iWXNycWpJWVpBLUtlR0JzMW50eXU1dw?oc=5",
+          "publishedAt": "2026-10-16T15:31:10.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 91,
+        "certainty": 48,
+        "momentum": 23,
+        "trendChange": 100,
+        "sentiment": 0,
+        "mediaTone": 0,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 7,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 42,
+          "p24": 58,
+          "p72": 70,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-w4n53y",
       "headline": "Aditya Birla Group plans up to USD 30 billion in investments over next three years",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1634,6 +1691,65 @@
           "name": "Bhaskar English",
           "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPVW1VTDNwNVVNM2hjcmVFbTNIWFRtbHY4cUlwQXNaYk5NMHAyNE5tVnhyVmZoemxtWV84aV9IRldWd25rSXRWZGNHejl6N0Rwd0JoSTlpeUJKQ2FrTUZsVERoaUtyb1VNejJta2NjNjVUQUJaVzZQZmxFcllnWl8zaExjYjg4YUIwZGt4UU5VTEVIUU9PMV9aWENxNl9OeEM4ZXc0TFB1ZVZBemwzeG92S2Vn0gG3AUFVX3lxTE9qQ29SaEowQ1V2Q1ZHMC1XTFVqa2xUY0s2VVFFS2E0MEpiZHI3YUNpMEJPaDFJcGNZQTh6NmZOWkthQTBHMjZGd0dFTEtNalpoY3VWU093Y3FUQWRtQTZOUDhpcDU5OHk2aEU0cW8zOTFnOU1LT1QtQ1cwS29MQWpQR0FoQlN2cUs5VzNua2FLNGxoZnQ0YktnUE5Tb044Vlo3TFVJcURLM1lJQldFazF0bG5TdXdaQQ?oc=5",
           "publishedAt": "2026-10-15T15:46:22.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 75,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 8,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 26,
+          "p24": 35,
+          "p72": 53,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-187rnn2",
+      "headline": "ABFRL acquires Imperial stake: what it means for Aditya Birla Fashion and Retail stock",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This may alter Aditya Birla Group's capital allocation, ownership or strategic growth trajectory.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "M&A",
+      "entityIds": [
+        "abg",
+        "abfrl"
+      ],
+      "publishedAt": "2026-10-14T00:06:15.000Z",
+      "updatedAt": "2026-10-14T00:06:15.000Z",
+      "sources": [
+        {
+          "name": "ad-hoc-news.de",
+          "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPSVU3b0hkWWhDa3ZOdUhjdGR4LVBtcXdiNG1QN0tldlRKc2ptblNZMGFVbjNxR1dQX3F4OUQyNklaVXZKOUhXRTlHMUM3bDQ4WDBGZTRSZjg5REdNVVkwNGVXbklmMEN2Y3AzeWNleTNJM1NLSUhIQjA0VXZ5c3JILW0xa3VKVDFMZ1Q1bVJraXdSWnpBdjF3Tm0xRjZXS2NQY0F2Z3FaSTE0VHEyam9xQ2tid2dZWTZMbGZrMzBtV1g1VEx6SGtVWVV4WjlVMFlwMEhGMl9TY2ZkT1VP?oc=5",
+          "publishedAt": "2026-10-14T00:06:15.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -2884,13 +3000,13 @@
       "entityIds": [
         "novelis"
       ],
-      "publishedAt": "2026-10-07T14:00:00.000Z",
+      "publishedAt": "2026-10-07T07:00:00.000Z",
       "updatedAt": "2026-10-09T20:30:34.000Z",
       "sources": [
         {
           "name": "PR Newswire",
           "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPWEtQaVRmd05lSEwyc2E0YWY2bm1jc0NKc3NXc21VS09pLURfb2pyT1U5N2czeXhUU1VLaHRUSTRVVE9CRURVbkZCQ0ljbGpraWZDRjl4T2ZyQXJhaExGM28yRUlsY1BCZGdEUU8tUWN1Y2RXODd1M0xlZjhwTmNZc1FIUjgteHV6dmZsc1lZY1JlYm5kQ093Y1BLX0t1UzZNUnMwcFQ0eTVRaFd2UWVHWGFRNEFUVVB3bWZBTjhZNTZ3czFiZ3VoS2JsU3dIWndaVlJhc0hnSGJJQmJnaGc?oc=5",
-          "publishedAt": "2026-10-07T14:00:00.000Z",
+          "publishedAt": "2026-10-07T07:00:00.000Z",
           "tier": 2,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -2908,7 +3024,7 @@
         {
           "name": "Yahoo Finance",
           "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQaE5adzVvbUlWWUJPMmZIak4ta0tyTVF1ZmF5WV9LeFlLQ3BLTEdBb2RYZGQxdUY3dXUtVjd4ZkYzN0FtZ0c5NzVHblFvRl9DTzRZcEhnckdQdEVvU3R0MUpra1pTanVFNTA4ZDgwRDJmend3V2VBS3Y2OEhxNkZzdmZmdTk?oc=5",
-          "publishedAt": "2026-10-08T08:57:46.000Z",
+          "publishedAt": "2026-10-08T07:00:00.000Z",
           "tier": 3,
           "provider": "Google News US-en",
           "channel": "news",
@@ -3276,63 +3392,6 @@
       "live": true
     },
     {
-      "id": "live-1ymr4tv",
-      "headline": "Vodafone Idea Approves Appointment Of Manoj Murali As Chief Operating Officer",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Financial",
-      "entityIds": [
-        "vi"
-      ],
-      "publishedAt": "2026-10-16T15:31:10.000Z",
-      "updatedAt": "2026-10-16T15:31:10.000Z",
-      "sources": [
-        {
-          "name": "TradingView",
-          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNXzdZajlSYmJiRjhYbG5jcnVCeG5qeW96bGR2TmtHUUxQWkpTNmI1RDdkdmx6UVlNRnNGV1dMejh2b2ZNcWRsS090SUtTSDllQ3QtNF9CMXFteGFuZ095STRfRWtIQ3hIUktrT3BFelY5NW5XVzBnajhRa0lUb05GUHRsRk5EaWFPWkdvTlFieV9Ja2R2RXpKdkxrMXR1VGlQdmJqckdtWmFZRGZ1UlhGanQ2SFF0YUcxSkZGeDNHNFdVamhiQzhDaC1iWXNycWpJWVpBLUtlR0JzMW50eXU1dw?oc=5",
-          "publishedAt": "2026-10-16T15:31:10.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 42,
-        "momentum": 6,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 16,
-          "p24": 22,
-          "p72": 44,
-          "drivers": [
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
       "id": "live-1vq7bmk",
       "headline": "Vodafone Idea launches family prepaid plans to boost subscriber stickiness",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -3400,13 +3459,13 @@
       "entityIds": [
         "novelis"
       ],
-      "publishedAt": "2026-10-10T06:36:16.000Z",
-      "updatedAt": "2026-10-10T06:36:16.000Z",
+      "publishedAt": "2026-10-09T07:00:00.000Z",
+      "updatedAt": "2026-10-09T07:00:00.000Z",
       "sources": [
         {
           "name": "AL Circle",
           "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNWG96MWlTdHVaSkFIN3VRU0hPNUpNWXAzb3RhS2hzTXh3ZF9mNHdZWjMwZDdCSGJMOE9BdHQza25ydHQ1ZEZsOXdueEJpell1eS1DVkRiZmNibHdJUUdCYnlMWHRNbHBocWUxcWFhOW5COHFIbW5mRWVzai1kMHNBU2wtQ3VYSGxiZmJ5MjN6U3RCcUxpRVAxZG1OSHJNeEhJUU1XVHJwT3NJYmxzRFJycHlfVGJXTF82VjR3aV9udTA3RmhYMHZYSnRDaXEtcFcwdXNDZkJOTk9iaUVCc1FLYVg2OEJfV005RnVSLVFBeHhGOGpDZHBvNUJB?oc=5",
-          "publishedAt": "2026-10-10T06:36:16.000Z",
+          "publishedAt": "2026-10-09T07:00:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -3638,6 +3697,63 @@
       "live": true
     },
     {
+      "id": "live-14m5ps6",
+      "headline": "Daily Brief India: Hindalco Industries, Jio Platforms Ltd, Zetwerk Manufacturing Businesses, Amwill Health Care, Hannah Joseph Hospital, Sahajanand Medical Technologies, HD Fire Protect, SP Refractories and more",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The development may create operational or reputation exposure; facts and response posture should be reviewed quickly.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Reputation",
+      "entityIds": [
+        "hindalco"
+      ],
+      "publishedAt": "2026-10-13T02:01:06.000Z",
+      "updatedAt": "2026-10-13T02:01:06.000Z",
+      "sources": [
+        {
+          "name": "Smartkarma",
+          "url": "https://news.google.com/rss/articles/CBMi2gJBVV95cUxPckVpcXBEWnZZb0NtNGI5THJ6QTRIVGVkdnREYW52TnZKNE9QR2NGbTVaZ0ZwY0gtR3FFOHJMQkhkOVBlVWxFVXBiX21BSGFIZ2hwTVdidDU3TDFBQjFJNEUwOENuWjZsd1l6Nl82VmJnNTF1QTJGMUpuT2FDaXZWM051OXJaNzIzVVNDcndIUTVVTFdiTF9RVl9weXJ1TnNXX2I3b3dObVpBVDg0UDFEajc3amxwVllvNE9UaTgyOTR6MEh6emF6MTZHZl9VNGlsVmNiM0J1UHk4VGRxTEk4TFYyUk1vbjhzc1RTTEVuTFlNU2lUYVMwUUYzOTVtXzBtT2Mwek03OTdocVJvQk9OTmpabUlTbTNZZzhUNVdGU3pEMnRxNnR2WkZONjNYQjZWLUpPTGt3dV9oeVpvMUhzN01raEF5VnQ4ZFpVX0dQb01aMzh2czI4S1dR?oc=5",
+          "publishedAt": "2026-10-13T02:01:06.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 62,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": -8,
+        "mediaTone": -8,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": -2,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 19,
+          "p24": 25,
+          "p72": 46,
+          "drivers": [
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-tfhqke",
       "headline": "No sides on this: Novelis layoffs raise stakes for HR, labour representatives | Human Resources Director",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Novelis Inc. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -3697,7 +3813,7 @@
     {
       "id": "live-1mp8h0h",
       "headline": "Vodafone Idea Share: रिचार्च महंगा होने की खबर से दौड़ा वोडाफोन आइडिया शेयर, 4 फीसदी उछला",
-      "summary": "Published coverage across 8 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "summary": "Published coverage across 7 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
       "bucket": "watch",
       "status": "strong",
@@ -3763,15 +3879,6 @@
           "official": false
         },
         {
-          "name": "Digit Hindi",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQQUxuS0tNUjlqY3BEZGlYQlVYempTLTlqTGQ5bVlFVDY1WmZDWnhsRElKTXJuSWNodjVseWRQV0JSTFBCWU00YXZmVHJRdkYxN1A4MktVS2FSaC1CYmFGdXR4b2VjX05raWIwa3pnQ0ZZVUZoTDdwLW5ITzhNbUVxZ1hOUEZ6c2FRN3M4MDJHMzN1UVlVOUcxN2NCZ1JfWmllYlZodE54RFR2Vml6LXlhMUhBMlp5R1FYUVkyRUtNMGJ2dG95VVVB0gHOAUFVX3lxTE1kSlUyRndwOHFCS2tvZE1SdF9SeWQ1RFg0d3VIU1c4TU1GTXYwYjJWN0t6d0h1bjB4RUVITHVIQ0lEZEE1akI5TEs2bnZCeTdpNXBmUGl5T2M4NHQ1aHVVVzNWMWxIR2lmWVFyVUtPQU9pWjlCVV8zc21aUjdjUzRQbld0UjUzVmlBUEtDbWd6M09Dclg2cjhoM0dGWmNZTDlxdG5DT3Z1c2RSTXdxb0ZpZFZKZjNQbW1jXzUxY1VXVWpEOFRKWW04WlNWZktR?oc=5",
-          "publishedAt": "2026-10-08T00:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-hi",
-          "channel": "news",
-          "official": false
-        },
-        {
           "name": "Navbharat Times",
           "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxQX2dKTmtTU0lHTFBQQ0xfZjRDUUJqMUMxSFJ6bVpoMmR3aEE5NHdVWEh5TWc3TVRIMGdVNFNBWUlVWWs5bzM2ZHFwZF9YaEpGRzY2Z3FyQ2hrX19DR2JScHJIal9scUdqNmk5a01GY2hocGtHTW9YRnFYZjRCeU94RGwyUEM2dGVvYWZOSy13NlZFVjU5dXFscExQaW1hT19VdkJnWkdVNU1hcGpGLXM1M0N5YVhiLXNqLVYzRldxMzdjU1ZSZ3BXR3J2RTlXUWFYMnNUVWxoYjZHVk41eWQxeWlhOUl4TmpncDhCMWRXc3FmQQ?oc=5",
           "publishedAt": "2026-09-29T07:00:00.000Z",
@@ -3808,12 +3915,12 @@
           "official": false
         }
       ],
-      "sourceCount": 8,
+      "sourceCount": 7,
       "intelligence": {
         "materiality": 60,
         "certainty": 76,
-        "momentum": 59,
-        "trendChange": 100,
+        "momentum": 53,
+        "trendChange": -100,
         "sentiment": 0,
         "mediaTone": 0,
         "publicSentiment": {
@@ -3826,9 +3933,9 @@
         "reputationImpact": 2,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 59,
-          "p24": 74,
-          "p72": 81,
+          "p6": 55,
+          "p24": 69,
+          "p72": 78,
           "drivers": [
             "broad independent-source pickup"
           ],
@@ -3842,9 +3949,9 @@
       "live": true
     },
     {
-      "id": "live-xh4yof",
-      "headline": "Vodafone Idea appoints Manoj Murali as COO, effective October 19",
-      "summary": "Published coverage across 7 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "id": "live-w0uhv3",
+      "headline": "Vodafone Idea appoints former Ola Electric business chief Manoj Murali as COO",
+      "summary": "Published coverage across 8 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
       "bucket": "watch",
       "status": "strong",
@@ -3853,11 +3960,20 @@
         "vi"
       ],
       "publishedAt": "2026-10-16T12:31:00.000Z",
-      "updatedAt": "2026-10-16T19:05:51.000Z",
+      "updatedAt": "2026-10-17T04:42:24.000Z",
       "sources": [
         {
+          "name": "CNBC TV18",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPcWNYQW9iRmNIa3JlN3VfblBydWpjYXpKSnk2THFZZUt5R0Q1cDAydE5feWwyclpYUFFKSFZraGU3MHJKc1ZhTnBsYzF5RjdCWW10UWNsYmQwS2NVV2ZVbVctY2tHR2xFcG9rQkJSS2N6QXB3YWtWYi1CVE5nY0k3dzBoby1wRFhiUnAxUUpSVm9Jdm5fN0V3eFN2U0d0R0tzQ0xlVXpncnN6ODF6cjZZeGQyVllNY01yUmVJdnpQSkJWakhBNk82MkpHTVVMTEHSAdQBQVVfeXFMTk9BRHBLUjhsNHA0SDhRaERfRHdrSzJ0NlJKajcxcUZweDlTRDdHYVE0cHFZQ012RnQ5OWo3SXF6NnlHY0tWVkZ4a2Y1Y0p2QXFXRElkaGZjdnFpY1pDN21WSEM3UG9KSlpjUTBXNkFHRWFaOXI1YlRuUkRGR2l6YmZnRnFjTXJ5M3M1UG9nVWhuQ1NOaFJYTlVaeXpsLTRacF9qOGwxWGhzUmVkV0RUNzlvdTNqVjdiM2ViVGtMclg4OWhMYjI3NnFHMV95Ni04bDhiRTM?oc=5",
+          "publishedAt": "2026-10-16T18:13:40.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
           "name": "Fortune India",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQazRSLXpCdFlrWEJpRG1lR0h2MTNoMjdHa0hGNlJwbDZOTVpJdmhGNnBGc1A1bDNmZ1RVLTVLM0ZKR1otUzdVR1VEOUZ0bGlhaUphR0NWU2lTY3J4N3d3ZExkZVJYc3pSTWYxaHNlRXFEMENYeU4yazdQNFRhMTBjbmhUaHd5dVNsVGdLM21QLVpQVGlwQ0sxRENsLWJYaUxYV1JTeEI5a0pwWWt6bDRCd01GYkhYR1dyckkwLUMxaF_SAcABQVVfeXFMUGs0Ui16QnRZa1hCaURtZUdIdjEzaDI3R2tIRjZScGw2Tk1aSXZoRjZwRnNQNWwzZmdUVS01SzNGSkdaLVM3VUdVRDlGdGxpYWlKYUdDVlNpU2NyeDd3d2RMZGVSWHN6Uk1mMWhzZUVxRDBDWHlOMms3UDRUYTEwY25oVGh3eXVTbFRnSzNtUC1aUFRpcENLMURDbC1iWGlMWFdSU3hCOWtKcFlremw0QndNRmJIWEdXcnJJMC1DMWhf?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNZ05VUXZZODNEMU0xZXVKd3g1b09pN2ZWYW1pNlF5Vk5WY01odFZPRHV4ajVfS2NBRjlqbU11SjdjN252bTNDQUVsbUlOU0dzU0N0el9SYmhoQkpLLWpJc2RoRVpsWGVqeFU0MXhWR2xDMHBnWWhmVXZnR283ZTlLSDVYRm5pT3ZWWE9WSUxZS0VONU1FR1VjSkdlV3hHYTFabVJsTVVRMVA5b0FxaDNjUUVya9IBwAFBVV95cUxQazRSLXpCdFlrWEJpRG1lR0h2MTNoMjdHa0hGNlJwbDZOTVpJdmhGNnBGc1A1bDNmZ1RVLTVLM0ZKR1otUzdVR1VEOUZ0bGlhaUphR0NWU2lTY3J4N3d3ZExkZVJYc3pSTWYxaHNlRXFEMENYeU4yazdQNFRhMTBjbmhUaHd5dVNsVGdLM21QLVpQVGlwQ0sxRENsLWJYaUxYV1JTeEI5a0pwWWt6bDRCd01GYkhYR1dyckkwLUMxaF8?oc=5",
           "publishedAt": "2026-10-16T15:00:57.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
@@ -3866,7 +3982,7 @@
         },
         {
           "name": "Moneycontrol.com",
-          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNSGNoLS1YMmRyUG5XOVJ1cWZpS0x4STNhdHFHd0pYZDRDNEMydXV3Mk9tT2Q4d19JV2xUU1c5NXd4b1NCcFZHQzRHX3ZSOVlGUzlqOVRQdTc2eFpPXzh5WjZMTHc1czVialMtOFcwblpNeW5tZjlLQVFNcUxtZHU5RHJkZFhfNHRWa0xSSjFxTzJXMEFTQ1RSMnpKY0x4MmVVVTdxWlNBQ0F5T2tqZEc2QW0zVTFzWWhjMHBMdGpqcVJwVFFPYndSVkJwUWNveUlYelFEb9IB1AFBVV95cUxNSGNoLS1YMmRyUG5XOVJ1cWZpS0x4STNhdHFHd0pYZDRDNEMydXV3Mk9tT2Q4d19JV2xUU1c5NXd4b1NCcFZHQzRHX3ZSOVlGUzlqOVRQdTc2eFpPXzh5WjZMTHc1czVialMtOFcwblpNeW5tZjlLQVFNcUxtZHU5RHJkZFhfNHRWa0xSSjFxTzJXMEFTQ1RSMnpKY0x4MmVVVTdxWlNBQ0F5T2tqZEc2QW0zVTFzWWhjMHBMdGpqcVJwVFFPYndSVkJwUWNveUlYelFEbw?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQVWh3akRCTVdxOWRGTmpfbHptT1FJcERzNDVjRU1tTmNDbDBFLUlFRnBPLVpuckE5TVVKd1lhZlhKRzBWTGMxeU83Yjd4Wm5xTVZXTXE1NlJhdVFHLUpUYjZaWHI5SzVtQ0M5bUJvVkRiMVcybm9oSFRXbGpQdXhLMmtHaElfcmNVNWVMS2hSUnppYVA3M0JwYUgyb3BHbjluQ2NoM0lPcldKRHczelktdTJmbnhRUkdQSndFWGxTZHQ4emw4ZmFvUGFXM29ZeVnSAdQBQVVfeXFMTUhjaC0tWDJkclBuVzlSdXFmaUtMeEkzYXRxR3dKWGQ0QzRDMnV1dzJPbU9kOHdfSVdsVFNXOTV3eG9TQnBWR0M0R192UjlZRlM5ajlUUHU3NnhaT184eVo2TEx3NXM1YmpTLThXMG5aTXlubWY5S0FRTXFMbWR1OURyZGRYXzR0VmtMUkoxcU8yVzBBU0NUUjJ6SmNMeDJlVVU3cVpTQUNBeU9ramRHNkFtM1Uxc1loYzBwTHRqanFScFRRT2J3UlZCcFFjb3lJWHpRRG8?oc=5",
           "publishedAt": "2026-10-16T15:00:14.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
@@ -3884,7 +4000,7 @@
         },
         {
           "name": "ET Telecom",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNSHJkT0lVcUJsQ2FwS0NRYmhKQVBobUswRHFGOHIzaE52ejdtclBrTzlJTGVkM0hzMklRMEVjMkI2YmhnZXF1ZGZCRWdEc0lBakFpWmx4aFM5OHk5NWI4aG40MkZjbnZsazlRSWEyZFd4bjNoeUVONFNVWFIzQktTeDR3X3BaOVh0M3NGbW5ZN2pwLXFyeHhCV0xzcnhZNUdJemlFSUUxVkI5eXZ0VEstZ3lIQlFtUdIBtgFBVV95cUxNSHJkT0lVcUJsQ2FwS0NRYmhKQVBobUswRHFGOHIzaE52ejdtclBrTzlJTGVkM0hzMklRMEVjMkI2YmhnZXF1ZGZCRWdEc0lBakFpWmx4aFM5OHk5NWI4aG40MkZjbnZsazlRSWEyZFd4bjNoeUVONFNVWFIzQktTeDR3X3BaOVh0M3NGbW5ZN2pwLXFyeHhCV0xzcnhZNUdJemlFSUUxVkI5eXZ0VEstZ3lIQlFtUQ?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQVmlUaTV1YU5VQmI0cEVFa0J3bzhIbGM0Mmh6OWkxMnBOWV80c2NPSnJHbWVkWjEzU3dWV01pU1ZKeVY2WWdxOHNDWW51TlgxUVBlckt5YU0wd05pcFpDVnMxczNDNjBIYkhqX01aZHUxbWZUSEd5Wng5UHJNMkVWeDhiVjBWR240bFBfR3VjNVRTYWlqaXpMRE9WUXdLNlU2ZjFKWEFneGlmeFdEcjVJadIBtgFBVV95cUxNSHJkT0lVcUJsQ2FwS0NRYmhKQVBobUswRHFGOHIzaE52ejdtclBrTzlJTGVkM0hzMklRMEVjMkI2YmhnZXF1ZGZCRWdEc0lBakFpWmx4aFM5OHk5NWI4aG40MkZjbnZsazlRSWEyZFd4bjNoeUVONFNVWFIzQktTeDR3X3BaOVh0M3NGbW5ZN2pwLXFyeHhCV0xzcnhZNUdJemlFSUUxVkI5eXZ0VEstZ3lIQlFtUQ?oc=5",
           "publishedAt": "2026-10-16T13:36:44.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
@@ -3892,10 +4008,10 @@
           "official": false
         },
         {
-          "name": "BusinessLine",
-          "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQVUZveHdRNmo3MEZMQUFKUHhJZWluWGdYM3BNMFNocmU0R3lWU0l4TmNhallCdU9FODJiZmVjdUFBcGxtbGlmZzl0UDhIRERuT09LZnhSNWd3RUJPbE1ybzdkTVNMdFVaUV93MkF1c3RfbTJYSUlMOE5yUVJacDN6NldjWFdZOWNwaloybjluRkhmaTBsbW1lT2ZMSk45OWZIaUhONEJCOG5UV1dodjRrMWJVeUJNMkNoc2hIYXdPYldnamRtOWpQN29QNGpGSkFCVFdMd2JITTY0WERY0gHcAUFVX3lxTFBVRm94d1E2ajcwRkxBQUpQeEllaW5YZ1gzcE0wU2hyZTRHeVZTSXhOY2FqWUJ1T0U4MmJmZWN1QUFwbG1saWZnOXRQOEhERG5PT0tmeFI1Z3dFQk9sTXJvN2RNU0x0VVpRX3cyQXVzdF9tMlhJSUw4TnJRUlpwM3o2V2NYV1k5Y3BqWjJuOW5GSGZpMGxtbWVPZkxKTjk5ZkhpSE40QkI4blRXV2h2NGsxYlV5Qk0yQ2hzaEhhd09iV2dqZG05alA3b1A0akZKQUJUV0x3YkhNNjRYRFg?oc=5",
-          "publishedAt": "2026-10-16T13:28:23.000Z",
-          "tier": 1,
+          "name": "scanx.trade",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOeEdib3pjSjFwc3MwTFI5eUZlN2t4MWZKZ3JDdlM4cXc5cm1NeXI0cmJZYnRlNUVxQUpGQVlQZmxlRVRFMG9mQnExS1RXS2RtTmRhSExhUVptYVE0QWppMUtSclNWdkVYM0tObkZ2ek1HQ3FnOGxKMmN3b2tpNGNldUFTNUF2cGZjMHNpdWYtd2lDNjh3eF9JbjVQM2Z0bm9wOXV2UDJsTDBPek5UdXBmV3dB?oc=5",
+          "publishedAt": "2026-10-17T04:42:24.000Z",
+          "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
@@ -3919,12 +4035,12 @@
           "official": false
         }
       ],
-      "sourceCount": 7,
+      "sourceCount": 8,
       "intelligence": {
         "materiality": 60,
         "certainty": 76,
-        "momentum": 42,
-        "trendChange": 0,
+        "momentum": 52,
+        "trendChange": -100,
         "sentiment": 0,
         "mediaTone": 0,
         "publicSentiment": {
@@ -3937,13 +4053,13 @@
         "reputationImpact": 2,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 48,
-          "p24": 62,
-          "p72": 73,
+          "p6": 56,
+          "p24": 70,
+          "p72": 78,
           "drivers": [
             "broad independent-source pickup"
           ],
-          "posture": "WATCH"
+          "posture": "PREPARE"
         }
       },
       "flags": [
@@ -4008,121 +4124,6 @@
         "headline-derived"
       ],
       "live": true
-    },
-    {
-      "id": "live-kx6zfi",
-      "headline": "76% Rally Ahead For Aditya Birla Real Estate? Motilal Oswal Sees Large Project Wins Driving Growth",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Financial",
-      "entityIds": [
-        "abg",
-        "ab-real-estate"
-      ],
-      "publishedAt": "2026-10-16T06:12:07.000Z",
-      "updatedAt": "2026-10-16T06:12:07.000Z",
-      "sources": [
-        {
-          "name": "NDTV Profit",
-          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPUUlQTUVsRkVMY3hyM0RzTHlYZEdHcDNzSk5tamtUMkVNV2lGUDJhY3NodmNod253XzFEenEybDhROHc1Z0JLeDZ6eW50a2NiQVlDanFQbURQY0E5cUVhQTlwOHUzSFNjZU1jdWRHY3lhR3hUNklQQ0hILVhOUGJzV2NHYkxUT2xhY1VyYXVDdjBSRl9qVFpWMnlSZ0ZrREMtZzVhandwM09vaExjZEtyaFdFNTJhem1FbkxQWTJPdFVNREh0VFBTWl9qQ1RfX19uOXgwSXAtdkVyZ1NrektaaERR?oc=5",
-          "publishedAt": "2026-10-16T06:12:07.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 60,
-        "certainty": 68,
-        "momentum": 6,
-        "trendChange": 0,
-        "sentiment": 28,
-        "mediaTone": 28,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 17,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 18,
-          "p24": 25,
-          "p72": 46,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-14aok0a",
-      "headline": "UltraTech, Ambuja, Shree Cement surge up to 3% on upbeat quarterly results of peer Nuvoco Vistas",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Financial",
-      "entityIds": [
-        "ultratech"
-      ],
-      "publishedAt": "2026-10-15T11:47:00.000Z",
-      "updatedAt": "2026-10-15T11:47:00.000Z",
-      "sources": [
-        {
-          "name": "Moneycontrol.com",
-          "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxNaExmYi1mekxtVDl4dUZtVUpId01XcjNrWTlKUnE1MnRHckR6RWVSOWczdkpRUmtEcWtSWVUyTUJGT0Vfc2gyRzdlNkg3NlFUMUd0bVZsTTBBNG8yVERXREJQZ1UwOGNXY0EwNThDcTBwaE9YSm5wNWNRMU40RHcxalhJWTl6TjdzQXlNMXk4d0FETFcxMXU2T3NhNF9OZXBPdmkwQ2lRbTdhNTBCSVZEUHRXU043czdtQ2h3T0trOUVIeVdsUkYxcGkzR2FTVEpYMGtpcGlYRHUweEVrUnFSNXZHa2d1RUxxcjNfdVh5bWlGckg2OTV3QtIB_gFBVV95cUxQT0tDYUIzQkdvRGlvcFI2cG9vdUNsYWx0RWxrV3FwY3JCdUFWZjRZVnRDMk5CSmVVdkxxRFFKQngyTW9RMjY3VU5Pb0xVVFRrNzdxQzl5dEdacGsxYlBhZVN6T0RSd1RmVE4xRThkVUQ5YTZyWHVpWXZnWG5uNW1Tb0hFRmk4YWlyck1xUnhIU1hDQlZJV0VFbVc4YUxNOTRqUWEybnhxOGZiendzYTh0QTlmM2ozWnV3T3laUHJ4cklXd2hYSUdJSjJGSTRscjNWTTVKQml5d3dzcmxiMjhsNTRuY0w1bmFyUGlUTnhFekxzS1VxT1Y5dmRTZkJodw?oc=5",
-          "publishedAt": "2026-10-15T11:47:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 60,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 6,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 22,
-          "p24": 29,
-          "p72": 49,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
     }
   ],
   "entityUniverse": {
@@ -4142,7 +4143,7 @@
     "stakeholderScope": "Regulators, exchanges, courts, ratings agencies, lenders/JV partners, key sector competitors, industry bodies and material government ministries; stakeholders are matched only with ABG context."
   },
   "meta": {
-    "scannedAt": "2026-10-18T00:00:47.455Z",
+    "scannedAt": "2026-10-18T04:23:41.247Z",
     "deliveryMode": "governed-snapshot",
     "providers": [
       "GDELT",
@@ -4208,7 +4209,7 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-10-17T23:59:06.807Z"
+        "checkedAt": "2026-10-18T04:21:26.791Z"
       },
       {
         "kind": "registry-audit",
@@ -4261,11 +4262,11 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-10-17T23:59:06.835Z"
+        "checkedAt": "2026-10-18T04:21:26.804Z"
       }
     ],
     "registryReconciled": true,
-    "successfulQueries": 33,
+    "successfulQueries": 34,
     "sourceChecks": [
       {
         "name": "group-family:gdelt",
@@ -4274,14 +4275,14 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "group-family:IN-en",
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 52,
+        "itemCount": 51,
         "registryAudit": null,
         "error": ""
       },
@@ -4297,11 +4298,11 @@
       {
         "name": "group-family:reddit",
         "provider": "Open public conversation",
-        "ok": false,
-        "status": "failed",
-        "itemCount": 0,
+        "ok": true,
+        "status": "healthy",
+        "itemCount": 22,
         "registryAudit": null,
-        "error": "Reddit RSS 429"
+        "error": ""
       },
       {
         "name": "group-leadership:gdelt",
@@ -4310,7 +4311,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "group-leadership:IN-en",
@@ -4337,7 +4338,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "cement-building:IN-en",
@@ -4353,7 +4354,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 26,
+        "itemCount": 59,
         "registryAudit": null,
         "error": ""
       },
@@ -4373,7 +4374,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "metals-aluminium:IN-en",
@@ -4409,7 +4410,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "financial-services:IN-en",
@@ -4436,7 +4437,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "telecom:IN-en",
@@ -4452,7 +4453,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 63,
+        "itemCount": 60,
         "registryAudit": null,
         "error": ""
       },
@@ -4472,7 +4473,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "fashion-lifestyle:IN-en",
@@ -4499,7 +4500,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "fibres-textiles:IN-en",
@@ -4535,7 +4536,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "chemicals-carbon-mining:IN-en",
@@ -4571,7 +4572,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "new-growth:IN-en",
@@ -4598,7 +4599,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "sports-rcb:IN-en",
@@ -4634,7 +4635,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "regulatory-reputation:IN-en",
@@ -4661,7 +4662,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "leadership-governance-advisors:IN-en",
@@ -4688,14 +4689,14 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "name": "leadership-corporate-functions:IN-en",
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 17,
+        "itemCount": 18,
         "registryAudit": null,
         "error": ""
       },
@@ -4776,7 +4777,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-10-17T23:59:06.807Z"
+          "checkedAt": "2026-10-18T04:21:26.791Z"
         },
         "error": ""
       },
@@ -4837,7 +4838,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-10-17T23:59:06.835Z"
+          "checkedAt": "2026-10-18T04:21:26.804Z"
         },
         "error": ""
       },
@@ -4959,19 +4960,21 @@
         "error": ""
       }
     ],
-    "rawArticleCount": 1130,
-    "freshArticleCount": 622,
-    "articleCount": 466,
-    "rejectedArticleCount": 156,
+    "rawArticleCount": 1182,
+    "freshArticleCount": 695,
+    "articleCount": 481,
+    "rejectedArticleCount": 211,
     "rejectionReasons": {
-      "no_abg_entity": 135,
-      "routine_market_advice": 17,
-      "price_movement_without_event": 4
+      "no_abg_entity": 168,
+      "public_question": 7,
+      "weak_public_context": 11,
+      "routine_market_advice": 19,
+      "price_movement_without_event": 6
     },
     "eventCount": 60,
-    "publicConversationItems": 0,
+    "publicConversationItems": 3,
     "publicConversationChecks": 14,
-    "publicConversationChecksSucceeded": 0,
+    "publicConversationChecksSucceeded": 1,
     "sentimentCoverage": {
       "media": "Google News, GDELT and official published-source language",
       "openPublic": "Accessible Reddit public-search RSS where available; samples inform sentiment only and cannot create news events.",
@@ -4981,17 +4984,12 @@
       {
         "provider": "GDELT",
         "query": "group-family:gdelt",
-        "error": "GDELT 429"
-      },
-      {
-        "provider": "Open public conversation",
-        "query": "group-family:reddit",
-        "error": "Reddit RSS 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "GDELT",
         "query": "group-leadership:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5001,7 +4999,7 @@
       {
         "provider": "GDELT",
         "query": "cement-building:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5011,7 +5009,7 @@
       {
         "provider": "GDELT",
         "query": "metals-aluminium:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5021,7 +5019,7 @@
       {
         "provider": "GDELT",
         "query": "financial-services:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5031,7 +5029,7 @@
       {
         "provider": "GDELT",
         "query": "telecom:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5041,7 +5039,7 @@
       {
         "provider": "GDELT",
         "query": "fashion-lifestyle:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5051,7 +5049,7 @@
       {
         "provider": "GDELT",
         "query": "fibres-textiles:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5061,7 +5059,7 @@
       {
         "provider": "GDELT",
         "query": "chemicals-carbon-mining:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5071,7 +5069,7 @@
       {
         "provider": "GDELT",
         "query": "new-growth:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5081,7 +5079,7 @@
       {
         "provider": "GDELT",
         "query": "sports-rcb:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5091,7 +5089,7 @@
       {
         "provider": "GDELT",
         "query": "regulatory-reputation:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5101,7 +5099,7 @@
       {
         "provider": "GDELT",
         "query": "leadership-governance-advisors:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5111,7 +5109,7 @@
       {
         "provider": "GDELT",
         "query": "leadership-corporate-functions:gdelt",
-        "error": "GDELT 429"
+        "error": "Source check exceeded 9000ms"
       },
       {
         "provider": "Open public conversation",
@@ -5139,15 +5137,15 @@
         "error": "essel-mining-news: official 403"
       }
     ],
-    "windowStart": "2026-09-17T23:59:05.491Z",
-    "windowEnd": "2026-10-17T23:59:05.491Z",
-    "requestedWindowStart": "2026-09-17T23:59:05.491Z",
+    "windowStart": "2026-09-18T04:21:24.375Z",
+    "windowEnd": "2026-10-18T04:21:24.375Z",
+    "requestedWindowStart": "2026-09-18T04:21:24.375Z",
     "windowCapped": false,
-    "snapshotGeneratedAt": "2026-10-17T23:59:05.491Z",
-    "snapshotExpiresAt": "2026-10-18T01:29:05.491Z",
-    "snapshotSuccessRatio": 0.5077,
+    "snapshotGeneratedAt": "2026-10-18T04:21:24.375Z",
+    "snapshotExpiresAt": "2026-10-18T05:51:24.375Z",
+    "snapshotSuccessRatio": 0.5231,
     "snapshotMinimumSuccessRatio": 0.2,
     "sourceCommit": "9010adc06f361ad55adb3da21f95519b3a98febb",
-    "workflowRunId": "39081054431"
+    "workflowRunId": "39096792610"
   }
 }
