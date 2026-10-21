@@ -1,24 +1,24 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-21T13:11:25.660Z",
-  "expiresAt": "2026-10-21T14:41:25.660Z",
+  "generatedAt": "2026-10-21T18:14:25.764Z",
+  "expiresAt": "2026-10-21T19:44:25.764Z",
   "source": {
     "repository": "NinjaRK/abg-pulse",
     "commitSha": "9010adc06f361ad55adb3da21f95519b3a98febb",
     "workflow": "Refresh governed ABG Pulse snapshot",
-    "workflowRunId": "39605762049",
+    "workflowRunId": "39650903899",
     "workflowRunAttempt": "1"
   },
   "window": {
-    "start": "2026-09-21T13:11:25.660Z",
-    "end": "2026-10-21T13:11:25.660Z",
+    "start": "2026-09-21T18:14:25.764Z",
+    "end": "2026-10-21T18:14:25.764Z",
     "lookbackDays": 30
   },
   "events": [
     {
       "id": "live-1asu4dq",
       "headline": "Aditya Birla Sun Life AMC Q2FY27 profit falls 8.4% to ₹221 crore",
-      "summary": "Published coverage across 3 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "summary": "Published coverage across 5 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "Coverage is accelerating across independent sources and may become more consequential even if the underlying facts remain unchanged.",
       "bucket": "must",
       "status": "strong",
@@ -28,14 +28,23 @@
         "absl-amc",
         "sun-life"
       ],
-      "publishedAt": "2026-10-21T11:24:30.000Z",
-      "updatedAt": "2026-10-21T12:11:31.000Z",
+      "publishedAt": "2026-10-13T14:07:00.000Z",
+      "updatedAt": "2026-10-21T13:33:32.000Z",
       "sources": [
         {
           "name": "Business Standard",
           "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQVEJNMGlSazNlSzZLb2JsTlNtS3h2ZWZsWGVZSVpDa2pLbkF3ZUljMjNYQzhiUE44ZlE3OXktUWppU0ZlU2w3V19DR2xQUGxUOFFsZUhweEJ0YV9wRHhsQUs3d2g3eWYxZENEWHRtZ1pZRGdUcktRVl9hT0JZRUFJMnRzQjRWaEwwZS1ialhRdzdQdnVjN0I0czlLNG5uQzVTY25hbHhsWmJ5aEFDOXVHbWNTQkJFOFdjQTVnbUt0UHBFSkpzaW92RUN4TVVKeVR4VWlfTS1IbWNuVlN60gHiAUFVX3lxTFBUQVJHbWJOQ3RLWkhpcnFsY2ZoVngyYVlQdFR5U1ZtMVpabHhBS1N3QUZKQkx5OVNwNzhpejRwUjBwcGRHQlhiRTIwN0Foamh0bWRvOTUyeWZMeEN1R3M0eEZuTjh2N2s5RXRIbXJXT2ktdFBOUVpfSmo4cXdhLW9nRkRMT3FMN1VjdXBWMHNORUVoZUxwUXVfcXNfX3FBY0I4Q2ZYaEFCX25DUFVsOXVoaGtoSlVmWVRtYjRBMDJPMVJqaHEwNHNGN1hrYXpzZ0ZxMzRxQ0xTeFFlX0Voek1lSWc?oc=5",
           "publishedAt": "2026-10-21T12:11:31.000Z",
           "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOOVhxTHpxcDlsY05OOUFjN19YbC13cnE2N3BPTGR5Mlpid0JNVVczdVQyelNYQkhjU09JNHZqT2xKUDlYVFNuWGFnLVdvVERYMG93LU5nMXFYVXJZX2FpclFGckk4endoMGxnWnlpRHpNcUtMVlpLbEhXcDRNNUcxUFBmMEFOcmQ3d3BpVVdyR1djczNSR1BsUjBtX196YzhFNWtJUVdGUmU0d1ByMFVHekJaU2xtX3NvM0dyZ0t3OF9lTXc4eGc?oc=5",
+          "publishedAt": "2026-10-21T13:33:32.000Z",
+          "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
@@ -50,23 +59,41 @@
           "official": false
         },
         {
-          "name": "BW Businessworld",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNY2JtamtEMExVd1RsYjd6ZjhyeVI0LXlPWGp4cUNrSXd1YUdBVVU3UTdydEh1UUQ5M1JQT3prLWxISG1BWWtiYjJkSE01aExmRGlvcmJsODZJRTV4NE9rR2VRVDh6T3ZJNmhlcTJkYkxmaTR1RDdWV3BIVG9YRDRFZG1QeU05dWFfcjN0Z0loOHZqZ2QzaER1MElEVzBDQ1YtaG1USTZSNl9nTzRibHd4Mk0wVmQ?oc=5",
-          "publishedAt": "2026-10-21T11:24:30.000Z",
+          "name": "Investing.com India",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNbHhoSGR4NGJzYmpTQlNrVk1aU3A1akFBNUU3TzZKRUs1MjhWbS1BMXAzWEtTLXA2Q3FDc2pvNmxPUlJpeTQ1NEdENnpyXzFBeUxhMV80bEZOWS12MGpEcnVQbnhjNGhfWEdMODc4cWQ4cWItVkROMXdVcmYtcXZ2WWVIbVFSNXQ5MnJ4N3FnOVBXVk5IZWpQV0RHVG9XeTAxMWRaal9LeTNmckZ1YlhHNmVPb3RxcmFWbmR5eHVuNl9nSy1mc2hJdFVzazk?oc=5",
+          "publishedAt": "2026-10-21T11:41:24.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPNmxUZ3lPU1BBQ3l5NlptOUhQZUZLWUR5enh4NkxjTHpWb0dUM2Q2c0lmblVIeEo1ZENDMjcyZjNxNjJoNG5wYWI3Qkk1WEZjZVRGOWNXVUhHbGxCNm8zaGw2R3hmSmFpc1NaUUplNlN6TVRZaVVCSmpxQlN3bUZaV2NDYnkwTnZyZzNLQ0F0dmV5TlJZU0lUYXRGRnZTUThYajRrVHlZcGZJSkRYT3VseVBySXZSMTFaUVVKS0pwWi1CQQ?oc=5",
+          "publishedAt": "2026-10-21T10:27:33.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "scanx.trade",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNY2c1a0tYVnZzWnBCbThhdUladGVUOTRRZVRKLUUyUW1seDI5VUE0ZVdVN2xzdFJoSW0zWlpMQk14clBiUmZKdWtzSXo3ZzJKSkVGVFdjSUdpUkMya0lXbXZWeGZ0LWpvSmQ2RVY4NHVUd2h1RFNVcndyYXZnR1BDOEk3Vlg5OThhWHdFWnVPTW9SS0l5Y05FQjNJUmtWN0k1Nmk3RTRudDFwRThhd19sV2ZsTlF5QQ?oc=5",
+          "publishedAt": "2026-10-13T14:07:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         }
       ],
-      "sourceCount": 3,
+      "sourceCount": 5,
       "intelligence": {
         "materiality": 100,
-        "certainty": 72,
-        "momentum": 73,
+        "certainty": 76,
+        "momentum": 71,
         "trendChange": 100,
-        "sentiment": -4,
-        "mediaTone": -4,
+        "sentiment": 0,
+        "mediaTone": 0,
         "publicSentiment": {
           "score": null,
           "sampleSize": 0,
@@ -74,14 +101,15 @@
           "confidence": "unavailable",
           "coverage": "No open-public conversation samples in this event."
         },
-        "reputationImpact": 7,
+        "reputationImpact": 9,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 73,
-          "p24": 91,
-          "p72": 94,
+          "p6": 74,
+          "p24": 93,
+          "p72": 95,
           "drivers": [
             "rapid media acceleration",
+            "broad independent-source pickup",
             "high strategic or reputation consequence"
           ],
           "posture": "ACT NOW"
@@ -140,7 +168,7 @@
       "intelligence": {
         "materiality": 100,
         "certainty": 76,
-        "momentum": 39,
+        "momentum": 29,
         "trendChange": 100,
         "sentiment": 0,
         "mediaTone": 0,
@@ -154,9 +182,9 @@
         "reputationImpact": 9,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 67,
-          "p24": 91,
-          "p72": 94,
+          "p6": 63,
+          "p24": 88,
+          "p72": 91,
           "drivers": [
             "high strategic or reputation consequence",
             "promoter or senior-leadership involvement"
@@ -461,7 +489,7 @@
     {
       "id": "live-1uxrb85",
       "headline": "AI investments must deliver returns, avoid FOMO-driven spending: Kumar Mangalam Birla",
-      "summary": "Published coverage across 3 distinct source domains identifies this development concerning Kumar Mangalam Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "summary": "Published coverage across 4 distinct source domains identifies this development concerning Kumar Mangalam Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "This may alter Kumar Mangalam Birla's capital allocation, ownership or strategic growth trajectory.",
       "bucket": "must",
       "status": "strong",
@@ -469,7 +497,7 @@
       "entityIds": [
         "kmb"
       ],
-      "publishedAt": "2026-10-13T12:48:44.000Z",
+      "publishedAt": "2026-10-13T07:00:00.000Z",
       "updatedAt": "2026-10-15T05:12:56.000Z",
       "sources": [
         {
@@ -492,22 +520,31 @@
         },
         {
           "name": "Rediff",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPeGlaeEZvSmdRSVRvdUx2Rk16R3l2ZGhXbzIzUHRDSS1HbHV2aTBZZmozd0JZQmxkSEVPTmlXUzctNm1Wa0pCb0pHUmFWUTgzTzNtcUgzay1VQ2JHQkp3QUdqRHB4N2dPZzR1S3MwNlFxWi1vRFJJaGpoWldyS3Z1a3lONzJsYWdsUVVOYnF5LWJ0UE1fa1dSN3pENXJ0b0h3T2RWUHBMdVI1emRSTFHSAbMBQVVfeXFMTmoySDBGa093bk9rZlZRQlVadWlpMnotY3FZd3drbWJsQk16RjdvNXZkamtmYkNxazhqNDhyZzR6M2taUnVJWV96ejJmUWlKYVVhYlFLNTh4VlpNS1NEZzNoQno0MWc3T2ZuT2dDOXB2NlRiN05jOXV6bmFoeHdNVW5GSXJNWjh1V1p6N0xpQllXOGI3bmMwUnd1WU1JU3dLQml4V1NvaG8xQlMxdWo1YnA4MkE?oc=5",
+          "publishedAt": "2026-10-13T12:51:57.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Rediff",
           "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOWVhZZnE3bXNZbk5rRXVWeTM5NHlUV3c0TEZzeHN1MUJ1V21tZ29BdmxvdEM0bW4tS1oxVGMzaWNUTEM4M24yRGtBUzY2eTRNT1BkU3M1YUwyR0JjNTFKeWJNOF9fcXBkUUk1dVk1aDVwWWVoR2tCVFZ2Y1dubFFXWjl6UjBGWFdWcVRNMjJQS0FuUWNVZUFqdzlQUy1ZeEJGeUxFbGl4RUdRQl9lYWfSAbABQVVfeXFMTkp3SGxfeWhvSFBkWldra2RxQjZWQ2g5cFlWcUd3VUNtOGJhS0k3OHh0MExiajdtbmx4X0lDRV9BTUNLMHdqd19XRHFkTnhzMzc4VE1PQWphOWYyeXBaTzdhN25SNW1UeTgtMnhiWlR0NVVlamp1dTgteVdSZ2NvNlBwbnBIQ01XbWJJWkNBdUlESUJvTGg4bVdYaElyajd2Z0dFTW9QSVl6TlZ2NUZmWGE?oc=5",
-          "publishedAt": "2026-10-13T12:48:44.000Z",
+          "publishedAt": "2026-10-13T07:00:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         }
       ],
-      "sourceCount": 3,
+      "sourceCount": 4,
       "intelligence": {
         "materiality": 100,
-        "certainty": 72,
-        "momentum": 26,
+        "certainty": 74,
+        "momentum": 32,
         "trendChange": 0,
-        "sentiment": 19,
-        "mediaTone": 19,
+        "sentiment": 18,
+        "mediaTone": 18,
         "publicSentiment": {
           "score": null,
           "sampleSize": 0,
@@ -518,9 +555,9 @@
         "reputationImpact": 19,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 62,
-          "p24": 87,
-          "p72": 91,
+          "p6": 65,
+          "p24": 89,
+          "p72": 92,
           "drivers": [
             "high strategic or reputation consequence",
             "promoter or senior-leadership involvement"
@@ -790,6 +827,90 @@
       "live": true
     },
     {
+      "id": "live-b9jvw1",
+      "headline": "Hindalco calls off AluChem acquisition amid prolonged closing delays",
+      "summary": "Published coverage across 4 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This may alter Hindalco Industries Limited's capital allocation, ownership or strategic growth trajectory.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "M&A",
+      "entityIds": [
+        "hindalco"
+      ],
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "updatedAt": "2026-10-02T07:00:00.000Z",
+      "sources": [
+        {
+          "name": "BusinessLine",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOSDFReGpFMHR4NEtwWVpwRnA0bG9FckZjNVY3T3IyME9laWNodV9PLU5DbXdGazI1SThyRU82cFpzUUI0ZjBOeG5tQUxvTUczN2VENGExdmVmTWxlUU5jRFBMVFJZdGQyd0dFdHVpZGd6MnRZNFU4dE55RmhaOXdvVXBkMFQwdnB0cXMzTW5OLTRaZTJNQVduNHAtWDNPbjBVZ2dZMWZQZkZDbHhCYTF0Zi0ydTlGanBsQ0E5U2Utd2VnUjN6R1ZvaEtXdjhySU9W0gHXAUFVX3lxTFBwcHYtTHZHUWdYVlRrRmZwQk9aZkpkYVUzZ3lOTEZkRkVUVzVDelpodFVlMVUtck9MS3ZGMjE2XzZoYTZ1TnpZTVlJNEhqUllXU3JVSFlqZE1RSVVzY29iYVhrSHFOZDdnSXFGb3dlb1pKMFo4WWc4LWFpb1JHRXRkWHZKdXBfYVAzc1JST2xMREhHbFFnTWE4d1lDNGRVV090UnJNQlNHYXlXd2E5eTVsODMxUmV1M3lCX2pFV3o1WGQ5dEUxUi1VY1NQOVdsbGsyY1hHb0dB?oc=5",
+          "publishedAt": "2026-10-02T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "The Economic Times",
+          "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNbGlWRzVfQ1RkVWpJbmhvczNJa0dUTmhLRmgtUDRYN1BBamZyMmdjbEJYUHVFN1FiRC1SakZmemhPcVpLcmFPR1pKbTRGQkdSWFJiZTgwSURLU2UtOWZXWmIwbndOVWFyUWZ3X3J5cWp1OWJxbTdqVVpHOHVYcklkUkFfN3ZQUW9WVndsYkVOY0tUUzBNZlptX3p1YmY3WFNjMjRsWXo2RTVMSkIwNnY3LU92YUJSRlVXR2VoV0dad3RiT1Awa1o4V1VGX05xbkVjalE2Y1VUNGZJOUFkYlVTb3FsX2FmYU1Yd1J1b2tEUFd0QdIB9wFBVV95cUxNZUx3akFjLWtRVmRVMWpWWXlBUGEyaExmUTJvZVBpTUFXRHhwRzJGaURVS3Z5VEN5cV9YNml2RFJlVzlibEtQM01kZUtxRS1vRVRGTlZLYkM3MUQza05mVXFCbmh3cWNoWGNOeUREWTlXSGtBSS1UcDctLXg5eHBILXplcTlHd05MblNqZUJMOVdGY0ZDaW1yUlVlUTJiWk9TSHlMWnBvTU9DTmxXTkFtNDRiS3NQZDAzMVVPWFM5cmY1WU0zS015N21vRDc1c200REQwMW5WY2xCbVJBelJJMG9qQVo3QlJjS0RWU3NOWXVjN0lNNEFR?oc=5",
+          "publishedAt": "2026-10-02T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Mid-Day",
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQcHZLaTNHNWcxUTllZ0xRc0NScVFQZTFGOEJUTlUzWHZDYlZqMVJZcGlrTF9CTWdZbDdPQ0ZRbng4WHREV2N0OWlXSnk5YVZ5MHFRaC1XTkw5czJMUmtBbURtNDZtaTliU3pXSEdLc3EtUWttdlJiNWJ0VDJfeFFGWWZYTVJIRUVtMC01d0UzTEFfZkM1ZkZCLXRZcVFXT1owekc4R1NQOGYtN1JGN08wdUU0Wl9wMHVQdDBWMkVid0FrdGlOa1V0MkxVeDhocHVpR3FiSWIybmZmd9IB3wFBVV95cUxQQU1mLTlHYmE1ZjNEOU1NbzR5VTIyVzh5ajVIRk5qVTAwQXNSbnhTbEZacDRaVTBKeDhjWjlWLTBvei00ZVpnVF9DN2h2eU9FSGd4OG9vVWowbkEwSEVuZmNVVUk3R0dwbTM5UUY3Y3pVSVdPcjhPZzFFQ2FqVXYtVTdRcEQxbnF0N0dER1NkM2ZyclVFZGNfN0dlR2ZjM3prNzlQZVFyVHg5Tk1ZSVZFM1RsYW1YTnNyNUhTVDkwdUZYUHZETGxtbUVXNGJPSjd5NFozSC1Gbzl6aVhoRmNJ?oc=5",
+          "publishedAt": "2026-10-02T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Rediff MoneyWiz",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQSXM5TGxmY1E1OVVMclFwZndyV1VDcm1rTzZyTFpvQzdyOEdrYmk4TnY2cG1Hb3NGenhjZXY2c05sTDVfLUtpOWtEc3BPYUhZVUJUcXhyTU1JR2lXekp1QTZGMjBlZVFkckZFbmU5ZGFZSzVlVHBXa1cteDVJTGF0TWlhNkxZOTlabkVWODVISjU1UHB0OUJEMk5ETnlrX0x6UnNBbW14ZUs2ZEx1bEHSAbMBQVVfeXFMTzZIM0FYeEJ5bmFlRThuaVdiMmNXVDRBUHJ6aGFSVG5SclJpaDktSmRuTUZaWnhXUFhETk82TU5EemNBTjhLeGJhVFNSTkk1SmhndXRjYkdDSFJoRU8zRTFCNGhkRURjeE5vWjRaNUNoSlItVmJfVDRodVFaYXViaG16c1NMbXNHdVlqYU9CaE0wa1RtdW9aUzZhNEFVWmtCQTExbExMNUtSZFJ0LWlqR0V5SmM?oc=5",
+          "publishedAt": "2026-10-02T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News US-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 4,
+      "intelligence": {
+        "materiality": 84,
+        "certainty": 74,
+        "momentum": 32,
+        "trendChange": 0,
+        "sentiment": -1,
+        "mediaTone": -1,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 51,
+          "p24": 68,
+          "p72": 77,
+          "drivers": [
+            "high strategic or reputation consequence"
+          ],
+          "posture": "PREPARE"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-x2m365",
       "headline": "AI arms race giving way to AI returns race: Aditya Birla Group chairman",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -836,215 +957,6 @@
           "p72": 62,
           "drivers": [
             "high strategic or reputation consequence"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-b9jvw1",
-      "headline": "Hindalco calls off AluChem acquisition amid prolonged closing delays",
-      "summary": "Published coverage across 3 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This may alter Hindalco Industries Limited's capital allocation, ownership or strategic growth trajectory.",
-      "bucket": "must",
-      "status": "strong",
-      "category": "M&A",
-      "entityIds": [
-        "hindalco"
-      ],
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "updatedAt": "2026-10-02T07:00:00.000Z",
-      "sources": [
-        {
-          "name": "BusinessLine",
-          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOSDFReGpFMHR4NEtwWVpwRnA0bG9FckZjNVY3T3IyME9laWNodV9PLU5DbXdGazI1SThyRU82cFpzUUI0ZjBOeG5tQUxvTUczN2VENGExdmVmTWxlUU5jRFBMVFJZdGQyd0dFdHVpZGd6MnRZNFU4dE55RmhaOXdvVXBkMFQwdnB0cXMzTW5OLTRaZTJNQVduNHAtWDNPbjBVZ2dZMWZQZkZDbHhCYTF0Zi0ydTlGanBsQ0E5U2Utd2VnUjN6R1ZvaEtXdjhySU9W0gHXAUFVX3lxTFBwcHYtTHZHUWdYVlRrRmZwQk9aZkpkYVUzZ3lOTEZkRkVUVzVDelpodFVlMVUtck9MS3ZGMjE2XzZoYTZ1TnpZTVlJNEhqUllXU3JVSFlqZE1RSVVzY29iYVhrSHFOZDdnSXFGb3dlb1pKMFo4WWc4LWFpb1JHRXRkWHZKdXBfYVAzc1JST2xMREhHbFFnTWE4d1lDNGRVV090UnJNQlNHYXlXd2E5eTVsODMxUmV1M3lCX2pFV3o1WGQ5dEUxUi1VY1NQOVdsbGsyY1hHb0dB?oc=5",
-          "publishedAt": "2026-10-02T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "The Economic Times",
-          "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNbGlWRzVfQ1RkVWpJbmhvczNJa0dUTmhLRmgtUDRYN1BBamZyMmdjbEJYUHVFN1FiRC1SakZmemhPcVpLcmFPR1pKbTRGQkdSWFJiZTgwSURLU2UtOWZXWmIwbndOVWFyUWZ3X3J5cWp1OWJxbTdqVVpHOHVYcklkUkFfN3ZQUW9WVndsYkVOY0tUUzBNZlptX3p1YmY3WFNjMjRsWXo2RTVMSkIwNnY3LU92YUJSRlVXR2VoV0dad3RiT1Awa1o4V1VGX05xbkVjalE2Y1VUNGZJOUFkYlVTb3FsX2FmYU1Yd1J1b2tEUFd0QdIB9wFBVV95cUxNZUx3akFjLWtRVmRVMWpWWXlBUGEyaExmUTJvZVBpTUFXRHhwRzJGaURVS3Z5VEN5cV9YNml2RFJlVzlibEtQM01kZUtxRS1vRVRGTlZLYkM3MUQza05mVXFCbmh3cWNoWGNOeUREWTlXSGtBSS1UcDctLXg5eHBILXplcTlHd05MblNqZUJMOVdGY0ZDaW1yUlVlUTJiWk9TSHlMWnBvTU9DTmxXTkFtNDRiS3NQZDAzMVVPWFM5cmY1WU0zS015N21vRDc1c200REQwMW5WY2xCbVJBelJJMG9qQVo3QlJjS0RWU3NOWXVjN0lNNEFR?oc=5",
-          "publishedAt": "2026-10-02T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Mid-Day",
-          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQcHZLaTNHNWcxUTllZ0xRc0NScVFQZTFGOEJUTlUzWHZDYlZqMVJZcGlrTF9CTWdZbDdPQ0ZRbng4WHREV2N0OWlXSnk5YVZ5MHFRaC1XTkw5czJMUmtBbURtNDZtaTliU3pXSEdLc3EtUWttdlJiNWJ0VDJfeFFGWWZYTVJIRUVtMC01d0UzTEFfZkM1ZkZCLXRZcVFXT1owekc4R1NQOGYtN1JGN08wdUU0Wl9wMHVQdDBWMkVid0FrdGlOa1V0MkxVeDhocHVpR3FiSWIybmZmd9IB3wFBVV95cUxQQU1mLTlHYmE1ZjNEOU1NbzR5VTIyVzh5ajVIRk5qVTAwQXNSbnhTbEZacDRaVTBKeDhjWjlWLTBvei00ZVpnVF9DN2h2eU9FSGd4OG9vVWowbkEwSEVuZmNVVUk3R0dwbTM5UUY3Y3pVSVdPcjhPZzFFQ2FqVXYtVTdRcEQxbnF0N0dER1NkM2ZyclVFZGNfN0dlR2ZjM3prNzlQZVFyVHg5Tk1ZSVZFM1RsYW1YTnNyNUhTVDkwdUZYUHZETGxtbUVXNGJPSjd5NFozSC1Gbzl6aVhoRmNJ?oc=5",
-          "publishedAt": "2026-10-02T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 3,
-      "intelligence": {
-        "materiality": 81,
-        "certainty": 72,
-        "momentum": 26,
-        "trendChange": 0,
-        "sentiment": -1,
-        "mediaTone": -1,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 5,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 44,
-          "p24": 60,
-          "p72": 71,
-          "drivers": [
-            "high strategic or reputation consequence"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-sdokpu",
-      "headline": "Former Bidhannagar Mayor Sabyasachi Dutta Gets Interim Bail from Calcutta HC in Corruption Case",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Sabyasachi. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Sabyasachi.",
-      "bucket": "must",
-      "status": "developing",
-      "category": "Regulatory",
-      "entityIds": [
-        "sabyasachi"
-      ],
-      "publishedAt": "2026-10-14T11:45:10.000Z",
-      "updatedAt": "2026-10-15T03:55:33.000Z",
-      "sources": [
-        {
-          "name": "Court Book",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOdndCTjFTYnhtUzlnanlMZjRId05wWGVFM082QUV6UTNUMDd1ZlFDYzJtTE5hc3RlbERUNEY2VjZveXdDc3NYUUZHV0NaeUpqSGRrTHVlbWduSTV5YVRiTmowNXM1dUJRamV2NzNwVFE1c01IWFpZNzVsS09PZkZaSkZMOXNPWlJLYTVTcEJoWEw3T1FxdEwxVTV5OW9FcGNsTkF1QWNfN0d0X2dzUFl0ZldwbXh3ZDhuRDM1MHAxLXlNMlNpQy1HOHpB?oc=5",
-          "publishedAt": "2026-10-15T03:55:33.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Live Law",
-          "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNb3lqNHpBY2hoWWxqbkl3ZGxldmFVNjJDOUZER0xIYWRoRmM5NWlZQ2pjM2VibXFpUjMzN1poUWVnYW5FZ0F4VFlNZmFON0EzM2M5S0JxNVNnNS03U1Bqc3lBdzJiaWtsUHRzZHJLXy1adXpmeFBVaVdyaEhVYl9OaFg0UGI5ZHVBb1FVSldpTmMtTlNGVWYyRjBJekVTb0pHelpqcy01cDBxMmpTSU5zUlZ1SVgtd2VQNjlBUWVyQm5nYnlrdDBIekpRc1I2ZHhnZk9BU1BOeHRhTDdRWm93QzRQZWx4YjJycjJaU3dVMVJFSlpWbS1F0gH8AUFVX3lxTFBGa2xWbEhSQlc2N1BmMks5VzQtWW5qUFZDdjF1aGRKVENYTGdYaExHR0V2NVBKaDlXbC04LWl3b3d2MVRVdVE1MWluMk44UnJsTUpmQnR2YUI1cWJRWmk5OEFuc1htRjM4QXhaS2VaV2h0cTVkcHhIZnY2aUJPVlBnNFZQbkRDQ1NuVnZGSnhpd3J3WXBld1B1cDZlVWIyN3hCOFF1aFI5SzZrSnpVUHhwSEx2cVVzbjhnR09ScTAwOHJWNFVPeUtTdllsY1NyRXpfVEREeFkwczcyVlptbFd1bUdzblVLOXlmYjNyalFvN1VpbkVfZjdfRnJvOA?oc=5",
-          "publishedAt": "2026-10-14T11:45:10.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 2,
-      "intelligence": {
-        "materiality": 80,
-        "certainty": 38,
-        "momentum": 20,
-        "trendChange": 0,
-        "sentiment": -8,
-        "mediaTone": -8,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 1,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 32,
-          "p24": 43,
-          "p72": 59,
-          "drivers": [
-            "high strategic or reputation consequence",
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1m630d9",
-      "headline": "Jailed for three months in extortion case, former MLA Sabyasachi Dutta granted interim bail by Calcutta High Court ahead of Durga Puja",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Sabyasachi. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This could affect Sabyasachi's regulatory, legal or financial position and merits verified senior-level awareness.",
-      "bucket": "must",
-      "status": "developing",
-      "category": "Regulatory",
-      "entityIds": [
-        "sabyasachi"
-      ],
-      "publishedAt": "2026-10-13T11:30:00.000Z",
-      "updatedAt": "2026-10-13T11:35:54.000Z",
-      "sources": [
-        {
-          "name": "Hindusthan Samachar English",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOQWJ5REpJQ05QSEg3MFE2cVJKVzE3NWUwNTNZME1BYThCeXhsM0JEc0Z4MDlZLUxCNGlnY1NyVl9yMEQ2T3FKaGZ4eXBKZE1oMlhJLVZYM1hxRWhhLUJtUUUwX1lSWVBrc1ZUMVVfOUM5aDNDcml4WFM1SHg1Mk1jV3hXTXhaTGtINXlCQ29GYzJfYzA?oc=5",
-          "publishedAt": "2026-10-13T11:35:54.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "The Statesman",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNTng0U08yWDVacWdkZVVEdlNncVhwUU8yZUs3TGVGQWRHNTdSelY4b1dIb2xwZ0pqZDgyT3BvV0ktOWVGamVDN3IxbVBYOC1aWlVoN1hLM3Q2Z1BaSjFHSVREMG9wNXhyOU16ZnJFOVpsMWItUDV3azFSNUl1d2VmRG1YUmg3VVdnSWFKSW5nTFpsMjI3WTZEdDJ2YVBzVkFqYl9LcEtzWG45enpkVUc1M2c0dHBKcnN1ZXBhMl9nb1N6UTlrTjFoZFBTUdIB0AFBVV95cUxQa0pyUS1lUm5vR2dGTWdNTjhMTFd6NDE1RU5vaEVERWVnaENydzM2dXpXT3hnNktCWE91bHNlMGRCX0pMQ2UxMzRzVHNxY25TWTNTb2h3cmZTdGxFaVJ5NVVTdTBINWVnQWp5ZFd5OElhZGJCUjdXLWI0VTkzSFc0bnI0c1pEMnVsTjl6VXdZTE15SUt3cHZEQ21GSDRVSFBZRV9NQWFiZ2drZEZKMDJfbkhrOE9rNERNYURMUXRmRFRTbzlpdVNWTGxRRnNOM0Qw?oc=5",
-          "publishedAt": "2026-10-13T11:30:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 2,
-      "intelligence": {
-        "materiality": 80,
-        "certainty": 44,
-        "momentum": 20,
-        "trendChange": 0,
-        "sentiment": -4,
-        "mediaTone": -4,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 33,
-          "p24": 45,
-          "p72": 60,
-          "drivers": [
-            "high strategic or reputation consequence",
-            "uncertainty may drive further coverage"
           ],
           "posture": "AMPLIFY"
         }
@@ -1668,65 +1580,6 @@
       "live": true
     },
     {
-      "id": "live-2ds1uf",
-      "headline": "Bloomberg New Economy Forum: Kumar Mangalam Birla, BlackRock & Hyundai CEO On Business Adaptation Entergy (ole3mySzny)",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Kumar Mangalam Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Senior-leadership developments can change governance, accountability and external narrative around Kumar Mangalam Birla.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Leadership",
-      "entityIds": [
-        "kmb"
-      ],
-      "publishedAt": "2026-10-20T08:33:36.000Z",
-      "updatedAt": "2026-10-20T08:33:36.000Z",
-      "sources": [
-        {
-          "name": "Unisba Media",
-          "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5tVG1KT3NEcmVHSThpLVFndmZLS2JybkNja1ZkbHBXLW1TV2Q2S05Zd3pNRzEtSGhTYi1SbWgwOTlVaS1PLXlXZGotSV82eFU3QnZoMmNEX3l6MklldVdoTk9YOGcxRmxJalRF?oc=5",
-          "publishedAt": "2026-10-20T08:33:36.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 82,
-        "certainty": 42,
-        "momentum": 6,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 6,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 37,
-          "p24": 54,
-          "p72": 67,
-          "drivers": [
-            "high strategic or reputation consequence",
-            "uncertainty may drive further coverage",
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
       "id": "live-7ntxsg",
       "headline": "Kumar Mangalam Birla plans investments up to $30B by 2029",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1776,6 +1629,65 @@
           "coverage": "No open-public conversation samples in this event."
         },
         "reputationImpact": 13,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 42,
+          "p24": 60,
+          "p72": 71,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage",
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-1nq9zds",
+      "headline": "AI investments must be judged by returns, not fear of missing out: Kumar Mangalam Birla",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Kumar Mangalam Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This may alter Kumar Mangalam Birla's capital allocation, ownership or strategic growth trajectory.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Technology",
+      "entityIds": [
+        "kmb"
+      ],
+      "publishedAt": "2026-10-14T06:13:06.000Z",
+      "updatedAt": "2026-10-14T06:13:06.000Z",
+      "sources": [
+        {
+          "name": "People Matters - HR News",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNMmE5TGhZbXBYbDk4ZkdFdjFVTjdfcms3eVNRbTIwU1Q0ZFVoNkp4WW13T21DME1QUS11MWw0ZDF0aDJxR3hoWHI1N2U5c3BUdnZONnBqem9QYmExaUhGQUhhUlJMYm0tc2kwMkNKX3hsNjhhbzhWWlgzVEg5MUJQX0gwVHM2c1duYWliT2tzT3h6NFJqVk5qaUhGX3FidlFVMUxtanlTTlRfMmNKR3ZBNjhhcUpib2JlOWYwRkRac29XUEhlX09yUEw0eW1SX0NSaFE?oc=5",
+          "publishedAt": "2026-10-14T06:13:06.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 82,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 6,
+        "mediaTone": 6,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 9,
         "narrativeAlignment": 100,
         "prediction": {
           "p6": 42,
@@ -1855,93 +1767,6 @@
       "live": true
     },
     {
-      "id": "live-182rlht",
-      "headline": "Aditya Birla Fashion and Retail (NSE:ABFRL) — Fashion Formats After Demerger Explained",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This may alter Aditya Birla Group's capital allocation, ownership or strategic growth trajectory.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "M&A",
-      "entityIds": [
-        "abg",
-        "abfrl",
-        "nse"
-      ],
-      "publishedAt": "2026-10-06T07:00:00.000Z",
-      "updatedAt": "2026-10-15T12:51:00.000Z",
-      "sources": [
-        {
-          "name": "Kalkine India",
-          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPWkVQdmszcVRQVUJlX2MyWm1Jc2ZpYWtjTlBqQXdoQ29jQUVicXNPY1pOOUJqOHpRZXVWdmF6ZERXYmpkZlAtQlQ0ZmNuWmJVNHJ3Y3FNUnMxU1dRMGNEdUc5YlVEMVVEYnl1U09GSXpIM1RkMTBVVFMxd2pGakRJUzUwbTQxTC11SjV2eWNUbW03UXRJYU1zdHFpRlh0Mm0tNTdpZzRPZjFVdEZLVTRza1Q0R3I5LS1ZNU5PcllKVEdHWmQycjRYRVUzS1ZvQ1pGSGhLVUdIRVlob050SnFqNDFxdTQ?oc=5",
-          "publishedAt": "2026-10-15T12:51:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Kalkine India",
-          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNRloxWENGUkVxQ1V4anRiNkJlbWVrVzdQYktacmx5TjBTaVpEbF9URkczSkxYZUJRS1BYR0prRTlCOFhqd3VVWXBJcEt2bGRKYjVaTUxCUlNOWU9KRnYtejlLOFd3Ty1rV0JYQ0EzdzZaY09MU0xTcVNmUjIzWkxmOHhDTXBxcUR6NDZJTVpPZUhyVGdwbzNPXzdPbWUtNDI5bC1aZEpLQ296UnN3bXU5WTk0LUkzNExETVExa2d2SXlHa25kY2pkWVhtaFRBM2M?oc=5",
-          "publishedAt": "2026-10-14T13:47:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Kalkine India",
-          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOZTJmZW5lemNIMHpfbVVVc2xvb29IUENYSVdKTjRVUUFXak9LeXd6a2hyakd3SnZfbldpWV85QnB5YkE2Mm1LdDdweE1pa25GRDJoRF9UMWhMSURjeE0tYUxPcHNvcGVWZDZnWUxEMGZYOGNTRk1vejB1cFdadUVqOTNzNEdoem4zQm9KMkVWb0hja0RGeF94SXRaU2xNd00yUERCV3ZrZUJPcmlTM2VfMWdERFR6SkNaekpGWS1xTzBrb091YTQ3MVpadmlQMEdYVXQ4ZUhBOXpSbjZkUlFXZ1l3R2VmV001OXc?oc=5",
-          "publishedAt": "2026-10-12T14:44:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Kalkine India",
-          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNWElGMld2dDYzeFl3ZHJOeUEtRjdzS3JvbW80MXl5YlZmX1AzWURiSVNxOXM0RURjUEk0enFIZGc2RXFqaFY4Sm5ISFUyaW55Z0lZOVFZNHVXWmdEMWVNX0NrWHdjNG9GTmV0RjJwbFV4d1dPR1pxdVpEVlhhUUFjdmYzS3NybklVdk5va3lCOE8zQUdWYWRxWTFYNldZWVlWcFlHem9PT2czVmJ5M2MwSmtMellNT1docUVlRlR1bnhnR1BEeS1IaTBWTHZoRkVxVklOLW53eGx3dVZlcVJ4S2I1cEI0eVZ2WWc?oc=5",
-          "publishedAt": "2026-10-06T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 78,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 2,
-        "mediaTone": 2,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 6,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 27,
-          "p24": 37,
-          "p72": 55,
-          "drivers": [
-            "high strategic or reputation consequence",
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
       "id": "live-187rnn2",
       "headline": "ABFRL acquires Imperial stake: what it means for Aditya Birla Fashion and Retail stock",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -2001,6 +1826,63 @@
       "live": true
     },
     {
+      "id": "live-1q2tspv",
+      "headline": "Contraband by Ananya Birla launches new fragrance; to double retail presence to 200 outlets",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "watch",
+      "status": "strong",
+      "category": "Brand",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-10-21T12:03:55.000Z",
+      "updatedAt": "2026-10-21T12:03:55.000Z",
+      "sources": [
+        {
+          "name": "ET Retail",
+          "url": "https://news.google.com/rss/articles/CBMiogJBVV95cUxOcGhjYURBb1pteGJmQnpPa1JXRTEyaFVuMEFrWXJseXZWVDM0V1NpTnAtbnpGVFRWX2ctczRDR2d0N1VpT1lsWHNiak1WMlpKMzlJUzdlZWpCX2hVQXUzTHhCWjdhclZJNnpyVWhIVVRRVHJzTW9fVDRqWnBLT2MzaXc4OUo4cDZhSGFpTk0yNi1ITlpjM2hPT2ZMZ0JqNEFsd21MaDRJX2NCdTNUSlhDVjJwSmxyZ3I1dmlFM3VBcHVTQ09sa2ZvR1VNQjNJWFpDMFQ4R0JYRnpTUllWUFUwN0tLTVE2NUJxNDFqTkdfMnZmOXh3Z25DR1VxWl90d1ppNlhYVXJzRHAxaXBqRTZ4eWk4RnZIUGp5N0RUbHVCa3Vod9IBogJBVV95cUxOcGhjYURBb1pteGJmQnpPa1JXRTEyaFVuMEFrWXJseXZWVDM0V1NpTnAtbnpGVFRWX2ctczRDR2d0N1VpT1lsWHNiak1WMlpKMzlJUzdlZWpCX2hVQXUzTHhCWjdhclZJNnpyVWhIVVRRVHJzTW9fVDRqWnBLT2MzaXc4OUo4cDZhSGFpTk0yNi1ITlpjM2hPT2ZMZ0JqNEFsd21MaDRJX2NCdTNUSlhDVjJwSmxyZ3I1dmlFM3VBcHVTQ09sa2ZvR1VNQjNJWFpDMFQ4R0JYRnpTUllWUFUwN0tLTVE2NUJxNDFqTkdfMnZmOXh3Z25DR1VxWl90d1ppNlhYVXJzRHAxaXBqRTZ4eWk4RnZIUGp5N0RUbHVCa3Vodw?oc=5",
+          "publishedAt": "2026-10-21T12:03:55.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 74,
+        "certainty": 68,
+        "momentum": 17,
+        "trendChange": 100,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 8,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 44,
+          "p24": 62,
+          "p72": 73,
+          "drivers": [
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-e0odml",
       "headline": "UltraTech Cement Reports Q2 Net Profit Of ₹1,494 Crore On ₹23,295 Crore Revenue",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -2028,7 +1910,7 @@
       "intelligence": {
         "materiality": 74,
         "certainty": 42,
-        "momentum": 6,
+        "momentum": 14,
         "trendChange": 0,
         "sentiment": 7,
         "mediaTone": 7,
@@ -2042,9 +1924,9 @@
         "reputationImpact": 8,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 20,
-          "p24": 29,
-          "p72": 49,
+          "p6": 25,
+          "p24": 34,
+          "p72": 52,
           "drivers": [
             "uncertainty may drive further coverage"
           ],
@@ -2254,6 +2136,83 @@
       "live": true
     },
     {
+      "id": "live-67hmj",
+      "headline": "Buy Aditya Birla Sun Life AMC; target of Rs 1200: Prabhudas Lilladher",
+      "summary": "Published coverage across 3 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
+      "bucket": "watch",
+      "status": "strong",
+      "category": "Corporate",
+      "entityIds": [
+        "abg",
+        "absl-amc",
+        "sun-life"
+      ],
+      "publishedAt": "2026-09-28T07:00:00.000Z",
+      "updatedAt": "2026-09-30T04:57:35.000Z",
+      "sources": [
+        {
+          "name": "Moneycontrol.com",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQMlpkSnAwMV9IN0twdzFiaW8teU9kbTY0SEJoR0cyTFR3TTdUbUFXTVZnR2wtLXVIckRZOTNsc2pqa2RBaGlnb01XQjExeUVNVFVpeG8wMW9TT3lHaHVkMzA4b3BqX29fTnRueDJKUUVNdkRNMm9wSXQ2Q1hsZ25feXpMWHBXRVUzZ2s1Rl9mMXN3N3ZHZ2lmVDZtSElkOWZFcUtaSjNGR1NZWngtbmxpTE9VR2I4U3NMQXhzeXViOWVPNVEzeFpZalhpd9IB0AFBVV95cUxNODVNV3JQQXFub1pRUldyRnlBblRfYzhVUEVCMmNIRmlWNVloWkNrZUFvdTZDNVRiZ3d5SlJvSWNMTmNyZnBoRkF0OUc2WlpwQ2Y0bjhqV00tQThpTUFMX0pJWUlaazBSanFEb2ZsX0hNZGNRVnQ4YVU4WTA2NmhldFdqNThIYTRUV05zTGZXYWkwcllOdzJfUmhwdkp5SUM5aTFLUjQtOG5CR0lOdk4zSDRtVV9zMzcxSTFhRTlkeFB5cUktMkJxOU1HVklZVGpJ?oc=5",
+          "publishedAt": "2026-09-29T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Investment Guru India",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQZXhLM3FkX3A2enA0QW5KdWkwT3cxeE9UbGZOSzVNWjdidWhxMWhQZHBoU0UwZFpKNjRHa0xqVzl2R3pFenFjeFluLW5Iako5TUlZSmNaeGd0NlhFa1RWZ1BpU291RVJrNmtaSnBvSzNnOHNvWGdFWkR4cTFqTmJOSmtoaHV5LTdjTVdONGY2MV82THRnZ2w3Smo4Sk5RdmVfS19OT0M2dTB1RW9FMU9nT2tjWjA2ZFpLZjdnZVhWLVlEcVdBbWg5UXQ3NmE1dw?oc=5",
+          "publishedAt": "2026-09-30T04:57:35.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOYmFfUjU0a0pmVG15X2dDZGU4Q05vRDNrelVMMmFOWlpISDhSRDdLRU56Ny1vakJEM2dNd0dlUjlRNVlHeko0Z2U3ZzZTS2ZOVUJreE5yZF9uczBSMnJEOGZ3YTZIQWptMGlicXVBS0M0WXZkY0JHaTRzbVVfZ2VPclhIN1dmSV9MaFJ2TjAtX1hLOXA1VzVFaEFKdHp4M3J6MVFNZFN6RGU2dHdLMC16RXJISmRrTHNDQTUyMHdOOUZpQ01YSG5VRVVB?oc=5",
+          "publishedAt": "2026-09-28T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 3,
+      "intelligence": {
+        "materiality": 73,
+        "certainty": 72,
+        "momentum": 26,
+        "trendChange": 0,
+        "sentiment": 5,
+        "mediaTone": 5,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 7,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 40,
+          "p24": 53,
+          "p72": 66,
+          "drivers": [
+            "incremental relevance with limited momentum"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-1p40xlg",
       "headline": "Vodafone Idea Subscriber Loss: जियो के 48.1 करोड़, एयरटेल के 40.6 करोड़ ग्राहक, वोडाफोन आइडिया कहां खड़ा?",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -2281,8 +2240,8 @@
       "intelligence": {
         "materiality": 72,
         "certainty": 68,
-        "momentum": 17,
-        "trendChange": -100,
+        "momentum": 6,
+        "trendChange": 0,
         "sentiment": -8,
         "mediaTone": -8,
         "publicSentiment": {
@@ -2295,9 +2254,9 @@
         "reputationImpact": 0,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 30,
-          "p24": 41,
-          "p72": 58,
+          "p6": 24,
+          "p24": 34,
+          "p72": 52,
           "drivers": [
             "incremental relevance with limited momentum"
           ],
@@ -2584,7 +2543,7 @@
       "intelligence": {
         "materiality": 71,
         "certainty": 72,
-        "momentum": 60,
+        "momentum": 40,
         "trendChange": 100,
         "sentiment": 2,
         "mediaTone": 2,
@@ -2598,93 +2557,9 @@
         "reputationImpact": 5,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 59,
-          "p24": 73,
-          "p72": 81,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "PREPARE"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-158bec9",
-      "headline": "India's UltraTech Cement misses profit view as higher costs weigh",
-      "summary": "Published coverage across 3 distinct source domains identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of UltraTech Cement Limited.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Financial",
-      "entityIds": [
-        "ultratech"
-      ],
-      "publishedAt": "2026-10-19T08:23:42.000Z",
-      "updatedAt": "2026-10-19T08:50:28.000Z",
-      "sources": [
-        {
-          "name": "Reuters",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPSk8zT0E0N3hRWXNlSWR4d193aDFxU3hhaDAtZ2ZGNm4yV1M2NUlZSkZwTTNIOUFvVmduYnc4YUowaDRQN0xCSWo1ZHVLTzR5aXB2SE03ZUtTM1BYQjFIcHd5dXVNQTFCcXJOR3FkeXZiYWZLaDNlYVVHZDlNS1JzLXY5RkJqRnFsS0ZEWkIzdmExQllicGtyY25Vdw?oc=5",
-          "publishedAt": "2026-10-19T08:50:28.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "TradingView",
-          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQUTJnR2R6U2ZmUVhJT0l5MG1JY0R6M2NDUk1kajdBMm9kS1FQNzZ5MXRTbmk1SjhQaUU3TFZxSEN2WWJuU29jMkJ3V1hTeF80amZPcDhSM1NWalZQTG1fY0JtTFYyMDRtWEs2d1NXY0lEMDBldy00NlBiVkNWbDVHN09Da3dEYy1UZkk3WjVtUUlWU1R6Z2kwbHdpY2lKZDFUeDJ2Y3NpWmRNVTl2MHJsOVNGV1g5cHBVSDg0cjgwUlNIUkFDOFB5M2FmYUdyejI4?oc=5",
-          "publishedAt": "2026-10-19T08:50:08.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "marketscreener.com",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPYzA3SjJXVFlaQnJ3WXRvMTlOOThmdkEyMmJmVURrT2lySER1MTNmSFdCUHZBOHRBcUhmVmxtU3M3VzBOWlBCeEdsMXQ1YmZsbHJZeFYzVk5lZ056bTVoRU90Y0lXbEFLU25fTDhBMUJtcjNRSzlBcEItYmlNWkhlV1N2Sm9Jd1JfWFdpeFdhdVVhQlZBemhKWThPc0tOYzBZdzBJ?oc=5",
-          "publishedAt": "2026-10-19T08:25:02.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "TradingView",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOQ0laNVBGRWYwbUFTdlluenJROVhlc1pxUTFFT2U1Z0lfTW1fb1V2S2Qzb1BzOUtCbXEzYmdQczBLVzlIcEk1NXdmeHB4RjVVSEdlVjh6TDFVZHhRMm1aTW9RTWJjcS1VZWtQamxfOUpubXQ3TUFEeERDbWFJY29kQlBrYXpFVGZBcm03ekRQMHFRVDVHQ0FKTWdRbXgxaFhEWV9tZFdfZFJJQkp3c0d6SDZCclFOaVpPcVE?oc=5",
-          "publishedAt": "2026-10-19T08:23:42.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 3,
-      "intelligence": {
-        "materiality": 71,
-        "certainty": 72,
-        "momentum": 26,
-        "trendChange": 0,
-        "sentiment": -9,
-        "mediaTone": -9,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": -1,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 38,
-          "p24": 51,
-          "p72": 65,
+          "p6": 47,
+          "p24": 61,
+          "p72": 72,
           "drivers": [
             "incremental relevance with limited momentum"
           ],
@@ -3006,74 +2881,6 @@
       "live": true
     },
     {
-      "id": "live-67hmj",
-      "headline": "Buy Aditya Birla Sun Life AMC; target of Rs 1200: Prabhudas Lilladher",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Corporate",
-      "entityIds": [
-        "abg",
-        "absl-amc",
-        "sun-life"
-      ],
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "updatedAt": "2026-09-30T04:57:35.000Z",
-      "sources": [
-        {
-          "name": "Moneycontrol.com",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQMlpkSnAwMV9IN0twdzFiaW8teU9kbTY0SEJoR0cyTFR3TTdUbUFXTVZnR2wtLXVIckRZOTNsc2pqa2RBaGlnb01XQjExeUVNVFVpeG8wMW9TT3lHaHVkMzA4b3BqX29fTnRueDJKUUVNdkRNMm9wSXQ2Q1hsZ25feXpMWHBXRVUzZ2s1Rl9mMXN3N3ZHZ2lmVDZtSElkOWZFcUtaSjNGR1NZWngtbmxpTE9VR2I4U3NMQXhzeXViOWVPNVEzeFpZalhpd9IB0AFBVV95cUxNODVNV3JQQXFub1pRUldyRnlBblRfYzhVUEVCMmNIRmlWNVloWkNrZUFvdTZDNVRiZ3d5SlJvSWNMTmNyZnBoRkF0OUc2WlpwQ2Y0bjhqV00tQThpTUFMX0pJWUlaazBSanFEb2ZsX0hNZGNRVnQ4YVU4WTA2NmhldFdqNThIYTRUV05zTGZXYWkwcllOdzJfUmhwdkp5SUM5aTFLUjQtOG5CR0lOdk4zSDRtVV9zMzcxSTFhRTlkeFB5cUktMkJxOU1HVklZVGpJ?oc=5",
-          "publishedAt": "2026-09-29T07:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Investment Guru India",
-          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQZXhLM3FkX3A2enA0QW5KdWkwT3cxeE9UbGZOSzVNWjdidWhxMWhQZHBoU0UwZFpKNjRHa0xqVzl2R3pFenFjeFluLW5Iako5TUlZSmNaeGd0NlhFa1RWZ1BpU291RVJrNmtaSnBvSzNnOHNvWGdFWkR4cTFqTmJOSmtoaHV5LTdjTVdONGY2MV82THRnZ2w3Smo4Sk5RdmVfS19OT0M2dTB1RW9FMU9nT2tjWjA2ZFpLZjdnZVhWLVlEcVdBbWg5UXQ3NmE1dw?oc=5",
-          "publishedAt": "2026-09-30T04:57:35.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 2,
-      "intelligence": {
-        "materiality": 69,
-        "certainty": 70,
-        "momentum": 20,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 7,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 32,
-          "p24": 43,
-          "p72": 59,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
       "id": "live-iegp9i",
       "headline": "UltraTech Cement Q2 Results: Higher volumes lift profit 21%, but shares slip - CNBC TV18",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -3131,6 +2938,121 @@
       "live": true
     },
     {
+      "id": "live-142ianj",
+      "headline": "How ABHI Rewards Healthy Living Through Gamification",
+      "summary": "An official source has published this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
+      "bucket": "watch",
+      "status": "confirmed",
+      "category": "Corporate",
+      "entityIds": [
+        "abg"
+      ],
+      "publishedAt": "2026-10-18T07:00:00.000Z",
+      "updatedAt": "2026-10-18T07:00:00.000Z",
+      "sources": [
+        {
+          "name": "Aditya Birla Group",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNc2ZJMzNrWGlMVGgzRzFsbzRTRmlpVzNHT0EzYlFjOFRzRjhQbU1HM1BRcVVxUjFNUUVicG5ycmJSN1Uyd0pnd0VrOXI4aWhKSzlVcXZzVXZ6LXlwTE5ZcGU0OUJIQ00yVEFjbmR3Tk5vRTRnMWczYmUtaElpdUNjLXVueEZMUklITUE?oc=5",
+          "publishedAt": "2026-10-18T07:00:00.000Z",
+          "tier": 0,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 68,
+        "certainty": 88,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 0,
+        "mediaTone": 0,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 3,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 30,
+          "p24": 41,
+          "p72": 58,
+          "drivers": [
+            "incremental relevance with limited momentum"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-1ofc25g",
+      "headline": "Aditya Birla Ventures Invests in AI, Fintech and Quick Commerce",
+      "summary": "An official source has published this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
+      "bucket": "watch",
+      "status": "confirmed",
+      "category": "Technology",
+      "entityIds": [
+        "abg",
+        "ab-ventures"
+      ],
+      "publishedAt": "2026-10-15T07:00:00.000Z",
+      "updatedAt": "2026-10-15T07:00:00.000Z",
+      "sources": [
+        {
+          "name": "Aditya Birla Group",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQOHhHV0hCRElMTmkwYkZqcUFiU3R5dGt0OUI0OUtIMnlzZ2Z3QU44Sm5PbGl1T0tjWER6OEswRU5USVl2OHNIRDZDX0ZuNGxPSVcwb2RoRXVsX28weHVXaWlYcU04VnJyV2prYmVERU56WFdGd1BJdUxSY2ZWUGlLaFhZOTlrQVlfQlpGOUZNUHdUcEJBSDJN?oc=5",
+          "publishedAt": "2026-10-15T07:00:00.000Z",
+          "tier": 0,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 68,
+        "certainty": 88,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 7,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 30,
+          "p24": 41,
+          "p72": 58,
+          "drivers": [
+            "incremental relevance with limited momentum"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-1hyp40j",
       "headline": "From Fields to Resilient Futures: The Focus on Rural Women Communities",
       "summary": "An official source has published this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -3177,120 +3099,6 @@
           "p72": 58,
           "drivers": [
             "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-d3lair",
-      "headline": "ABLBL Q1 FY27: Sales Up 11%, Profit Up 21%, Stock Near Low",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Lifestyle Brands Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Lifestyle Brands Limited.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Financial",
-      "entityIds": [
-        "ablbl"
-      ],
-      "publishedAt": "2026-10-12T07:00:00.000Z",
-      "updatedAt": "2026-10-12T07:00:00.000Z",
-      "sources": [
-        {
-          "name": "Kalkine India",
-          "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxPQXA0bm54cG9Ga3V5VE5JOGxnQVhjR0FfVDQ4TmZMaGtiX0pHbmpvTWZ6QmNaT05nWGkxdFdFSmxmSU9CdnVkNU55VExoN09HV09talFiMF9sR3U2Zm1GTmJVLXBNSzZfT052ZG9JNG5mSWZGTGNEbHBYLWtPZ3BSaGlpLXNwZUtVbmprQmJybEZQaHV6ZEpfSzJuVXpqaUdHT2ZaSDRBYW1mOWJsbmw5ZEdlbHFTdnhkLTduVUJPb1pFbV80MjlkX1FvanVCWVVSUVpaaUpRWkltOGl6RnlGemdjU0VQNUJ6cTdjMXRMU0N2SEpCVVJxZg?oc=5",
-          "publishedAt": "2026-10-12T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 68,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 7,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 22,
-          "p24": 29,
-          "p72": 49,
-          "drivers": [
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-5qupo3",
-      "headline": "ABFRL (NSE: ABFRL): Q1 FY27 Loss Widens as Sales Grow",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Fashion and Retail Limited (ABFRL). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Fashion and Retail Limited (ABFRL).",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Financial",
-      "entityIds": [
-        "abfrl"
-      ],
-      "publishedAt": "2026-10-06T07:00:00.000Z",
-      "updatedAt": "2026-10-06T07:00:00.000Z",
-      "sources": [
-        {
-          "name": "Kalkine India",
-          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOUkFKQjlSempKZzY2ZTlRU3BNNExXODVfWkJhbjAtSml6dUZBcEdudlFVMGM1c0ttMkZZdkdkY0NwT2xwXzdVWlhvVDkxR19vVmtfSURzcHgyMXhZcHlpeXh0R3RkRjhVWURMeldlXzczT1R5dXJqa3ZaYlFERmtRcm1hZFhWeDFxNDFmakdBaE0zdkVTZTMwWklfa0g1bGhSNEw1dTBoWWl5OE5tWTBrTlZSLVRHQ19EdTBFTllhZjF2aG01M0g5VV9hdENaZEdUa0hKQUZpTQ?oc=5",
-          "publishedAt": "2026-10-06T07:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 68,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": -8,
-        "mediaTone": -8,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": -1,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 22,
-          "p24": 29,
-          "p72": 49,
-          "drivers": [
-            "uncertainty may drive further coverage"
           ],
           "posture": "AMPLIFY"
         }
@@ -3361,122 +3169,6 @@
       "live": true
     },
     {
-      "id": "live-1rzoqas",
-      "headline": "Sustainable Rural Livelihoods: ABG’s Force for Good",
-      "summary": "An official source has published this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
-      "bucket": "watch",
-      "status": "confirmed",
-      "category": "Sustainability",
-      "entityIds": [
-        "abg",
-        "force-for-good"
-      ],
-      "publishedAt": "2026-09-30T07:00:00.000Z",
-      "updatedAt": "2026-09-30T07:00:00.000Z",
-      "sources": [
-        {
-          "name": "Aditya Birla Group",
-          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPQVBRMVJFUWtIT005RllPVmJDTC16eEkzMmRuS3lyXzF3dFBfYlBhSk91TDdCZnJfeXc5Nml4cUhUMVVsSTk5SWFBLWJvaFBubmlheHBnRzRteWswbHpobHAtU3V0alI2UDlReHRuUUtvT203RjN4LURhLV9CaW5udU5KYUpSazU5eWRPeldmODZqUm9MXzRhU3ljcFBlZm1EZWRKRVFmU19oMi13OVlwVHVvc19NeWRQUDJWTEhSeWdUMEZJcThqcURpU1NqaHZmb3k2UQ?oc=5",
-          "publishedAt": "2026-09-30T07:00:00.000Z",
-          "tier": 0,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 68,
-        "certainty": 88,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 7,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 30,
-          "p24": 41,
-          "p72": 58,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-ol0r4s",
-      "headline": "Indriya’s Rising Brilliance: The Strategy Behind Its Growth",
-      "summary": "An official source has published this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
-      "bucket": "watch",
-      "status": "confirmed",
-      "category": "Corporate",
-      "entityIds": [
-        "abg",
-        "indriya"
-      ],
-      "publishedAt": "2026-09-29T15:59:39.000Z",
-      "updatedAt": "2026-09-29T15:59:39.000Z",
-      "sources": [
-        {
-          "name": "Aditya Birla Group",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPc3ZCNy1HMGpRSnVhZkhIMkZJZ25LSFdfamZiQzJIemhGZ0x3SU5SYmhjTE5zWjhVS2gweW1XSWdhS2ZIM3QtaXExXy1XeURpQmZPN3JNTU9yX252RHpEY3IxZmFDN2RpU0Y4Y0ZSc0RKb2QyMGp2SVJSRXladDU4ZXVsT1NkVFNlRVpkU0RvMmx1WGN4OWwzRF93SmpKOTdjdnVoRWFkd3Q?oc=5",
-          "publishedAt": "2026-09-29T15:59:39.000Z",
-          "tier": 0,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 68,
-        "certainty": 88,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 7,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 30,
-          "p24": 41,
-          "p72": 58,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
       "id": "live-1kc3q2y",
       "headline": "UltraTech Cement shares fall 5% from day's high post-Q2 results: Here's why",
       "summary": "Published coverage across 2 distinct source domains identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -3525,6 +3217,81 @@
           "coverage": "No open-public conversation samples in this event."
         },
         "reputationImpact": -1,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 31,
+          "p24": 41,
+          "p72": 58,
+          "drivers": [
+            "incremental relevance with limited momentum"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-158bec9",
+      "headline": "India's UltraTech Cement misses profit view as higher costs weigh",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of UltraTech Cement Limited.",
+      "bucket": "watch",
+      "status": "strong",
+      "category": "Financial",
+      "entityIds": [
+        "ultratech"
+      ],
+      "publishedAt": "2026-10-19T08:23:42.000Z",
+      "updatedAt": "2026-10-19T08:50:28.000Z",
+      "sources": [
+        {
+          "name": "Reuters",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPSk8zT0E0N3hRWXNlSWR4d193aDFxU3hhaDAtZ2ZGNm4yV1M2NUlZSkZwTTNIOUFvVmduYnc4YUowaDRQN0xCSWo1ZHVLTzR5aXB2SE03ZUtTM1BYQjFIcHd5dXVNQTFCcXJOR3FkeXZiYWZLaDNlYVVHZDlNS1JzLXY5RkJqRnFsS0ZEWkIzdmExQllicGtyY25Vdw?oc=5",
+          "publishedAt": "2026-10-19T08:50:28.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQUTJnR2R6U2ZmUVhJT0l5MG1JY0R6M2NDUk1kajdBMm9kS1FQNzZ5MXRTbmk1SjhQaUU3TFZxSEN2WWJuU29jMkJ3V1hTeF80amZPcDhSM1NWalZQTG1fY0JtTFYyMDRtWEs2d1NXY0lEMDBldy00NlBiVkNWbDVHN09Da3dEYy1UZkk3WjVtUUlWU1R6Z2kwbHdpY2lKZDFUeDJ2Y3NpWmRNVTl2MHJsOVNGV1g5cHBVSDg0cjgwUlNIUkFDOFB5M2FmYUdyejI4?oc=5",
+          "publishedAt": "2026-10-19T08:50:08.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOQ0laNVBGRWYwbUFTdlluenJROVhlc1pxUTFFT2U1Z0lfTW1fb1V2S2Qzb1BzOUtCbXEzYmdQczBLVzlIcEk1NXdmeHB4RjVVSEdlVjh6TDFVZHhRMm1aTW9RTWJjcS1VZWtQamxfOUpubXQ3TUFEeERDbWFJY29kQlBrYXpFVGZBcm03ekRQMHFRVDVHQ0FKTWdRbXgxaFhEWV9tZFdfZFJJQkp3c0d6SDZCclFOaVpPcVE?oc=5",
+          "publishedAt": "2026-10-19T08:23:42.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 67,
+        "certainty": 70,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": -9,
+        "mediaTone": -9,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": -2,
         "narrativeAlignment": 100,
         "prediction": {
           "p6": 31,
@@ -3628,113 +3395,6 @@
       "live": true
     },
     {
-      "id": "live-zf059",
-      "headline": "Earnings call transcript: Aditya Birla Sun Life AMC Q2 2026 profit slips",
-      "summary": "Published coverage across 5 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Coverage is accelerating across independent sources and may become more consequential even if the underlying facts remain unchanged.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Financial",
-      "entityIds": [
-        "abg",
-        "abcl",
-        "absl-amc",
-        "sun-life"
-      ],
-      "publishedAt": "2026-10-13T14:07:00.000Z",
-      "updatedAt": "2026-10-21T11:41:24.000Z",
-      "sources": [
-        {
-          "name": "Investing.com India",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNbHhoSGR4NGJzYmpTQlNrVk1aU3A1akFBNUU3TzZKRUs1MjhWbS1BMXAzWEtTLXA2Q3FDc2pvNmxPUlJpeTQ1NEdENnpyXzFBeUxhMV80bEZOWS12MGpEcnVQbnhjNGhfWEdMODc4cWQ4cWItVkROMXdVcmYtcXZ2WWVIbVFSNXQ5MnJ4N3FnOVBXVk5IZWpQV0RHVG9XeTAxMWRaal9LeTNmckZ1YlhHNmVPb3RxcmFWbmR5eHVuNl9nSy1mc2hJdFVzazk?oc=5",
-          "publishedAt": "2026-10-21T11:41:24.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "TradingView",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPNmxUZ3lPU1BBQ3l5NlptOUhQZUZLWUR5enh4NkxjTHpWb0dUM2Q2c0lmblVIeEo1ZENDMjcyZjNxNjJoNG5wYWI3Qkk1WEZjZVRGOWNXVUhHbGxCNm8zaGw2R3hmSmFpc1NaUUplNlN6TVRZaVVCSmpxQlN3bUZaV2NDYnkwTnZyZzNLQ0F0dmV5TlJZU0lUYXRGRnZTUThYajRrVHlZcGZJSkRYT3VseVBySXZSMTFaUVVKS0pwWi1CQQ?oc=5",
-          "publishedAt": "2026-10-21T10:27:33.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "MarketsMojo",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNbFlCVU5waW10NVhUdWhFc1ZwdWNUMG4zdU5vcng3Vm8zcXBXSHpnQmowUWF3YldQZWhvVVBrQVBlZUdOMWFrdzQ0bnpPUl82cThwN3Vpd2xIMjFqU1BSTjFMX2lPMnFsakdUSTRiQzlMU3NkUlcySXpJSGM5am5zZ05VVTB4Y0pUbHFfSkJZbDh3c2tiWUhoUWRCeERIU0tMdWNnM2V2bTI?oc=5",
-          "publishedAt": "2026-10-18T12:02:30.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "digital terminal",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPY29QT2JUQjlzd1htQ1l3dTNrQ3I5R2gwNjZwZ1JQX2l3Mk0tS3JlWkp6M3BaRWJmNGJxem1zNkNZRFpXejhzLXltakMtREpkZ0V4YWU4UGV4X1RxZkZocTRFcEc0R2YwU1FER2RJNE94UVk5U3JIMGcwejJDYmw4VVg2TVhkRTlJWmg0UlhrU2p6cVNEU2YwTUpwN09idzZXcjc0OdIBpAFBVV95cUxPY29QT2JUQjlzd1htQ1l3dTNrQ3I5R2gwNjZwZ1JQX2l3Mk0tS3JlWkp6M3BaRWJmNGJxem1zNkNZRFpXejhzLXltakMtREpkZ0V4YWU4UGV4X1RxZkZocTRFcEc0R2YwU1FER2RJNE94UVk5U3JIMGcwejJDYmw4VVg2TVhkRTlJWmg0UlhrU2p6cVNEU2YwTUpwN09idzZXcjc0OQ?oc=5",
-          "publishedAt": "2026-10-17T05:48:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "MarketsMojo",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNUlRKSHpFUXFCdzZxallvd08wd29oRHJQalVKdFVkVnFTU3UtZG5zUVI1ZTU4OFBCVUpObGdrbG9UZ0RqRERCUkd2MUdESnU4bmZDbzIxSThvODJxTVZOeFdyaEFZZ1dJVnBLUl8tUENSb3dpTmZTQ2FuRHczUUI2Y1pyeGpVSG9NdjZIeDFHMTFZbVJndGRISDdRWXJuZng4M2c?oc=5",
-          "publishedAt": "2026-10-13T20:47:14.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "scanx.trade",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNY2c1a0tYVnZzWnBCbThhdUladGVUOTRRZVRKLUUyUW1seDI5VUE0ZVdVN2xzdFJoSW0zWlpMQk14clBiUmZKdWtzSXo3ZzJKSkVGVFdjSUdpUkMya0lXbXZWeGZ0LWpvSmQ2RVY4NHVUd2h1RFNVcndyYXZnR1BDOEk3Vlg5OThhWHdFWnVPTW9SS0l5Y05FQjNJUmtWN0k1Nmk3RTRudDFwRThhd19sV2ZsTlF5QQ?oc=5",
-          "publishedAt": "2026-10-13T14:07:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 5,
-      "intelligence": {
-        "materiality": 66,
-        "certainty": 50,
-        "momentum": 72,
-        "trendChange": 100,
-        "sentiment": 2,
-        "mediaTone": 2,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 4,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 62,
-          "p24": 75,
-          "p72": 82,
-          "drivers": [
-            "rapid media acceleration",
-            "broad independent-source pickup",
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "PREPARE"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
       "id": "live-1upqbfu",
       "headline": "Aditya Birla Sun Life AMC Says Sept-Quarter Consol Net Profit 2.21 Billion Rupees",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -3764,7 +3424,7 @@
       "intelligence": {
         "materiality": 66,
         "certainty": 42,
-        "momentum": 27,
+        "momentum": 17,
         "trendChange": 100,
         "sentiment": 7,
         "mediaTone": 7,
@@ -3778,9 +3438,9 @@
         "reputationImpact": 7,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 29,
-          "p24": 36,
-          "p72": 54,
+          "p6": 22,
+          "p24": 29,
+          "p72": 49,
           "drivers": [
             "uncertainty may drive further coverage"
           ],
@@ -4178,8 +3838,8 @@
         "absl-amc",
         "sun-life"
       ],
-      "publishedAt": "2026-10-12T18:30:00.000Z",
-      "updatedAt": "2026-10-12T19:40:47.000Z",
+      "publishedAt": "2026-10-12T19:40:47.000Z",
+      "updatedAt": "2026-10-13T07:00:00.000Z",
       "sources": [
         {
           "name": "The Economic Times",
@@ -4193,7 +3853,7 @@
         {
           "name": "Realty Today",
           "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNb0ROVnVPMWFzekRtUWZIa2N4dzhyYTRVNVhIUWpSNS1jRTh1TGVyaUk0LW4tN2lsZm1Ua0JLQUMyV1U5NktnSVg5ZjFFNGZlYzlWbWJIM05wa3Aya25YbGtVbXkxMkhlTlkzOHZTNkN6aXpCdVdiNndDZy1FeGU3cHFWQnI5WjVlUFJpVDJKQzNnb3RsbkMwY1ZWaUttWUNjc0l3TVl5VWZ5QQ?oc=5",
-          "publishedAt": "2026-10-12T18:30:00.000Z",
+          "publishedAt": "2026-10-13T07:00:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -4263,7 +3923,7 @@
       "intelligence": {
         "materiality": 64,
         "certainty": 42,
-        "momentum": 27,
+        "momentum": 17,
         "trendChange": 100,
         "sentiment": 0,
         "mediaTone": 0,
@@ -4277,11 +3937,326 @@
         "reputationImpact": 3,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 27,
-          "p24": 34,
-          "p72": 52,
+          "p6": 22,
+          "p24": 28,
+          "p72": 48,
           "drivers": [
             "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-xanimw",
+      "headline": "Earnings call transcript: UltraTech Cement posts strong Q2 FY2027 profit growth",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Financial",
+      "entityIds": [
+        "ultratech"
+      ],
+      "publishedAt": "2026-10-19T12:09:26.000Z",
+      "updatedAt": "2026-10-19T12:14:26.000Z",
+      "sources": [
+        {
+          "name": "Investing.com India",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPZ2VyckgtV1g3R3RCWWVTY3lSa0hBMzV1MndaR1ZZRVpaeXc2VjB4NlZzS25UVkhCRHpqcnctTHlENHo1TTU0UFBCN0FRSEZMX2VpOUczajcyV1VSalJnb1pzel84S1gyOWFfRUdsU054MTBXc2RQMHZoQ1ZoVTZ6WGRpT0lCR25BZjdMTVBKNS1ISjR1dFJ6R2NVcmJ6UFgzSHhFQ19lWWNOUVA4VkVYQkMxZEdfcVZCakdDX2pFelAyOFRjQ3Z3amRSV3R2TnkxaGpWc0xR?oc=5",
+          "publishedAt": "2026-10-19T12:14:26.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Investing.com India",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQNUZSYWpZNHdaSW5FOXM3SjlNSThsRmFnbzhMWmNhZUVIeFpkbWFNWVhENlhNZF9Fa0VuWUh2LXJ0S293YURrRngwU2xBQ1lvVFgxMGFtWWhseThoeW84T2RjOUdhbDFGVzlsWElxeHlscG5nNkpFWVc1VTZ6aWd2RGxEbkFQZGVPNTdfdnpUdkhPendBZFZDdzU4RURBOEhnZDV3WWtxMEJvN29YaFhPaV9QQUNHODJWZkpoclR4eGYtb19Wd0lMVA?oc=5",
+          "publishedAt": "2026-10-19T12:09:26.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 64,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 18,
+        "mediaTone": 18,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 12,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 20,
+          "p24": 26,
+          "p72": 47,
+          "drivers": [
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-zmnbg6",
+      "headline": "AL Circle analysis: Germany’s aluminium trade surplus, Novelis’ US expansion, Asia’s EV demand & India’s underutilised downstream capacity",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Novelis Inc. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Operations",
+      "entityIds": [
+        "novelis"
+      ],
+      "publishedAt": "2026-10-09T07:00:00.000Z",
+      "updatedAt": "2026-10-09T07:00:00.000Z",
+      "sources": [
+        {
+          "name": "AL Circle",
+          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNWG96MWlTdHVaSkFIN3VRU0hPNUpNWXAzb3RhS2hzTXh3ZF9mNHdZWjMwZDdCSGJMOE9BdHQza25ydHQ1ZEZsOXdueEJpell1eS1DVkRiZmNibHdJUUdCYnlMWHRNbHBocWUxcWFhOW5COHFIbW5mRWVzai1kMHNBU2wtQ3VYSGxiZmJ5MjN6U3RCcUxpRVAxZG1OSHJNeEhJUU1XVHJwT3NJYmxzRFJycHlfVGJXTF82VjR3aV9udTA3RmhYMHZYSnRDaXEtcFcwdXNDZkJOTk9iaUVCc1FLYVg2OEJfV005RnVSLVFBeHhGOGpDZHBvNUJB?oc=5",
+          "publishedAt": "2026-10-09T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 64,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 20,
+          "p24": 26,
+          "p72": 47,
+          "drivers": [
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-72953x",
+      "headline": "Aditya Birla Sun Life AMC launches two retail funds from GIFT City",
+      "summary": "Published coverage across 3 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
+      "bucket": "watch",
+      "status": "strong",
+      "category": "Brand",
+      "entityIds": [
+        "abg",
+        "absl-amc",
+        "sun-life"
+      ],
+      "publishedAt": "2026-10-16T03:01:09.000Z",
+      "updatedAt": "2026-10-19T06:44:00.000Z",
+      "sources": [
+        {
+          "name": "BusinessLine",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPM2tsRFBEa3VhcTBCT2ZyMUM1OGZIZ3l0UThmT0taU3pqT3R6T0MwWjdvdjRiNFBwaG5EeWZoQUw3QlR5eC1feThhNEZiRGZDOGhsYVdLQnZQMUVrVnZKZlNacERnZ3ZZQW5VbW5KeTRGN3RqSzlxTEd6ZWFmS0UtcWh1S0thYTVtZnRiNkRoSjVUejhpMFNRSlhxZkV0Sk9YUFl4ZkRRR2NoSm9sNkthR1BrUVBjUTV4cF8xeXF6OTl3SHg3Zm5xM3B4MNIB0gFBVV95cUxOS3ZObmVJQXRfdF9hNmZic3hwVTQ1QUJWUWVwREluZkR4Yy1VZDVtUHpheDNFSjB3eUpVcFBmdXVnUVVONC11WWREWENSSEFkOGFYeTZ5SXVZcHJKWDUtdm1MLXhoWTRzSkExY1RTUHFVOW5XZU1kV0t3V1dzMllhREk4Ympqa25Jb3hNZVd1MGNnc3QtWkIyVlpYWkhkVm56RjdTbXpaYXdST2cybjJ6dXhNTXY3SDZSdEVYZXp2Tll4MUtQQXpaMW11VmRfLWdvUmc?oc=5",
+          "publishedAt": "2026-10-16T11:05:39.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "CNBC TV18",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQaTZsWDgyZjNta0FBbFE0aGYwQjJOblhjQm1yQWhxdksyaS1adFh0bVF5WGNMdXMzUVlFRjhwNmNLUUVtVFBIT3I4UW1fTEpSWGtnV3ktdmxqSWxKb19MZFFWRTVDUmVNRVhYdmhqbHlCYzh0azZiYmZjVjZtQlg2VFAxeFdVWl9odC1fSUhVVjZlZk1pS050Y2diUjVUZ2VQeFFDRzZxbWhjWnIzN2RaSGd4RTNYblptRVBUcUJ30gHDAUFVX3lxTFAwTUljOG5iSHhpM08tMVQ3WlNZZFJhcURkRkJHc3V0WU5kUGM3akxlR3gtckRLdGVIQWl1WnV2eldqS3ZmS3lLeWxxNkRZaXdJamZUbXhkeGFIV3A5LUVQbWd1cVc3WTY5aG1rRGNzSy1QcU1OSUZxd0k4RmVxWTBmWVN2LW8yR2JaVmVpUVpLaGdhSHpsTHV5NC1JZXg0MDFyS0NQYzhWR2hwUHZhUHJ3a09sM0FRQlF3VVlkMlhBU1pKRQ?oc=5",
+          "publishedAt": "2026-10-16T03:01:09.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Plataforma Media",
+          "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQZ3ZOWGx2S0FZeVRWMEFjeE9WTDBVNnVNTFRDU1htYlg3TDYxSkdvbkE3VFp0ZVVRTlEycU15YnAzZWtLTVVHeVZKb29NeWJvSXEwQUhkSUVKQTRMclRaSnA4bUN5MGxFTHVMSzVMUno4dkZRWFY3TUNzLXRTMWpiekt3cGNxclhkZUtzZ1hMdTA2NGw2bU8xbThOd3N5c0NwUUZrckl6Zl9qOVZzUV9qUElHaktFdWlYWUc2R1Ryc05pYXJQRzJsOFdRVC1tTHJHQ1dTNWlOdFN1dURhMnRzQkYta2dRdw?oc=5",
+          "publishedAt": "2026-10-19T06:44:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 3,
+      "intelligence": {
+        "materiality": 63,
+        "certainty": 72,
+        "momentum": 26,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 34,
+          "p24": 44,
+          "p72": 60,
+          "drivers": [
+            "incremental relevance with limited momentum"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-1r9ypih",
+      "headline": "UltraTech Cement Targets 240 MT Capacity and ₹1,400 EBITDA per Tonne",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Financial",
+      "entityIds": [
+        "ultratech"
+      ],
+      "publishedAt": "2026-10-21T04:03:26.000Z",
+      "updatedAt": "2026-10-21T04:03:26.000Z",
+      "sources": [
+        {
+          "name": "Sahi",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQTXZhWWlYOGpHRXYzdGRCR0lxSUVkYzNoc1lwSzk3Vi1pMlg5RjA2RzJYbGVxeGhBUEtYbjdjcnlYRXBtVDBmUXh3LUhZVEVNWDB1eDUtTHZtTktua2dzdlM2cnJDU0JvU1hzRGlfSmFLLXNrams5bXFBb2J0bDFmc0c1aFBRN0ktdWRGZTU5aUxhT3dyd244bQ?oc=5",
+          "publishedAt": "2026-10-21T04:03:26.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 62,
+        "certainty": 42,
+        "momentum": 17,
+        "trendChange": -100,
+        "sentiment": 0,
+        "mediaTone": 0,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 2,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 21,
+          "p24": 27,
+          "p72": 47,
+          "drivers": [
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-qxhiqa",
+      "headline": "Kumar Mangalam Birla shares his approach to investing in AI",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Kumar Mangalam Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Technology",
+      "entityIds": [
+        "kmb"
+      ],
+      "publishedAt": "2026-10-14T08:29:52.000Z",
+      "updatedAt": "2026-10-14T08:29:52.000Z",
+      "sources": [
+        {
+          "name": "Motilal Oswal",
+          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1YVkdDa0V2VkZranBKZUNzUXZiYjNLc3ZnUDJQRHd4TVB5aV9YZGVjc0ViYXhaT2EwcmV5OEg5OURmeG5ENEJwVktnM3FrUUctS1FvYkh6bmlETzA?oc=5",
+          "publishedAt": "2026-10-14T08:29:52.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 62,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 31,
+          "p24": 43,
+          "p72": 59,
+          "drivers": [
+            "uncertainty may drive further coverage",
+            "promoter or senior-leadership involvement"
           ],
           "posture": "AMPLIFY"
         }
@@ -4310,7 +4285,7 @@
     "stakeholderScope": "Regulators, exchanges, courts, ratings agencies, lenders/JV partners, key sector competitors, industry bodies and material government ministries; stakeholders are matched only with ABG context."
   },
   "meta": {
-    "scannedAt": "2026-10-21T13:14:42.775Z",
+    "scannedAt": "2026-10-21T18:16:03.011Z",
     "deliveryMode": "governed-snapshot",
     "providers": [
       "GDELT",
@@ -4376,7 +4351,7 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-10-21T13:11:27.422Z"
+        "checkedAt": "2026-10-21T18:14:27.252Z"
       },
       {
         "kind": "registry-audit",
@@ -4429,7 +4404,7 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-10-21T13:11:27.461Z"
+        "checkedAt": "2026-10-21T18:14:27.293Z"
       }
     ],
     "registryReconciled": true,
@@ -4449,7 +4424,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 53,
+        "itemCount": 47,
         "registryAudit": null,
         "error": ""
       },
@@ -4521,7 +4496,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 52,
+        "itemCount": 51,
         "registryAudit": null,
         "error": ""
       },
@@ -4647,7 +4622,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 100,
+        "itemCount": 38,
         "registryAudit": null,
         "error": ""
       },
@@ -4674,7 +4649,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 26,
+        "itemCount": 27,
         "registryAudit": null,
         "error": ""
       },
@@ -4719,7 +4694,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 7,
+        "itemCount": 8,
         "registryAudit": null,
         "error": ""
       },
@@ -4746,7 +4721,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 52,
+        "itemCount": 51,
         "registryAudit": null,
         "error": ""
       },
@@ -4944,7 +4919,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-10-21T13:11:27.422Z"
+          "checkedAt": "2026-10-21T18:14:27.252Z"
         },
         "error": ""
       },
@@ -5005,7 +4980,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-10-21T13:11:27.461Z"
+          "checkedAt": "2026-10-21T18:14:27.293Z"
         },
         "error": ""
       },
@@ -5127,16 +5102,16 @@
         "error": ""
       }
     ],
-    "rawArticleCount": 1166,
-    "freshArticleCount": 684,
-    "articleCount": 490,
-    "rejectedArticleCount": 187,
+    "rawArticleCount": 1098,
+    "freshArticleCount": 621,
+    "articleCount": 452,
+    "rejectedArticleCount": 162,
     "rejectionReasons": {
-      "no_abg_entity": 149,
+      "no_abg_entity": 124,
       "weak_public_context": 8,
-      "public_question": 4,
+      "public_question": 3,
       "routine_market_advice": 19,
-      "price_movement_without_event": 7
+      "price_movement_without_event": 8
     },
     "eventCount": 60,
     "publicConversationItems": 7,
@@ -5304,15 +5279,15 @@
         "error": "essel-mining-news: official 403"
       }
     ],
-    "windowStart": "2026-09-21T13:11:25.660Z",
-    "windowEnd": "2026-10-21T13:11:25.660Z",
-    "requestedWindowStart": "2026-09-21T13:11:25.660Z",
+    "windowStart": "2026-09-21T18:14:25.764Z",
+    "windowEnd": "2026-10-21T18:14:25.764Z",
+    "requestedWindowStart": "2026-09-21T18:14:25.764Z",
     "windowCapped": false,
-    "snapshotGeneratedAt": "2026-10-21T13:11:25.660Z",
-    "snapshotExpiresAt": "2026-10-21T14:41:25.660Z",
+    "snapshotGeneratedAt": "2026-10-21T18:14:25.764Z",
+    "snapshotExpiresAt": "2026-10-21T19:44:25.764Z",
     "snapshotSuccessRatio": 0.5231,
     "snapshotMinimumSuccessRatio": 0.2,
     "sourceCommit": "9010adc06f361ad55adb3da21f95519b3a98febb",
-    "workflowRunId": "39605762049"
+    "workflowRunId": "39650903899"
   }
 }
