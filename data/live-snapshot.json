@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-07T20:10:15.296Z",
-  "expiresAt": "2026-11-07T21:40:15.296Z",
+  "generatedAt": "2026-11-07T23:55:10.788Z",
+  "expiresAt": "2026-11-08T01:25:10.788Z",
   "source": {
     "repository": "NinjaRK/abg-pulse",
     "commitSha": "9010adc06f361ad55adb3da21f95519b3a98febb",
     "workflow": "Refresh governed ABG Pulse snapshot",
-    "workflowRunId": "42409728304",
+    "workflowRunId": "42427378832",
     "workflowRunAttempt": "1"
   },
   "window": {
-    "start": "2026-10-08T20:10:15.296Z",
-    "end": "2026-11-07T20:10:15.296Z",
+    "start": "2026-10-08T23:55:10.788Z",
+    "end": "2026-11-07T23:55:10.788Z",
     "lookbackDays": 30
   },
   "events": [
@@ -443,7 +443,7 @@
         "abg",
         "kmb"
       ],
-      "publishedAt": "2026-10-14T07:00:00.000Z",
+      "publishedAt": "2026-10-14T07:18:04.000Z",
       "updatedAt": "2026-11-02T13:57:02.000Z",
       "sources": [
         {
@@ -468,15 +468,6 @@
           "name": "NewsBytes",
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNVEE5NGJGZFlST002eDR1UlRQajZfM0MtZUxzZHFGdV81MTIya3NROG8zdnRYei1IcUdRWmpBNW9IUXJicy1yMUFadVpjU1NnOXJmZUpuWVpHLWFFbWNhbmx5bTNwM2xvdlhvQy1KdGk1bWYzc0pua1RTdE1JZ1oxemQwYmo0R2hzbHl0dF9xN3JxZDkxVXhLUkcxYUZhWUU4cTVZMURKVEN4Tk9WNGtmUA?oc=5",
           "publishedAt": "2026-10-14T07:18:04.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "NewsBytes",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPS2ppX0lxdXJ3OFZhZDMxZlF3ZDhuTkVnVEpkZU9BQmlMaE5Ud0plZFFaZFkwUm95SlVfcmtXZ0FZMzhqUmcyVU1VNmNOSWhINVJFd1g4WGhOZUl6MmdSaWJKa0JNTTdiRTNQQW9wU0lkbFFkRTg1WGFmbURQY1RuT2h4OXZXZFFRR0NtOXNGZHBfa2NkZXplMTl0a0ZTby15Vkt2dkNiMkZRUVNVU1dwZUI5bzRLSEFWUFF6cm93?oc=5",
-          "publishedAt": "2026-10-14T07:00:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -1032,6 +1023,73 @@
       "live": true
     },
     {
+      "id": "live-icawsy",
+      "headline": "TRAI Imposes ₹89.16 Lakh Business Disincentive on Vodafone Idea Over Alleged Regulatory Non-Compliance",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
+      "bucket": "must",
+      "status": "developing",
+      "category": "Regulatory",
+      "entityIds": [
+        "vi"
+      ],
+      "publishedAt": "2026-11-02T09:10:18.000Z",
+      "updatedAt": "2026-11-02T16:34:18.000Z",
+      "sources": [
+        {
+          "name": "The 420.in",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNM2ZWamJhMVdyY3lyVFBITmc2eHdOZnVORnhIbUptOF95TEZsMWlKd2M0cnJJWFh0bTJtbmRYYzBzclBUX3dPZWI3a1pMUUxvYm1nd09ZNTZVenh6bkdYUjNvb3NLeHZsMjM0Z2VlUFhFcTh1bzBNWWdDRFBxcjl3eVVmdUoyblpFVjllMXY5RWpiaWRDX094SWhicm9GTjRIWmY5cDcwcXhHMlRycFZwRHZtbk9WNXdaZFduSEUyN2syY3FzWUF6OQ?oc=5",
+          "publishedAt": "2026-11-02T16:34:18.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "scanx.trade",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxObGdzYzNhTDkxWU4tTExyOUZ2anBCYVRvYUFrc3hLdi1FTVFWaVNFdlQ5TWc4Rkpidk9HOW9tNFIybE5iQkduVFhLaDVEWElLYU1mZDVxYWdsXzc3NlZ0dGUydk9rbVBuS0hUQTU5cFRqU19yZ0JwWXRLRXR1OERMVFZYbVV0cTN2OXNUci1ZN1h4bWxFTFNQZnZ6dmdjTmRPU0oxcmhtN2t1Rl9NeU5Uc1hrRWtjM0hQSlJj?oc=5",
+          "publishedAt": "2026-11-02T09:10:18.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 90,
+        "certainty": 44,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": -12,
+        "mediaTone": -12,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 1,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 39,
+          "p24": 54,
+          "p72": 67,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-163amcv",
       "headline": "Kumar Mangalam Birla plans $30 billion push undeterred by crises",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Kumar Mangalam Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1081,6 +1139,72 @@
             "promoter or senior-leadership involvement"
           ],
           "posture": "PREPARE"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-o4mlbu",
+      "headline": "Vodafone Idea (Vi) launches four voice-only prepaid plans in India: Price, validity and benefits",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Vodafone Idea Limited (Vi).",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Regulatory",
+      "entityIds": [
+        "vi"
+      ],
+      "publishedAt": "2026-10-30T09:25:11.000Z",
+      "updatedAt": "2026-11-01T04:23:03.000Z",
+      "sources": [
+        {
+          "name": "Moneycontrol.com",
+          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOZkxFd3F3ZXlMYUJZNFR2SGFqdVpRRUVvS1V3S2JPV0E5VTgwWmJtbHNJNHQxWjdXR2tfbm8xX3hZMkJTN0U4ZW5xcE9JNi1RMjF2WVFXdFVpaVJhZWRsSjdtb2dRZ2oxR0xCU1QzNTk1cUpmNm83aHE0bnhVTUI0QVhRTnB0TWU4RzF4dTlyVU51Nmo5UXI5MG1BaFdvUWxaY1laRHJxT3lPRDNBYURVZEMyci1FWDR4SEVQVWZFQ1lNVEtNS1FXU0dacnAtRWJIUnFad19VSEFqVk9wRXpGOXNhdEtjVUpmVnfSAe8BQVVfeXFMTS0zd2hZNHVpYVRpZmYyZ2NURVM1Y1pud05XdDV6aXRTcHRKYXhUc3hUTDhDUjY3ZTlJSGRFendXeHJJVXRRX2tsQ3NsanJzV1hvOUxnLVdOMExrM24zcUdYTG54dzY0SE1vTVBCcDNGTkJHcTE3R05tUXpZTjMxYkJEUVU4SnBUNmJLLVpYUHE1bk8ySXpwVGYtejVRczVLb21xeWZTT2VSSV9KYm1iYU1PMm5XcUJVUHlxVGhaU1RVZF91bHhWZW5hTFZFZzJBQ2o4b3FVeTJDTm0zTDBzZk9CSF9rZmlRTzMtTkRNbFU?oc=5",
+          "publishedAt": "2026-11-01T04:23:03.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Gadgets 360",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQblRyUUdHR1IzZmNFYlFnMHdHQlQ5RVhYZkRCR3Q5MkJhMTE0allkYzFqUXh3MjlacDVDRklfSnptOW81TGctUW5HLXotUGgtWHRXRkNFRUtLcC1QNXI0Q1NyWm16T0JRblRVZVhJV2FOVkdhamgwUmFJWHh2NWpKNTM4dTNwcTEwTjhNRlAxRWVWOUVfMVRzWjhjNEpVb0VUTFRmQ3ljUGFVdUpTbVlPZENwVHVKZmEyT0hVOV81ZF95dzBzOW9tcll5NEdpR3EwYV9oZi1n0gHbAUFVX3lxTE5FUWl1YVRMSE9nZjJaUTAyQy03U3g1Q1U2QVdtUGhtNHA0c3Z2YlVPT25nWEtlUDdBaGNoVERBX0pIWFpyMm1GaFVjYUtjYlQ3S3IzS251NzZtT2tvQkc5ZjFkZkdnTHFqaF9zLTNZck5RSE5JX1AxWHlEU0FWeEdQRlVERFQzN0Iwb1l3ZDZ4ajBFYktXb3Iyb0wweGRSUzhCb2NEd0ZtU1lLNm5wRTI1NEVzN0NLbkttWEJQaUVZYTZIR3pFT1I5ODRqS2dVSDVSQkNwNTg0eHBpaw?oc=5",
+          "publishedAt": "2026-10-30T09:25:11.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 85,
+        "certainty": 70,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 10,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 41,
+          "p24": 57,
+          "p72": 69,
+          "drivers": [
+            "high strategic or reputation consequence"
+          ],
+          "posture": "WATCH"
         }
       },
       "flags": [
@@ -1422,7 +1546,7 @@
         "materiality": 100,
         "certainty": 44,
         "momentum": 23,
-        "trendChange": 100,
+        "trendChange": -100,
         "sentiment": -1,
         "mediaTone": -1,
         "publicSentiment": {
@@ -1675,13 +1799,13 @@
       "entityIds": [
         "kmb"
       ],
-      "publishedAt": "2026-10-14T14:14:18.000Z",
-      "updatedAt": "2026-10-14T14:14:18.000Z",
+      "publishedAt": "2026-10-14T07:00:00.000Z",
+      "updatedAt": "2026-10-14T07:00:00.000Z",
       "sources": [
         {
           "name": "NewsBytes",
           "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNZVR3UDVyREhfd2JlWjZuVTZVYUNMeTNveEY2dWNHbzIyWDFqR2lBWkQwTGUyeGVKSFlHTWN1aWlZRlZJSFZRX1lkZS1ycHdLT2RyMXlGaGppcVFKakVVTzJuWFFCS1Rqb1VJVGQzSUJNckx6MkVvX2FwdWItWFlyTEdHMmJqN1dnckJkc2lMUVB1VWhDbE1fYzBrOHJhTHQ4bFM2NHNKOC0wU0xDNXg4bWUtZjkwYktWRVBiMw?oc=5",
-          "publishedAt": "2026-10-14T14:14:18.000Z",
+          "publishedAt": "2026-10-14T07:00:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -2082,6 +2206,63 @@
       "live": true
     },
     {
+      "id": "live-1p40xlg",
+      "headline": "Vodafone Idea Subscriber Loss: जियो के 48.1 करोड़, एयरटेल के 40.6 करोड़ ग्राहक, वोडाफोन आइडिया कहां खड़ा?",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Vodafone Idea Limited (Vi).",
+      "bucket": "watch",
+      "status": "strong",
+      "category": "Financial",
+      "entityIds": [
+        "vi"
+      ],
+      "publishedAt": "2026-11-06T16:47:00.000Z",
+      "updatedAt": "2026-11-06T16:47:00.000Z",
+      "sources": [
+        {
+          "name": "Business Standard",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOSjByeDk3Tnh0RGo3RG9IV1R4UWh3TU5ObW1fUjRaa0NtT09wMWRaTnkxb2dvUHRfd2N0d1haVXdjNm90dUFtUlJfRU53Q3NJNTFFc2lkWmtSQnBycnNZM3dkZHMxV2EtTlhMSW82Y0FURjc2ZzVmbXJEZWJpZ0VDNGpZdDM2YXlTVm9acVRkWkt4eG9EbE01MnNDc1N3eFJnQTNFVXBnZWtycGNKSzdGRnFrRi03RWg1SEVDM0pVZFltcVoxemJGZy1Cd0pUWEtmbElNQk9HT0_SAd4BQVVfeXFMTWY5UnByZTB6bGs1S3hiejBXRjBwUTBjVHEwRnZsZGRPcUMtdDNsZEtGLWJYdW1JMk94TzZ2SFZmZXFkaHNldzBMNkZqbm5YMnZydkRvbW1EMWl1S3VRX3JHZ0NTekxjM2N4ZzlNUEhpUlB5c0JiSTBqTk9lZzRhNDk2d0lxSXZYMklZZmlqYWh2YVJBS2psZVE3NjAwWk9jLVZsMk1YTDVoNUxPU2pHY083TkNPdVZfaGlnTmdTSlNvMHdfcG1SaktLYVppTm1jd0hCdkdzdTB1TUJ2WXlR?oc=5",
+          "publishedAt": "2026-11-06T16:47:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-hi",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 72,
+        "certainty": 68,
+        "momentum": 6,
+        "trendChange": 0,
+        "sentiment": -8,
+        "mediaTone": -8,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 0,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 24,
+          "p24": 34,
+          "p72": 52,
+          "drivers": [
+            "incremental relevance with limited momentum"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-1f2t2on",
       "headline": "Birla goes big: Hindalco plans ₹80,000 crore investment as rivals raise the bar",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -2187,63 +2368,6 @@
             "promoter or senior-leadership involvement"
           ],
           "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1p40xlg",
-      "headline": "Vodafone Idea Subscriber Loss: जियो के 48.1 करोड़, एयरटेल के 40.6 करोड़ ग्राहक, वोडाफोन आइडिया कहां खड़ा?",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Vodafone Idea Limited (Vi).",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Financial",
-      "entityIds": [
-        "vi"
-      ],
-      "publishedAt": "2026-11-03T16:52:00.000Z",
-      "updatedAt": "2026-11-03T16:52:00.000Z",
-      "sources": [
-        {
-          "name": "Business Standard",
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOSjByeDk3Tnh0RGo3RG9IV1R4UWh3TU5ObW1fUjRaa0NtT09wMWRaTnkxb2dvUHRfd2N0d1haVXdjNm90dUFtUlJfRU53Q3NJNTFFc2lkWmtSQnBycnNZM3dkZHMxV2EtTlhMSW82Y0FURjc2ZzVmbXJEZWJpZ0VDNGpZdDM2YXlTVm9acVRkWkt4eG9EbE01MnNDc1N3eFJnQTNFVXBnZWtycGNKSzdGRnFrRi03RWg1SEVDM0pVZFltcVoxemJGZy1Cd0pUWEtmbElNQk9HT0_SAd4BQVVfeXFMTWY5UnByZTB6bGs1S3hiejBXRjBwUTBjVHEwRnZsZGRPcUMtdDNsZEtGLWJYdW1JMk94TzZ2SFZmZXFkaHNldzBMNkZqbm5YMnZydkRvbW1EMWl1S3VRX3JHZ0NTekxjM2N4ZzlNUEhpUlB5c0JiSTBqTk9lZzRhNDk2d0lxSXZYMklZZmlqYWh2YVJBS2psZVE3NjAwWk9jLVZsMk1YTDVoNUxPU2pHY083TkNPdVZfaGlnTmdTSlNvMHdfcG1SaktLYVppTm1jd0hCdkdzdTB1TUJ2WXlR?oc=5",
-          "publishedAt": "2026-11-03T16:52:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-hi",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 72,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": -8,
-        "mediaTone": -8,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 0,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 28,
-          "p24": 39,
-          "p72": 56,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
         }
       },
       "flags": [
@@ -2688,64 +2812,6 @@
       "live": true
     },
     {
-      "id": "live-1aferee",
-      "headline": "TRAI Launches Network Anubhav Platform to Compare Jio, Airtel, Vodafone Idea and BSNL Network Performance",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Regulatory",
-      "entityIds": [
-        "vi",
-        "bharti-airtel"
-      ],
-      "publishedAt": "2026-11-05T09:46:38.000Z",
-      "updatedAt": "2026-11-05T09:46:38.000Z",
-      "sources": [
-        {
-          "name": "TelecomLead",
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQVkppVV9Nc29TQnZBcHZZVkVXLXJwMVJFY1JfTjFlWHdvMmU5NlFRdl9GN1FuNXQ5N19lZllsM0VCQ2NRaTR5bFhuei13WUhJSkY1VTg2LVFUaGo4R1VObmlYeXhxaWFWc1ozRkt2SlhJWU1vRllEZWhvUVh2UHFUbnhyUmphVU95Y1BJNElObGR1bEI5VHdraWZSNFpJMVJvQktSeTB1NmFULW5iRVhwWHMxa0h4QVdSYTlTVTYtSkdtUzFOejAxdlE5TE95bXYxZmVWbngzMlfSAeABQVVfeXFMTTNEaUQ5TGtqNHpKQzVDY21iQU1VRkpvN05QQnBJaXZkUFZsVDNleVkxTlUxeGdUMHFlZERwODFtcVZDTUppdERYMS1KcTcyZWFHRkRIbjM3OFY3UXQ4Y3loeGQ0NW50TTk5ZXgycHp4NVQ5TW9BTTZoTFlVYy02VGQzWlZocklhWkxncHJwUWpRdE1WU2xGdWtwd3ZNMGxyMjR6SDZBUjZ6Rlg3REZtUWlJVHV5Zk5HSkViYkp1TUtBbmppXzlvbmtBOXJONjFXNDdfb2tNOVBSNWE2WVBpazg?oc=5",
-          "publishedAt": "2026-11-05T09:46:38.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 68,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 7,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 22,
-          "p24": 29,
-          "p72": 49,
-          "drivers": [
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
       "id": "live-6sazzu",
       "headline": "Second time in 2 months, TRAI fines Vodafone Idea",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -2849,63 +2915,6 @@
           "p72": 53,
           "drivers": [
             "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-p1020j",
-      "headline": "Vodafone Idea (Vi) Launches Four Voice-Only Prepaid Plans in India a Month After TRAI Mandate",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Regulatory",
-      "entityIds": [
-        "vi"
-      ],
-      "publishedAt": "2026-10-30T09:25:11.000Z",
-      "updatedAt": "2026-10-30T09:25:11.000Z",
-      "sources": [
-        {
-          "name": "Gadgets 360",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQblRyUUdHR1IzZmNFYlFnMHdHQlQ5RVhYZkRCR3Q5MkJhMTE0allkYzFqUXh3MjlacDVDRklfSnptOW81TGctUW5HLXotUGgtWHRXRkNFRUtLcC1QNXI0Q1NyWm16T0JRblRVZVhJV2FOVkdhamgwUmFJWHh2NWpKNTM4dTNwcTEwTjhNRlAxRWVWOUVfMVRzWjhjNEpVb0VUTFRmQ3ljUGFVdUpTbVlPZENwVHVKZmEyT0hVOV81ZF95dzBzOW9tcll5NEdpR3EwYV9oZi1n0gHbAUFVX3lxTE5FUWl1YVRMSE9nZjJaUTAyQy03U3g1Q1U2QVdtUGhtNHA0c3Z2YlVPT25nWEtlUDdBaGNoVERBX0pIWFpyMm1GaFVjYUtjYlQ3S3IzS251NzZtT2tvQkc5ZjFkZkdnTHFqaF9zLTNZck5RSE5JX1AxWHlEU0FWeEdQRlVERFQzN0Iwb1l3ZDZ4ajBFYktXb3Iyb0wweGRSUzhCb2NEd0ZtU1lLNm5wRTI1NEVzN0NLbkttWEJQaUVZYTZIR3pFT1I5ODRqS2dVSDVSQkNwNTg0eHBpaw?oc=5",
-          "publishedAt": "2026-10-30T09:25:11.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 68,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 7,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 22,
-          "p24": 29,
-          "p72": 49,
-          "drivers": [
-            "uncertainty may drive further coverage"
           ],
           "posture": "AMPLIFY"
         }
@@ -3865,7 +3874,7 @@
     "stakeholderScope": "Regulators, exchanges, courts, ratings agencies, lenders/JV partners, key sector competitors, industry bodies and material government ministries; stakeholders are matched only with ABG context."
   },
   "meta": {
-    "scannedAt": "2026-11-07T20:11:40.572Z",
+    "scannedAt": "2026-11-07T23:56:36.674Z",
     "deliveryMode": "governed-snapshot",
     "providers": [
       "GDELT",
@@ -3931,7 +3940,7 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-11-07T20:10:16.700Z"
+        "checkedAt": "2026-11-07T23:55:12.080Z"
       },
       {
         "kind": "registry-audit",
@@ -3984,11 +3993,11 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-11-07T20:10:16.737Z"
+        "checkedAt": "2026-11-07T23:55:12.126Z"
       }
     ],
     "registryReconciled": true,
-    "successfulQueries": 33,
+    "successfulQueries": 34,
     "sourceChecks": [
       {
         "name": "group-family:gdelt",
@@ -4004,7 +4013,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 45,
+        "itemCount": 44,
         "registryAudit": null,
         "error": ""
       },
@@ -4024,7 +4033,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "Reddit RSS 403"
+        "error": "Reddit RSS 429"
       },
       {
         "name": "group-leadership:gdelt",
@@ -4047,11 +4056,11 @@
       {
         "name": "group-leadership:reddit",
         "provider": "Open public conversation",
-        "ok": false,
-        "status": "failed",
-        "itemCount": 0,
+        "ok": true,
+        "status": "healthy",
+        "itemCount": 2,
         "registryAudit": null,
-        "error": "Reddit RSS 429"
+        "error": ""
       },
       {
         "name": "cement-building:gdelt",
@@ -4067,7 +4076,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 41,
+        "itemCount": 40,
         "registryAudit": null,
         "error": ""
       },
@@ -4103,7 +4112,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 74,
+        "itemCount": 77,
         "registryAudit": null,
         "error": ""
       },
@@ -4112,7 +4121,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 82,
+        "itemCount": 86,
         "registryAudit": null,
         "error": ""
       },
@@ -4139,7 +4148,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 25,
+        "itemCount": 23,
         "registryAudit": null,
         "error": ""
       },
@@ -4166,7 +4175,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 59,
+        "itemCount": 61,
         "registryAudit": null,
         "error": ""
       },
@@ -4364,7 +4373,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 42,
+        "itemCount": 41,
         "registryAudit": null,
         "error": ""
       },
@@ -4499,7 +4508,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-11-07T20:10:16.700Z"
+          "checkedAt": "2026-11-07T23:55:12.080Z"
         },
         "error": ""
       },
@@ -4560,7 +4569,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-11-07T20:10:16.737Z"
+          "checkedAt": "2026-11-07T23:55:12.126Z"
         },
         "error": ""
       },
@@ -4682,19 +4691,20 @@
         "error": ""
       }
     ],
-    "rawArticleCount": 679,
-    "freshArticleCount": 422,
-    "articleCount": 308,
-    "rejectedArticleCount": 114,
+    "rawArticleCount": 685,
+    "freshArticleCount": 424,
+    "articleCount": 307,
+    "rejectedArticleCount": 117,
     "rejectionReasons": {
-      "no_abg_entity": 96,
-      "routine_market_advice": 14,
-      "price_movement_without_event": 4
+      "no_abg_entity": 95,
+      "weak_public_context": 1,
+      "routine_market_advice": 16,
+      "price_movement_without_event": 5
     },
     "eventCount": 60,
     "publicConversationItems": 0,
     "publicConversationChecks": 14,
-    "publicConversationChecksSucceeded": 0,
+    "publicConversationChecksSucceeded": 1,
     "sentimentCoverage": {
       "media": "Google News, GDELT and official published-source language",
       "openPublic": "Accessible Reddit public-search RSS where available; samples inform sentiment only and cannot create news events.",
@@ -4709,17 +4719,12 @@
       {
         "provider": "Open public conversation",
         "query": "group-family:reddit",
-        "error": "Reddit RSS 403"
+        "error": "Reddit RSS 429"
       },
       {
         "provider": "GDELT",
         "query": "group-leadership:gdelt",
         "error": "Source check exceeded 9000ms"
-      },
-      {
-        "provider": "Open public conversation",
-        "query": "group-leadership:reddit",
-        "error": "Reddit RSS 429"
       },
       {
         "provider": "GDELT",
@@ -4862,15 +4867,15 @@
         "error": "essel-mining-news: official 403"
       }
     ],
-    "windowStart": "2026-10-08T20:10:15.296Z",
-    "windowEnd": "2026-11-07T20:10:15.296Z",
-    "requestedWindowStart": "2026-10-08T20:10:15.296Z",
+    "windowStart": "2026-10-08T23:55:10.788Z",
+    "windowEnd": "2026-11-07T23:55:10.788Z",
+    "requestedWindowStart": "2026-10-08T23:55:10.788Z",
     "windowCapped": false,
-    "snapshotGeneratedAt": "2026-11-07T20:10:15.296Z",
-    "snapshotExpiresAt": "2026-11-07T21:40:15.296Z",
-    "snapshotSuccessRatio": 0.5077,
+    "snapshotGeneratedAt": "2026-11-07T23:55:10.788Z",
+    "snapshotExpiresAt": "2026-11-08T01:25:10.788Z",
+    "snapshotSuccessRatio": 0.5231,
     "snapshotMinimumSuccessRatio": 0.2,
     "sourceCommit": "9010adc06f361ad55adb3da21f95519b3a98febb",
-    "workflowRunId": "42409728304"
+    "workflowRunId": "42427378832"
   }
 }
