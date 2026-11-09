@@ -2,14 +2,14 @@
   "schemaVersion": "1.0.0",
   "supportPolicy": "source-metadata-only-v1",
   "statementVerification": "not_performed",
-  "generatedAt": "2026-11-08T20:37:27.788Z",
+  "generatedAt": "2026-11-09T00:08:35.917Z",
   "sourceCommit": "9010adc06f361ad55adb3da21f95519b3a98febb",
   "summary": {
     "eventCount": 60,
     "claimCount": 60,
     "factClaimCount": 60,
     "interpretationCount": 0,
-    "evidenceCount": 97,
+    "evidenceCount": 96,
     "supportedFactClaims": 0,
     "provisionalFactClaims": 60,
     "unsupportedFactClaims": 0
@@ -415,21 +415,6 @@
       "provisionalFactClaims": 1
     },
     {
-      "eventId": "live-2p9pck",
-      "entityIds": [
-        "vi"
-      ],
-      "claimIds": [
-        "a9c3410e449ec4f8b00c82e7"
-      ],
-      "evidenceIds": [
-        "404ab7e940cc9fab6128ce99",
-        "c17edec6cbe7d64e3737483c"
-      ],
-      "unsupportedFactClaims": 0,
-      "provisionalFactClaims": 1
-    },
-    {
       "eventId": "live-1iza8rq",
       "entityIds": [
         "abg"
@@ -579,7 +564,7 @@
         "f1891202653d9a7321f49fa0"
       ],
       "evidenceIds": [
-        "fdaf4895f15e7bd537647cf8",
+        "802a2eb4f15b31586efd630d",
         "6df877183f78e5076ea97fd5",
         "511753521f5eb2118b809b6b",
         "ae6b68e9f1f1148a795aaf8a"
@@ -900,6 +885,20 @@
       ],
       "evidenceIds": [
         "8773d5f84d95ef4e966d1772"
+      ],
+      "unsupportedFactClaims": 0,
+      "provisionalFactClaims": 1
+    },
+    {
+      "eventId": "live-ja9c9z",
+      "entityIds": [
+        "vi"
+      ],
+      "claimIds": [
+        "631d6071c53980b4a4ee0c90"
+      ],
+      "evidenceIds": [
+        "d698e425cc9afa12af183efb"
       ],
       "unsupportedFactClaims": 0,
       "provisionalFactClaims": 1
@@ -1618,33 +1617,6 @@
       "sequence": 1
     },
     {
-      "id": "a9c3410e449ec4f8b00c82e7",
-      "eventId": "live-2p9pck",
-      "entityIds": [
-        "vi"
-      ],
-      "evidenceIds": [
-        "404ab7e940cc9fab6128ce99",
-        "c17edec6cbe7d64e3737483c"
-      ],
-      "evidenceCount": 2,
-      "supportStatus": "provisional",
-      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
-      "supportConfidence": null,
-      "statementVerification": "not_performed",
-      "supportPolicy": "source-metadata-only-v1",
-      "independentEvidenceCount": null,
-      "independenceAssessment": "not_established",
-      "sourceDomainCount": 1,
-      "observedAt": "2026-10-16T07:00:00.000Z",
-      "lifecycle": "developing",
-      "sourceEventVersion": 1,
-      "kind": "fact",
-      "text": "Published coverage across 2 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "normalizedText": "published coverage across 2 distinct source domains identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
-      "sequence": 1
-    },
-    {
       "id": "0f9e4cfa02cb0a6b2f566bce",
       "eventId": "live-1iza8rq",
       "entityIds": [
@@ -1912,7 +1884,7 @@
         "ultratech"
       ],
       "evidenceIds": [
-        "fdaf4895f15e7bd537647cf8",
+        "802a2eb4f15b31586efd630d",
         "6df877183f78e5076ea97fd5",
         "511753521f5eb2118b809b6b",
         "ae6b68e9f1f1148a795aaf8a"
@@ -2513,6 +2485,32 @@
       "kind": "fact",
       "text": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Lifestyle Brands Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning aditya birla lifestyle brands limited abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
+      "sequence": 1
+    },
+    {
+      "id": "631d6071c53980b4a4ee0c90",
+      "eventId": "live-ja9c9z",
+      "entityIds": [
+        "vi"
+      ],
+      "evidenceIds": [
+        "d698e425cc9afa12af183efb"
+      ],
+      "evidenceCount": 1,
+      "supportStatus": "provisional",
+      "supportReason": "Traceable source metadata is attached; the statement has not been checked against source text. Source tier and repeated reporting do not establish truth.",
+      "supportConfidence": null,
+      "statementVerification": "not_performed",
+      "supportPolicy": "source-metadata-only-v1",
+      "independentEvidenceCount": null,
+      "independenceAssessment": "not_established",
+      "sourceDomainCount": 1,
+      "observedAt": "2026-10-22T07:00:00.000Z",
+      "lifecycle": "developing",
+      "sourceEventVersion": 1,
+      "kind": "fact",
+      "text": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "normalizedText": "published coverage across 1 distinct source domain identifies this development concerning vodafone idea limited vi abg pulse has grouped the available items as one event and retained every source link for verification live discovery may expose only headlines or short extracts so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system",
       "sequence": 1
     }
   ],
@@ -3453,40 +3451,6 @@
       "wireService": null
     },
     {
-      "id": "404ab7e940cc9fab6128ce99",
-      "eventId": "live-2p9pck",
-      "authority": "https://hrtoday.in/",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQRG1aOGYyWlRfWnV6LXNwT3BwZU1OM2hkQllhemNrODlZLTZDSUZiQWhGVXhCa19kVVVEWmY3ZTQwWmpjbWJ5Z1pHV3l6M2F1ZE9OblRzNmMzb1BYWkpiM3h6aHBUNElEQllqZzl6T3RWdng4a19kbGYxN3dIcHNfOG85WU1GZHBMRzB0RmUxNEFjVWhRZnc?oc=5",
-      "publishedAt": "2026-10-19T07:00:00.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null,
-      "originalReportUrl": null,
-      "wireService": null
-    },
-    {
-      "id": "c17edec6cbe7d64e3737483c",
-      "eventId": "live-2p9pck",
-      "authority": "TradingView",
-      "title": null,
-      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNXzdZajlSYmJiRjhYbG5jcnVCeG5qeW96bGR2TmtHUUxQWkpTNmI1RDdkdmx6UVlNRnNGV1dMejh2b2ZNcWRsS090SUtTSDllQ3QtNF9CMXFteGFuZ095STRfRWtIQ3hIUktrT3BFelY5NW5XVzBnajhRa0lUb05GUHRsRk5EaWFPWkdvTlFieV9Ja2R2RXpKdkxrMXR1VGlQdmJqckdtWmFZRGZ1UlhGanQ2SFF0YUcxSkZGeDNHNFdVamhiQzhDaC1iWXNycWpJWVpBLUtlR0JzMW50eXU1dw?oc=5",
-      "publishedAt": "2026-10-16T07:00:00.000Z",
-      "tier": 3,
-      "official": false,
-      "provider": "Google News IN-en",
-      "sourceId": null,
-      "attachmentUrl": null,
-      "rights": null,
-      "snapshotSourceCommit": null,
-      "originalReportUrl": null,
-      "wireService": null
-    },
-    {
       "id": "f71513968e3791007cffe37f",
       "eventId": "live-1iza8rq",
       "authority": "Free Press Journal",
@@ -3657,12 +3621,12 @@
       "wireService": null
     },
     {
-      "id": "fdaf4895f15e7bd537647cf8",
+      "id": "802a2eb4f15b31586efd630d",
       "eventId": "live-137ws6r",
       "authority": "Business Standard",
       "title": null,
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQcmhtZU1jN01vcVplOUgtZ01EcG5OV21ybjlTQUdCUUNhZEpISEdxVmE3UlpQVGJtck1hS3NDMktLemNBNDVnVDFMdlphdXBnZlJXMlhOSDFraTZwSWFRZ0NzR1JXMzdGaXhndG1yYWhhWjhkZFF4MTl3Y09iREMtZmNZTmdrTlAzeXZ3c0lpeGNnbWx3aEFHa01lb1RicWVjNHJGRmNkN05FUGt30gGzAUFVX3lxTFBROTE2UTBJbFFWSjhyTmc3dExEZ3N4OHpXc2VydkV0TVNKcTZpYy1SY0h4VXgtTDFCRjBfaHg5Wk05WTEwUnVIaURWbmdDTkpJQ0lkNWN2QVN1a2VyZHpheHdkY0N6amN1Rm1TUzFIcmg3RUs2eUhaZnE0ZllLQjI3ZXhwSHNack55RUN6amd5dW5JaDltNG4zMFNlekdXV1FWbEcxc3lJV3NDZ043Zi05RjBr?oc=5",
-      "publishedAt": "2026-11-06T09:01:14.000Z",
+      "publishedAt": "2026-11-06T09:02:00.000Z",
       "tier": 1,
       "official": false,
       "provider": "Google News IN-hi",
@@ -4165,24 +4129,41 @@
       "snapshotSourceCommit": null,
       "originalReportUrl": null,
       "wireService": null
+    },
+    {
+      "id": "d698e425cc9afa12af183efb",
+      "eventId": "live-ja9c9z",
+      "authority": "scanx.trade",
+      "title": null,
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOQVhFR2FReEpFZHBlX2NiNW5YOFlRYzRUUUd2Rkw2RGg2eE9OcjNRLTNmY2djZnEzNHcwUnFucUtwd1VoVDl1RVpROVBreHJGMVotYXNzb1JtRTVrQS0zSWZJUFpST3YyeU1yT3k5ZmJxaVBSem1MZGtGZU0xM3lJX1ZXcXo1VWZqbmdRT0xLcnRDWU1YX3g2NFlaNjM0ckhocnRjYWppUDRueUlsRnFaTU5lbzVkcWM?oc=5",
+      "publishedAt": "2026-10-22T07:00:00.000Z",
+      "tier": 3,
+      "official": false,
+      "provider": "Google News IN-en",
+      "sourceId": null,
+      "attachmentUrl": null,
+      "rights": null,
+      "snapshotSourceCommit": null,
+      "originalReportUrl": null,
+      "wireService": null
     }
   ],
   "input": {
-    "governedSnapshotGeneratedAt": "2026-11-08T18:27:33.832Z",
-    "governedSnapshotAgeMinutes": 129.9,
+    "governedSnapshotGeneratedAt": "2026-11-08T22:24:08.839Z",
+    "governedSnapshotAgeMinutes": 104.5,
     "governedSnapshotSourceCommit": "9010adc06f361ad55adb3da21f95519b3a98febb",
-    "governedSnapshotWorkflowRunId": "42510095657",
+    "governedSnapshotWorkflowRunId": "42530044171",
     "governedSnapshotWorkflowRunAttempt": "1",
     "governedSnapshotIdentity": {
-      "generatedAt": "2026-11-08T18:27:33.832Z",
-      "windowStart": "2026-10-09T18:27:33.832Z",
-      "windowEnd": "2026-11-08T18:27:33.832Z",
+      "generatedAt": "2026-11-08T22:24:08.839Z",
+      "windowStart": "2026-10-09T22:24:08.839Z",
+      "windowEnd": "2026-11-08T22:24:08.839Z",
       "sourceCommit": "9010adc06f361ad55adb3da21f95519b3a98febb",
       "sourceRepository": "NinjaRK/abg-pulse",
-      "sourceWorkflowRun": "42510095657",
+      "sourceWorkflowRun": "42530044171",
       "sourceWorkflowRunAttempt": "1",
-      "payloadHash": "29ed1d89bef0f55205d410a736492e2d9a252f9403efed53aeb8a4e03189d688",
-      "generationId": "04e2f490dcbdfa7cd4151856fe44f96af1974a59d7747324fab1270dae908e30"
+      "payloadHash": "e8624528f2499c111d9a1a9783e43d4243d7acf842c0dc4c1cd3da66e511d191",
+      "generationId": "fbae235aff5fc55c775bee93dc2c8e3b90651a94d3d0f8353fffd62754f674d0"
     },
     "governedSnapshotEventCount": 60
   },
@@ -4199,6 +4180,6 @@
   "contradictions": [],
   "integrity": {
     "algorithm": "sha256",
-    "payloadHash": "80069557ceaee026ccee4c872a48c08627d85e4e0391a16f8614df8984aacfff"
+    "payloadHash": "dff110148b19cc2044d6d9f59b3283ae1d8448f12bd81e80586b1362c6890447"
   }
 }
