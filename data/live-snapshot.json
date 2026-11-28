@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-27T18:52:47.083Z",
-  "expiresAt": "2026-11-27T20:22:47.083Z",
+  "generatedAt": "2026-11-28T01:54:28.085Z",
+  "expiresAt": "2026-11-28T03:24:28.085Z",
   "source": {
     "repository": "NinjaRK/abg-pulse",
     "commitSha": "9010adc06f361ad55adb3da21f95519b3a98febb",
     "workflow": "Refresh governed ABG Pulse snapshot",
-    "workflowRunId": "46052660706",
+    "workflowRunId": "46095423972",
     "workflowRunAttempt": "1"
   },
   "window": {
-    "start": "2026-10-28T18:52:47.083Z",
-    "end": "2026-11-27T18:52:47.083Z",
+    "start": "2026-10-29T01:54:28.085Z",
+    "end": "2026-11-28T01:54:28.085Z",
     "lookbackDays": 30
   },
   "events": [
@@ -39,17 +39,8 @@
           "official": false
         },
         {
-          "name": "Financial Express",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOcDZxdHVGYWRQNUdXQUtZeU5uRnhXNTZGQlBpdFhxOElKdHVya0pYZUhLZEllYkh1c1pDbGt2cUl4b1ZMbXp1VVlTb28zbG5xb2FCWnJ1Z2ZkNmRPUHNIRktBYm12M1NYZTRNSzc5R1FjRE9PVGFEZEJXU3dmWmZjN053TzJONEFMTXUtT012aWFGQ1FFV0I4Q3U0OG51ajVpWWRDaW5FdXg0T1AtbmJDQnd0VFB1NnVCY0FuVVZXWnA4OVhZeFgwNVpiMXo?oc=5",
-          "publishedAt": "2026-11-27T14:36:54.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
           "name": "The Financial Express",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQR0YxSjNIbUNodFB1Yk9kQ05FYm9kVHhUWFAzQTdETXgtbG1JWnVBMWl2d0FOVWd3STlUX2hZQjltU1BDOW9VN1ZjQlZ5R00yek5fVG90MnFwcVpIM3JmM2ptcjMwNUc0bE1YMXdvWVVacHNlbzI1QmVZOXRxbWZ5TU1iQjRVXzdxd0ZLSXJnazMtSGd2TDlrdC12Wk5vTzB4X1YzVnVxTW9CYTk2UWU4Z3NNQmQ5WWc0dGFKcXlDcldMTDhiMjRN0gHHAUFVX3lxTFBHRjFKM0htQ2h0UHViT2RDTkVib2RUeFRYUDNBN0RNeC1sbUladUExaXZ3QU5VZ3dJOVRfaFlCOW1TUEM5b1U3VmNCVnlHTTJ6Tl9Ub3QycXBxWkgzcmYzam1yMzA1RzRsTVgxd29ZVVpwc2VvMjVCZVk5dHFtZnlNTWJCNFVfN3F3RktJcmdrMy1IZ3ZMOWt0LXZaTm9PMHhfVjNWdXFNb0JhOTZRZThnc01CZDlZZzR0YUpxeUNyV0xMOGIyNE0?oc=5",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOcDZxdHVGYWRQNUdXQUtZeU5uRnhXNTZGQlBpdFhxOElKdHVya0pYZUhLZEllYkh1c1pDbGt2cUl4b1ZMbXp1VVlTb28zbG5xb2FCWnJ1Z2ZkNmRPUHNIRktBYm12M1NYZTRNSzc5R1FjRE9PVGFEZEJXU3dmWmZjN053TzJONEFMTXUtT012aWFGQ1FFV0I4Q3U0OG51ajVpWWRDaW5FdXg0T1AtbmJDQnd0VFB1NnVCY0FuVVZXWnA4OVhZeFgwNVpiMXrSAdMBQVVfeXFMTl9yVzZkVDJwVjdZLTFKNWdoNmtWb0FqSGlmZDVHYl9VSWxEZTZtRldpVlo1Tk5wWUtYZ1ZPU29QSWJldzZaQmEyMllmNlhfV0ZXV2J5M3c5UkhzYVFpS3NNc2ZGM2tQRGloRWRnZTRrWjY3WVhYbTllYTBTZWNYTXBMa0NVTXNfWEhvc0ZJNXlFUml1MDAwdVE3VlhQclJoVlp1VmhLazNLcXlQVmZ2U1hWcGw1cjU1S2VPZlVIeXhVSUF4YnMtdjRlUFcwY2pDa0tPYw?oc=5",
           "publishedAt": "2026-11-27T14:36:54.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
@@ -106,8 +97,8 @@
       "intelligence": {
         "materiality": 100,
         "certainty": 76,
-        "momentum": 100,
-        "trendChange": 100,
+        "momentum": 79,
+        "trendChange": 150,
         "sentiment": 0,
         "mediaTone": 0,
         "publicSentiment": {
@@ -120,8 +111,8 @@
         "reputationImpact": 9,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 83,
-          "p24": 99,
+          "p6": 79,
+          "p24": 98,
           "p72": 99,
           "drivers": [
             "rapid media acceleration",
@@ -141,7 +132,7 @@
     {
       "id": "live-3h5xht",
       "headline": "Hindalco reappoints Satish Pai as MD; Mahindra Logistics’ Hemant Sikka named Deputy MD",
-      "summary": "Published coverage across 16 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "summary": "Published coverage across 11 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "Coverage is accelerating across independent sources and may become more consequential even if the underlying facts remain unchanged.",
       "bucket": "must",
       "status": "strong",
@@ -158,7 +149,7 @@
           "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQd0VBX3NubzRDdDF1RlNySHFYc2NyOVE5aTcwS2VXd00xZ0M5R0g0TGxKRjdWSFpZeTNUVE9OVlBmSHUxMXdkM0xVNmZ4b2RBdV9kMTYxbUVRMjhsOEpPcVFSeWowRkJ3LUxHRmNucGpCLUlyaUppTjUzTEJTZGNvTHZEaTFpenpXVG90RFVUQXpJLTRHZTQ2djZ5Q1VPOTFuajFWN3VTZWJGOXlQUlRPV0tBWTRaMjBTd00tM2ptcThmSlVfb1ZDT1AycVplT1NXTDFDakdmS2VoeE5Z?oc=5",
           "publishedAt": "2026-11-25T04:26:03.000Z",
           "tier": 1,
-          "provider": "Google News US-en",
+          "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         },
@@ -166,24 +157,6 @@
           "name": "ET Manufacturing",
           "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPQTFSb1JsTkdaVXBzLThlVC1SdjU4elNXcHJjR2hCZHhQVXZqQTllMkhqeVZyOThfUE5HR1pzZ2hVZU11OFc3MVUwc20zU1FMejU1eXdPLXJmTnA3TUNoUUZXSFByQTdrM2JpdlpTUWhKNDBQc3R3c3duellPWFZoZFFZZTE0UkdyNWVwWVRVemdxUTQtYk4yaTZYYy05b0pyYjVyQzVuTG5xdWRGSTd2SWR6a094UWQtRm9jMmZ5N25nNVdaVW9OZ25QQWtxQ0dvM3ZOekM2WDRuWWZnbnfSAeMBQVVfeXFMT2hFS2ZWeEYwSjhyRlJpdzFVaThnNm9CR1duUW43bGROMGw4R0s1bUVlSUlqeHdMazFLZDFDNUNKZGt6Z1RwUW9EUWtSVTI5bGl1NHNlSVpBcFFzTzJ5Rk4wWW9VcFVuLW9WcDlLXzUtcGFpLUc5NWZ1SWZPYlZhUmtTTmItUGxfa0tTZ1pwRndMYkRYMWFQN2hQdUtEUk1kRzZhSDlXWlZSZ0NzV0daMnc5c2dzYmpvWHEzeUp2YVFIdDdHNWlwVEVTV2VtNFZOTl9LVGRuM2QwazBqT3RfOHUtSzQ?oc=5",
           "publishedAt": "2026-11-24T06:22:56.000Z",
-          "tier": 1,
-          "provider": "Google News US-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "ET Manufacturing",
-          "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPaEVLZlZ4RjBKOHJGUml3MVVpOGc2b0JHV25RbjdsZE4wbDhHSzVtRWVJSWp4d0xrMUtkMUM1Q0pka3pnVHBRb0RRa1JVMjlsaXU0c2VJWkFwUXNPMnlGTjBZb1VwVW4tb1ZwOUtfNS1wYWktRzk1ZnVJZk9iVmFSa1NOYi1QbF9rS1NnWnBGd0xiRFgxYVA3aFB1S0RSTWRHNmFIOVdaVlJnQ3NXR1oydzlzZ3Niam9YcTN5SnZhUUh0N0c1aXBURVNXZW00Vk5OX0tUZG4zZDBrMGpPdF84dS1LNNIB4wFBVV95cUxPaEVLZlZ4RjBKOHJGUml3MVVpOGc2b0JHV25RbjdsZE4wbDhHSzVtRWVJSWp4d0xrMUtkMUM1Q0pka3pnVHBRb0RRa1JVMjlsaXU0c2VJWkFwUXNPMnlGTjBZb1VwVW4tb1ZwOUtfNS1wYWktRzk1ZnVJZk9iVmFSa1NOYi1QbF9rS1NnWnBGd0xiRFgxYVA3aFB1S0RSTWRHNmFIOVdaVlJnQ3NXR1oydzlzZ3Niam9YcTN5SnZhUUh0N0c1aXBURVNXZW00Vk5OX0tUZG4zZDBrMGpPdF84dS1LNA?oc=5",
-          "publishedAt": "2026-11-24T04:49:38.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "CNBC TV18",
-          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNc2NJaUNkOGhZQ3pTSXBLRzBkVXBBRTYwblJveW5wbTUxLWRhSDRSbkFzSnp4aWxIR013SURWQ2RVYTF2azdxNUFJcUpTdTRXM2pPa1g1UFdkWEgtVVpoT2I3UWtRV2xuemxlTVc0QU1rWWcwelVMQ3pwald0amJ4SFpzU192amxmamprUFRIZnZuSzhJZzNrOXV2R0l5YVptdnZmQlpoSWh4a3pDWVZkM2p1dUZ6d3U5S0xTMmhUeDZFbmVVdDBaU1ozU1p0cmRHSFc4bHJyeXBGV0lDVXhZU0FaalUwb2_SAecBQVVfeXFMTXNjSWlDZDhoWUN6U0lwS0cwZFVwQUU2MG5Sb3lucG01MS1kYUg0Um5Bc0p6eGlsSEdNd0lEVkNkVWExdms3cTVBSXFKU3U0VzNqT2tYNVBXZFhILVVaaE9iN1FrUVdsbnpsZU1XNEFNa1lnMHpVTEN6cGpXdGpieEhac1NfdmpsZmpqa1BUSGZ2bks4SWczazl1dkdJeWFabXZ2ZkJaaEloeGt6Q1lWZDNqdXVGend1OUtMUzJoVHg2RW5lVXQwWlNaM1NadHJkR0hXOGxycnlwRldJQ1V4WVNBWmpVMG9v?oc=5",
-          "publishedAt": "2026-11-23T15:44:10.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -194,7 +167,7 @@
           "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPM1ZCd2tmOGhxNzYzNlhnV1lobFF6cnFoUmM5YmZBb2MtZVpndjY5WFB5Y003ZWh5dDZTVFFPVS10WnVTT3pZdmlyQkViOXItekVXVkhYWER5YWNLRHJBRTNfZnE0aXYzTXloYUJqa2RiR2NRZ2xfcU44WnFVYmVHTlRMVUpWU3dkYUFmTm03NVYwREhnM1FjbTFITTM0Zk0zcUM5aUVGdnFVQXlkU3ZVZ1g0NzB4MVlrbXhfcUUzX1NXQi1QQ3pqMnBoRlVvSVFNaVFwQy10eUNxcXVHUFg4UmNR0gHnAUFVX3lxTE1zY0lpQ2Q4aFlDelNJcEtHMGRVcEFFNjBuUm95bnBtNTEtZGFINFJuQXNKenhpbEhHTXdJRFZDZFVhMXZrN3E1QUlxSlN1NFczak9rWDVQV2RYSC1VWmhPYjdRa1FXbG56bGVNVzRBTWtZZzB6VUxDenBqV3RqYnhIWnNTX3ZqbGZqamtQVEhmdm5LOElnM2s5dXZHSXlhWm12dmZCWmhJaHhrekNZVmQzanV1Rnp3dTlLTFMyaFR4NkVuZVV0MFpTWjNTWnRyZEdIVzhscnJ5cEZXSUNVeFlTQVpqVTBvbw?oc=5",
           "publishedAt": "2026-11-23T15:44:10.000Z",
           "tier": 1,
-          "provider": "Google News US-en",
+          "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         },
@@ -203,7 +176,7 @@
           "url": "https://news.google.com/rss/articles/CBMikAJBVV95cUxQWGVBdWdlbjFMZkZidWt6d3FCWnhacGpLQy1NMnJpU1l0NDEyQTF0TldOa1I4Q0NnRWNydHFzMzJ4Umo4OEhsaEp2Wm5WbWE2V2toRjFrTV9uZk0xQ0htOEY1UjBQclJmOXA1M2dCRWJKS01waUZ5cWFISjZiZlZDX083SkNidWVWMUVDUU5GTDRFWnFuM1djZFBzYnJpa29Eai1nZzc4amEwakpZb1lBbGNEcnJuYmNOMHBVZ1BaNEJtUW1zY2F5WTd4QUdEX1dhTUtFaXRhQUtDWFRIZm85d2ZqcjJodV8tbnZwRWoxZ1pPSnRfbWtsaWtPTTVBcDlYMmlHbE5MZDQ1dmhtTFJjM9IBlgJBVV95cUxNcHpueHk0Z1VOeHpnRzYxNkxpY1BtNEUtVkx1X1dtWW5US1FEOEI5dVR0eGs4TGJuZkZJaEFpMHk0WW5sM0kyUXhtNGI3WEtDXy1LTDZqNUkyN2c3N1JFZnRMRWxkLVBWWTlzQWZUb1BjX2lYTVIwUmtkUHg5ckxRdzRCeENtMkt5SmhxdVhMUWVzTHVJelZBR0tMaGltbzFLY2hjTnhUMUUyVDZaWXl0VzZfNVBxZWsxdGM0U25jTUw0ZHU5LWZyajZyQmIxbDBIYkFEdE9HQlVWQ1lGMXhiSjA4WTdJckpMcHVnU2xGTUt5andwcGh4RW1TYlhscTQ5ZmJYMHFxLTNWdmV3enpxdFlmckZkUQ?oc=5",
           "publishedAt": "2026-11-23T14:55:13.000Z",
           "tier": 1,
-          "provider": "Google News US-en",
+          "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         },
@@ -253,42 +226,6 @@
           "official": false
         },
         {
-          "name": "Motoring Trends",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQUmkyRmJoOGp3SGFYeXBKX05KcDVLdXFRZXNKd3BTV2hWMnM4elh0Z0xBXzRPdFVvUmdqazVUVndOQlFRcnU2TC1VVENDZHZzdGI5VEQ1QlM4bVJpR25sak9teGJPdE8zQjNtXzBORHhpaEEtS3FOV0IwenZ4bkI4Zk5wZ01HSzlxSEozRlBNOE5Fc016emViUFFqdUd5Q3VqTHFTa3FZWQ?oc=5",
-          "publishedAt": "2026-11-25T07:12:53.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Magzter",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOVjdQcWN4YlZONHlidkNHb1FERzU3Q1V0Y1B1cGlaUjZxMXZVVjRBbnZSRFY0RnRDU1RqM0FnRWFjdWF1b0ZrM1BfUmg2SWdsbWFBWDFwYjFNaTlfdnNEMGpfdk9MZm9sQ2V5elpXTXVMcDdINUNmMUg4VUlwWjl0ZzczSmdHM3NMVmVONDNWQVAtSjNxdmlCSlc5X2Z3U1NfSUFnbVJoLXVLeW5VX21WempHNUlScG1SaHd3TDVDakFoVmpWMzhKbzVR?oc=5",
-          "publishedAt": "2026-11-24T16:51:39.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Kalkine India",
-          "url": "https://news.google.com/rss/articles/CBMitAJBVV95cUxORVhjWmd5cTNURUlDVXFUSEduS0RiU1phdnQ0U1FFYVluOHBRVDhPcGdVaktjZ1BkWHVpMHZFWFdvRThNVGNFSFZlV1hCbDBvQUNULU1vMHkwZGR6c0lfY1V4MmJMRWJBUl9MZmNhNDVJWXhhRWtybGNGSW1VMERIYTFYWjZUN0RDX0ZTcFFVVHZOTUFiRjVfVC1rUm0wRGlqb1V1T093OThzNGx6Y3FRYzdpTXpGanpESzBHeTQ3a0ktVzRySFYxRUxRUV9hYVU5VkJNOEpFWmZIeFNib05uRnVWOWhBR1MtZEdCOVRTQ1E5RDNhNFpkZjFJcWhGSUhrUlJXVFFBV2QtU3Y3cjhxZ1VsYi1MTXVlRURhOHVsYnI0aG5oZlFTN2RhTWhWc1IwUXhUeg?oc=5",
-          "publishedAt": "2026-11-24T07:38:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Mining Weekly",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOVXNUV3NGRGlGUkI5UWNVOVZGWUxfYjR2NWZ1eUV6MFhrcXJIeDYyQlhyNF9MTC0yTlR1am9PYjQtYW1OVHhNdGdzdFljYm0zRFd0a3RxNk5ZXzVEZFJ4OU9VMmpnWE8zUktRYkI3NVpselREcU5NR3dHWVg2MWFsUFhBeUFFblM2bjNCLXlvTmVTMFp0ZjcweDBvSHhnZkEzNFNWRENJUFhEMFdVS1VnMGREU01HTHFYQTBVTEZaVjBpRnhkMzRHOERyNA?oc=5",
-          "publishedAt": "2026-11-24T07:15:00.000Z",
-          "tier": 3,
-          "provider": "Google News US-en",
-          "channel": "news",
-          "official": false
-        },
-        {
           "name": "scanx.trade",
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNLV8tYjRSaFhZUnh1Y3ljbmotV2JWTmp4eUUwMzFldGhONjNVSXJ6d3pwWTBWdXNJNnFqbnRaUmtsWnBLSGVJRWJDbXZOdDNyVjFZTUpJclgzb2VkVU9LR2ZSVDBDaHRna3FEbFBmZ0Fpbl90dW5fQkNzcmdvOWh3UUFWZUhCZ0hCbnBVSzBZV1lCUlFoMWFDeVlWWWk3T2wwTjZ6bDZ5U25YTWJHdUthNHhNN1ppdjA?oc=5",
           "publishedAt": "2026-11-24T04:28:21.000Z",
@@ -296,14 +233,23 @@
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPRnVaaHhnT2lWeUFoNHJhcmlYaERuaWxLZkIzMkZoMTl0aDFEcFhic2l1YklneXdzTDRxMFVoVDBhajkxOWZXWHVfd1U5Y043SXQxQVB6dW9OSldXYWM0eDRXRHVsQnlXVkZEbTZ5dWRVckZ1ajN6SVBQZHlHdlFjV3I5QUg3YXh6YkVqRTNENXktOXM1bUVhX3FUU2Z0T2J2TUNrclJOb2FxYm5RenJjYWd1YUJBQi03RzRWOV9wQmFnZ2tQdFZJRm0yRVhTOGEtVUthWkpidF9Wa2tZb0V4bnBGRGVIWHlZdDln?oc=5",
+          "publishedAt": "2026-11-23T14:10:23.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
         }
       ],
-      "sourceCount": 16,
+      "sourceCount": 11,
       "intelligence": {
         "materiality": 100,
         "certainty": 80,
-        "momentum": 100,
-        "trendChange": 100,
+        "momentum": 77,
+        "trendChange": -100,
         "sentiment": 0,
         "mediaTone": 0,
         "publicSentiment": {
@@ -316,8 +262,8 @@
         "reputationImpact": 9,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 83,
-          "p24": 99,
+          "p6": 79,
+          "p24": 98,
           "p72": 99,
           "drivers": [
             "rapid media acceleration",
@@ -395,24 +341,6 @@
         },
         {
           "name": "ET Now Swadesh",
-          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPSlNXeHczTk1HRlJIaGZQSWk5TDNESXNVN0NDblh4M0NvN3FtUndqR3JOamhMQlNIdV8zN1RLN2hhZ0xfbUtXUUpJWmJFM2JDZUZ2TFVIeXpLbjNWV2R3YTZ2b2V0NTVSckNVMWJLRzA3dkNBLVoxU0RrVVRtQ2czZlBfNEdxRTJYQlZrVmJmY0FPaGV0azZNdHZIa1BIb0dmQTZpb084OG1hVnhaZVFPODB4cG9IV01zRWs3NWZYa3E2cnpYUTJ1YjJHMzZqSkU4d2lSb3BLNNIB3AFBVV95cUxQTGxkTUNjam9pcFhweWFlT3FoeWNDb0MyTVBFUzdqVVl0cDFWbjBkTXFZekxRTVc5bkR5UXJEcGpHYlVNdFFBTnhIRFBnVUdYVDAzMlE1WXhuN3ZBNTBmbTJ5SkpfOVNxbEoxQVprcEltS0htVGJjdUhabjQyeW9QVWY3eEZRcmp5TWR6TVNubndRcmdwUml5YW5yeW1weDA3MkZBWF9fTWEzdkwtT01CMDM4aEtMRXpxM1psVXFtX1VHTmwzUGFRQVlZeDhhVEZmUnQyT0FPdWZBa21i?oc=5",
-          "publishedAt": "2026-11-13T08:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-hi",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "Zee Business",
-          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOeEoyT2YweFZKdVVHeEU3LWNhd2hrYnFnU0tnd0o3bWRHVFBGajNiNm5QcHlCT0d2NXdmMkRPd0ZfUlJjOW02WjJqMG1aUURUakdsV1dnQjlsTzREYVBOS1pwLW5UVFhzc3hYTVMzMmR1aVM3NHRPYXg4SkJmblRycVlQT0hYWFVQRVdUTmhyQVFPcGpXNEVmQkh4WVBlRWpMMG5fQ1dCSmJzSTY0b18tXzk1ZXhBV2FwaVpObmEyTE1YN0dSVEpxVFJkb09RNXZENEtVV0FuZDBCY1MwLXc?oc=5",
-          "publishedAt": "2026-11-12T13:52:47.000Z",
-          "tier": 3,
-          "provider": "Google News IN-hi",
-          "channel": "news",
-          "official": false
-        },
-        {
-          "name": "ET Now Swadesh",
           "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPbHJ0c21CcHFLZmJkeGRvdUtxanVZRExXVVVTbUlFWGs4N2RmV2g4bVI0YUo4dENXVFN0YXRjdzNfTVc5dHc3cU1YRHNnbUV3ZFJ0dDZqM2QtQkROdUdOOXRESUdPYUtMSm5RN0pzd1pob0VCTFZoWTk0VG41Z1JPQWdINzRoMTc4cjE4S2JBQXExMFItSmw2cmpvSmZfSjZuMERkclZzMjZnenVZWnQ5VnRuME95REstSFpTLV9INEotT3d2NHRYTVpkRHZxa0NBaER3Q3U3eWh6YzdGdm1PQ3JhQ1pHNGN20gHuAUFVX3lxTE9uQ3ZuOXlReVFyNVhUM1E1cVlRU191eTdfck9iVzdWajFWbzNRYW9RdXZJcXh3U1R1LVhJbW80WFZQT3Q5YThCYU5JZks3X09nam9XSjYzcmh0ZVl4NlZYSEMtWURyQVNGZHNBQm1FWG9Oc2l6ell6eTRkYlJsUzJKX0xrWkp6dHdCVUEwNGxLNnlDYmlCM3FEaW5BcnBOdUpXTFlLR3hzVlNaZk9sZmc1LVh2bDBDWVBvQVdDYzhJcksxZi1rVllvRzVxT3kxWUlNcEJwWjJLZGplT3dMV1RtcmVLcFBuVjFKcjB3R2c?oc=5",
           "publishedAt": "2026-11-12T13:30:19.000Z",
           "tier": 3,
@@ -435,6 +363,15 @@
           "publishedAt": "2026-11-12T08:00:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Zee Business",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOeEoyT2YweFZKdVVHeEU3LWNhd2hrYnFnU0tnd0o3bWRHVFBGajNiNm5QcHlCT0d2NXdmMkRPd0ZfUlJjOW02WjJqMG1aUURUakdsV1dnQjlsTzREYVBOS1pwLW5UVFhzc3hYTVMzMmR1aVM3NHRPYXg4SkJmblRycVlQT0hYWFVQRVdUTmhyQVFPcGpXNEVmQkh4WVBlRWpMMG5fQ1dCSmJzSTY0b18tXzk1ZXhBV2FwaVpObmEyTE1YN0dSVEpxVFJkb09RNXZENEtVV0FuZDBCY1MwLXc?oc=5",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-hi",
           "channel": "news",
           "official": false
         }
@@ -551,6 +488,73 @@
       "live": true
     },
     {
+      "id": "live-1mq54ig",
+      "headline": "'Straight out of James Bond!' Farah Khan stunned by Ananya Birla's ₹425 crore home",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This could affect Ananya Birla's regulatory, legal or financial position and merits verified senior-level awareness.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Regulatory",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-16T08:00:00.000Z",
+      "updatedAt": "2026-11-18T09:27:24.000Z",
+      "sources": [
+        {
+          "name": "Business Today",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPVG5uWV90N0JZZE03RTgxdExOV3FzclNuc05CZ2hpd2NVc1N2RjB6QWVnM185STVzLTZjX2xuZzItQmhrWjhZQlZlQlI3S2hTOTZNNjFYLVcxaTJ5TEpxakdraVdLZEJvX3dXcFZRTzI4M2xoVTFMYmdLU2hiNURLamhaUnA2MTdRX3I1UnZaQVNWZ1hiME5yWnJaaUliMG5XN0d2eGpNMVk1b2pnODJ1Y0RHak1nbldXWW0yYUNGanc1ZVhiazdhSzBsdVZUcElFb1Jnazl30gHbAUFVX3lxTE5ScEZRTnhPbl9iSlBfcGJfenRBLV9DZlM5ak1LRkJSRFJDVkJDWXZtMEdPai1XSV94ZExWdHZ0X0l1cjRNdWtrMkRGc0s1dnJ6b3p3eDVoeDdzYUhKbmtRNVpzNlpreGJFSUREYm5zVGpPVFVCYTBOZEVLTnFWYVdmTGJuS0ZabnlkeVo5UWMxc21NcnJwNktwd1FXMEVtdElBNG56bXJJcVk2aFVZd1YxNWFDU3hTOWNkRWQ3YnBweGJlb0xha0MwNkg5OGVBemtmeUMyQ2theWhkdw?oc=5",
+          "publishedAt": "2026-11-18T09:27:24.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "The Indian Express",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNZy02VVZvbEd6bnBlUGpMbktWQ3BUdnNGTllxNEVTLWZubnpLdVlkaE94clYxdHU1X18xS2g2SEcwQkEtRy1wZGczTjg4ellQbXhyLW5iTXRYVHJUZDVvWkJMUTJzODlxNkEyei03bnFYWFlwVmI2eWJFU3o5Vm9OZHlndjl4a0RxSUoxTXZad2dzdjBuNXpxMFNoWUhEY2xwR0ViVG5NMFV2ZWlRYWplcTl0eEFvUzJqbXZVSXRsVWdmRHcxamhGWXl2eTU1dFJSbXfSAdgBQVVfeXFMTVpDU0luakJ2MHQ5VmhNd204MTFNVUFkakE0WXVNUk1hSXFNZVEwMmlMM3BCc2lkTzZhMjhWc2x0Q0xadi1scThNZUFIUVRuV09yd2Y2WnlfZTRSbjdpRzRES2g3YjhnbkJXM0t3dDlDTEtGdFF0RFlySzdPZEJsZy1BTnh5VWtrbTk4LTZta0NUYUhtRnNmSzVlTTV1YnNqaW9RYktHMGRiU251dWRwYnBhQWY2d1JpQVdtV3ZvT1ZIU0tKci0tUEZmek5tc25BZE4tZFdoYTJy?oc=5",
+          "publishedAt": "2026-11-16T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 100,
+        "certainty": 70,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": 0,
+        "mediaTone": 0,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 9,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 58,
+          "p24": 83,
+          "p72": 88,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "ACT NOW"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-1ft3c9y",
       "headline": "UltraTech moves Supreme Court against BAI's role in CCI cement cartel probe",
       "summary": "Published coverage across 2 distinct source domains identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -563,12 +567,12 @@
         "supreme-court-india"
       ],
       "publishedAt": "2026-11-16T08:00:00.000Z",
-      "updatedAt": "2026-11-17T14:23:39.000Z",
+      "updatedAt": "2026-11-17T08:00:00.000Z",
       "sources": [
         {
           "name": "Business Standard",
           "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxON3BmMFpvYkVHdHYyOXRHNVNaSWJvd0pxVDZ5enNkMTBUUGJ3TnpnZng4c3Fhem91UWRHSXZYRVoxRUJRZVFGUm5tM3Q4allheUVJM2RmRjBzR2F0dHZ1eW9iWThOZzAtQWRSQmRPTm9DNUl3ZjVScWFtQnZDVzNOemdzazNzMEYwR09saEFKRUhIWW42VnBQUFBPa3NzcVFieHVBQkRPQ28zU3RIdS1VOVhvejR4Y2hLV1Z1NlctNENFSGtJbURENFF0ZjNWdW9OVUdBdDVLOV9Cdkxv0gHiAUFVX3lxTE5sUGNtNE1HUURhcG05SG9oNVhBZ2hQOG5zTEgyTHZwajhyTElwQ21DOFpLRFo3UTQ4YkVLZHZyVjN2Y0p1a0xXVkVpU2VrdHlDVVo2S0NxX3FRenJicUZON2ljNFVRUUdsNzAzVjNHTi1iNVhGQWItVGEzZWU1QlhWZzM5RHVmcjZSdFhFd2xCUmJpRkNsRDhBX2N4SW9UQ1BWamhvVlJ1SmN6aEk1bUNYOE1iX2hpWFdNdEdSZnVFOF9HTWtXYldyMWpwYlNPVkItcHpXbV9Ya0JPel9GWDZGUFE?oc=5",
-          "publishedAt": "2026-11-17T14:23:39.000Z",
+          "publishedAt": "2026-11-17T08:00:00.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -609,63 +613,6 @@
             "high strategic or reputation consequence"
           ],
           "posture": "PREPARE"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-x73iul",
-      "headline": "Grasim Industries Q2 Results: Standalone net profit zooms 187% YoY to Rs 2,306 crore, revenue jumps 33%",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Grasim Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Grasim Industries Limited.",
-      "bucket": "must",
-      "status": "strong",
-      "category": "Financial",
-      "entityIds": [
-        "grasim"
-      ],
-      "publishedAt": "2026-11-13T08:00:00.000Z",
-      "updatedAt": "2026-11-13T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "The Economic Times",
-          "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxPUG0wNDdSNWRfaHZvVjBGRkF5NlVUcmJ6U0JoOXNQZjV0bkxLbW8tLW1heVVGNnFBcUVtc2hiMFlYN0ptTTlFY1kxZWhqZWMza1FHRzNjVkp1WFYySF8ycDFHQW9Bejh4OWFEX2pZcmhOWGd5c2lpNFlGWTFZaXJDMFpqLTlkRkNHVk13ZVlaSUU4YlpkdEQxTmZQSjdSZ1F1eXctNThRaTMwV0tiNDNwSFBINXZCaWFVSC0zd1ZrZHh6T08yNURzTkxZWFRCb3ZITUVvaUx2MExQWXNER19sWGZ0RGR3UTh6SVZnVFg4Y0s4eFFvSkR1adIB_gFBVV95cUxPM2FkNFRwSlpBRDNxWm85Q2FZREJNOTJZOFREUTBfdngtMS1vLUZZbHpqcVBuV1FXWDFwTjU0QUJlbG9mQmdpSEYzNWY3MzlHb3RYbEtBZjJrN1ZKZE1PMDg1STBNTXkxblNOcWVEb3RuV3pJWnBJTXZEQ25oSmVTQS1NSzFqRXpTZWJwTGx0UGhLLVRkcEVsMVJKZFE4WmFSd2RBaXBydE9IbmN1NUlLX3phSHljYkliZEE1OFRCVGVEY1pJRnAwZ0RDVml3S1dJbUZfMndqZWJfdWhPeXNKRkpGUjQyVmwxbnMtcWZDRzZSLWljXzFSTFhIb3B6QQ?oc=5",
-          "publishedAt": "2026-11-13T08:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 100,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 13,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 44,
-          "p24": 63,
-          "p72": 73,
-          "drivers": [
-            "high strategic or reputation consequence"
-          ],
-          "posture": "WATCH"
         }
       },
       "flags": [
@@ -783,6 +730,128 @@
             "promoter or senior-leadership involvement"
           ],
           "posture": "PREPARE"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-upohm4",
+      "headline": "Aditya Birla Capital Q2 Results: Net profit up 38% to ₹1,288 cr",
+      "summary": "Published coverage across 7 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Financial",
+      "entityIds": [
+        "abg",
+        "abcl"
+      ],
+      "publishedAt": "2026-10-30T07:00:00.000Z",
+      "updatedAt": "2026-11-04T08:00:00.000Z",
+      "sources": [
+        {
+          "name": "BusinessLine",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQeXdwa1dPUlZDaEQzY2JINWRWTWFVUUxJUTBQR2NqV21ReEZ1MDVNUmxBOXBOSHluem1mQmxiVVU4UkJHenlZRW12OE9IbzZZbGtyRkZ1QTVjRVcwa3R6dHFvMnRVSHE4WFk1Z25nT1lUdVFocTVCUXlfWmdLdzc0eDhkWkM4NTY5WGFSUFE1S1BkSnRpbGRBRS1nbUoxMXdPZGRqc0Vn0gGsAUFVX3lxTE42TkF4NDNreVI4ZTRNVEwxTjRTamtkU0hsMDFGTGhkZzQ4QWtzS0ZsLU9MUUZ2a2h6OXltVnRaaFpFOG1COXdQN29Xd2RlQlcyRmJYQWNHZFdwbjQ1M0dFVW9fbWtNdnBsR3E5MDRyVHhZM1BEZEpYdHBRalZzTWhGU3VSWEdJYzlBUE0wX0tBajg2ckxJWldDNlZCYy00SUItdldTLVl4X19QRk8?oc=5",
+          "publishedAt": "2026-10-30T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Business Standard",
+          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQVWVKeGRrYWZ1dEU4bl8tRGhvYjN6Nkg0NHdrS3VaLXZKSXZGZUY0WDlmODhzb2NqUlRUaU1PenlyMEFvUVdyYkg3THFiaWN6eWhmc3J0WXJFOFB5RTNveTVBUDhkNzVBa1hPZXdULTJxcGx5SmM0cFVLQy1ZTHlLWnNKY0VzOUhfc2RZdXJTWm4zYkpVb1VzMGhpa0Z4cnhldW5HWlRGc1d0cm10UFlJR2ZSVUdFeVJObUlrZWtvOVJXd1hNQnpON3JlakpuYm5wRDA2eElnbWpEU2xSVEhZVWdTSWkzZTjSAewBQVVfeXFMT3pYZElNUUYxaEVVUmd0MGd2M2ZYUlA2QURpODFkcWRRN0FBOUduZjhGNlVNdkpUTDhIeEdhNDFPMUFGaHR3bndvRzdxZG1oc2ZDUVUxZk5CY3ZNQ3pNaV9jRU12RllkWFhiZjRRTzRQRHFoVjdLQ3FQN0RJb0d5SEo4TG9fVXgxNEZCUEo1azRDUGVxUnJUYVplX09rYXZVRGhhUjZvQWdHVC1QWEJ0ODlHYVVSREpVSXlKUlVkclpNRTJMSUtLOHE5ZUhlWlpES0dlc0ZoRHFLQk5NcEo5U3R6OGNjTTFfQW5Gd2Y?oc=5",
+          "publishedAt": "2026-10-30T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "scanx.trade",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNRWVwcGdQOUZTYm4tWlpnYW5DMmZ4UFJ1OHFYN21jOXNUYzYyQk9rNk9vUGRPV2tBLUs1VzFEdDRsRVZaRkplZ0V2enZ6QUhXWmJJSk5SN3ExcmNzRGhpcS00YlowOW4tUkk2WEkzYjhFTlVta3ZkNlNXTFlZUktRVHk4SzVMOWJ1ZV9OZVRYVTRfTm5fWGotSmFTdnNlYllOOUpqNjJsSEJpYzRaRUpIaA?oc=5",
+          "publishedAt": "2026-11-04T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "HDFC Sky",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQNGZtLUhVakRyZVZnNy1mc0U3NE5VMmxKTW9DcDh0NXdJQmM4ZlM5aTRubC1kTnRpZGZxNkp6MzZHc1lVVkJlM2xGTWNxUU1Zc1dja3FBMl9hZnRCaXJvM1pOM1NmSnBGbmxpR1FEUnBZNEtfN0JYNVNGSjI4dTJtdFB3OGRyXzdUTW42TEln?oc=5",
+          "publishedAt": "2026-10-30T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "LinkedIn",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNWERFRkN6OUZzT0FMb2E3MmEzSGtEMTBqMGNCVTZlMVRaV2xZMmxzUG0wdFRLNFczRG9meEZUdXVCNlB5R00yaUNmMW8xV0JfUkw3STZDMXB6M216bkV5S0ZyaXU4Y2xkSHVwVmNvRlN3ck9Md1hrZVR4b05veC1aRmVWVklPWXRRX1FsQldjd2hYQmFpZmZrUXpVNzJFUGhCRHdGZDVDS0swcXpzSlFsSFJqX1o?oc=5",
+          "publishedAt": "2026-10-30T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWHZ4aXZPT2VxYUVpM3VQT2Y0amNSa3EzSUlnM1hubC0wTGNTQldRQ0NlRWpWNV9mVEFhTldtV0hJTDBTaF90cWd0SGJRUmpUOGlzTXBkbkpHT3lTalVnS0taSHdIQkwxZEFGUHpNWmFnLTJGWjBCUWdzc2ZCZ2xuNWJfVkdYR1djOTVheHZxaFVMblEzUUgwTQ?oc=5",
+          "publishedAt": "2026-10-30T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOSkt3MkhRemUzOXNJNExwUTlWdEkyaXJvSDE2NHppM1puSDlVZmVjNXVOeWlHcC1WOHBpVHRkMFRlWkVnVXFrVlJwSmFmaVhwY29zMFVOVTBBcll5eEVGb1EyVV9CZFIzdEpvaEZCSm1uVjllT3VhbjJOMU5aaWJDVFQ2azlGV19DV2JiS3dHWWlaODRfM0Jndw?oc=5",
+          "publishedAt": "2026-10-30T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Multibagg AI",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOTUlFNEozM2c3Y2V4NTc1QVBoRTdJS1Y2UVUzNlZOaEtBTW0yLWJUNGJPcS1EYTcxb2JNMG5ZYmZuSkFKUDNFaW1wdzJFSDQzejNUY0dxa0pwdzlrMDlFYmN0Y0pVQ1VlZ0haOGNwY2JyN2N0LU50cTJpWG81OXlsTjN1a2M3akRkVl9tZ2xBQmxIN2ROTWcxb1RucXRQUDZCS0hlQmpfWHE4d0E?oc=5",
+          "publishedAt": "2026-10-30T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 7,
+      "intelligence": {
+        "materiality": 100,
+        "certainty": 76,
+        "momentum": 50,
+        "trendChange": 0,
+        "sentiment": 13,
+        "mediaTone": 13,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 16,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 68,
+          "p24": 89,
+          "p72": 92,
+          "drivers": [
+            "broad independent-source pickup",
+            "high strategic or reputation consequence"
+          ],
+          "posture": "ACT NOW"
         }
       },
       "flags": [
@@ -975,100 +1044,80 @@
       "live": true
     },
     {
-      "id": "live-1fp84ri",
-      "headline": "Hindalco Q2 results: Net profit rises 59% to Rs 7,532 crore, beats estimates",
-      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Hindalco Industries Limited.",
+      "id": "live-796j01",
+      "headline": "Aditya Birla Capital opens 100th Gold Loan branch, enters Mumbai market",
+      "summary": "Published coverage across 6 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "This may alter Aditya Birla Group's capital allocation, ownership or strategic growth trajectory.",
       "bucket": "must",
       "status": "strong",
-      "category": "Financial",
+      "category": "Regulatory",
       "entityIds": [
-        "hindalco"
+        "abg",
+        "abcl"
       ],
-      "publishedAt": "2026-11-06T08:00:00.000Z",
-      "updatedAt": "2026-11-06T08:00:00.000Z",
+      "publishedAt": "2026-11-12T08:00:00.000Z",
+      "updatedAt": "2026-11-12T09:51:00.000Z",
       "sources": [
         {
-          "name": "Moneycontrol.com",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNMmZNZ2ltZy1sMWlDOWdub3VBYWh6ZjZTc29lX1YxX1J6MkVLaWpnRW9uc0ZCd2pIMVBaRzhXRldFRk55SWQxd2VuTjVvM2FNcG1obU1BN1lrQlk5MWFjeWl3c3ZISUwxczA3TnRLa3hPOGwtY0s2dWhSZ2FXWlVSVVFYWkkybWRfNXh1bXVpaWpsOHlza2FGN29GRGNKWGFJNnROajNBOHlhR2ZGUGh4dXpSYjA2R0pTNVJXajdKS0VDZnVzZjIzcTNjX1VHaE5nRkFBZmV30gHbAUFVX3lxTE4xMjRtNXBxMmxPNktSR1hnbF8wYW9EUWRESENNZ1poSy1oWHZ3TWlHeVNKd09aQWlLcFVYZktIQ1NuWFNETHBfOFhyN1JSMFBwZXUxYXBaX0sxTDRIcmVMRjVoYlFYQ1pSVFhtd2dVZTl1aDYtb1JWUHRvR1FnNXhGVEtITk43WlBvQkh3NmdMMlpwUWx4NHBKZ2MzYjh1ZmVvVUliOE5YTWhTSDF0ZU12QzdTRjZWMjR5X1daSmUzNFk4RlNvaDJZeEJ5dE5zVmhpRXUySWE1eWoyZw?oc=5",
-          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "name": "BusinessLine",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNLXhiUUxJMnNmMGFjMEZCZmc4N2R5WGloNUR5V1MtQnNZenV0SEEzWkdGTzYwaWFVclZsNnd1eXNmY05zYjZOOEg5VDdTekdMUXRidmNFTmlXbGw2dG9pSTRwM2ZfU3ZFOUlOcm5kdWpWdkprRVJJaTQ4Z3JYRVRiU3JkS1FtOEJtdUNDaFpfT2lISUtGOEpJNGVVZDZGSGVPZWd5dXNfYmRRM25LS0lqMEVXQUw4WGRZZndlNmhlclkzcWJMZTRyZ2pHOTl2UzFqbWp2TzI1bnFXam9lYVHSAeQBQVVfeXFMUGEyM0pxS0k3TkhMNlR0Q2NzWDMxUVJQbnpjbml4M2NBR1RucVJOWUZES0xJMklSS09sZ3ZYVDZEeXdqRzUycTFSYVpVZWc2Q19pekRMWC1KX1BybjVzb2lZU2t1WTA4WG5MYllzaW1NNFBYR3JuVkxSbnREZk1scXpQdUtsUWJ3TDRnek1kYm43OVZuMEVHWFFQNG1mcXo1dWM0VTZCN1l0SjBXLXl6SEtsNjA1Q3pNYXdOdzlQMU1Sd2VUX3hCaW53cFM5SXNETGpCa0puZlUtbkhsdnNHNTRybTk3?oc=5",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         },
         {
-          "name": "Kotak Neo",
-          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxObnBIYzZrN1pteTZ6bXQ1ZHE4VXdRQkV0M0hqaFFwQlFpZTJVX3pLTTNZMDlaOERyZ3lTVHpTVFFhRDNzeGNWcG4yMi1naS1MOFZuM2JxSUlqVDhnSlFtWVNsSHphRjdzVlZMTmNDYnZqVXctZG9LVXRsTG1JampJQzFKcEUxQQ?oc=5",
-          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "name": "Business Standard",
+          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPb0l0ZGFGQzdERzV2Wjg5OU5yTXhicTZMY3VaV05IQmRfWHBNVmVKUjRORmwxaHk3c1FjTkVNTUFNX1R4MU5ZRzk1Vzc5Y0lTUkJBT0RUNnhGeDkxc0xYcUVkZ0ZMcUh6T0l4VW9KQjRrLUhnMWlKempOY3JGM2stYnNqWXpzcFhqSUQtWkpuUWhIVHFCOHpOdmVLcWZiQ3NDTnNGZHFfMm1OUW9Ta2JLNlhDRGh4NlZ0V0RLNElxTnk3c0FndGhyajNROHFfZGZtRkY00gHYAUFVX3lxTE54NkNWQ210ZXRfYk5LcFE4RU16ckswcTJudTFZVlF1YjR4d001Z25Ddm5BOWpoTEFKZ2JmR2hoMEEwMTgzcXQ5WDBKQWVnUTVibXhmY19WNWxiZHo0WlZNb181QTFwMXh0VXEyZmw1SmhRcFByOEtjcDN1Zzd6WHQxQ3psdjFvdE9lZXlSR1piMmhZYldsaFZBVTNqYjRSNGFUU3RKQ2g1NmtZSThkcUhWc0dLNkMwbWdPTE8yQ2hCTG10bWFpWlV5NncydHplcV83djlJMFVERw?oc=5",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "www.marketscreener.com",
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNMGIwV1pDMi1VcE1tSklFako2RWQyNkZZaDVFUGcydXNnbmZieGdlUVZHaTk0ZmVjdlhtMlVmQnJzT3dVbURia2dNVG40NWNTRW9wY0lzTXpXdndOcVBDMEIwN01IaE9lNEtzNDFCVlZTOS1TbVJObUxFc1EtWmN4SXYtbTlfbnRiam5XU1JKaGpPV0ItOTNHYTd5QTVFSVNIQ3g2c3d6b0JDQ2VNQklWdUNlMTQ2S0ZFNkFENl9HTDRfTzBxZUZBVzduZ2VFRXJ6M1YtaXhJVzM0cHBsMjROc19pUHlndXR5?oc=5",
+          "publishedAt": "2026-11-12T09:51:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Rediff MoneyWiz",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOX2ctS1RfcFZ2QjN2RkF2NzJqNS0yaC1Nb3dwbWlURFlaOGZQQkxWT1l0WnpyZmwwUjEyT05ZdmwxN0p3NXRkdGpvU2dGNVQyeTRfS2ptY0sxZ1JwZUdJb2Q0a3d3emJTVTFSN0JYWkl1Z2pXXzVTbXAtcTFyUTZETzdsS19uR2xIXzItb0ZMTkUtZGZCZ1FlMlhESGJ5enlXWUpoLWFaOG9FYWZ3T1VDRXVqQdIBuAFBVV95cUxOVEExb2lkZWtwdXA0UDZJakNzM196VzQyTHl0Q0pEX3liQVlDOHh6UG1sNnZPcF90S3E5Y2dab1I3TE9GdXFBS0VZbHBFVmNZT2c0T1J6RnZOQVA4QW5pMEh1bnREaWlXaXBMeHhYTGsxNkRPenRYd0tVd0VEQjh0R2FGX1VKUG5wdFdFSGdrMHBUQi1MbGlXR2NodzhaS1NiaXBQOV9UNmxVOUpGa3ZlMmdEcUEzZEFO?oc=5",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "scanx.trade",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOVlJXVFRoNk9NU0E0VDdhQVlSUVZjVVVGTzBqVUFTdmFuZFlrbGhEa0haN1dqc19kSTJZUlNsNl9UX2xEcVJEbGE1Z1dYNE5ZOEdKc0NGT3hIRVMtV3J2dS14ZE1OcTFQeEFYckVsWW5ZLVNfUk41cUhjWnpNdmRhejNSSFZBekRmbXMxWVE4NUJLNDdjcGw3cDFsRHdLVGxoNFhTZFM1VkFld29tY2gwdFh2dw?oc=5",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "TaxGuru",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOczFBOVhLSmM2bkFtR0NMVHM0OEkxbFdKbFFfVm02SHExX3doQVNCeldMSXNhejVMZ29WVDFpSlRlcEl1bXY2Z2xRUzNQR3hvVHdvS2E0cnFTWlFmQk56dXZKUkFsTzlIRXl4ckNXSlo5NnF5aVdiVHh1c2ZmOFpJWUlaam1nakNhVXRUNjBRVjZRb2hSMWU1TkFFaUpyelJUSTgySng4eU0zRDhvMk4ySw?oc=5",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         }
       ],
-      "sourceCount": 2,
+      "sourceCount": 6,
       "intelligence": {
-        "materiality": 95,
-        "certainty": 70,
-        "momentum": 20,
-        "trendChange": 0,
-        "sentiment": 21,
-        "mediaTone": 21,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 20,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 47,
-          "p24": 65,
-          "p72": 75,
-          "drivers": [
-            "high strategic or reputation consequence"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1bbhohw",
-      "headline": "‘Straight out of James Bond film’: Ananya Birla gives Farah Khan a tour of her luxurious Mumbai home",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "This could affect Ananya Birla's regulatory, legal or financial position and merits verified senior-level awareness.",
-      "bucket": "must",
-      "status": "strong",
-      "category": "Regulatory",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-16T08:00:00.000Z",
-      "updatedAt": "2026-11-16T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "The Indian Express",
-          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNZy02VVZvbEd6bnBlUGpMbktWQ3BUdnNGTllxNEVTLWZubnpLdVlkaE94clYxdHU1X18xS2g2SEcwQkEtRy1wZGczTjg4ellQbXhyLW5iTXRYVHJUZDVvWkJMUTJzODlxNkEyei03bnFYWFlwVmI2eWJFU3o5Vm9OZHlndjl4a0RxSUoxTXZad2dzdjBuNXpxMFNoWUhEY2xwR0ViVG5NMFV2ZWlRYWplcTl0eEFvUzJqbXZVSXRsVWdmRHcxamhGWXl2eTU1dFJSbXfSAdgBQVVfeXFMTVpDU0luakJ2MHQ5VmhNd204MTFNVUFkakE0WXVNUk1hSXFNZVEwMmlMM3BCc2lkTzZhMjhWc2x0Q0xadi1scThNZUFIUVRuV09yd2Y2WnlfZTRSbjdpRzRES2g3YjhnbkJXM0t3dDlDTEtGdFF0RFlySzdPZEJsZy1BTnh5VWtrbTk4LTZta0NUYUhtRnNmSzVlTTV1YnNqaW9RYktHMGRiU251dWRwYnBhQWY2d1JpQVdtV3ZvT1ZIU0tKci0tUEZmek5tc25BZE4tZFdoYTJy?oc=5",
-          "publishedAt": "2026-11-16T08:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 90,
-        "certainty": 68,
-        "momentum": 14,
+        "materiality": 94,
+        "certainty": 76,
+        "momentum": 44,
         "trendChange": 0,
         "sentiment": 0,
         "mediaTone": 0,
@@ -1079,12 +1128,79 @@
           "confidence": "unavailable",
           "coverage": "No open-public conversation samples in this event."
         },
-        "reputationImpact": 7,
+        "reputationImpact": 8,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 51,
-          "p24": 73,
-          "p72": 81,
+          "p6": 63,
+          "p24": 84,
+          "p72": 88,
+          "drivers": [
+            "broad independent-source pickup",
+            "high strategic or reputation consequence"
+          ],
+          "posture": "ACT NOW"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-1rflf78",
+      "headline": "Ananya Birla Cooks Aloo Bhindi And Triangle Parathas For Farah Khan At Her Lavish Mumbai Home",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Financial",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-16T08:00:00.000Z",
+      "updatedAt": "2026-11-18T08:00:00.000Z",
+      "sources": [
+        {
+          "name": "NDTV Profit",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOLUFBYk14UkVNZWtGZlBWcFBfMmNNSV84ZVBSYXhZV3RfTkxRVnRraVc4QUxQekhkOFBxRE5WRE9mSXJOQktGdzFwRXhzYmF5WXJhTnhiRVB6WEVVdVhaQm1vOHlyMll1N19PWWVfbHkwb1pjeXpkci1jMFZHTE9YaFd5RC1nV3VjUk10TXEyc1B4MzZHREhPbnRJWFhacmdRR2ZoaXZGd1hVOG1RRWtvQmtqLWE2UXNLbEVIb093RkdSeFdBYnJTcmpQeG5Zb3JzZmktTQ?oc=5",
+          "publishedAt": "2026-11-16T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Curly Tales",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPQlYwZU5CWDF3Qmc1eS04UUw1TmJBdXBsWEpIVkh2eGhCS2Qxa21TTkxjNVNSTkdfUC1fWU90ajhFZTE4RlktMGp6NkF2ZXQ5MEhYN1NTbmVFU3pQZ0ZqZmU3SEdHU2RacG9iZWRxM09NM3RrbGl1YjhSM1E1akV3V2pWNGE0M3B6S2wxb3dVY3hGQUhJWFZBM04zbVdSQmZ4VU1Dd3dkQnItX3dyUC10WTdaTEhEb3dKd3NvZ3pFWHVHaWRoUWJldk1IbjR5ZjZs0gHWAUFVX3lxTE1KTXZ3bHQxLWtKS2pOQXRVZXVjb25fM3RqeFVLMWdKdGtjSllKUFc4WTZ6UVduTmxNd09odGFpc1pZVjNfMzVZbTBBY0JaMFFKX0tVOS1lSVJvSjBCbk04LVFNejc0bnF4M3VCZGE3VE5ZVTc3V0lTZ28yelkwTTluUll5anFjYWFkN2VtNkwzS2RMSks1dHQzR0tTUTdOU3RwSnBJaFRSRVlPNVYxeC10RmpJX01lam1TV2o2QjdQNU8xUVQ0X2VYWmtMcWQ1SGpXcUdWcGc?oc=5",
+          "publishedAt": "2026-11-18T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 89,
+        "certainty": 70,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": 4,
+        "mediaTone": 4,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 9,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 54,
+          "p24": 77,
+          "p72": 83,
           "drivers": [
             "high strategic or reputation consequence",
             "promoter or senior-leadership involvement"
@@ -1250,6 +1366,110 @@
       "live": true
     },
     {
+      "id": "live-1w28o3b",
+      "headline": "Koffee with Karan 9: Ananya Birla calls Ranveer Singh's Pralay a spectacle",
+      "summary": "Published coverage across 6 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Corporate",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-18T08:00:00.000Z",
+      "updatedAt": "2026-11-21T12:47:31.000Z",
+      "sources": [
+        {
+          "name": "India Today",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNUkxSQWR3Q0ptRkhOQzh3VkhCQXpzQm1KM0ZGN0o2LW9zOHkyMWp5cWcxSFY0bmtCS0x3N21hRmJla3BmZ0QyWE9JSnkycWlvcE1VeHRRandWVWNsVG9NbXVicGhaLUZjdXJwT2ZhMzNFMTdVc0RtYi13Y2M5bVJNQlZ1NDI2ZlMwTFFDRWw4OS1yXzVJUlN5bV9nSm1OVGZER19hUTZnUzlzWVZLVFBqUVBFWk5HLWNjWXFhZ3JDME5XZUxQeEVpOEVwQ0RTaXFEdXZKTNIB2gFBVV95cUxPMEJBRzFvNEc4ZzF4cHEtMFllQTNKQUZYZzJiVUVzLWVMemFJSE81SHVfYUdmU0tzSWJOWmk3blB3RjFJbkVtQWxqY0lzQXd1NXFqYzZ2MnljN3BiTUoydVJjTjE3VkhybWViUldYTlZ6TFVSQWRaaVhfcl95V1NwV2xMa25ISUthdkNxQ3VXYkdiZTdBQURPbFczSXV1TFJYUzdjQXZzUXp0WG0zd21PcXdNYWRndWM0N0c3dHJ4Mm44M0Uzakh3MjNyUDdYMXJxZzlwTzVMRWtGdw?oc=5",
+          "publishedAt": "2026-11-19T02:10:11.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "The Indian Express",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQTDVJT3o3eE1iRW9sM2o3OGNYS3VHOEE2QkRseVpqekxsa2NvSGczOUFBWHZocDhGN2dkZk5odkhxdk5UZDVMbjc2SUtad0t1NjI4Y1RwRnM5SE9qeTZoVFVLU20zRjc2RUtfdXlKODlpMUF3eG5tLVhiNmM2aGtuUl9kX2h3aU55aEFVRzZnbmNRNGtQMDVvd0hFdG0xaGhLakdhWVN2VFdSb0R1c3Z6Z1VTY0VuaHNRd3pWdW56ampoekZaUm1GQlljTGdCanVRNkFXUlZWU1RuNWdwYWNqM1dB0gHoAUFVX3lxTE8xQ25QemxKZ19yS1ZUX04wNUJXa2tyVFBBbWQxeTVMLWdPVUpvRGdOb3BSdjlGbXRnQTViOXJtZDhJc3psbHZlV1phMUMyV1dEQ3ZiZEZCSGlTWUFGUGlDUFdtbzRVdXZGekgxWmpqRUIwdzZaMkx2M3JqRzdIZE1QZjBQRDBCSFRLMkVhMTZVUXR6QzJHRmJWRVROYTZhVjFYWUtLMVpsNERXYTQ4aXhEUmx2MUpOYmRVRVRneGVfaE9OZEJITE84ZksyWnZ5LVlIODc1b3ZleXZBVHFpNHZ6NXJodlhuUnA?oc=5",
+          "publishedAt": "2026-11-18T15:35:14.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "NDTV",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPMU9vOHZOS3N6dkhqTUczUlBGWml4cHNXcF9MYVBhZmRhaWJBVjZyOU8wTzZaeHZmY3NCTjV4Q3M2NUtVaWFVU3pzZVZvUWNKSnRmMDVYN0Q0T3A3TmF0cU1yMEI1NC1WYjZnLWRaSTJOOEV1SDFwOG5GNGdVUXQ3Nkk4ajVFQTA1S2FzbE84RWVSNFk4VGpYME9Sc1lvaTlGb256dXIzblpLVkRyNHJmTWpQem9uZHNqaTBxVV9SRG1GVEZ6Ukh3ODRvMzJDQ1pvZ1lkT1NXSdIB3wFBVV95cUxNalY5WHpjQ0xnYWpNakg0NFJHZ052UlIyNFFXYi1oWDEzd214amJuUjBJSF9Gb2twdVhMbE1mRjJ1Sm1hdWJkVzFXNk5JUzZFTTh0UTktc2ZTNFk4andlazhtRTFTMDd0bFdJY0RfNTRpV2RxZVVaUUk3YnNUSVVpOTlkUTNPUm5iMmFkZFBQSnlOTUc5c3FHRTFicUFxb1NZVU16V1BvX0xIelQzd3RjUnItemRPOU1QTjdKN2Z1b2hkTFI5VHZmTzk3aDZCTnhXMEVQNmNYT0lTRmhhRlpn?oc=5",
+          "publishedAt": "2026-11-18T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "EasternEye",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNWFZicDl2Ti0yZ0trXzBmTTVUMnFqbnYxVnhHeGt2YVRTX2FtZk44LXFpMjNQdWJiUHZDSXREaGFjUnA1MzhGdjlJR0liMF9veURsb2JndHVNYVpVSjBwLWdaVGYxWFZwSzhSclhXZVZiMFJISllpdHJ0dnhGWDJtRWRMSU5ETGxUaExGNDQzcUpEMXFTNTNGeHZiYXhRakl4eWVwZXRuanVVMlZ2UEh0SmYwX3BFbEZheEpwNHlNTm5oQ211OE4wQTRMOG9mZw?oc=5",
+          "publishedAt": "2026-11-21T12:47:31.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Outlook India",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPVHd5aGREMDBXU05DQjU2bHRqWHI1MGtGcC10ZUwxNk5USHg0cU8zN3lXRTlxSG5OOU9rRS00ckc2OFBpRnVXaVFQMUk5YTFFU3BSRHJlVVJWVmljZDB5czd6ZlhOVTlxVk9CdklySVRxTFktS0t5WlFteDZiYVI2QWxaRDhveGEzSHA5VTlPcDlZdzRmalpCQWFzOG02dVBjNEFQMHo2QnItbEhvVUd4MHJkOUQ3ZHRyRmd2ZnRhcG13VGZlLXZFSHRPVzFYQ3NTcF90d9IB4gFBVV95cUxPRHpXcEY5a2NPSFJFd2Z0OTNiQmtzcjFfb25mY1Fuam1QTTBXcEpIOEdMMUU2OVFuM2lFem5TR2JqQWJyWEdxSzB5eU1uNXJuUmY2MllDdHF3Z196Q3o2LUNVWERuUjdncmJGaEU5WjQ0VlZCUXFUaENNQU0wN1YxQ3RlTms5VzY1c0MwRzJmY0tfdDR0NVdnc201WXB4Zl9EYm9OSV9IUjgyWnVLdkM2R1hEOHB3VkNTdkI4bDBKdUVSb0MtcDRFYTdtYVZ1TjR0b3puR0ZVTlY5UkN6ZkdwUDNn?oc=5",
+          "publishedAt": "2026-11-19T03:13:46.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "News18",
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQaERObmVVN1lDZ1lFTzY3VGh3MHk3Y2JQbzdIX2pXelRjTEJENDNVRExqQ2JqWTdHa2t3YWI2ZFFCd0t4azhYQjhXTEZ2T0NGYTBaSGhNdExKZm54VVdfaTEtODhxQWd5MXJreUM5MVlRNTRfVi1mNVUzWV9DdUwzakFnZUpuY3JlSG1DaUkyV3dyX0tMMmRacTB1MjhSbmJiMHhFT0I4UUloZ0daZnhDczVXTnBWRVU0cTlxOTNNZ0I2cEd4eURoT29teFV4MUs3VS1RSGxldXFxdmQ1ZDE4N0FpMlFlSl8y0gHuAUFVX3lxTE9XSHhhOXBsS3VvcUxxLW9ma0hubGZVaDVieDRhcUtydXlQNElNQ1d3bWh0anBfcV9BZ1B0Y1REazY1ODRjcG85bVRkMjBYT3A1RkI1TDQwcTc1NGZkbFRpUzFWZUQxcVVtNGZ1bzlmNTE0VkZYOXVicGI5UlVuam0xN25Ma242RnZwYjYwV29ZSF9wd0M3MS13NmJNMFBpbjZfcWNuTy1oNlh5Ujc1SG9RNHNpQThUN1VsWUtkaWVCWGtWRnZybGtuSENkQUdhRm5lX1duNGhtZkF3Z2E4UDkzamhvTmFPcVhsQVlfQ1E?oc=5",
+          "publishedAt": "2026-11-19T02:15:06.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 6,
+      "intelligence": {
+        "materiality": 82,
+        "certainty": 76,
+        "momentum": 44,
+        "trendChange": 0,
+        "sentiment": 0,
+        "mediaTone": 0,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 66,
+          "p24": 88,
+          "p72": 91,
+          "drivers": [
+            "broad independent-source pickup",
+            "high strategic or reputation consequence",
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "ACT NOW"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-t4sw2s",
       "headline": "'Never Present, But' — Ananya Birla Shares Her Heartfelt Poetry With Farah Khan",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1366,6 +1586,282 @@
       "live": true
     },
     {
+      "id": "live-1oy29wv",
+      "headline": "Inside Ananya Birla's Mansion, Bought For Rs 425 Crore, With MF Husain Artwork, Ganpati Idol, Marble Staircase",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Corporate",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-17T08:00:00.000Z",
+      "updatedAt": "2026-11-19T11:45:14.000Z",
+      "sources": [
+        {
+          "name": "NDTV",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQRUpiTkpCaUJaelFiSnpxUnJOVFBQQnNPeGJTZlNHZGhjOTVpd0I2amNUYkN6NXQwbzMyYWplX0stQlR5T2dvMFRhcHZtRnRCRVNySmFmOFhhVTI4MTdOX29DWVVmZ3lYa2k3X0lYT1pvY1poM0hvNUJTbmJoV2tLVlhBM2Jpal9OLTl0RklkcWlHT0F2WlNtRDhRR2laSmMwcVJMMkpXMjBCckJXWjdqTHVqTkptQ2NBUjkyclV5c2FPVmR0eS1GWTdmdFpPVUNrTG1ZNTdselZFNU5BSHfSAeYBQVVfeXFMTWI1cVBiZk1zdlV6YUpXY25FUE5oaXBSY3czZkFkRERla3JqOWYybUNYUWN4U29YTEs5S1V2cDBiQVR4UnBfVUtOajVtRUtfR2ZHV0c3U0lydWNWNXFfRXBzX1pKa1pGQW9wUllOZmxzQ2NSYU9PcEllQ0xJX2c4eHV2Y2o3UTZWNVBJalljNHJLMDBxTXV6NFJsVmlxM3JxTUhYSlRPd1IyaTJ3S3ItV2R2MmpqN2kyWTV3anMxM2hnUUlPTkE1S0Z4UlB6QnVlYnh3YlFCSHJHZGJrX1Z5WXJxcDBRanc?oc=5",
+          "publishedAt": "2026-11-17T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "News18",
+          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxOU3VtYlBxOEZnWWJLM3BVMVVMTXk1UXBPc1NHZDR2ZmxzM0dyOVhCYkJIaWpyOVpDdWJRWl9sa3Q1VUVmNmVtUkVkYlV0NnBBVlFpVk42MDJ5QTB5S0wydDBrR241QzZDYVhYWmFiWW9WTC1fa2xZbWU3NzZsTkJnaTNUUl9pM05KMHhoTG81dXRUUko1V2t4VmNVTWwxcXFCSS04Yks2ZkJTSFpvU045Snl4VGVka2NCZE41Rk4tSzhzcVdIb25CUVNOU1BTbjJNT2l3T0t3UUdMVHZSc0RQZmRxLUliNFh6QzBTbFZWVHRGWXZtNnBUVTRB0gH_AUFVX3lxTE5lSXpzVzZoc2h0S1ppZkRpUnV6VHRUMkluRndGZ3BqQmRZSkpsTkE1b2g2Q2RNUzZ3UWJ0WWxLYkJ3ejgwYUtPbjQydnM5ZVNJT0hDcy1LSWhIbHA1Wkg0elA2Umk5N3JxTWVlZDZCRnBXakotdG1XM09TUWNDTVZMMnk4MjRtWG9STDgzekQ5UkVnazF4TV9uNkJoejRlMnA3LV8xcGlCR01jQnNubjE0Z0lPcWtGcTRXalEyRkoxNjVqLVNDR3lxbVpsYmEwSjBaNWhQM0k0SHA1NjNOSzBfRTRiaUQyZU5aTUREMjVrME9LVGY3V1J4QllwaERRaw?oc=5",
+          "publishedAt": "2026-11-19T11:45:14.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 81,
+        "certainty": 70,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": 0,
+        "mediaTone": 0,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 51,
+          "p24": 72,
+          "p72": 80,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "PREPARE"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-11xoz7o",
+      "headline": "Ananya Birla gets a ₹50,000 ‘Made in India’ luxury watch from Farah Khan: All about the Jaipur Watch Company piece",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Technology",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-17T08:00:00.000Z",
+      "updatedAt": "2026-11-18T08:00:00.000Z",
+      "sources": [
+        {
+          "name": "Livemint",
+          "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxOZjhUWDlRS2RxU0NJdEZoRWN2TS12UW5pdHhhbk9uTkNsdE9JNzlMY2N4cnlqNDBmc3UybURMME9sS1l6Y1otYnZGTGpLVHNkTlhUSXZtUUZqci0yMXlxUzhVZ3ZuLXdnMGdmMHQ0bjlkaEZVZkIzSG1oUTBLclgyVlpIQlhMX2NzQjlkODAwakhDTlYxc0l6aGRveHM2bkt2bGhQbXVpMGVQLWtjcWx0NnNHMzA0eXJVOXRqc0lQOHllQVYwcHJmdHBBMnRrVmk5M0s2VmJSRE5ybThYVWwtOUlMMmRZM2RmSVcwNmtqRUhuTFRMZTVERDk3SdIBgAJBVV95cUxQcVluZG1pQTRleDUyeGlSY2VFekotMnNvUl9sM25ybk12OHhXZUFoM2Z1TldSajJfOGllVTlLVXk2Ym5kQURIekZDd0RUay1TV1IwcGdIZWNxSF9XWHBha09jVnJpd0Iwano1R0hPMTFHRkFDRkRNT2NjQmNaTnJzSWExaExvNTVQb2x4WjV0TTVDT1kxV2NFVXRod3pHYjlZcnhnd2ZQMUpFdjRSUWhocW9CWnBubTFZY0dtZ1o0VjdMT2RrUE41NmF3MFlZUnZTc3pTZU1aNGs2MWhMMXVKTVVRcUliZTJzT3dGMVpXbXFvTXBQUTBELVJtR3M1Yzlx?oc=5",
+          "publishedAt": "2026-11-18T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "NDTV",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQSFNMeDg5Nzloc2ZDcUtscDAwVnFhVzg5YlZVNHZ6bnR0YU1QT0k2ZUh4QjQ4MUFFNl9tbEVjUFlUQUVKdlNHOWxtV0RWVVpLX2x4RS1kRXNxSE5GeUZJbVBTaC1NN0FWVzQyUWw0Y2k3WjVZUTVVNUt6QnZablBQUmFRTUlyQUNEcTk5R1d5T1lTTlUwdTFEblpxVlhuUndLNUQ2QndHS1FRcEVTeGh0U1R3UGRsVWhkREwxMk95dWdUX3EtX1lFdFVOLTVtQlXSAdcBQVVfeXFMT0E2RTNIdDUzM1NMQWJWX3lpU0l5Y1dhRFhkUmpFLU9JNU1PZzREODc0N081R3o2Y04yQXR1clFQRG5mZVItNWlwNWJaSnN2VVVCME0zUmdKRmlEUGtCMm03UUUxa1Y2QnBsTmZFSUhsemhfZjFFaFY5UHdjZjZGUVUyLTE2cVBIS3FKUXg3X2VzWWpPUHdqemMyR1FsMmh0dDh4TmZJaHZqYlVQc2g3RlYzYUpoQVpiNzdEUUxBaExpQmlQdUZCdHBvODRVMHkzUUF1blNmQUE?oc=5",
+          "publishedAt": "2026-11-17T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 81,
+        "certainty": 70,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": 0,
+        "mediaTone": 0,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 51,
+          "p24": 72,
+          "p72": 80,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "PREPARE"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-wyeo5y",
+      "headline": "India's Vodafone Idea narrows quarterly loss on bigger per-user revenue",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Vodafone Idea Limited (Vi).",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Financial",
+      "entityIds": [
+        "vi"
+      ],
+      "publishedAt": "2026-11-12T08:00:00.000Z",
+      "updatedAt": "2026-11-12T08:00:00.000Z",
+      "sources": [
+        {
+          "name": "Reuters",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPN3ZpMGg1ZFRicnQ0SnVVUjhHejBQMzRTVHl4ZF9vY09EUTY1d1ZsYWNDbXJFTnNTMTJsbkkySnRqSC1pRkhwS2FYTVJVS3I1UWNnLU5TcXBqOVVjb01xQ0RiRGVNYUFwUnJVSzFDSEdfekhJVzRjRm1KMkEtbUhpRU9KeWgtdm52LUVMZDZmcmcyQ18ySDFlSTZ3YnhwNkU4QmJNUTU0NVo0NWlMZjRjbGlLQ3RDUQ?oc=5",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Traders Union",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQRWg1R3FScEl2MkZvZWJJZVpuQy0xOGtFV2piYXBES2VRN1kzaWNzcGl2bWkxakR1QUx1Wk1rZkNlZ3UzMmVFaGdCTTk4WWlyZlNxeWFjQUt2VlVVUjlNQk0xS3BFLTZsb0k3dktUQ0VEbmVQVE9YUXA2SFhvVnFBRDlIN2hhaDBJUU82UkhPU1pUSVR5WVpn?oc=5",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 81,
+        "certainty": 70,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": -4,
+        "mediaTone": -4,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 3,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 39,
+          "p24": 53,
+          "p72": 66,
+          "drivers": [
+            "high strategic or reputation consequence"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-1ga9una",
+      "headline": "Aditya Birla Lifestyle Brands Q2 profit more than doubles to ₹53 crore",
+      "summary": "Published coverage across 3 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
+      "bucket": "must",
+      "status": "strong",
+      "category": "Financial",
+      "entityIds": [
+        "abg",
+        "ablbl"
+      ],
+      "publishedAt": "2026-10-31T07:00:00.000Z",
+      "updatedAt": "2026-11-06T11:52:31.000Z",
+      "sources": [
+        {
+          "name": "Business Standard",
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxOc2VFUGNwNkpyYTdzYU56TUVmeVltSlpMeDZqODBDTVpmZnJrTHU3TGhnWGVEZy0xUUdiSzRyS050OXNEQTNtZy04dm5pVHUzQ29zNDl6SkZwTUZxSzM4YmtDNmVBMmtQanlBVVZhV184Y01BRDJBUnFQSlliaXBiMmFJU2NDUmVsLWhkU3R4OEhPT2hQLWFaQi1iUjFNYTAxVlhUNDJucFFyX19qcDBNcGRJOFpWZThkS0xLYmR2cGNnWEZ1Y1B6ekxFc3kwNTBZaWdIQzRzcVdnMHJsdTVoN1NxLS1oVDQ50gHuAUFVX3lxTE9Ic012SWdMR2s2M3dWalZXVHRYcTcyOWZINDM2S2RNR3pSWW1DS3hLSUZjbTFLaFFDSWtvdU50UGN3X2VENkRHRk5qeWptekoyUi1vYVRIU19TanZ6dHlIOHVIVkM0UmhtWHBlMzlXZUIzNzNmOVk1dmlLU1A2Sng3dUpmdkJBN0MyUk1rS21CZXpTNG4zZ1RLeGhNZFR4VTU2R2NNdk1VMU9WTHRqQS11X3BmZ2dna25zVFYwZHJuQWZ2M3Jzd3d2OGRUSGEzUjBQMlJxMmp1S2VGVnJVMFhUSlM3VjFPb3BTZnJIc0E?oc=5",
+          "publishedAt": "2026-10-31T07:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Multibagg AI",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQdm55anRpeXROeWEzU0xKZG1LZjl2SGZDNnBzdmQtTmFaRElPNDNFVV9vYXBPMXpydHMzTld0V0xPNHpBRFBEUFdTNUdTMnZCbUtvZlVhcFQwSENSNUdtZ0p0V2pLdEVOTE1ic294ZjZQOXYwWUphZG1lUDl5SnR2TFB6OGRSRkp3cmpGZjRieklZVHJ3UHpEOFZvUW80UnlUZmFQUEd3?oc=5",
+          "publishedAt": "2026-11-06T11:52:31.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Storyboard18",
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOeDk4bUFIR2hHVGFsNFBNWDF3dDZzdUNwNVBjYnRPYmdXaXlBa1VWUkRTaGg2VXJYZVN3MjQ1clRidHMxZS1NdWJ2ZkFycnJPX0VmWDBQSEszMnhDWGs1N3JvUEFBUVY2dVBGTzV1MWc4cDJnZ2Q5U3lmY2UtYjQ5Qy1NWHVmc252UkJqU3BRUmllb25PSXB3ZVZHdFFiU25ZbXk5Tlpfa1NwOThrV1hTTW9zSTdmeE0tcTdVR0JBMEFUVTNTemRTODJ5bzBmV0FYQ2R1b2VEX2ZOUdIB3wFBVV95cUxNa3Z1NDNmTEV5MmJWQnMwaFY0dFdLal9GaTlVR0RkMkM2em9FMFo3VmIwNnhyT2JUT2t6MXFybE9WVjhqZHB5UGJFS3BnbEx2SzhKVUR0c0d2cGQxWDhadEhsUzBUN2Jjbzd3bnQ1UkFSVHRmcTIybWZSd0xJeU1sU2dzVl91ODFZcl8yQ2FfVHhxYndQUVk0SWZBUkRuZWtMdF9laFFkaTg4c3lEc2xUZk1HTTFrUXo4dHVGVXZSNU03QlRFV0ZNamVyd3EyYk5FS0x0LUUxM1AzMWFad2w4?oc=5",
+          "publishedAt": "2026-11-01T07:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 3,
+      "intelligence": {
+        "materiality": 81,
+        "certainty": 72,
+        "momentum": 26,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 9,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 44,
+          "p24": 60,
+          "p72": 71,
+          "drivers": [
+            "high strategic or reputation consequence"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-yu7jqn",
       "headline": "From music to movies: Who is Ananya Birla? Meet the billionaire heiress backing ‘Dhurandhar’ Ranveer Singh’s next film",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1424,8 +1920,8 @@
       "live": true
     },
     {
-      "id": "live-1iatn7q",
-      "headline": "Ranveer Singh’s Pralay will be a ‘spectacle’, declares producer Ananya Birla",
+      "id": "live-1hx6994",
+      "headline": "'You've Called All You Exes: Ananya Birla To Ananya Panday After She Dialled Aditya Roy Kapur, Kartik Aaryan And Ishaan Khatter On Koffee With Karan 9",
       "summary": "Published coverage across 4 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
       "bucket": "must",
@@ -1434,42 +1930,42 @@
       "entityIds": [
         "ananya-birla"
       ],
-      "publishedAt": "2026-11-18T08:00:00.000Z",
-      "updatedAt": "2026-11-21T08:23:00.000Z",
+      "publishedAt": "2026-11-14T08:00:00.000Z",
+      "updatedAt": "2026-11-15T08:00:00.000Z",
       "sources": [
         {
-          "name": "The Indian Express",
-          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQTDVJT3o3eE1iRW9sM2o3OGNYS3VHOEE2QkRseVpqekxsa2NvSGczOUFBWHZocDhGN2dkZk5odkhxdk5UZDVMbjc2SUtad0t1NjI4Y1RwRnM5SE9qeTZoVFVLU20zRjc2RUtfdXlKODlpMUF3eG5tLVhiNmM2aGtuUl9kX2h3aU55aEFVRzZnbmNRNGtQMDVvd0hFdG0xaGhLakdhWVN2VFdSb0R1c3Z6Z1VTY0VuaHNRd3pWdW56ampoekZaUm1GQlljTGdCanVRNkFXUlZWU1RuNWdwYWNqM1dB0gHoAUFVX3lxTE8xQ25QemxKZ19yS1ZUX04wNUJXa2tyVFBBbWQxeTVMLWdPVUpvRGdOb3BSdjlGbXRnQTViOXJtZDhJc3psbHZlV1phMUMyV1dEQ3ZiZEZCSGlTWUFGUGlDUFdtbzRVdXZGekgxWmpqRUIwdzZaMkx2M3JqRzdIZE1QZjBQRDBCSFRLMkVhMTZVUXR6QzJHRmJWRVROYTZhVjFYWUtLMVpsNERXYTQ4aXhEUmx2MUpOYmRVRVRneGVfaE9OZEJITE84ZksyWnZ5LVlIODc1b3ZleXZBVHFpNHZ6NXJodlhuUnA?oc=5",
-          "publishedAt": "2026-11-18T08:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        },
-        {
           "name": "NDTV",
-          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPMU9vOHZOS3N6dkhqTUczUlBGWml4cHNXcF9MYVBhZmRhaWJBVjZyOU8wTzZaeHZmY3NCTjV4Q3M2NUtVaWFVU3pzZVZvUWNKSnRmMDVYN0Q0T3A3TmF0cU1yMEI1NC1WYjZnLWRaSTJOOEV1SDFwOG5GNGdVUXQ3Nkk4ajVFQTA1S2FzbE84RWVSNFk4VGpYME9Sc1lvaTlGb256dXIzblpLVkRyNHJmTWpQem9uZHNqaTBxVV9SRG1GVEZ6Ukh3ODRvMzJDQ1pvZ1lkT1NXSdIB3wFBVV95cUxNalY5WHpjQ0xnYWpNakg0NFJHZ052UlIyNFFXYi1oWDEzd214amJuUjBJSF9Gb2twdVhMbE1mRjJ1Sm1hdWJkVzFXNk5JUzZFTTh0UTktc2ZTNFk4andlazhtRTFTMDd0bFdJY0RfNTRpV2RxZVVaUUk3YnNUSVVpOTlkUTNPUm5iMmFkZFBQSnlOTUc5c3FHRTFicUFxb1NZVU16V1BvX0xIelQzd3RjUnItemRPOU1QTjdKN2Z1b2hkTFI5VHZmTzk3aDZCTnhXMEVQNmNYT0lTRmhhRlpn?oc=5",
-          "publishedAt": "2026-11-18T08:00:00.000Z",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNRVlSVzF0SzZ5VjhJQUxEMkZBVmphSWJ2T1Q0TzlOLUxtdHBDNGU0Qm80YmdZTXE0aVVENXFaS1diWVdiUUJnV2E2ck5lUE1PbzVVVXctcS1xaUVNNHZzN0x6NUQ1VFl1UnM4V2s5ZnVVZ29JeElPd2phU3JNUzJZVWM1cWtLLVhpbm1DUkVXTVlMTlhydkhBZl9hV1hYeXBZc1NvSnhEM29vT0laVmlOUWZYVUdmbDlreUl5WTFpeWhtRDTSAcsBQVVfeXFMTk53OV9NemtMdi1EODRBVE9kOU9jV0VwWjM2TkRiclUtNXowblQ1cFJ2X3NmaDNzS3JWMW1RTS1ISUd1cDhEMzNqOC14T05meGRZTXZya04walAwRldQdlJaOGc5bzhqLXlucGJpcHJBOFNSY1d3RS0wOWw2ZkhOUHhiZUtZV1hTZmdIMTdIX0h6NG5JeFB2TTFmOGFINXVGcE9JX0VFMDVXS1oxSjRhTzREZzlSOFhTOFE0OTZHeXNiR1NlN2lZWGNKcGs?oc=5",
+          "publishedAt": "2026-11-15T08:00:00.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         },
         {
-          "name": "cinematalk.in",
-          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBqZGVjOFdKbnN3bUNLZzFnSklRV1EyOTJ5a0VZSG9NVllTN3RLU0JVODVaQ01vdXR4ZDU0UnVPNXRRVEJlMTNDWnY4bDlBSzgxLVRtaS1LMHVOeTJjZkh3SDlTZ2NKVHhXTXpjRG5MdThfdzlqYkVOWGtB?oc=5",
-          "publishedAt": "2026-11-21T08:23:00.000Z",
+          "name": "ANI News",
+          "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxOanVKRXVfaTQyLVpnektZMG5EWV9nSnFBWHI4ckNaamRidHZqTFZsTEZaR2RQdC1ZT2lsWTFzME1pSW9laWRLc1VxU1lWcXAySkYtRk5rOUl2NHJvZkswbFRRdkNNLW9CYm1BNXJ1THZpMHZaQjNmQmJZSm1TamFhbks5aFFnTzEzS04tWV9TWS1lNWIzbWtkNTRoUWs3YzBzVmhQUzktb0VNZjZvREo2T1Y4b1k0R3JLRnJNUmtqNXlybWJOMFFFX1dpblFpaGxIc1B4RVVBQ1RPSVlpX2Y1cm5yTzY4NExuSG1ldFAzSVhDNFF6dHJxRVJYdDJfUHZa?oc=5",
+          "publishedAt": "2026-11-14T08:00:00.000Z",
           "tier": 3,
-          "provider": "Google News IN-hi",
+          "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         },
         {
-          "name": "Times Now Navbharat",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNT1FIQWpHOE92ejZHSlh1LVNEWFdsLVpPTFBSQXhkN3FFcWVBU2JOM0NQcnY2eklmM0RHbE1wa2loWWo0LTA3NW5UVl9od3lweHhrQzdTdjd5dHBUeGVjV0RNRm01N1JRXzZYTGYtcUxlVThOeXJ0ZlltSlk2bXN1QUhEWXppTGdEbEhBeHZDV1dfVFdUc3VQRVZJMWk0djd3UDBtemdBWDA3azhEZ3dQai1EWlNELXVBOU9CWDhVRGctZ1Z0SXdDeUl1dWhETWh5U29aWEh30gHbAUFVX3lxTE5OblJ6THlUdkg1N2pscm1oMG5DUUh3RS1QaGdscU05VmVQZXVaWDFaYWI5V1FkYlA1bFhUXy1UU2ZHeEJFQmQ1TlI1UjZIcVkwczV4Y3JUX2p4eVhzb1IyOVpmTTU3WGRmdXpVTHZGY05yZEZSOG1uekszcTNvLXJGWEp3SnVEMTdNVWFIQjVrM294Z3BraEtqeG42LTdqS2Q0Y0FTSmlxaFNXR1RfVWhmME1Jckt1X1o5OHBUdVlwbFJhS2hlR281WU1GUGZmbElUdFZERTJfY1dSaw?oc=5",
-          "publishedAt": "2026-11-19T04:05:12.000Z",
+          "name": "Hindustan Times",
+          "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxNQVYzVGt5YWw4dW9jQlNoOU9JenZLOHVpR2xpcGhSNnhoRzVBME5RWWl4YTdHVnNLc2hFc2xxNk1zYlhGanE0bkF0alR3cnQyYWs4ZFhjM1V6c1c2b1I5TTdfaTFQNGZNMG52UnBNVC12MXY5bXFqY1VCd0RQSjVKeHR1R2E0XzRKYUtrLTNBMnFjOGxXTDJjeXpqSVlkOXhOamxydFJTcEdYVGZlNDlmT2gya1owYTd3dG5iUHZrZFBUZ1BQcmdlZTlIVWtJc1ZzQ3pyWjNSdkdvUlZXUFpzWHBYbzNXR3ZpVDdCSUoxYjBxWVB4LUFmYkJLejFLQ0lIUkxPZFhzcWpsQm9kdXfSAZMCQVVfeXFMUDRoS1ZTcjB0TGdDcHlOeTRwdW1MMDJJWTRxR28yZ2lKLWlTM01rWmNDa0NGUlN4N19xMUl0SUNjdFlITVJCbmFLcE9ZWjNuaGlUM2lrMkZOTEtLWTVzeE9ucEo4ZnEzVEd5TEtYWnpleThmVkpGODFmYTRKRG1VejlZYno3b1cwZElsWkdQTUcyOTdlTWlldS1xN3RzMVFZakFGMTVhLVRFSWllTVlkZDM0a3l0VjJoODNRci1FWEJLczFzZFkydXhjelZnWG0zdml3VERPQUo5dEZKdGMteVhWQUNwOW5Wc19fWUFaLXJlOWdpbWd2ZTJaZ3NxN2RCQlBJU01wWnJtdm9KckliRW5INFE?oc=5",
+          "publishedAt": "2026-11-14T08:00:00.000Z",
           "tier": 3,
-          "provider": "Google News IN-hi",
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Pragativadi",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOTWpSbXR0R0NIM3pDRGxqc1Z5bnJCUDdmbkJpdTNEeElFXzBWVjAtZ3NQR0J0LUxKZS1KVGZVMThFX2V3UUdhdGxFakNmUjJNZ0VHTnZTbWhuellWb1hUU0FBc0JXbFdlRTRZUnRrZm80SmVXQjhzTVlXWDVOZnJTaU4ybjRVdjZoYU9sSl83T1ZoM0lmWlJiX1pETWRyOGltUGxaTTRabmhlNW5qR01FUVpxaEVFQnF2QXFhNS1kTDlieHZiUEJPWXd2dEFoNmxSdE1YeURZN0c?oc=5",
+          "publishedAt": "2026-11-14T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         }
@@ -1611,7 +2107,7 @@
       "intelligence": {
         "materiality": 77,
         "certainty": 70,
-        "momentum": 33,
+        "momentum": 23,
         "trendChange": 100,
         "sentiment": 0,
         "mediaTone": 0,
@@ -1625,9 +2121,9 @@
         "reputationImpact": 5,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 45,
-          "p24": 59,
-          "p72": 70,
+          "p6": 38,
+          "p24": 52,
+          "p72": 65,
           "drivers": [
             "high strategic or reputation consequence"
           ],
@@ -1641,32 +2137,32 @@
       "live": true
     },
     {
-      "id": "live-16tp54x",
-      "headline": "Koffee With Karan S9: Ananya Birla Recalls 216-Metre Bungee Jumping Adventure In South Africa",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
-      "bucket": "watch",
+      "id": "live-1x0s6od",
+      "headline": "Ambikapur Fraud Case: इंस्टाग्राम पर अल्ट्राटेक सीमेंट का देखा विज्ञापन, क्लिक करते ही आया सेल्स मैनेजर का फोन, लग गई 4.13 लाख की चपत | 4 Lakh 13 Thousand Fraud In The Name Of Ultratech Cement",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The development may create operational or reputation exposure; facts and response posture should be reviewed quickly.",
+      "bucket": "must",
       "status": "developing",
-      "category": "Corporate",
+      "category": "Reputation",
       "entityIds": [
-        "ananya-birla"
+        "ultratech"
       ],
-      "publishedAt": "2026-11-20T12:55:30.000Z",
-      "updatedAt": "2026-11-20T12:55:30.000Z",
+      "publishedAt": "2026-11-01T07:00:00.000Z",
+      "updatedAt": "2026-11-01T07:00:00.000Z",
       "sources": [
         {
-          "name": "Curly Tales",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOVnF1cGVyVGNWRjhTOHlxNGVYeWlUSWlXWExoZUFGZ3NpeXNidkpxYUJvY3VlZzZNMW5zUlo3cnpJTW9EeTJTYWs4ODVtcnlrbUZYOUxIaWlacFItelBBMC1fNFc2Q3laTmoxZWx5bzR6VWxtazNpcjdRbDlnbGxrSjBibXZmakx3WDV6TGhINEFPRGxqZWNkVHpHZ2FJVXUxS2RGYkQ5cFZzUERVQnVJdEVEWE9rUUg3U3IzTg?oc=5",
-          "publishedAt": "2026-11-20T12:55:30.000Z",
+          "name": "Head Topics",
+          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBPZWJiRmFyZ1JqU0p1MjdTbWxreW54V3FuQ3drRmt4cmI3eGNkR0ZhZ1BWZDZDWURLbXZkaGVLYlhqMlFiRV9hcXNsT1p0eG1TNmVRLXA0NnYzSUpDSG9lc0JfNmlIcy1wQTJOcQ?oc=5",
+          "publishedAt": "2026-11-01T07:00:00.000Z",
           "tier": 3,
-          "provider": "Google News IN-en",
+          "provider": "Google News IN-hi",
           "channel": "news",
           "official": false
         }
       ],
       "sourceCount": 1,
       "intelligence": {
-        "materiality": 84,
+        "materiality": 70,
         "certainty": 42,
         "momentum": 14,
         "trendChange": 0,
@@ -1679,16 +2175,216 @@
           "confidence": "unavailable",
           "coverage": "No open-public conversation samples in this event."
         },
-        "reputationImpact": 2,
+        "reputationImpact": -1,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 43,
-          "p24": 62,
-          "p72": 73,
+          "p6": 23,
+          "p24": 31,
+          "p72": 50,
+          "drivers": [
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-15ra65",
+      "headline": "Ananya Birla recalls bungee jumping adventure on Koffee With Karan | Tap to know more | Inshorts",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Corporate",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-20T12:55:30.000Z",
+      "updatedAt": "2026-11-20T16:06:54.000Z",
+      "sources": [
+        {
+          "name": "Inshorts",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOdmJYSXFVYVM3SmRMZlN0Z190QlRXTnFtMU0zTUFKUVZYSUxiZ3BWRXdILWt6R25uLWxZUGRXS0lrVUgxcXBKcDZwWUppbG5qVTY2dUh2dm04XzFmTG0teEduRHJaRU9qRFktTHNHX1JabEpqanY2R0FTVXdYWjRCeDRWTVpzd29uYmoySHdLUVdvYnk1OVZfQ09qQ19UOEV2TllOLUk3eWc1TU5ydmfSAbMBQVVfeXFMUEF5aW1abkpVSGNuU2JzaXZ6eTZNbHJ2OXNSUFJHeS1uMTJseGo1YzhHNGx4NldQMFB2bEFyZzk1ZjJNMHFHcTY2UHByZFB0OHVJb2NrajlTYnNYWmpsVlZlakotVmtOYTRlZUFuWHNCUzNZUUdOUGRfRzk5dWx5WEhrRzBCRmFWVWFrN21lVFdqaGJBck8wSERCM3c2c2R6b20zTGxOeDR1YkRLN1hHRkJEWnM?oc=5",
+          "publishedAt": "2026-11-20T16:06:54.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Curly Tales",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOVnF1cGVyVGNWRjhTOHlxNGVYeWlUSWlXWExoZUFGZ3NpeXNidkpxYUJvY3VlZzZNMW5zUlo3cnpJTW9EeTJTYWs4ODVtcnlrbUZYOUxIaWlacFItelBBMC1fNFc2Q3laTmoxZWx5bzR6VWxtazNpcjdRbDlnbGxrSjBibXZmakx3WDV6TGhINEFPRGxqZWNkVHpHZ2FJVXUxS2RGYkQ5cFZzUERVQnVJdEVEWE9rUUg3U3IzTg?oc=5",
+          "publishedAt": "2026-11-20T12:55:30.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 91,
+        "certainty": 44,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": -8,
+        "mediaTone": -8,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 3,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 52,
+          "p24": 73,
+          "p72": 81,
           "drivers": [
             "high strategic or reputation consequence",
             "uncertainty may drive further coverage",
             "promoter or senior-leadership involvement"
+          ],
+          "posture": "PREPARE"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-155i877",
+      "headline": "Aditya Birla Fashion’s Q2 loss widens to INR 376 crore as festive season shifts to December quarter",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Financial",
+      "entityIds": [
+        "abg"
+      ],
+      "publishedAt": "2026-11-06T08:00:00.000Z",
+      "updatedAt": "2026-11-09T08:00:00.000Z",
+      "sources": [
+        {
+          "name": "Prop News Time",
+          "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOZzY1eWNDQjdmZ1gtWTRjMU1oV0RMMnJuSS02U1VNQzQyTXJwZWNrdHlJZldlcFdfUG5vb2t1aFlGLWVmUjc3N3c3d1hlRTB6dnc5WS0tMi1ENWxkaHhyTkhfN3l6ZWxlWFluZk9CRTEtV3ZoWUd0ODlJd1BfNUpnVlJLNHVSQjI2OHFoMW9KWDJsbGZ0UVJMX2Rhd1E0U0xKcThuSnNYSjJKUkUxVWR6U3hpNHFkY3ZsZ3prblZJMmNqNmNoN3JKeXBDTm5IZHlzclFzYV81Y2ZleFJWSXpTMmRJaGJKQQ?oc=5",
+          "publishedAt": "2026-11-09T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Investment Guru India",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNdDNvZVBBTF9NNkNBS25aVDloV2syN0VpYWVsaTZ2RmgzWmwtR01PaGpXdVp6QjY0Y25ONEJSZmhkYkhxQXB2cC1QZGpwY2lFRTIxV0lQMVlYRG9sV1BKNjZqazdKVENFM0pqNnJXYzYyb2lKSHFNOGtib3VacS1PcmFITWJ6ZmlJT21BZFcwd1hvRERyQXJUdmdUVDk5RWVaVUZhTTZFV1JGMW5v?oc=5",
+          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 87,
+        "certainty": 44,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": -1,
+        "mediaTone": -1,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 37,
+          "p24": 51,
+          "p72": 65,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-aeexz7",
+      "headline": "Hindalco Q2 FY2026-27 Results: Net Profit Rises To ₹7,533 Crore",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Hindalco Industries Limited.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Financial",
+      "entityIds": [
+        "hindalco"
+      ],
+      "publishedAt": "2026-11-06T08:00:00.000Z",
+      "updatedAt": "2026-11-06T08:00:00.000Z",
+      "sources": [
+        {
+          "name": "Kotak Neo",
+          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxObnBIYzZrN1pteTZ6bXQ1ZHE4VXdRQkV0M0hqaFFwQlFpZTJVX3pLTTNZMDlaOERyZ3lTVHpTVFFhRDNzeGNWcG4yMi1naS1MOFZuM2JxSUlqVDhnSlFtWVNsSHphRjdzVlZMTmNDYnZqVXctZG9LVXRsTG1JampJQzFKcEUxQQ?oc=5",
+          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "HDFC Sky",
+          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9SNXk1OEJIUHRhOHRrMk9SVXByM0pUa3Z1TzBodzk5UHNQSnJIbmstNVJJclFSWTM2NHVtaWxJQ3Zxc0o1aThCQURfMzkyWXpmT2lGdXdrV2tUYnVmd2tMOFZsUzNVVm1COS1Cam44V204WjA4RnBXag?oc=5",
+          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 85,
+        "certainty": 44,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": 14,
+        "mediaTone": 14,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 14,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 36,
+          "p24": 49,
+          "p72": 63,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
           ],
           "posture": "WATCH"
         }
@@ -1727,7 +2423,7 @@
       "intelligence": {
         "materiality": 82,
         "certainty": 42,
-        "momentum": 27,
+        "momentum": 17,
         "trendChange": 100,
         "sentiment": 0,
         "mediaTone": 0,
@@ -1741,15 +2437,15 @@
         "reputationImpact": 6,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 50,
-          "p24": 68,
-          "p72": 77,
+          "p6": 44,
+          "p24": 62,
+          "p72": 73,
           "drivers": [
             "high strategic or reputation consequence",
             "uncertainty may drive further coverage",
             "promoter or senior-leadership involvement"
           ],
-          "posture": "PREPARE"
+          "posture": "WATCH"
         }
       },
       "flags": [
@@ -1803,6 +2499,122 @@
           "p6": 24,
           "p24": 35,
           "p72": 53,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-lhd49h",
+      "headline": "Telecom news: Vodafone Idea, 5G Spectrum Sales in Ghana, Cell C, Melon Mobile",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Vodafone Idea Limited (Vi).",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "M&A",
+      "entityIds": [
+        "vi"
+      ],
+      "publishedAt": "2026-11-26T05:02:37.000Z",
+      "updatedAt": "2026-11-26T05:02:37.000Z",
+      "sources": [
+        {
+          "name": "TelecomLead",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPOWxwbmRqUjR4ZFR1YTBmaWkyN3ZFRUxaM2VseVJpemVZbXZJSGVacXdiRWJLU1JuZEM5Yzlxa1VxN3Z6a2JpbVlyakdlQm1MazJEZ0pvOXFLSFpyODN2VURtQmpfb1R2UkF3WDNFSmF5R3ozaER4QlBtVmdPTjlQSGVVTFk0cm85OTg0R3g0UzJhYnRTUEdLZDU4N0tUM3FpX041eDc2QXdSS3BXQVHSAbYBQVVfeXFMUFRXaWFJM19keGlUNl9nWWd0SUgwV1BRanROeTRfMXM3VmluREh0bkxpa2d3aWxPLVNhSEJfX3EtWlNXSHgwZ2lhSVJiN2dsUjlTQjJHVXV3LWFPQm5qQVZPb2QzVmdtOEVscDU0Q3FnUVJEN3A2ZFF0QXlDVUtMNDZPajQxei0yREZTNzcxRHhzVUpVYU9jbmRpMFlRUXp1c1FSZ1VvSW5taTZISTlab19Bd2s3OFE?oc=5",
+          "publishedAt": "2026-11-26T05:02:37.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 82,
+        "certainty": 42,
+        "momentum": 6,
+        "trendChange": 0,
+        "sentiment": 0,
+        "mediaTone": 0,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 6,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 24,
+          "p24": 35,
+          "p72": 53,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-1foq187",
+      "headline": "ABFRL Q2 FY27 Results: Revenue and Loss Details",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Aditya Birla Fashion and Retail Limited (ABFRL). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Fashion and Retail Limited (ABFRL).",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Financial",
+      "entityIds": [
+        "abfrl"
+      ],
+      "publishedAt": "2026-11-07T10:38:00.000Z",
+      "updatedAt": "2026-11-07T10:38:00.000Z",
+      "sources": [
+        {
+          "name": "Kalkine India",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOWGV2N1dpT1lhM1FZd3lwTG53ZFotOFdMSFktQXFubWxZcHc0blc5R0hJLUMxbUFlYm9QSEpFck5oVzZfcWZSV2NCVHpYRFBqTWVYVFZhMDU3WWVrR3pnODVhSXljZ25Od0lVMXltUnR1SGgtS0JrMDFNbzRCTzZRYnZqbE0ybmZsV3M1MEk0UU1GSnh0UEFjZVBYeUcta1R6bEdjclJ5czNIWXZzZTVqY3ZGY2l1OHRqTk5QNWhuS0FwbzlZRUE?oc=5",
+          "publishedAt": "2026-11-07T10:38:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 82,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": -8,
+        "mediaTone": -8,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 1,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 29,
+          "p24": 40,
+          "p72": 57,
           "drivers": [
             "high strategic or reputation consequence",
             "uncertainty may drive further coverage"
@@ -1876,6 +2688,65 @@
       "live": true
     },
     {
+      "id": "live-104y0qt",
+      "headline": "“I launched Svatantra at 17 with Rs 10,000, and we now stand at a portfolio of 7 billion USD,” says Ananya Birla",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Brand",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-24T10:05:33.000Z",
+      "updatedAt": "2026-11-24T10:05:33.000Z",
+      "sources": [
+        {
+          "name": "Startup Pedia",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQQVY3ckktYmpDdFNHRjF3V0E5b3lBazdub1MzdHI4U1ZiVzdnYzBZT2h3WmpHNUZxXzY4anlSWEpTS1NxbWVaRUVhYm5Fb0JLUEJYTEZubHBuYU1lY3RBem9EWk1PcUh0Wm1jVVhQNmgxNDBrcFJfQ1lIWHhPWFFOaHBmYURkTXY2dlZHaXdSNXdHOEdGcWlXQU5TWEZ4WEtOQnJLaFcxWDZfLXlEc2x1aUI0QTM2dThRQmRobw?oc=5",
+          "publishedAt": "2026-11-24T10:05:33.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 80,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 14,
+        "mediaTone": 14,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 13,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 41,
+          "p24": 58,
+          "p72": 70,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage",
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "WATCH"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-k2yp96",
       "headline": "Vodafone Idea Q2 FY27 Results: Cash EBITDA Grows 11.2% To ₹2,498 Crore As ARPU Rises To ₹178 Per User",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1934,6 +2805,64 @@
       "live": true
     },
     {
+      "id": "live-t6jti4",
+      "headline": "Hindalco Industries Q2 profit soars 59% YoY to ₹7,532 crore, Aluminium Upstream EBITDA grows 55%",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Hindalco Industries Limited.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Financial",
+      "entityIds": [
+        "hindalco"
+      ],
+      "publishedAt": "2026-11-06T08:00:00.000Z",
+      "updatedAt": "2026-11-06T08:00:00.000Z",
+      "sources": [
+        {
+          "name": "Upstox",
+          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQWlJjUkxwaU1ya2J1TW1mYjdSaGN2UVJTMFJTMzFrVkVVMmd0LTgwZkFMcmZiUy1qSEl0OVRocE5scFpOb2RFRXhRdGswQS1MMTJFMTNqT3loUV9lZ215Q2o0NkFrbFJjRlAzR0RTN2d3Q3E2NXBSOGI4LUpFQUk2aW03SlFDbUZuQ2hEQl9pU28tZHpkcWpRVWMyU3M0NUtEdUJhMENBMGRzWGpsbHJlUzV4OG1ic3RlbWxOajMxRlItX2U4WnZaLW9DdXhLSjVKZ21TTGVLU1RneU12T1l4Q3dTWExxUjVxdEE?oc=5",
+          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 1,
+      "intelligence": {
+        "materiality": 76,
+        "certainty": 42,
+        "momentum": 14,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 9,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 26,
+          "p24": 35,
+          "p72": 53,
+          "drivers": [
+            "high strategic or reputation consequence",
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
       "id": "live-5rqk8i",
       "headline": "Ananya Birla on Ranveer Singh’s 'Pralay' and 'Main Vaapas Aaunga' Box-Office Run on ‘Koffee With Karan’",
       "summary": "Published coverage across 2 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -1944,7 +2873,7 @@
       "entityIds": [
         "ananya-birla"
       ],
-      "publishedAt": "2026-11-19T08:00:00.000Z",
+      "publishedAt": "2026-11-20T10:05:57.000Z",
       "updatedAt": "2026-11-20T11:59:50.000Z",
       "sources": [
         {
@@ -1957,9 +2886,9 @@
           "official": false
         },
         {
-          "name": "News18",
-          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQaERObmVVN1lDZ1lFTzY3VGh3MHk3Y2JQbzdIX2pXelRjTEJENDNVRExqQ2JqWTdHa2t3YWI2ZFFCd0t4azhYQjhXTEZ2T0NGYTBaSGhNdExKZm54VVdfaTEtODhxQWd5MXJreUM5MVlRNTRfVi1mNVUzWV9DdUwzakFnZUpuY3JlSG1DaUkyV3dyX0tMMmRacTB1MjhSbmJiMHhFT0I4UUloZ0daZnhDczVXTnBWRVU0cTlxOTNNZ0I2cEd4eURoT29teFV4MUs3VS1RSGxldXFxdmQ1ZDE4N0FpMlFlSl8y0gHuAUFVX3lxTE9XSHhhOXBsS3VvcUxxLW9ma0hubGZVaDVieDRhcUtydXlQNElNQ1d3bWh0anBfcV9BZ1B0Y1REazY1ODRjcG85bVRkMjBYT3A1RkI1TDQwcTc1NGZkbFRpUzFWZUQxcVVtNGZ1bzlmNTE0VkZYOXVicGI5UlVuam0xN25Ma242RnZwYjYwV29ZSF9wd0M3MS13NmJNMFBpbjZfcWNuTy1oNlh5Ujc1SG9RNHNpQThUN1VsWUtkaWVCWGtWRnZybGtuSENkQUdhRm5lX1duNGhtZkF3Z2E4UDkzamhvTmFPcVhsQVlfQ1E?oc=5",
-          "publishedAt": "2026-11-19T08:00:00.000Z",
+          "name": "The Hollywood Reporter India",
+          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPbXZHV1lIVGZ4Q1pldEttN2tyZS0ybTUxc2tKcHlRUm40OUZkcTI5UmRGcXFnd2dxejdDejlmdDNMMjVlSVNQWlBTYXJKb2FLaTdUZFpFQjB1U1JkbFdqWWFrS3JGLXlXS1Q0dmhQVXR6X0dITjk2eV9GeWhJTFJNZWhSbGFTZzBfWXJ4XzBsaVRNc0wyUmdmSUs4ZGFEMUZIMVZXQk9yT2RacTAyQllnY3hiNFpNY3ZOa2p2TlJHVVBWTE1LWEZ1eVdPMGpycDhNay1FU1BTc3pOYzJ0YU5DSkVCaFpCNzTSAfQBQVVfeXFMTWZNLVZPcEV5alpvcUVOSEs4VDdEOTQ3cFQtN3RHUU5aV3FvenBfME1wT3RSNjNXSGhKMVo2bE9SbUdfQ3ZXN2pnZ2Q2RkdQZUNJTzhXc1RUSnE2SmpibGJNNUlJdm43U1NoN3FLQWp1MG9pVVJHdkZlZWZOYkJEYXJiWmluSGFZenVMVEE4TTNheGtfQ2JqcEtpSWxoLVRUb2t1SkJuRkJoMlJDV3BpM0ZVdWlsejRVQVVEZnNRekt4RU9saDlGejg5Y0UzZ3gzVEdBUUloUWxKNDRrWjRnSEZGY2lrendTLUFvT3U1WlJiSVp3Zg?oc=5",
+          "publishedAt": "2026-11-20T10:05:57.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -2078,8 +3007,8 @@
       "live": true
     },
     {
-      "id": "live-ryt1nh",
-      "headline": "Farah Khan Gifts Ananya Birla A Rs 50,000 Jaipur Watch During Rs 425 Crore Mumbai Mansion Tour",
+      "id": "live-11curti",
+      "headline": "Ananya Birla lives in Rs 425 crore Mumbai mansion Jatia House: Inside the luxurious property featuring Eur",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
       "bucket": "watch",
@@ -2092,8 +3021,8 @@
       "updatedAt": "2026-11-17T08:00:00.000Z",
       "sources": [
         {
-          "name": "NDTV",
-          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQSFNMeDg5Nzloc2ZDcUtscDAwVnFhVzg5YlZVNHZ6bnR0YU1QT0k2ZUh4QjQ4MUFFNl9tbEVjUFlUQUVKdlNHOWxtV0RWVVpLX2x4RS1kRXNxSE5GeUZJbVBTaC1NN0FWVzQyUWw0Y2k3WjVZUTVVNUt6QnZablBQUmFRTUlyQUNEcTk5R1d5T1lTTlUwdTFEblpxVlhuUndLNUQ2QndHS1FRcEVTeGh0U1R3UGRsVWhkREwxMk95dWdUX3EtX1lFdFVOLTVtQlXSAdcBQVVfeXFMT0E2RTNIdDUzM1NMQWJWX3lpU0l5Y1dhRFhkUmpFLU9JNU1PZzREODc0N081R3o2Y04yQXR1clFQRG5mZVItNWlwNWJaSnN2VVVCME0zUmdKRmlEUGtCMm03UUUxa1Y2QnBsTmZFSUhsemhfZjFFaFY5UHdjZjZGUVUyLTE2cVBIS3FKUXg3X2VzWWpPUHdqemMyR1FsMmh0dDh4TmZJaHZqYlVQc2g3RlYzYUpoQVpiNzdEUUxBaExpQmlQdUZCdHBvODRVMHkzUUF1blNmQUE?oc=5",
+          "name": "The Economic Times",
+          "url": "https://news.google.com/rss/articles/CBMi7gJBVV95cUxNNDV0SEdzMmczZXVRUGRrSlU2M1ZUcXNkbmlJWEFXTjdIMzVxc0tnOE50N2ZDMnhRVWZsY0R5enJ1V1lPYzdiZGRoQVpuelpXLV9maEV6Z2tGQXlqMnZSc21fS29sWUFkRWJjdFdxdWllb2FDakxMY3RmUE5pMVNZZWY0cVFnN1lpQmJKd2tEcE01bzFOaHQ2TzVFTy1KR1NDUkVUQUM2aVl0TUNCNGJ2X3dOcEtvLXN4YU5UaEdfYmx2MGVPSURYNklXejdyMlZweGdhbFgwOGtxWnpRTmJHNzBSSnNQeGY3bWF1TzJjYlAxb0JnQmJUZU13cEcxdmhveVFrbGhEdFJPSlRoQVQ2WXpHTEVud3pZVWFiM0s4WFhpXzZ2QWdBdzJvQUlIVDVwMVNiNUVWbm02ZFUtN1BTbFJaYlRibmZhQmk5eG4wS0VFYTdrNWF3OXF2S2I4cFBGazRkR3pZYmp6WTZZelHSAfMCQVVfeXFMTURkd2VzQkpzMnNObkN1N3h5eWM2WF8wS2pwZ1ZrYllBb0lHQTJRaHhRWFdMS3VfOVV1REoxQkFaYVR1bm5PRERndmJhR3VGWEh3Q2diOU5sOTV3ci1wRDhWdVZlbnBTZE11UVpLV3FsOVhUd29xNFQ0Mlp3RWR0Nlp4djZNYVVTR0dFQW03RU5rdjk3N0hmbzR0b1BJdnVtMnVCeGlLZm1YSV82aTI0T0RpLTMzZXJkcWY3a2M4bnR2UFUwY2hRY1VfLWdlWUNHUFRSRkREU2JCNjRKTWVMajF5VW1CZTVWZXhGSDRrWjJxT000Mlo2bTk5bE1wNzJTWjJGb1MwdTd5djV2TUkyU0xhSnBOTzZ1VDlDcFFab0dQNzFRazdxc1JDOTNJLVJYcXozUmpQeFVwNjdFQm1uWkZueTc5b28tWktWZ0VMX0hvY1NrQWJWTjBTY3dpc3JzVkZaanFzRktFZ0ZqLURZR2ZWb3M?oc=5",
           "publishedAt": "2026-11-17T08:00:00.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
@@ -2126,120 +3055,6 @@
             "promoter or senior-leadership involvement"
           ],
           "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1oy29wv",
-      "headline": "Inside Ananya Birla's Mansion, Bought For Rs 425 Crore, With MF Husain Artwork, Ganpati Idol, Marble Staircase",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Corporate",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-17T08:00:00.000Z",
-      "updatedAt": "2026-11-17T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "NDTV",
-          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQRUpiTkpCaUJaelFiSnpxUnJOVFBQQnNPeGJTZlNHZGhjOTVpd0I2amNUYkN6NXQwbzMyYWplX0stQlR5T2dvMFRhcHZtRnRCRVNySmFmOFhhVTI4MTdOX29DWVVmZ3lYa2k3X0lYT1pvY1poM0hvNUJTbmJoV2tLVlhBM2Jpal9OLTl0RklkcWlHT0F2WlNtRDhRR2laSmMwcVJMMkpXMjBCckJXWjdqTHVqTkptQ2NBUjkyclV5c2FPVmR0eS1GWTdmdFpPVUNrTG1ZNTdselZFNU5BSHfSAeYBQVVfeXFMTWI1cVBiZk1zdlV6YUpXY25FUE5oaXBSY3czZkFkRERla3JqOWYybUNYUWN4U29YTEs5S1V2cDBiQVR4UnBfVUtOajVtRUtfR2ZHV0c3U0lydWNWNXFfRXBzX1pKa1pGQW9wUllOZmxzQ2NSYU9PcEllQ0xJX2c4eHV2Y2o3UTZWNVBJalljNHJLMDBxTXV6NFJsVmlxM3JxTUhYSlRPd1IyaTJ3S3ItV2R2MmpqN2kyWTV3anMxM2hnUUlPTkE1S0Z4UlB6QnVlYnh3YlFCSHJHZGJrX1Z5WXJxcDBRanc?oc=5",
-          "publishedAt": "2026-11-17T08:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 74,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 4,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 42,
-          "p24": 60,
-          "p72": 71,
-          "drivers": [
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-wyeo5y",
-      "headline": "India's Vodafone Idea narrows quarterly loss on bigger per-user revenue",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Vodafone Idea Limited (Vi).",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Financial",
-      "entityIds": [
-        "vi"
-      ],
-      "publishedAt": "2026-11-12T08:00:00.000Z",
-      "updatedAt": "2026-11-12T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "Reuters",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPN3ZpMGg1ZFRicnQ0SnVVUjhHejBQMzRTVHl4ZF9vY09EUTY1d1ZsYWNDbXJFTnNTMTJsbkkySnRqSC1pRkhwS2FYTVJVS3I1UWNnLU5TcXBqOVVjb01xQ0RiRGVNYUFwUnJVSzFDSEdfekhJVzRjRm1KMkEtbUhpRU9KeWgtdm52LUVMZDZmcmcyQ18ySDFlSTZ3YnhwNkU4QmJNUTU0NVo0NWlMZjRjbGlLQ3RDUQ?oc=5",
-          "publishedAt": "2026-11-12T08:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 74,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": -8,
-        "mediaTone": -8,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 0,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 29,
-          "p24": 40,
-          "p72": 57,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
         }
       },
       "flags": [
@@ -2343,7 +3158,7 @@
           "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPTTEyQUcyVjR2VFFKV2p3YmpYUDdvYlBGSjJTTXJwZEdDRmtVelRXbUZhdTAyQVR0b3NjX2pXZHM2MDZicjVzRzl5VE9IUmUzcUdIalJIYi01UllQc3Bzd0lfeV9pWmE3OXBmUnBqb3JoU3pia1gwOWdJWWVxeWtIRW1Wa2lZcEMxcGNVeFR3N3Brb1JJZk1GOE00bVdQM2VtY01Vc1V5M01TSkVlbTFYYlNyVkxrNGt4VEdpNWRFOVZocDJJa0FQOHhR?oc=5",
           "publishedAt": "2026-11-24T06:42:37.000Z",
           "tier": 3,
-          "provider": "Google News US-en",
+          "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         },
@@ -2633,12 +3448,12 @@
         "ultratech"
       ],
       "publishedAt": "2026-11-20T01:30:00.000Z",
-      "updatedAt": "2026-11-23T07:44:00.000Z",
+      "updatedAt": "2026-11-26T17:27:00.000Z",
       "sources": [
         {
           "name": "Business Standard",
           "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNRlZ6blQzMjhFSnJnMXhlcUJsbDdqR044dTk2ZUJuSi00aU1CQUZqN0hzdTNXUVRtVVRkZzVpN2kyZ3B6SHJvS3Nodkt2OWdFelV2Q0k2M0pnRUViOHRKd3VtLVVOZHVnX0pVTnNPYTJSVTZTTWtGcmNEZGlGeGJsRHAzNHgyUVVHbGJwVXN4UHcxQzZudkdROVg2ZC1nOGZubGs0Q01NMThGbnhqQ25jSkY0WXhZM2dmem1kNFR3czBCTU5mQlhSckh30gHPAUFVX3lxTE9NY2NpSmhraTYyQWZIN194ZTZxWlI3Ynh2VGtuU25aTTFyM1RNUzJaQmdwWWtsMlpTandXSjI5bzd1enBMUFZOV3BkQ2dwQlYwN1dkNllFT2xfc2VhZk1YRFJhNDJ4dWdJR2IzNndMcXJ2SWlycF9XcC1vZXRqb2U2Vnh3UDZvMmRCU2tGYTFLamRZNWd0QTZfR3hsS3Y3SXBMNExBRFNSVlppc2Z2VUE3WnJacTZKN1BpaUlIQk9lYm5GdU90aEhkR2JBcDR6UQ?oc=5",
-          "publishedAt": "2026-11-23T07:44:00.000Z",
+          "publishedAt": "2026-11-26T17:27:00.000Z",
           "tier": 1,
           "provider": "Google News IN-hi",
           "channel": "news",
@@ -2667,7 +3482,7 @@
       "intelligence": {
         "materiality": 71,
         "certainty": 72,
-        "momentum": 26,
+        "momentum": 18,
         "trendChange": 0,
         "sentiment": 0,
         "mediaTone": 0,
@@ -2681,13 +3496,13 @@
         "reputationImpact": 4,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 38,
-          "p24": 51,
-          "p72": 65,
+          "p6": 34,
+          "p24": 46,
+          "p72": 61,
           "drivers": [
             "incremental relevance with limited momentum"
           ],
-          "posture": "WATCH"
+          "posture": "AMPLIFY"
         }
       },
       "flags": [
@@ -2697,34 +3512,34 @@
       "live": true
     },
     {
-      "id": "live-1hx6994",
-      "headline": "'You've Called All You Exes: Ananya Birla To Ananya Panday After She Dialled Aditya Roy Kapur, Kartik Aaryan And Ishaan Khatter On Koffee With Karan 9",
+      "id": "live-1atiqom",
+      "headline": "ananya birla Photos",
       "summary": "Published coverage across 2 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
       "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
       "bucket": "watch",
       "status": "strong",
-      "category": "Corporate",
+      "category": "Technology",
       "entityIds": [
         "ananya-birla"
       ],
-      "publishedAt": "2026-11-14T08:00:00.000Z",
-      "updatedAt": "2026-11-15T08:00:00.000Z",
+      "publishedAt": "2026-11-18T04:22:00.000Z",
+      "updatedAt": "2026-11-24T09:23:47.000Z",
       "sources": [
         {
-          "name": "NDTV",
-          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNRVlSVzF0SzZ5VjhJQUxEMkZBVmphSWJ2T1Q0TzlOLUxtdHBDNGU0Qm80YmdZTXE0aVVENXFaS1diWVdiUUJnV2E2ck5lUE1PbzVVVXctcS1xaUVNNHZzN0x6NUQ1VFl1UnM4V2s5ZnVVZ29JeElPd2phU3JNUzJZVWM1cWtLLVhpbm1DUkVXTVlMTlhydkhBZl9hV1hYeXBZc1NvSnhEM29vT0laVmlOUWZYVUdmbDlreUl5WTFpeWhtRDTSAcsBQVVfeXFMTk53OV9NemtMdi1EODRBVE9kOU9jV0VwWjM2TkRiclUtNXowblQ1cFJ2X3NmaDNzS3JWMW1RTS1ISUd1cDhEMzNqOC14T05meGRZTXZya04walAwRldQdlJaOGc5bzhqLXlucGJpcHJBOFNSY1d3RS0wOWw2ZkhOUHhiZUtZV1hTZmdIMTdIX0h6NG5JeFB2TTFmOGFINXVGcE9JX0VFMDVXS1oxSjRhTzREZzlSOFhTOFE0OTZHeXNiR1NlN2lZWGNKcGs?oc=5",
-          "publishedAt": "2026-11-15T08:00:00.000Z",
+          "name": "The Times of India",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5HcVN0c1ltcDhhLVVxb01KR0p6WE1LeTNlbnpRcnNPcEQtdUo3eEc0aXJWQkNVQno5MTVTMndKMXZINnMzdE1QblFTNWp1WkpqQmM5SThEVUhkeFc2c00yRFYzWXdIbkhuTGl0Zjdn?oc=5",
+          "publishedAt": "2026-11-18T04:22:00.000Z",
           "tier": 1,
           "provider": "Google News IN-en",
           "channel": "news",
           "official": false
         },
         {
-          "name": "ANI News",
-          "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxOanVKRXVfaTQyLVpnektZMG5EWV9nSnFBWHI4ckNaamRidHZqTFZsTEZaR2RQdC1ZT2lsWTFzME1pSW9laWRLc1VxU1lWcXAySkYtRk5rOUl2NHJvZkswbFRRdkNNLW9CYm1BNXJ1THZpMHZaQjNmQmJZSm1TamFhbks5aFFnTzEzS04tWV9TWS1lNWIzbWtkNTRoUWs3YzBzVmhQUzktb0VNZjZvREo2T1Y4b1k0R3JLRnJNUmtqNXlybWJOMFFFX1dpblFpaGxIc1B4RVVBQ1RPSVlpX2Y1cm5yTzY4NExuSG1ldFAzSVhDNFF6dHJxRVJYdDJfUHZa?oc=5",
-          "publishedAt": "2026-11-14T08:00:00.000Z",
+          "name": "Nai Dunia",
+          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOcHlOM19JUy1ucVJGMFQyc0FwVUdQYThiZWU2VGlCT0lSWWVlS000Z3JCblNodDlDMm40TmpOMlQ5OVpTYXlQUUI2NjY1c0tsTzJjdDBhbnF5OW5tM0Q4R19TZng4R3RoRThkQ2V5aGk4RFppSi1HNEZjRmZhUW1aWUFiTmpHX01yR21nSkVhSGlNTDZLREctS3V0djBjSWRxSFJKWTQ0a1d0RWw0ZTNOaDdTTklxeVZRb19wVVgyczB5bGxrSXdCZG1WVGhuQmhUME9CTm1BaG9TTUFmdDFQal9TUkdWNXc?oc=5",
+          "publishedAt": "2026-11-24T09:23:47.000Z",
           "tier": 3,
-          "provider": "Google News IN-en",
+          "provider": "Google News IN-hi",
           "channel": "news",
           "official": false
         }
@@ -2839,23 +3654,90 @@
       "live": true
     },
     {
-      "id": "live-vxiegp",
-      "headline": "India’s Electric Truck Sales Surge 254% in 2026 as Tata Motors and UltraTech Expand Fleet Plans",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning UltraTech Cement Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of UltraTech Cement Limited.",
+      "id": "live-hytnjq",
+      "headline": "Aditya Birla Fashion and Retail Q2 Results FY27: Revenue Down 23.75% YoY to Rs 1,511.04 Cr",
+      "summary": "Published coverage across 2 distinct source domains identifies this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Aditya Birla Group.",
       "bucket": "watch",
       "status": "developing",
-      "category": "M&A",
+      "category": "Financial",
       "entityIds": [
-        "ultratech"
+        "abg",
+        "abfrl"
       ],
-      "publishedAt": "2026-11-21T06:33:58.000Z",
-      "updatedAt": "2026-11-21T06:33:58.000Z",
+      "publishedAt": "2026-11-05T08:00:00.000Z",
+      "updatedAt": "2026-11-06T08:00:00.000Z",
       "sources": [
         {
-          "name": "Dalal Street Investment Journal",
-          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxObFBUWmlKRTVKYVpRd0FyUjNSak4wNUVTSW0zSms0My0xWkp2c2lLUGd6cTJlVFlfaHJaQk9xZHpKaW5iaVFORi02VEdxMHJUX2k3US1NYWhNZTYwTkJBanRNU0k3YUg2VTkzYjhsaUJLbUZhRlRuek1fQlFaeXhYQTR0VFphVWY1dGFyZUIyeVROcDZsWmQ3UW9LckJSNHdfMUlvMDRaczhYblBTSHBxVEdQTVlYVThLMzluSEkyZDBqV3g2MkdXZlpvV1A5SzA4UDFYQnROOUdYZw?oc=5",
-          "publishedAt": "2026-11-21T06:33:58.000Z",
+          "name": "Univest",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNc3BWV1NnMmlselc5VDc0a0pJMjBYdmVkbGFRU3p5T0VFbWxYUjZKM2Mxd0Z5VFU3NFpIUlNNMnVrazhlY1l4MmlKSWFpQmwzTm1yeDl5Sl9jLUJmXzlFc3VqanFUekN1X3ZIUWZDU2U5b3dFeGZBVHZZRzF6bkhpd3FnUnlFR2ZVTkpFaTM5Tko?oc=5",
+          "publishedAt": "2026-11-06T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Multibagg AI",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQQ3NyQVpUVWdNVExXY01FeWw5YXc4czEyTDFheWVsZEF1dkNKaS1YWVZxY2tFTFByNkxCSmFvd3JPUDJ0dWNLc0kzMTVqT0JNeFZDTTdJUktJbmVmMXhuLVpiMXRoeV9TNURRN1Awa2xJS2FEbVc4b2Iyak5MeVR6ZXM0Mk9PRklsdTlLZHRZMGMwT3NtR2JxZmZwNjg4c3M5MFhV?oc=5",
+          "publishedAt": "2026-11-05T08:00:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 2,
+      "intelligence": {
+        "materiality": 71,
+        "certainty": 44,
+        "momentum": 20,
+        "trendChange": 0,
+        "sentiment": 7,
+        "mediaTone": 7,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 8,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 28,
+          "p24": 37,
+          "p72": 55,
+          "drivers": [
+            "uncertainty may drive further coverage"
+          ],
+          "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-vegdc6",
+      "headline": "From Billionaire Heiress To Bollywood Producer: Ananya Birla",
+      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Corporate",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-20T14:56:33.000Z",
+      "updatedAt": "2026-11-20T14:56:33.000Z",
+      "sources": [
+        {
+          "name": "English Bombay Samachar",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPZnotRlZaX2xPM0EzZThwLVYtSFk5dnZ5aFFXVnhZT3ZLVUJPcGpzWEY1TWRVaks2ZkR1QjFaSWlxbExVR2xHMHBxcm5JTFpaYjV6LWNHQk9qSkxJQmhGRTh0NGk1R3p3cm1TZmltWkJkWmI5eVoyOWZKWHgxelk0M0xJUGxrSFNabEkwclBtZG1GcmdQOVBpNkdleV84ckNBZWlSQTh3?oc=5",
+          "publishedAt": "2026-11-20T14:56:33.000Z",
           "tier": 3,
           "provider": "Google News IN-en",
           "channel": "news",
@@ -2868,8 +3750,8 @@
         "certainty": 42,
         "momentum": 14,
         "trendChange": 0,
-        "sentiment": 28,
-        "mediaTone": 28,
+        "sentiment": 0,
+        "mediaTone": 0,
         "publicSentiment": {
           "score": null,
           "sampleSize": 0,
@@ -2877,16 +3759,17 @@
           "confidence": "unavailable",
           "coverage": "No open-public conversation samples in this event."
         },
-        "reputationImpact": 19,
+        "reputationImpact": 4,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 23,
-          "p24": 31,
-          "p72": 50,
+          "p6": 36,
+          "p24": 50,
+          "p72": 64,
           "drivers": [
-            "uncertainty may drive further coverage"
+            "uncertainty may drive further coverage",
+            "promoter or senior-leadership involvement"
           ],
-          "posture": "AMPLIFY"
+          "posture": "WATCH"
         }
       },
       "flags": [
@@ -2953,63 +3836,6 @@
       "live": true
     },
     {
-      "id": "live-i89z5g",
-      "headline": "Grasim Industries’ net profit declines 35% to ₹1,029.42 crore in Q2 FY27",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Grasim Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Grasim Industries Limited.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Financial",
-      "entityIds": [
-        "grasim"
-      ],
-      "publishedAt": "2026-11-13T13:48:55.000Z",
-      "updatedAt": "2026-11-13T13:48:55.000Z",
-      "sources": [
-        {
-          "name": "ET Realty",
-          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOemxtUGpzS3BnMDBMNkh4Umd3a2hWRktoUC10T2VzNnpWbmFNUHR2N1JtZkxWdGFpbTBFWVd4ZHVUYUhZaWktTWNMQlJOdGpVaE5OOG9zaDltM1VDQU5nUGNPdERyeEEtNW5kdGd6NmdmNnJTN2tibDBBNU45TjNaNUJvLTFyZ05ORzdYODdJS0g1U3lWM1h6NTl6U0N5Y0xIQWlFVTFfR0RZM0VyNkkxX2VIVEFiTFlVa0l4c0RtZTdfeVJOaHVrNVhfbXhaLVXSAdQBQVVfeXFMTktTSl93RXpvUllMQ1dIZHhSVXBsYWZwdWFOcG5MX0o3aWRONjlVN0Y4QjRxenFhd0JWVzY1M1lSbHI1THVEeWJGdmVBdDBDampXUnBESTRUaVpkVVlsSjlUM21YbmNvamxoVVQ4R0I5b0g1b2tDVFdQSTNlZHBabXdYWjlSQTBuOTVEM0U3bFhyZVEyRTkxaDRiSVZ3TGFvTFlQblltUmdTSkd4RjhIUUFxWWMwSXduYVctbmU3d1VQbXpveGo1dzMtd05jSGcwQ2xLYjY?oc=5",
-          "publishedAt": "2026-11-13T13:48:55.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 70,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": -1,
-        "mediaTone": -1,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 27,
-          "p24": 37,
-          "p72": 55,
-          "drivers": [
-            "incremental relevance with limited momentum"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
       "id": "live-cok57",
       "headline": "Driving Innovation in EV Materials",
       "summary": "An official source has published this development concerning Aditya Birla Group. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
@@ -3058,6 +3884,91 @@
             "incremental relevance with limited momentum"
           ],
           "posture": "AMPLIFY"
+        }
+      },
+      "flags": [
+        "live-signal",
+        "headline-derived"
+      ],
+      "live": true
+    },
+    {
+      "id": "live-46k92v",
+      "headline": "Ananya Birla कौन हैं? Ranveer की Pralay करेंगी Produce",
+      "summary": "Published coverage across 4 distinct source domains identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
+      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Ananya Birla.",
+      "bucket": "watch",
+      "status": "developing",
+      "category": "Corporate",
+      "entityIds": [
+        "ananya-birla"
+      ],
+      "publishedAt": "2026-11-19T04:05:12.000Z",
+      "updatedAt": "2026-11-21T08:23:00.000Z",
+      "sources": [
+        {
+          "name": "cinematalk.in",
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBqZGVjOFdKbnN3bUNLZzFnSklRV1EyOTJ5a0VZSG9NVllTN3RLU0JVODVaQ01vdXR4ZDU0UnVPNXRRVEJlMTNDWnY4bDlBSzgxLVRtaS1LMHVOeTJjZkh3SDlTZ2NKVHhXTXpjRG5MdThfdzlqYkVOWGtB?oc=5",
+          "publishedAt": "2026-11-21T08:23:00.000Z",
+          "tier": 3,
+          "provider": "Google News IN-hi",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Demokratis.co.id",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5vTHp0TDQyVkQ0bHBxN1g2ZW5SMnZjNktkNnlMQVlKQnlVMzMyQXcxMlRnQlRTTDcwSFBReVE1bmpsX3R3TEVTa2d5NXMwaFMtenJXZVc5Q3VuZFdsamhVYnRyN3UzZlBLOWNPV1M2Tnk?oc=5",
+          "publishedAt": "2026-11-20T08:07:03.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "cwibc.co.id",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBmaFVfUFJqZ2ltQy02Y0d6anFtZ2NDdm5tZDRMMEZxa0F6b2tyaHc0VUtUbm42cURIWmxZQ1Vyam1JcmgyVDBsMmJFY1BWUVZvZjJEUkVCblRUNC1JdUYzMmZtQURYb3c?oc=5",
+          "publishedAt": "2026-11-20T08:05:22.000Z",
+          "tier": 3,
+          "provider": "Google News IN-en",
+          "channel": "news",
+          "official": false
+        },
+        {
+          "name": "Times Now Navbharat",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNT1FIQWpHOE92ejZHSlh1LVNEWFdsLVpPTFBSQXhkN3FFcWVBU2JOM0NQcnY2eklmM0RHbE1wa2loWWo0LTA3NW5UVl9od3lweHhrQzdTdjd5dHBUeGVjV0RNRm01N1JRXzZYTGYtcUxlVThOeXJ0ZlltSlk2bXN1QUhEWXppTGdEbEhBeHZDV1dfVFdUc3VQRVZJMWk0djd3UDBtemdBWDA3azhEZ3dQai1EWlNELXVBOU9CWDhVRGctZ1Z0SXdDeUl1dWhETWh5U29aWEh30gHbAUFVX3lxTE5OblJ6THlUdkg1N2pscm1oMG5DUUh3RS1QaGdscU05VmVQZXVaWDFaYWI5V1FkYlA1bFhUXy1UU2ZHeEJFQmQ1TlI1UjZIcVkwczV4Y3JUX2p4eVhzb1IyOVpmTTU3WGRmdXpVTHZGY05yZEZSOG1uekszcTNvLXJGWEp3SnVEMTdNVWFIQjVrM294Z3BraEtqeG42LTdqS2Q0Y0FTSmlxaFNXR1RfVWhmME1Jckt1X1o5OHBUdVlwbFJhS2hlR281WU1GUGZmbElUdFZERTJfY1dSaw?oc=5",
+          "publishedAt": "2026-11-19T04:05:12.000Z",
+          "tier": 3,
+          "provider": "Google News IN-hi",
+          "channel": "news",
+          "official": false
+        }
+      ],
+      "sourceCount": 4,
+      "intelligence": {
+        "materiality": 68,
+        "certainty": 48,
+        "momentum": 32,
+        "trendChange": 0,
+        "sentiment": 2,
+        "mediaTone": 2,
+        "publicSentiment": {
+          "score": null,
+          "sampleSize": 0,
+          "channelCount": 0,
+          "confidence": "unavailable",
+          "coverage": "No open-public conversation samples in this event."
+        },
+        "reputationImpact": 4,
+        "narrativeAlignment": 100,
+        "prediction": {
+          "p6": 50,
+          "p24": 67,
+          "p72": 76,
+          "drivers": [
+            "uncertainty may drive further coverage",
+            "promoter or senior-leadership involvement"
+          ],
+          "posture": "WATCH"
         }
       },
       "flags": [
@@ -3238,92 +4149,35 @@
       "live": true
     },
     {
-      "id": "live-1e613xv",
-      "headline": "Hindalco Q2 FY27 Results: Copper EBITDA Jumps 164%, Non-LME EBITDA Hits Record",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "The subject has sufficient strategic, financial or reputation consequence to change today's picture of Hindalco Industries Limited.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Financial",
-      "entityIds": [
-        "hindalco"
-      ],
-      "publishedAt": "2026-11-06T08:00:00.000Z",
-      "updatedAt": "2026-11-06T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "NiftyTrader",
-          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPNXJxVjVQaXlxbzR6Zm51NTJSVzJBdWdvbVVyRjhvSXM2WnRXX3lIYktJTjJyaFFQS0FQbnJ6Q0pFSjFNcWp1dnphYWE5d1p2NndOSUt0c1NseE9oTVRuU3AxOFkwVnJ5SUM1WldRdGNTUV9hQUF6ZDdfejNOY0dIb20wdw?oc=5",
-          "publishedAt": "2026-11-06T08:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 66,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 7,
-        "mediaTone": 7,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 7,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 21,
-          "p24": 28,
-          "p72": 48,
-          "drivers": [
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1qm6qpq",
-      "headline": "Dr Parthasarathy V S Appointed Independent Director at Vodafone Idea Limited",
+      "id": "live-125gqmk",
+      "headline": "Vodafone Idea News: वोडा आइडिया को लगा झटका, TRAI ₹89.16 लाख का जुर्माना, दिसंबर 2024 तिमाही से जुड़ा मामला",
       "summary": "Published coverage across 1 distinct source domain identifies this development concerning Vodafone Idea Limited (Vi). ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Senior-leadership developments can change governance, accountability and external narrative around Vodafone Idea Limited (Vi).",
+      "whyItMatters": "This could affect Vodafone Idea Limited (Vi)'s regulatory, legal or financial position and merits verified senior-level awareness.",
       "bucket": "watch",
-      "status": "developing",
-      "category": "Leadership",
+      "status": "strong",
+      "category": "Regulatory",
       "entityIds": [
         "vi"
       ],
-      "publishedAt": "2026-11-27T17:12:19.000Z",
-      "updatedAt": "2026-11-27T17:12:19.000Z",
+      "publishedAt": "2026-11-02T08:00:00.000Z",
+      "updatedAt": "2026-11-02T08:00:00.000Z",
       "sources": [
         {
-          "name": "https://hrtoday.in/",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOM25GVWw0bW0zeUtuTEZkUHJzZWlmeTM2OFdSQXlzU1puY0pqbFJsVXFDTklFcnUtWm5DR0lwbHBZbkN0SV9lNURScE1tWHlIUnIxQmxXeHpHOEdTZnlTNkllSTA3cUg5UV9TQW5QLVdyQkZhcHJlR3hrcFdqZjVZcXhHeW15OWJYNHlRRm9PMFFtNEE5ZWZtcm9RWFY?oc=5",
-          "publishedAt": "2026-11-27T17:12:19.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
+          "name": "CNBC TV18",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOQ0lpM3BwdkxYZWgyZGZZd1V2cC1NRzU3MHRYcUw1cVdDR3IxVjBqdFBoa2ItQUdQYUJ1LUVLSU5uR01SWExVc21lazdWMjNveUxVWGg1eDB1bzhrdk50Z0VmSWNZUVdzYVpfZFNvVTBMSF96dUc0UXQ4SzVPRG1xWjJla1RYaENUeENTZXNZVndiVWJZR1BRVnpZNXM0TU5FYWhKWi1nM2pWc3hCQUlIOEViSjhHRXdZN09BNXBkSkdXV1NfYVk3T3MySjFXX3JXSFp0ZGVTdUMtcHVYNUHSAeMBQVVfeXFMUHVWblJSQjFaWTY2RWQ4TzdtLXRfQ001ZkdZdVhTMWFRWFlwVWhsMy0yXzRwNUJJU2gtNzNEQ2ZhNndpYmIxRUdUNnVpdllhTlhMeklqNDRLZHpBRjdCaUxmbDlra0psYkdISDVBRmt5TFFqazFZalBUaXN1RTNXMVJWQ3NqZGh0YnkzVVNieGxIemhRRHl5YjNkSkdvcmN6NXJyX2U1ZUJkeXY3czR2SjJWOGtPMXIyaG9ORVBuaHZGbEU0bXNtcVR3QTBCVWNUcXluZlNRbEl6VEhhVXFnZWozdGs?oc=5",
+          "publishedAt": "2026-11-02T08:00:00.000Z",
+          "tier": 1,
+          "provider": "Google News IN-hi",
           "channel": "news",
           "official": false
         }
       ],
       "sourceCount": 1,
       "intelligence": {
-        "materiality": 64,
-        "certainty": 46,
-        "momentum": 27,
-        "trendChange": 100,
+        "materiality": 68,
+        "certainty": 68,
+        "momentum": 14,
+        "trendChange": 0,
         "sentiment": 0,
         "mediaTone": 0,
         "publicSentiment": {
@@ -3336,644 +4190,13 @@
         "reputationImpact": 3,
         "narrativeAlignment": 100,
         "prediction": {
-          "p6": 28,
+          "p6": 26,
           "p24": 35,
           "p72": 53,
           "drivers": [
-            "uncertainty may drive further coverage"
+            "incremental relevance with limited momentum"
           ],
           "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-uy2ail",
-      "headline": "Jaya, Abhishek And Shweta Bachchan's Famjam Pic Prompts Reactions From Navya Nanda, Ananya Birla",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Corporate",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-26T04:13:16.000Z",
-      "updatedAt": "2026-11-26T04:13:16.000Z",
-      "sources": [
-        {
-          "name": "NDTV",
-          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQMmgwc0U1RGxKM0pIamdlSGF2MEhtcUtVb1pIMTc5akxaVk9aOVlEY2RVU2hSN3ZaSzBZelRva0tqdHJ6MWJHaXA0LTd4MW5HOXJpZHo2dlQzSWlUNzIwZy1oOGR2bjJzQVNSeTA0N2hLd05IU3lTeGNsUFVTb1hHTEtvWW9Cbmc3dFNtZVpXbHVDRTNYWWVLSTRrV0xPWER3Zko2THhZNG9fbEtRazR0MGVYdUt6T0RrbWEtRFdfUlBUMVRSbGVWTzJKMndrVnBEQVhv0gHbAUFVX3lxTE9BcXdrcWRoa0RLVVU4dklDVWhuSm9faG02M2ZmUHMwOUJhc0Zma2RRdlFHTWU3SEZGUXp5ZGlwRlBrUFdKV0FWbUhEdVQ1N0RCUXEwZzB5WEN6SHBKUUxlT04yRXozMzY4akVma2VvMDBkTm5RVkRFbExGT1lXeVEzOXktOTZXdVlyQTNiY0FaTVNRX1lFdXN5bXJySTMxM001UHdsV0JSS2pGTHlYMFZrT0VJX0hkSnB3QUY2WHpJUlVQZGNtWjg0R0FSNHRXRG83blZmX1FWUjdYOA?oc=5",
-          "publishedAt": "2026-11-26T04:13:16.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 68,
-        "momentum": 6,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 31,
-          "p24": 46,
-          "p72": 61,
-          "drivers": [
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-ap77qz",
-      "headline": "Hemant Sikka Appointed Deputy Managing Director at Hindalco",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Senior-leadership developments can change governance, accountability and external narrative around Hindalco Industries Limited.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Leadership",
-      "entityIds": [
-        "hindalco"
-      ],
-      "publishedAt": "2026-11-24T15:32:56.000Z",
-      "updatedAt": "2026-11-24T15:32:56.000Z",
-      "sources": [
-        {
-          "name": "https://hrtoday.in/",
-          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPX1ktVldXOU5pU29wWXl4d0FqaTdRUTdURDJ5dWJVRC1FVXZoNFIyS0R5LWJvdDFhLUNpakZEVGtJRUxVd1lYcGREV3pLc1JIU2szRThjaFZjTnRuZDdmZDNBVm1VbWFWNGNqUDhTb09MeTNiaVpOdkdrWFRJWm1YaS00N2hsdw?oc=5",
-          "publishedAt": "2026-11-24T15:32:56.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 46,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 20,
-          "p24": 27,
-          "p72": 47,
-          "drivers": [
-            "uncertainty may drive further coverage"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-r62b4p",
-      "headline": "Hindalco Sets Leadership Transition In Motion, Satish Pai Gets Fresh Term As Hemant Sikka Joins As Deputy MD",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Hindalco Industries Limited. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Leadership",
-      "entityIds": [
-        "hindalco",
-        "satish-pai"
-      ],
-      "publishedAt": "2026-11-24T07:55:10.000Z",
-      "updatedAt": "2026-11-24T07:55:10.000Z",
-      "sources": [
-        {
-          "name": "Free Press Journal",
-          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPYk9vb2VkTUlaOV84aFAtTGFhSFBDSWNIaWl2amlfSnV1N21mYW9PRVJmZzJRRjdnNTdiaWxSTUY3OGJOVXhVaTBoQ3dubDh2SVNvcXpoNnBhM3N2N09vQ1Y5T1BsTko0LTBMS2l3RmZLLTEwUUVQaDNsa3ZqV3FtNFJ6TUhZM0EwOTZlaFZYY3NYQjNSeHE0LWliNGdZWld6SHBQSGIwaVlqVkEwbTN1bmZOaTNKSlVCZXNrS0M2Q29ZQmhnT3NDU3lELUd3c1VWaW5zU1VOMEw5T3JCUnFvcDJR0gHnAUFVX3lxTE80U2VrNmtDSEJqZjd4WFNPSFAxUURoN0VUeUFmdmlOaENYUnV4cXFJcTRCMHJkZ1ppZ004LWJJb2lNU3VyS21wM3FCLVBsNUhtMEF0X0ZhNTl6MEZCMHJ2UEFhSGt3TFMzbmx2Q0xla05KWXg3V2hJSWZubWZZTG43dTIwZ1JPN0ZNQnp2WU9PelR0UkZwaGdIVlZZandFOTA0Zm5MTUVCQjFFTVQ5TzdIOHVCaGJIYUVITHhTVDh3Q09SOFVYOEV0WDhrRkRUUDhLMXk3Q1RTVTlLMm1iQk95TnZNelVfcw?oc=5",
-          "publishedAt": "2026-11-24T07:55:10.000Z",
-          "tier": 3,
-          "provider": "Google News US-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 14,
-        "mediaTone": 14,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 10,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 32,
-          "p24": 44,
-          "p72": 60,
-          "drivers": [
-            "uncertainty may drive further coverage",
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-vsclkq",
-      "headline": "Ananya Birla's marriage proposal revelation has the internet curious - India Today",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Corporate",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-19T18:36:54.000Z",
-      "updatedAt": "2026-11-19T18:36:54.000Z",
-      "sources": [
-        {
-          "name": "India Today",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQUWh5R0ZtNjhJNXdzQ3B0SDkzUzBfWnVnLTBhanhPRTBRdEpTM1FUVWc5U20zakdHUU9LTlQ1d0J4QVJ0aFltLXp6VnRsY3k4eHQ3ay01N00yc0hRTlE0Wk1NZnZVN2lKclQtajNJcC13eEhtNURYZEtEam13QkRZZ2hseUtmeWljOVdnUUs0TjZ4aHc5NDdpVENOUy1MMGw3QjNmNG9BUU1NbzF5d29uSEFsbVBEUm5VOXpfcVVtWnhPeHZUSno2clFSY3nSAdIBQVVfeXFMTl9ZV09xUzBEM0ZDbUVtY2xVQ2oxVmpsMWlRRzA3cEl2UEhUNDR3TzV6OTNkVldTbWRhdldKX3MtWVk0UU8tRk9ZM0llQUd0X2laUmlrQkFEdnNxb3QwOEwtRUhBZHlaVkpTLWhhb3VKcnJzejdKYzZQZnlzMDVPYXpqU3pucll4T0VmUjFCTkN3dG1zWUdESF9OcTlOM1JxYzRFWTFHQ09zT01rNnBpVVI2TWQyOGdqRmtWV3lFN2tILVZQSE5sYjlQYXlPeFh0TjdR?oc=5",
-          "publishedAt": "2026-11-19T18:36:54.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 36,
-          "p24": 51,
-          "p72": 65,
-          "drivers": [
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-r99tx4",
-      "headline": "Ananya Birla's Mumbai home has a lift, gazebo and grandeur at every turn",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Technology",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-19T13:02:28.000Z",
-      "updatedAt": "2026-11-19T13:02:28.000Z",
-      "sources": [
-        {
-          "name": "India Today",
-          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNbHN2RXJsem1UQklNckgwejU2MW5GYlp3eGRodHRrQkdBRWVyaC1KbEpMc2NJTWpsWG55YzBvUGMwSU52ck5UWU05aEoxem5DQVVZbzBSZnU2eWVYMTFwdG4wbjJpd0hVdVJTR28xYUUtUXNjbkc3clVnNmp6bl84YV9rb09IOHc3R2pNbDEwd1pBd0x6anlxZXRsREdQNnV4QUMwOHN3R29HcnpOT1ZMNVhKTHl4VW1DQmc2NlY4Q0ljZS1iWW1pU3lQTUJRU2JFX0xlS1BJRnhKbzNNa3lwYnp0WU01QWxRQ0hN0gHwAUFVX3lxTE8zUjY5Y29YNEtrdThNVVpaZ2xEVFlmLUZXdTJLcDFvOVdrTmRrUTMwTHB3VWhodHBPMEhGT0s5b1RyQzhsUjktU3BzTXhLdEhaaEQ1bkxDRHdxeXhGZHhTWmdNal9LVVp6UmtENzhYMnV1U2RCcHI2LUxhZENNazBjZTJhakdHNXgzM2szc0J5SmFEUFlneElieEZNcXJySzJLSmZrNVhweFN6c2hmaE4wNjdkWXdMYk5vLW0xeGVKc1dTeW92dm1JM21YR0ZwMWJmOVNYa0JKZnlYSjlUMFJIYlNLQ2hNYktHajNfMnVVaw?oc=5",
-          "publishedAt": "2026-11-19T13:02:28.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 36,
-          "p24": 51,
-          "p72": 65,
-          "drivers": [
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1izimcx",
-      "headline": "Who is Ananya Birla? The Rs 2.17 lakh crore heiress behind Ranveer Singh's zombie thriller Pralay",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Corporate",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-19T10:39:46.000Z",
-      "updatedAt": "2026-11-19T10:39:46.000Z",
-      "sources": [
-        {
-          "name": "IndulgExpress",
-          "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQdmlZOUwzZU9scWwtZHI3MzZzNy12SkotTjBxWVpjNHEzRzE5V19hcFRLN0VTdVlBaWpJLWlBTGJxMmE5dXo0YTZHNUxYcWJ0SENRV2M3cDJ2MVNVdUg0X29aNHI5RjFZLXNteFlhNnJjSGZ5X1lyX2xqcDRycVNmSmpmLTJVNnNMNWxxVE02aGhDbEZqNktHV29mRlRHNzd6blUxVElna1hjTXdscDRTUzVPNW96bzNzNm9CakpoZ3pkZVR1ZFRYR1kxbWgtMkdqNi1KVDI1V3p1WVhFZFF0UW5OSW52MGM0TkFFVXN30gH7AUFVX3lxTE8zbVZPZmhCejRqTExXaEZPOWY3SlFCeTB3RW00a2NHTXo4RDBlQ2NrT29ieU83YjEzNmgtX3pRRmxzaXp3SWF1UG92c2M3NXZZUUotai0xSWFEc1VaUkVNUHJ3a0JlcFVMdWY1bW1RMjVlSlBkTkw4bkZFcExRNGxJcGQta09kZGxTTE90ZFlIQVp1ZGJxeUtsLUVqUEJMLTJDZEJtOTZCQmEydF9lQ0dSRkxHSzJGajI2ZXctSmNaUERNdGRGdXFfaW5UWTFYWHJRMmVJNk5fZkRra0VPaUswYk90TU1oaHAyU09zNm56WWVpbGE0b1JtZ1Rj?oc=5",
-          "publishedAt": "2026-11-19T10:39:46.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 32,
-          "p24": 44,
-          "p72": 60,
-          "drivers": [
-            "uncertainty may drive further coverage",
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-iybfjw",
-      "headline": "Ananya Birla on breaking a seven-generation tradition: ‘No woman in my family has ever worked’",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Corporate",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-19T08:00:00.000Z",
-      "updatedAt": "2026-11-19T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "The Indian Express",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQSkZ2SWFuWE5yMUpSREIzYmNhOF9mbE5LTVRXM0VCdlVsM1AtZzVHQ001X2hXMFllN2JSUEtzRXRyejl5b21RTC1IdjVfX2tvOXNXdkVhUGo3TkQ3QllqS3hNWEFtSGhVRXZodWJIQkVNSTlRSTZEeXJQR3NYZVZCVVJQWVhPN2lsVmlfaDdrcFhCWVhPcnNEb1BkLUNQVGl3ZGx0MzZoQUp4R1JsOE02Y3liY2dHMU9heS1TUm56SmNOVS10cjN0dGdPUdIB0gFBVV95cUxNNHpmVmlwcjdCZmpjcmFHTkhCRFg4cGVBVllMaGlyYUpCaGR3aS0ta1ZLZVZUeEEyVVE4ZkFZQ1cxdFo5UmV3N2ZhNEl5dWFuY2d1M3RjTlhwU0tQS3gxY2RJbDh1QXlKTW1KVnViM3pMUTV4RGxDQjVlZllIbHJya29QMFRyblgyQzROd1MtcFY3RXR6Rnpkc0xOOTZqdHFnUjBGN3h2SkFHRzdRX3dDVGJaMVZwdTBJUHVWbnNDRl94Y3FpT09NRXR0RWhucUlzM2c?oc=5",
-          "publishedAt": "2026-11-19T08:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 36,
-          "p24": 51,
-          "p72": 65,
-          "drivers": [
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-bdunmz",
-      "headline": "Ananya Birla Reveals She Received Many Proposals From The Same Person On Koffee With Karan 9. Internet Is Guessing",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Corporate",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-19T08:00:00.000Z",
-      "updatedAt": "2026-11-19T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "NDTV",
-          "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNcGpsWjJuRXg1cXBweGo0cVB0UnNRM3RObURIR3ZJU1JYU0hvWXJlU2pWY1JGb2lTUTJ3bFRFTXQtMUduWWFCYnI1aW9Ia1Vja3BkVFBqRWFZTmRVbkpvS1JkbFZJbVF3M2ZBa0JZTW5SVk5VZlIwT1pRdlpiS2hGb1ZGdWI5amU5NTEtRjRYbkF2QjR2WFNucnljZW1FSEVCU3cwQTB4OUd2czFCTWoyQmwwWXV0Q2lQelpHdlJQUGhWaEpYc1o5aFZBZk00MGE4RldxeG1aOGEwZEs1dE5uUlNhbHdKYkxnR2VMMG1R0gH2AUFVX3lxTE5WY0pQdDU5Tkx1OWFLZm4zNGdZQ3NmU0pPeW1CelpEdTB4N1RVZFJ3QU4yeHhOMHdJXy1tcGU2X2RZLW0wa3Q4UVlNdHBPT3JVTFRnby01ODhOdnRNT3J5VnIxaDFNQWh4cllpNTgtYlFpNU5zTTJqdjUxUXBTbE1rUTlYX3BTRmtYQ0FmcFVRekd5NVpPLS0ySy1sb1ZuU0s1c3FMWEdycjh0RXpHcU1LOUktRzd5aW5qNkRHUzZsRkdsUVJ6ckdPWk13bmNpb213LTdQSnlqM3NVVnVmZDZLcWRtZEtQVmw2TG4xVURoNE9KVWE3QQ?oc=5",
-          "publishedAt": "2026-11-19T08:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 36,
-          "p24": 51,
-          "p72": 65,
-          "drivers": [
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-wlqszu",
-      "headline": "\"Is It for General Knowledge?\" Alia Bhatt's Reply To Ananya Birla Makes It To Viral-Worthy Moments On KWK9",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Corporate",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-19T06:24:16.000Z",
-      "updatedAt": "2026-11-19T06:24:16.000Z",
-      "sources": [
-        {
-          "name": "NDTV",
-          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNZkozalBvaVVyRFZrSzRVMF83SHBtWVhWWjluN1lWMWNFZ1VMWFdrVFk4dV9oQjF5N1gtdHpJZGpkSGJFMjVFcWtsamtubVZJRk5JSm1ma21fbjY5aEl4ZGFpQ3FZQnNaWElwZmVkQWk5V09nTHQ3SF8tSVlHTkIyUkFZeTJ5YzZ4TmludTBkM0RzR0xJWlV0LXBka0hwejJyX0d0UE9vUUQ4UF9HZ002OS1SMEt4Ykp4ZlBCWE5MYVp1M3FoLTFkZFE0clZ5dHVwOW9HTFFVZi1GRnpiQjNvRnNwdVlfdnNrMmfSAfIBQVVfeXFMTmZaa1V2Z2hnX3BhQnFHNmNPeDVISVJHWVhHTVVuT1hNTm5NMHBPWFBpVXJOdG5WZlU3YWdoMjQ4bEprVTVlMnNXUUNJRnZkaEl3TmlBdmxCOV80Y2tUQWk4bE1ZM2N1N2ExSWpscW5qZU9oNm5NUnpHdmYxWHoyX3U5X1U0V3lLZ1VNdEtoa2hEQTlRYjdVQW5xVWNIMk9Wc096akZYX0d2U2FiTjhNV3FVSE5MSS13THFfRjNKWFYyLTRmTmtGem5hclZUTkJGcGdhNG14N0xySGVSU1MzeGgycG5pWUkzVEl3YTFwRWdlVlE?oc=5",
-          "publishedAt": "2026-11-19T06:24:16.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 36,
-          "p24": 51,
-          "p72": 65,
-          "drivers": [
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "WATCH"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-1xzlhix",
-      "headline": "Inside Ananya Birla’s Rs. 425 Crore Mumbai Home, Where The Interiors Are Her Mother’s Brainchild",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "developing",
-      "category": "Technology",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-18T08:00:00.000Z",
-      "updatedAt": "2026-11-18T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "Brut",
-          "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxORWpKaXE0M2RMR2JCMFdyUktjTjBvWEhfbUdjR2phRjVtWXVCQmVWTjhmaXZHd2VVSVh5SFJYUHE2N0o3ZnIxdVkzVHFMRF93TzNGcVNQYUhTOUNxaWFVSWs5RVoyeHhIUGJpZ0Zub29RUEpmTFY4dUpfTGRqUWtCYkYxTXMzSlhPajYwVWJneFBHdHVLVEdueFhpQ1BqTzZSWHV0YVZSbmJiYXBXSUIxZ3V2WnNvb2NXbkNBWklQYVRDRGIyY2g5M09rM3ZQZEdJa1ZENHQ2Z3lJT25IeDVqM3ZwVW5SWjhSa05scTJvd2FGQQ?oc=5",
-          "publishedAt": "2026-11-18T08:00:00.000Z",
-          "tier": 3,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 42,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 32,
-          "p24": 44,
-          "p72": 60,
-          "drivers": [
-            "uncertainty may drive further coverage",
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "AMPLIFY"
-        }
-      },
-      "flags": [
-        "live-signal",
-        "headline-derived"
-      ],
-      "live": true
-    },
-    {
-      "id": "live-188r2lv",
-      "headline": "What Did Ananya Birla Cook For Farah Khan At Her Lavish Mumbai Residence?",
-      "summary": "Published coverage across 1 distinct source domain identifies this development concerning Ananya Birla. ABG Pulse has grouped the available items as one event and retained every source link for verification. Live discovery may expose only headlines or short extracts, so details that are not consistent across the evidence remain unconfirmed rather than being completed by the system.",
-      "whyItMatters": "Relevant to the Group record, but it does not yet materially change today's operating or reputation picture.",
-      "bucket": "watch",
-      "status": "strong",
-      "category": "Technology",
-      "entityIds": [
-        "ananya-birla"
-      ],
-      "publishedAt": "2026-11-18T08:00:00.000Z",
-      "updatedAt": "2026-11-18T08:00:00.000Z",
-      "sources": [
-        {
-          "name": "NDTV Food",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPRTJsQmdYSWhVY3FjOEQ3MkxUUUN1RmlubEhKNzZ6UXJNck02SDkxNTFPUVRTajF4ZmpIMzBCNWUtcTd2bDN4ZUlibnhGbDJidWpFNU5HUUFoN0p2SktfNXo1eUxrOU9EUzRkLVp5SVhfQno4MF9mbUVBRUdhVEhENWh4dmVOSFg5Qlg3akFjMmg0aXRCazBIU2dEdGVIZTU0Y2xHeWlZMVRibDNV0gG0AUFVX3lxTFB0WE5tdVFKYVQ5RkxPLUFUSFM4OEVTUnpfNm1qbkhUMWQ5OE5uVFB4WkZpODZXOG05SlprZWNycEVvY3RTTjBXSi1sdjFEYWVBa3FXakdLYWZuSFZVellXMGZkeEJDblpVU2lOakxlVklVWjVSV3BsWjR3SE1hWHA2bGJGZVFkTllVYVlqc0ZCZTlMTUZBLVRWdHpIbDdxQ3ZwTmdrQTRzU0wwWks1OXhkaWYtUA?oc=5",
-          "publishedAt": "2026-11-18T08:00:00.000Z",
-          "tier": 1,
-          "provider": "Google News IN-en",
-          "channel": "news",
-          "official": false
-        }
-      ],
-      "sourceCount": 1,
-      "intelligence": {
-        "materiality": 64,
-        "certainty": 68,
-        "momentum": 14,
-        "trendChange": 0,
-        "sentiment": 0,
-        "mediaTone": 0,
-        "publicSentiment": {
-          "score": null,
-          "sampleSize": 0,
-          "channelCount": 0,
-          "confidence": "unavailable",
-          "coverage": "No open-public conversation samples in this event."
-        },
-        "reputationImpact": 3,
-        "narrativeAlignment": 100,
-        "prediction": {
-          "p6": 36,
-          "p24": 51,
-          "p72": 65,
-          "drivers": [
-            "promoter or senior-leadership involvement"
-          ],
-          "posture": "WATCH"
         }
       },
       "flags": [
@@ -4000,7 +4223,7 @@
     "stakeholderScope": "Regulators, exchanges, courts, ratings agencies, lenders/JV partners, key sector competitors, industry bodies and material government ministries; stakeholders are matched only with ABG context."
   },
   "meta": {
-    "scannedAt": "2026-11-27T18:54:50.054Z",
+    "scannedAt": "2026-11-28T01:56:31.508Z",
     "deliveryMode": "governed-snapshot",
     "providers": [
       "GDELT",
@@ -4066,7 +4289,7 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-11-27T18:52:48.223Z"
+        "checkedAt": "2026-11-28T01:54:29.582Z"
       },
       {
         "kind": "registry-audit",
@@ -4119,11 +4342,11 @@
         ],
         "missingIds": [],
         "reconciled": true,
-        "checkedAt": "2026-11-27T18:52:48.465Z"
+        "checkedAt": "2026-11-28T01:54:29.601Z"
       }
     ],
     "registryReconciled": true,
-    "successfulQueries": 32,
+    "successfulQueries": 33,
     "sourceChecks": [
       {
         "name": "group-family:gdelt",
@@ -4139,7 +4362,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 60,
+        "itemCount": 100,
         "registryAudit": null,
         "error": ""
       },
@@ -4148,7 +4371,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 36,
+        "itemCount": 33,
         "registryAudit": null,
         "error": ""
       },
@@ -4159,7 +4382,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "Reddit RSS 429"
+        "error": "Reddit RSS 404"
       },
       {
         "name": "group-leadership:gdelt",
@@ -4175,7 +4398,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 100,
+        "itemCount": 54,
         "registryAudit": null,
         "error": ""
       },
@@ -4186,7 +4409,7 @@
         "status": "failed",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "Reddit RSS 404"
+        "error": "Reddit RSS 429"
       },
       {
         "name": "cement-building:gdelt",
@@ -4202,7 +4425,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 79,
+        "itemCount": 40,
         "registryAudit": null,
         "error": ""
       },
@@ -4211,7 +4434,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 54,
+        "itemCount": 20,
         "registryAudit": null,
         "error": ""
       },
@@ -4238,7 +4461,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 100,
+        "itemCount": 85,
         "registryAudit": null,
         "error": ""
       },
@@ -4247,7 +4470,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 80,
+        "itemCount": 75,
         "registryAudit": null,
         "error": ""
       },
@@ -4274,7 +4497,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 19,
+        "itemCount": 100,
         "registryAudit": null,
         "error": ""
       },
@@ -4301,7 +4524,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 65,
+        "itemCount": 63,
         "registryAudit": null,
         "error": ""
       },
@@ -4337,7 +4560,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 39,
+        "itemCount": 100,
         "registryAudit": null,
         "error": ""
       },
@@ -4373,7 +4596,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 17,
+        "itemCount": 10,
         "registryAudit": null,
         "error": ""
       },
@@ -4409,7 +4632,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 9,
+        "itemCount": 11,
         "registryAudit": null,
         "error": ""
       },
@@ -4499,7 +4722,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 43,
+        "itemCount": 46,
         "registryAudit": null,
         "error": ""
       },
@@ -4526,7 +4749,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 38,
+        "itemCount": 9,
         "registryAudit": null,
         "error": ""
       },
@@ -4553,7 +4776,7 @@
         "provider": "Google News",
         "ok": true,
         "status": "healthy",
-        "itemCount": 9,
+        "itemCount": 15,
         "registryAudit": null,
         "error": ""
       },
@@ -4634,7 +4857,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-11-27T18:52:48.223Z"
+          "checkedAt": "2026-11-28T01:54:29.582Z"
         },
         "error": ""
       },
@@ -4695,7 +4918,7 @@
           ],
           "missingIds": [],
           "reconciled": true,
-          "checkedAt": "2026-11-27T18:52:48.465Z"
+          "checkedAt": "2026-11-28T01:54:29.601Z"
         },
         "error": ""
       },
@@ -4783,11 +5006,11 @@
       {
         "name": "birla-cellulose-news",
         "provider": "Official source",
-        "ok": false,
-        "status": "failed",
+        "ok": true,
+        "status": "healthy",
         "itemCount": 0,
         "registryAudit": null,
-        "error": "Source check exceeded 7000ms"
+        "error": ""
       },
       {
         "name": "essel-mining-news",
@@ -4817,15 +5040,15 @@
         "error": ""
       }
     ],
-    "rawArticleCount": 853,
-    "freshArticleCount": 529,
-    "articleCount": 382,
-    "rejectedArticleCount": 147,
+    "rawArticleCount": 866,
+    "freshArticleCount": 567,
+    "articleCount": 438,
+    "rejectedArticleCount": 129,
     "rejectionReasons": {
-      "no_abg_entity": 126,
-      "routine_market_advice": 16,
-      "price_movement_without_event": 3,
-      "entity_only_in_snippet": 2
+      "no_abg_entity": 114,
+      "routine_market_advice": 12,
+      "entity_only_in_snippet": 2,
+      "price_movement_without_event": 1
     },
     "eventCount": 60,
     "publicConversationItems": 0,
@@ -4845,7 +5068,7 @@
       {
         "provider": "Open public conversation",
         "query": "group-family:reddit",
-        "error": "Reddit RSS 429"
+        "error": "Reddit RSS 404"
       },
       {
         "provider": "GDELT",
@@ -4855,7 +5078,7 @@
       {
         "provider": "Open public conversation",
         "query": "group-leadership:reddit",
-        "error": "Reddit RSS 404"
+        "error": "Reddit RSS 429"
       },
       {
         "provider": "GDELT",
@@ -4994,24 +5217,19 @@
       },
       {
         "provider": "Official source",
-        "query": "birla-cellulose-news",
-        "error": "Source check exceeded 7000ms"
-      },
-      {
-        "provider": "Official source",
         "query": "essel-mining-news",
         "error": "essel-mining-news: official 403"
       }
     ],
-    "windowStart": "2026-10-28T18:52:47.083Z",
-    "windowEnd": "2026-11-27T18:52:47.083Z",
-    "requestedWindowStart": "2026-10-28T18:52:47.083Z",
+    "windowStart": "2026-10-29T01:54:28.085Z",
+    "windowEnd": "2026-11-28T01:54:28.085Z",
+    "requestedWindowStart": "2026-10-29T01:54:28.085Z",
     "windowCapped": false,
-    "snapshotGeneratedAt": "2026-11-27T18:52:47.083Z",
-    "snapshotExpiresAt": "2026-11-27T20:22:47.083Z",
-    "snapshotSuccessRatio": 0.4923,
+    "snapshotGeneratedAt": "2026-11-28T01:54:28.085Z",
+    "snapshotExpiresAt": "2026-11-28T03:24:28.085Z",
+    "snapshotSuccessRatio": 0.5077,
     "snapshotMinimumSuccessRatio": 0.2,
     "sourceCommit": "9010adc06f361ad55adb3da21f95519b3a98febb",
-    "workflowRunId": "46052660706"
+    "workflowRunId": "46095423972"
   }
 }
